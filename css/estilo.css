@@ -8,6 +8,7 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+/* menu do desktop em forma de barra fixa no topo */
 .navbar{
     display: flex;
     flex-flow: row wrap;
@@ -37,21 +38,20 @@ body{
     text-decoration: none;
 }
 
-.menu{
+.menu-desktop{
     flex:62%;
-   /* border:1px solid green;*/
     text-align:right;
     padding:5px;
 }
 
-.menu a{
+.menu-desktop a{
     color:#895013;
     text-decoration: none;
     font-size:20px;
     padding:10px 8px; 
 }
 
-.menu a:hover{
+.menu-desktop a:hover{
     color:#f0b256;
     border-top:4px solid #895013;
 }
