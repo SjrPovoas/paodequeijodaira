@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar{
+    display: flex;
+    flex-flow: row wrap;
+    height: 100px;
+    background: white;
+    justify-content: center;
+    align-items: center;
+    position:fixed;
+    width: 100%;
+}
+
+.logo{
+    flex:28%;
+    margin-left:10%;
+    /* border:1px solid red;  */
+    text-align: left;
+}
+
+.logo h1{
+    font-family: 'Lobster', cursive;
+    color:#895013;
+    font-size:34px;
+}
+
+.logo h1 a{
+    color:#895013;
+    text-decoration: none;
+}
+
+.menu{
+    flex:62%;
+   /* border:1px solid green;*/
+    text-align:right;
+    padding:5px;
+}
+
+.menu a{
+    color:#895013;
+    text-decoration: none;
+    font-size:20px;
+    padding:10px 8px; 
+}
+
+.menu a:hover{
+    color:#f0b256;
+    border-top:4px solid #895013;
+}
+
+#botao{
+    background: #895013;
+    padding: 10px 25px;
+    color:white;
+    border-radius:5px;
+    margin-right:10%;
+    margin-left:2%;
+}
+
+#botao:hover{
+    border:none;
+    background: #f0b256;
+}
+
+.header{
+    display: flex;
+    flex-flow:row wrap;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    padding-top:100px;
+}
+
+.headline{
+    margin-left:10%;
+    flex:40%;
+    /* border:1px solid black; */
+}
+
+.headline h2{
+    font-weight: 900;
+    font-size:20px;
+    color:#f0b256;
+    padding:0;
+    margin:0;
+}
+
+.headline p{
+    color:black;
+    text-align:left;
+}
+
+.contact-btn{
+    display: inline-block;
+    background: #f0b256;
+    padding:20px;
+    color:white;
+    text-transform: uppercase;
+    border-radius:5px;
+    text-decoration: none;
+}
+
+.contact-btn:hover{
+    background:#895013;
+}
+
+
+.img-headline{
+    margin-right:10%;
+    flex:40%;
+    /* border:1px solid deeppink; */
+    text-align:center;
+}
+
+section{
+    display: inline-block;
+    margin-top:80px;
+    /* border:1px solid black; */
+    margin-left:5%;
+    margin-right:5%;
+    padding:5%;
+    text-align: center;
+}
+
+section h2{
+    width:100%;
+    font-size:50px;
+    margin:0;
+    font-family: 'Lobster', cursive;
+    font-weight: bold;
+    color:#895013;
+}
+
+section h3{
+    width:100%;
+    font-size:22px;
+    margin:0;
+    font-family: 'Lobster', cursive;
+    font-weight: bold;
+    color:#895013;
+}
+
+section h3 a{
+    color:white;
+    text-decoration: none;
+}
+
+.servicos{
+    display: inline-block;
+    margin-top:5%;
+}
+
+.servicos a{
+    text-decoration: none;
+    color:white;
+}
+
+.promocao{
+    font-family: 'Lobster', cursive;
+    margin-top:40px;
+    margin-left:10%;
+    margin-right:10%;
+    padding:5%;
+    text-align: left;
+    color:white;
+    background: #f0b256;
+}
+.promocao-text{
+	font-family: 'Roboto';
+	text-align: center;
+	background: white;
+}
+
+.promocao li a{
+    color:white;
+    text-decoration: none;
+    background: #f0b256;
+    text-align: left;
+}
+
+.card{
+    display: inline-block;
+    width: 30%;
+    padding:20px;
+    margin:1%;
+    border:1px solid #895013;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.texto-oculto{
+    display: none;
+}
+
+.card:hover{
+    background: #895013;
+    color:white;
+    padding:40px;
+}
+
+.card:hover img{
+    display: none;
+}
+
+.card:hover .card-text{
+    display:none;
+}
+
+.card:hover .texto-oculto{
+    display:block;
+}
+
+.card:hover .texto-oculto img{
+    display:block;
+}
+
+footer{
+    margin-top:10px;
+    height: 450px;
+    background-image:linear-gradient(180deg,#895013,#895013,black);
+    text-align:center;
+    /* border-top:5px solid #895013; */
+}
+
+.logo-rodape{
+    padding:15px;
+    text-align:center;
+    color: white;
+}
+
+.img-logo-rodape{
+    margin-bottom:5px;
+    flex:50%;
+    /* border:1px solid deeppink; */
+    text-align:center;
+    width: 75%;
+}
+
+.pqi{
+    font-family: 'Lobster', cursive;
+    padding:5px;
+    color:white;
+    font-size:24px;
+    background-color: #073763;
+    margin-top:5px;
+    margin-right:10%;
+    margin-left:10%;
+    letter-spacing: 2px;
+}
+
+.pqi a{
+    color:white;
+    text-decoration: none;
+}
+
+
+.whats{
+    position: fixed;
+    bottom:5px;
+    right:5px;
+}
