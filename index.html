@@ -33,33 +33,56 @@
 </head>
 
 <body>
-
-    <nav class="navbar">
-        <div class="logo">
-            <h1><a href="index.html">Pão de Queijo da Irá</a></h1>
-        </div>
-        <div class="menu-desktop">
-     	    <a href="promocoes.html"><img src="img/voucher.png" alt="cupom"></a>
-            <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7" target="_blank"><img src="img/instagram.png" alt="instagram"></a>
-            <a href="https://www.youtube.com/@paodequeijodaira" target="_blank"><img src="img/youtube.png" alt="youtube"></a>
-            <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x93598532427ada55:0xedc9803f892654af?utm_source=mstt_1&entry=gps" target="_blank"><img src="img/googlemap.png" alt="googlemap"></a>
-            <a id="botao" href="https://api.whatsapp.com/send?phone=5561981885715&text=Ol%C3%A1%20peguei%20seu%20contato%20no%20site" target="_blank">Fale Conosco</a>
-        </div>
-    </nav>
-
-    <header class="header">
-        <div class="headline">
-            <h2 style="letter-spacing: 15px;">Sabor caseiro</h2>
-            <h2 style="font-size:50px">Vendemos Pão de Queijo Congelado</h2>
-	        <p><b>Funcionamento:</b></p>
-	        <p>De Segunda à Sábado de 08:00 hs às 18:00 hs e aos Domingos de 08:00 hs às 12:00 hs.</p>	<p>Ligue já ☎ (61) <b>98277-7196</b></p>
-            <a href="https://api.whatsapp.com/send?phone=5561981885715&text=Ol%C3%A1%20peguei%20seu%20contato%20no%20site" target="_blank" class="contact-btn">Faça seu Pedido</a>
-        </div>
-        <div class="img-headline">
-            <img style="max-width: 90%;" src="img/pqi.jpg">
-	        <p style="font-size:11px"><b>Para assar:</b><br>Leve ao forno pré-aquecido em 180°C entre 20 a 30 minutos, sem a necessidade de óleo na forma.</p>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <h1><a href="index.html">Pão de Queijo da Irá</a></h1>
+            </div>
+            <div class="menu-desktop">
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="promocoes.html">Promoções</a>
+                    <a href="https://api.whatsapp.com/send?phone=5561981885715&text=Ol%C3%A1%20peguei%20seu%20contato%20no%20site" target="_blank">Fale Conosco</a>
+                    <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7" target="_blank">Instagram</a>
+                    <a href="https://www.youtube.com/@paodequeijodaira" target="_blank">YouTube</a>
+                    <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x93598532427ada55:0xedc9803f892654af?utm_source=mstt_1&entry=gps" target="_blank">Google Map</a>
+                </nav>
+            </div>
+            <button onclick="animarMenu()" id="btn-menu">
+                <span class="linha"></span>
+                <span class="linha"></span>
+                <span class="linha"></span>
+            </button>
+            <div class="menu-mobile" id="menu-mobile">
+                <nav>
+                    <a href="index.html">&nbsp;Home&nbsp;</a><br>
+                    <a href="promocoes.html">&nbsp;Promoções&nbsp;</a><br>
+                    <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7" target="_blank">&nbsp;Instagram&nbsp;</a><br>
+                    <a href="https://www.youtube.com/@paodequeijodaira" target="_blank">&nbsp;YouTube&nbsp;</a><br>
+                    <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x93598532427ada55:0xedc9803f892654af?utm_source=mstt_1&entry=gps" target="_blank">&nbsp;Google Map&nbsp;</a><p>
+                </nav> 
+            </div>
         </div>
     </header>
+
+    <section class="header">
+        <article class="headline">
+            <div>
+                <h2 style="letter-spacing: 15px;">Sabor caseiro</h2>
+                <h2 style="font-size:50px">Vendemos Pão de Queijo Congelado</h2>
+                <p><b>Funcionamento:</b></p>
+                <p>De Segunda à Sábado de 08:00 hs às 18:00 hs e aos Domingos de 08:00 hs às 12:00 hs.</p>
+                <p>Ligue já &phone; (61) <b>98277-7196</b></p>
+            </div>
+            <div>
+              <p><a href="https://api.whatsapp.com/send?phone=5561981885715&text=Ol%C3%A1%20peguei%20seu%20contato%20no%20site" target="_blank" class="contact-btn">Faça seu Pedido</a></p><br>
+            </div>
+        </article>
+        <article class="img-headline">
+            <img style="max-width: 90%;" src="img/pqi.jpg">
+	        <p style="font-size:11px"><b>Para assar:</b><br>Leve ao forno pré-aquecido em 180°C entre 20 a 30 minutos, sem a necessidade de óleo na forma.</p>
+        </article>
+    </section>
 
     <section>
         <h2>Acompanhe os nossos Destaques</h2>
@@ -119,6 +142,8 @@
             <b>&copy; 2025 Pão de Queijo da Irá. Todos os direitos reservados</b>
         </div>
     </footer>
+    
     <a class="whats" target="_blank" href="https://api.whatsapp.com/send?phone=5561981885715&text=Ol%C3%A1%20peguei%20seu%20contato%20no%20site"><img style="width: 100px;" src="img/whats.png"></a>
+    <script src="js/animar.js"></script>
 </body>
 </html>
