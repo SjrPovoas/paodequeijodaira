@@ -1,18 +1,32 @@
-   /* responsividade para smartphone */
-@media screen and (max-width: 360px) {
-    .navbar{
-        position: relative;
-    }
-    .menu{
+@media screen and (max-width: 1032px) {
+
+    .menu-desktop, .sociais {
         display: none;
+    }
+    #btn-menu{
+        display: block;
+    }
+    .menu-mobile .nav a{
+	    display: block;
+        color: rgb(131, 91, 91);
+        text-decoration: none;
+        padding: 70px 20px 70px 20px;
+        font-size: 20pt;
+    }
+    .menu-mobile .nav a:hover{
+        color:#895013;
+        background-color: #000000ce;
     }
     .logo{
         margin:0;
+        width: 100%;
         text-align:center;
     }
-    .header{
-        padding-top:50px;
+    .menu-mobile.abrir{
+        visibility: visible;
+        height: calc(90vh - 50px);
     }
+
     .headline{
         flex:100%;
         margin:5%;
@@ -26,91 +40,10 @@
         margin:5%;
         text-align:center;
     }
-
     .card{
         width:100%;
     }
-
     .whats{
         display: none;
     }
-
-}
-
-   /* responsividade para smartphone */
-@media screen and (max-width: 768px) {
-    .navbar{
-        position: relative;
-    }
-    .menu{
-        display: none;
-    }
-    .logo{
-        margin:0;
-        text-align:center;
-    }
-    .header{
-        padding-top:50px;
-    }
-    .headline{
-        flex:100%;
-        margin:5%;
-        text-align:center;
-    }
-    .headline p{
-        text-align:center;
-    }
-    .img-headline{
-        flex:100%;
-        margin:5%;
-        text-align:center;
-    }
-
-    .card{
-        width:100%;
-    }
-
-    .whats{
-        display: none;
-    }
-
-}
-
-   /* responsividade para computador */
-@media screen and (max-width: 1005px) {
-    .navbar{
-        position: relative;
-    }
-    .menu{
-        display: none;
-    }
-    .logo{
-        margin:0;
-        text-align:center;
-    }
-    .header{
-        padding-top:50px;
-    }
-    .headline{
-        flex:100%;
-        margin:5%;
-        text-align:center;
-    }
-    .headline p{
-        text-align:center;
-    }
-    .img-headline{
-        flex:100%;
-        margin:5%;
-        text-align:center;
-    }
-
-    .card{
-        width:100%;
-    }
-
-    .whats{
-        display: none;
-    }
-
 }

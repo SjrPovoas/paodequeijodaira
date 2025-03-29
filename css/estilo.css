@@ -1,61 +1,148 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
 *{
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
-
+.container{
+    max-width: 1080px;
+    justify-content: center;
+    align-items: center;
+}
 body{
     margin:0;
     font-family: 'Roboto', sans-serif;
+    width: 100%;
+    min-height: 100vh;
 }
 
+/* Menu do desktop em forma de barra fixa no topo - Início */
 .navbar{
     display: flex;
     flex-flow: row wrap;
     height: 100px;
-    background: white;
+    top: 0;
+    background: #f0b256;
     justify-content: center;
     align-items: center;
     position:fixed;
     width: 100%;
 }
-
 .logo{
-    flex:28%;
+    flex:26%;
     margin-left:10%;
-    /* border:1px solid red;  */
     text-align: left;
 }
-
 .logo h1{
     font-family: 'Lobster', cursive;
     color:#895013;
     font-size:34px;
 }
-
 .logo h1 a{
     color:#895013;
     text-decoration: none;
 }
 
-.menu{
-    flex:62%;
-   /* border:1px solid green;*/
+.menu-desktop{
+    flex:58%;
     text-align:right;
-    padding:5px;
+    padding:4%;
 }
 
-.menu a{
+.menu-desktop a:hover{
+    color: white;
+    text-decoration: solid;
+    transition: .2s;;
+}
+
+.menu-desktop nav a{
     color:#895013;
     text-decoration: none;
     font-size:20px;
     padding:10px 8px; 
+    position: relative;
+}
+.menu-desktop nav a::after{
+    content: " ";
+    width: 0px;
+    height: 4px;
+    background-image: linear-gradient(45deg, white, #895013);
+    position: absolute;
+    top: 3px;
+    left: 0;
+    transition: width 0.5s;
+}
+.menu-desktop nav a:hover::after{
+    width: 100%;
 }
 
-.menu a:hover{
-    color:#f0b256;
-    border-top:4px solid #895013;
-}
+/* Menu do desktop em forma de barra fixa no topo - Final */
 
+
+
+/* Menu para smartphone - Início */
+.menu-mobile{
+    display: none;
+}
+.menu-mobile{
+    display: block;
+    background-color: #0000002c;
+    backdrop-filter: blur(25px);
+    position: absolute;
+    top: 100px;
+    text-align:center;
+    padding: 50px 0px 50px 0px;
+    font-size: 18pt;
+    width: 100%;
+    height: 0;
+    visibility: hidden;
+    transition: .5s;
+    overflow: hidden;
+}
+.menu-mobile nav a{
+    color:white;
+    text-decoration: none;
+}
+.menu-mobile nav a:hover{
+    background-color: #0000002c;
+    color:whitesmoke;
+    text-decoration: none;
+}
+#btn-menu{
+    background: transparent;
+    width: 50px;
+    height: 50px;
+    outline: none;
+    cursor: pointer;
+    border: 2px solid #00000080;
+    border-radius: 30px;
+    transition: .2s;
+    display: none;
+}
+.linha{
+    position: relative;
+    height: 3px;
+    background: #00000080;
+    width: 25px;
+    display: block;
+    margin: 5px auto 5px;
+    transform-origin: center;
+    transition: .2s;
+}
+#btn-menu.ativo .linha:nth-child(1){
+    transform: translateY(8px) rotate(-45deg);
+    background-color: red;
+}
+#btn-menu.ativo .linha:nth-child(3){
+    transform: translateY(-8px) rotate(45deg);
+    background-color: red;
+}
+#btn-menu.ativo .linha:nth-child(2){
+    width: 0;
+}
+/* responsividade para smartphone - Final */
 #botao{
     background: #895013;
     padding: 10px 25px;
@@ -64,7 +151,6 @@ body{
     margin-right:10%;
     margin-left:2%;
 }
-
 #botao:hover{
     border:none;
     background: #f0b256;
@@ -116,20 +202,17 @@ body{
 .img-headline{
     margin-right:10%;
     flex:40%;
-    /* border:1px solid deeppink; */
     text-align:center;
 }
 
 section{
     display: inline-block;
     margin-top:80px;
-    /* border:1px solid black; */
     margin-left:5%;
     margin-right:5%;
     padding:5%;
     text-align: center;
 }
-
 section h2{
     width:100%;
     font-size:50px;
@@ -138,7 +221,6 @@ section h2{
     font-weight: bold;
     color:#895013;
 }
-
 section h3{
     width:100%;
     font-size:22px;
@@ -147,7 +229,6 @@ section h3{
     font-weight: bold;
     color:#895013;
 }
-
 section h3 a{
     color:white;
     text-decoration: none;
@@ -157,7 +238,6 @@ section h3 a{
     display: inline-block;
     margin-top:5%;
 }
-
 .servicos a{
     text-decoration: none;
     color:white;
@@ -178,7 +258,6 @@ section h3 a{
 	text-align: center;
 	background: white;
 }
-
 .promocao li a{
     color:white;
     text-decoration: none;
@@ -195,31 +274,25 @@ section h3 a{
     border-radius:10px;
     cursor:pointer;
 }
-
-.texto-oculto{
-    display: none;
-}
-
 .card:hover{
     background: #895013;
     color:white;
     padding:40px;
 }
-
 .card:hover img{
     display: none;
 }
-
 .card:hover .card-text{
     display:none;
 }
-
 .card:hover .texto-oculto{
     display:block;
 }
-
 .card:hover .texto-oculto img{
     display:block;
+}
+.texto-oculto{
+    display: none;
 }
 
 footer{
@@ -227,23 +300,18 @@ footer{
     height: 450px;
     background-image:linear-gradient(180deg,#895013,#895013,black);
     text-align:center;
-    /* border-top:5px solid #895013; */
 }
-
 .logo-rodape{
     padding:15px;
     text-align:center;
     color: white;
 }
-
 .img-logo-rodape{
     margin-bottom:5px;
     flex:50%;
-    /* border:1px solid deeppink; */
     text-align:center;
     width: 75%;
 }
-
 .pqi{
     font-family: 'Lobster', cursive;
     padding:5px;
@@ -255,15 +323,21 @@ footer{
     margin-left:10%;
     letter-spacing: 2px;
 }
-
 .pqi a{
     color:white;
     text-decoration: none;
 }
-
-
 .whats{
     position: fixed;
     bottom:5px;
-    right:5px;
+    right: 25px;
 }
+
+/*             <div class="sociais">
+                <nav>
+                    <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7" target="_blank"><img src="img/instagram.png" alt="instagram"></a>
+                    <a href="https://www.youtube.com/@paodequeijodaira" target="_blank"><img src="img/youtube.png" alt="youtube"></a>
+                    <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x93598532427ada55:0xedc9803f892654af?utm_source=mstt_1&entry=gps" target="_blank"><img src="img/googlemap.png" alt="googlemap"></a>
+                </nav>
+                </div>
+*/
