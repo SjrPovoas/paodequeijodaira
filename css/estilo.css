@@ -6,23 +6,24 @@
     padding: 0;
     box-sizing: border-box;
 }
-.container{
+/*.container{
     max-width: 1080px;
     justify-content: center;
     align-items: center;
-}
+}*/
 body{
     margin:0;
     font-family: 'Roboto', sans-serif;
     width: 100%;
+    text-align: center;
     min-height: 100vh;
 }
 
 /* Menu do desktop em forma de barra fixa no topo - Início */
-.navbar{
+header .navbar{
     display: flex;
     flex-flow: row wrap;
-    height: 100px;
+    height: 120px;
     top: 0;
     background: #f0b256;
     justify-content: center;
@@ -30,57 +31,61 @@ body{
     position:fixed;
     width: 100%;
 }
-.logo{
-    flex:26%;
-    margin-left:10%;
+/* Logo nominativa Pão de Queijo da Irá - Inicio */
+header .logo{
+    flex:28%;
+    margin-left:8%;
     text-align: left;
 }
-.logo h1{
+header .logo h1{
     font-family: 'Lobster', cursive;
     color:#895013;
     font-size:34px;
 }
-.logo h1 a{
+header .logo h1 a{
     color:#895013;
     text-decoration: none;
 }
+/* Logo nominativa Pão de Queijo da Irá - Final */
 
-.menu-desktop{
+/* Menu para Computador - Inicio */
+header .menu-desktop{
     flex:58%;
     text-align:right;
     padding:4%;
 }
 
-.menu-desktop a:hover{
+header .menu-desktop a:hover{
     color: white;
     text-decoration: solid;
     transition: .2s;;
 }
 
-.menu-desktop nav a{
+header .menu-desktop nav a{
     color:#895013;
     text-decoration: none;
     font-size:20px;
-    padding:10px 8px; 
+    padding-inline:7px; 
     position: relative;
 }
-.menu-desktop nav a::after{
+/* Menu para Computador - Final */
+
+/* Barra animada sobre Menu para Computador - Início */
+header .menu-desktop nav a::after{
     content: " ";
     width: 0px;
     height: 4px;
     background-image: linear-gradient(45deg, white, #895013);
     position: absolute;
-    top: 3px;
+    top: -5px;
     left: 0;
     transition: width 0.5s;
 }
-.menu-desktop nav a:hover::after{
+header .menu-desktop nav a:hover::after{
     width: 100%;
 }
-
+/* Barra animada sobre Menu para Computador - Final */
 /* Menu do desktop em forma de barra fixa no topo - Final */
-
-
 
 /* Menu para smartphone - Início */
 .menu-mobile{
@@ -88,15 +93,19 @@ body{
 }
 .menu-mobile{
     display: block;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 0;
     background-color: #0000002c;
     backdrop-filter: blur(25px);
     position: absolute;
     top: 100px;
     text-align:center;
-    padding: 50px 0px 50px 0px;
-    font-size: 18pt;
+    padding: 70px 20px 70px 20px;
+    font-size: 26pt;
     width: 100%;
-    height: 0;
+    height: 20pt;
     visibility: hidden;
     transition: .5s;
     overflow: hidden;
@@ -109,7 +118,14 @@ body{
     background-color: #0000002c;
     color:whitesmoke;
     text-decoration: none;
+    font-size: 26pt;
+    width: 100%;
+    height: 20pt;
+    cursor: pointer;
 }
+/* Menu para smartphone - Final */
+
+/* Botão Menu Hamburguer para Smartphone - Início */
 #btn-menu{
     background: transparent;
     width: 50px;
@@ -142,35 +158,22 @@ body{
 #btn-menu.ativo .linha:nth-child(2){
     width: 0;
 }
-/* responsividade para smartphone - Final */
-#botao{
-    background: #895013;
-    padding: 10px 25px;
-    color:white;
-    border-radius:5px;
-    margin-right:10%;
-    margin-left:2%;
-}
-#botao:hover{
-    border:none;
-    background: #f0b256;
-}
+/* Botão Menu Hamburguer para Smartphone - Final */
 
-.header{
+/* Sessão de Chamada pra Ação - Início */
+section .header{
     display: flex;
     flex-flow:row wrap;
     justify-content: center;
     align-items: center;
-    background: white;
+    background-image: linear-gradient(45deg, white, #895013);
     padding-top:100px;
 }
 
-.headline{
+article .headline{
     margin-left:10%;
     flex:40%;
-    /* border:1px solid black; */
 }
-
 .headline h2{
     font-weight: 900;
     font-size:20px;
@@ -178,31 +181,70 @@ body{
     padding:0;
     margin:0;
 }
-
 .headline p{
     color:black;
-    text-align:left;
+    text-align:center;
 }
-
+.span1{
+    font-family: 'Lobster', cursive;
+    font-weight: 900;
+    font-size:20px;
+    letter-spacing: 15px;
+    color:#f0b256;
+}
+.span2{
+    font-family: 'Lobster', cursive;
+    font-weight: 900;
+    font-size:50px;
+    text-align: center;
+    color:#f0b256;
+}
+.headline-text{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14pt;
+    color:black;
+    margin-left:5%;
+    display: flex;
+    flex:35%;
+}
+.headline-img{
+    margin-right:5%;
+    max-width: 96%;
+    display: flex;
+    flex:35%;
+    text-align:center;
+}
+.span3{
+    margin-left:5%;
+    margin-right:5%;
+    font-family: 'Roboto', sans-serif;
+    font-size:14px;
+    color:black;
+    text-align: justify;
+    padding-block: 5%;
+}
 .contact-btn{
     display: inline-block;
-    background: #f0b256;
+    background-image: linear-gradient(45deg, white, #895013, #f0b256);
     padding:20px;
     color:white;
-    text-transform: uppercase;
     border-radius:5px;
     text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 20px;
+    transition: .2s;
+    padding:10px 40px 20px 40px;
+    font-family: 'Roboto', sans-serif;
 }
-
 .contact-btn:hover{
-    background:#895013;
-}
-
-
-.img-headline{
-    margin-right:10%;
-    flex:40%;
-    text-align:center;
+    background-image: linear-gradient(45deg, white, #895013, #f0b256);
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: .2s;
+    padding:10px 40px 20px 40px;
+    font-family: 'Roboto', sans-serif;
 }
 
 section{
@@ -233,7 +275,15 @@ section h3 a{
     color:white;
     text-decoration: none;
 }
-
+.span4{
+    font-family: 'Lobster', cursive;
+    font-size:14px;
+    color:#895013;
+    font-weight: 900;
+    font-size:50px;
+    text-align: center;
+    padding: 5%;
+}
 .servicos{
     display: inline-block;
     margin-top:5%;
@@ -246,25 +296,50 @@ section h3 a{
 .promocao{
     font-family: 'Lobster', cursive;
     margin-top:40px;
-    margin-left:10%;
-    margin-right:10%;
-    padding:5%;
+    margin-left:5%;
+    margin-right:5%;
+    padding:15px;
     text-align: left;
+    font-size:22px;
     color:white;
     background: #f0b256;
-}
-.promocao-text{
-	font-family: 'Roboto';
-	text-align: center;
-	background: white;
 }
 .promocao li a{
     color:white;
     text-decoration: none;
     background: #f0b256;
     text-align: left;
+    transition: ease-in-out .5s;
 }
-
+.promocao-btn a{
+    text-align: center;
+	background: white;
+    color:#895013;
+    margin-left:1%;
+    margin-right:1%;
+    font-size:20px;
+    cursor: pointer;
+    border-radius: 20px;
+    padding:10px 40px 20px 40px;
+    font-family: 'Roboto', sans-serif;
+}
+.promocao-btn a:hover{
+	background-color:#895013;
+    color: white;
+    margin-left:5%;
+    margin-right:5%;
+    text-align: center;
+    font-size:22px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: .2s;
+    padding:11px 40px 20px 40px;
+    font-family: 'Roboto', sans-serif;
+}
+.span5{
+    text-align: center;
+    cursor: pointer;
+}
 .card{
     display: inline-block;
     width: 30%;
@@ -300,44 +375,72 @@ footer{
     height: 450px;
     background-image:linear-gradient(180deg,#895013,#895013,black);
     text-align:center;
-}
-.logo-rodape{
-    padding:15px;
-    text-align:center;
+    text-decoration: none;
     color: white;
 }
-.img-logo-rodape{
-    margin-bottom:5px;
-    flex:50%;
-    text-align:center;
-    width: 75%;
-}
-.pqi{
-    font-family: 'Lobster', cursive;
-    padding:5px;
-    color:white;
-    font-size:24px;
-    background-color: #073763;
-    margin-top:5px;
+.rodape-turma{
+    margin-top: 10px;
     margin-right:10%;
     margin-left:10%;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    font-family: 'Lobster', cursive;
+    font-size: 20px;
+    background-color: #073763;
+    padding:5px 10px 5px 10px;
+
 }
-.pqi a{
+.rodape-turma a{
     color:white;
     text-decoration: none;
+}
+.rodape-text{
+    margin-top:12px;
+    margin-right:10%;
+    margin-left:10%;
+    font-size:18px;
+    flex:50%;
+    width: 75%;
+}
+.rodape-img img{
+    margin-top: 8px;
+    margin-right:10%;
+    margin-left:10%;
+    width: auto;
+    max-width: 250px;
 }
 .whats{
     position: fixed;
     bottom:5px;
     right: 25px;
 }
-
-/*             <div class="sociais">
-                <nav>
-                    <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7" target="_blank"><img src="img/instagram.png" alt="instagram"></a>
-                    <a href="https://www.youtube.com/@paodequeijodaira" target="_blank"><img src="img/youtube.png" alt="youtube"></a>
-                    <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x93598532427ada55:0xedc9803f892654af?utm_source=mstt_1&entry=gps" target="_blank"><img src="img/googlemap.png" alt="googlemap"></a>
-                </nav>
-                </div>
+/*img{
+    max-width: 250px;
+    transform: translateY(0);
+    animation: float 5s ease-in-out infinite;
+}
+#KeyFrames float{
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}*/
+/*             
+<div class="sociais">
+    <nav>
+        <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7" target="_blank"><img src="img/instagram.png" alt="instagram"></a>
+        <a href="https://www.youtube.com/@paodequeijodaira" target="_blank"><img src="img/youtube.png" alt="youtube"></a>
+        <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x93598532427ada55:0xedc9803f892654af?utm_source=mstt_1&entry=gps" target="_blank"><img src="img/googlemap.png" alt="googlemap"></a>
+    </nav>
+</div>
+*/
+/* Botões do Bootstrap
+<i class="bi bi-whatsapp"></i>
+<i class="bi bi-instagram"></i>
+<i class="bi bi-youtube"></i>
+<i class="bi bi-geo-alt-fill"></i>
 */
