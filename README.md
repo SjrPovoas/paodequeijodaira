@@ -2,20 +2,19 @@
   <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhskIML5HXxxY0UAcf2GeTAqRn0MAV9YF-dDp6xE8XPRBUk__edBmsG4rRLp_urBinyLqgdejGcrnQghmAhyphenhyphenYSW28UBn0gSljmj0IZvgTP4HHWYCQgqDSL4WBaC9BUu4rEv7nhi1HePkEk6_EcQpssp-WQYhppXH3AmvzmZzzOseSvkSstrGLHbpFqEpuk/s320-rw/FireShot%20Capture%20004%20-%20P%C3%A3o%20de%20Queijo%20da%20Ir%C3%A1%20-%20%5Bpao-de-queijo-da-ira.vercel.app%5D.png">
 </p>
 
+---
 ## <p>SOBRE O PROJETO</p>
 <p>Site desenvolvido para comércio Web2 e muito importante para nossa Start Up SjrPovoaS.<br>
 Comércio IRL desejando ingressar processos na blockchain. <br>
 Agilizar e utilizar a força da web3. </p>
 
-</br>
-
+---
 ## <p>MÍDIAS SOCIAIS</p>
 - [Site](https://pao-de-queijo-da-ira.vercel.app/)
 - [Instagram](https://www.instagram.com/pao.de.queijo.da.ira/)
 - [YouTube](https://www.youtube.com/@paodequeijodaira/)
 
-</br>
-
+---
  ### Sumário
 
 1. [Configurando conexão VScode com Github](https://github.com/SjrPovoas/Cafe-com-Povoas/#1-configurando-conexao-vscode-com-github)
@@ -23,8 +22,7 @@ Agilizar e utilizar a força da web3. </p>
 3. [Recursos Utilizados na parte Visual](https://github.com/SjrPovoas/Cafe-com-Povoas/#3-recursos-utilizados-na-parte-visual)
 4. [Conheça o Time](https://github.com/SjrPovoas/Cafe-com-Povoas/#4-conheca-o-time)
 
-</br>
- 
+---
  ## 1. CONFIGURANDO CONEXÃO VSCODE COM GITHUB
 
 <p>Para clonar esse Projeto, use:</p>
@@ -54,8 +52,7 @@ Agilizar e utilizar a força da web3. </p>
   <li>git push --set-upstream origin Main <i>(ou o nome da branch que você deseja, por ex: segunda-branch)</i></li>
 </ul>
 
-</br>
-
+---
 ## 2. TECNOLOGIAS USADAS
 
 - FRONTEND
@@ -64,8 +61,7 @@ Agilizar e utilizar a força da web3. </p>
 - BACKEND
   - JAVASCRIPT
 
-</br>
-
+---
 ## 3. RECURSOS UTILIZADOS NA PARTE VISUAL
 
 - FONTS
@@ -73,38 +69,13 @@ Agilizar e utilizar a força da web3. </p>
 - BOTÕES
   - [Bootstrap](https://icons.getbootstrap.com/)
 
-</br>
-
+---
 ## 4. CONHEÇA O TIME
-<div>
-	<table>
-		<tr>
-			<td>Nome</td>
-			<td>Título</td>
-			<td>Linkedin</td>
-			<td>X/Twitter</td>
-			<td>GitHub</td>
-			<td>Instagram</td>
-		</tr>
-		<tr>
-			<td>Silvio Povoas</td>
-			<td>Desenvolvedor e Fundador</td>
-			<td><a href="https://www.linkedin.com/in/sjrpovoas" _target="blank">sjrpovoas</a></td>
-			<td><a href="https://www.x.com/sjrpovoas" _target="blank">sjrpovoas</a></td>
-			<td><a href="https://github.com/SjrPovoas" _target="blank">SjrPovoas</a></td>
-			<td><a href="https://www.instagram.com/silviopovoasjunior" _target="blank">@silviopovoasjunior</a></td>
-		</tr>
-		<tr>
-			<td>Antônia Iraleide</td>
-			<td>Fundadora</td>
-			<td>X</td>
-			<td>X</td>
-			<td>X</td>
-			<td><a href="https://www.instagram.com/pao.de.queijo.da.ira" _target="blank">@pao.de.queijo.da.ira</a></td>
-		</tr>
-	</table>
-</div>
-  
-</br>
+
+Nome | Título | Linkedin | X/Twitter | GitHub | Instagram
+---|---|---|---|---|---
+Silvio Povoas | Desenvolvedor e Fundador | [sjrpovoas](https://www.linkedin.com/in/sjrpovoas) | [sjrpovoas](https://www.x.com/sjrpovoas) | [SjrPovoas](https://github.com/SjrPovoas) | [@silviopovoasjunior](https://www.instagram.com/silviopovoasjunior)
+Antônia Iraleide | Fundadora | X | X | X | [@pao.de.queijo.da.ira](https://www.instagram.com/pao.de.queijo.da.ira)
+***
 
 &COPY; 2025 Pão de Queijo da Irá
