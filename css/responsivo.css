@@ -1,4 +1,4 @@
-@media screen and (max-width: 1211px) {
+@media screen and (max-width: 1256px) {
 
     .menu-desktop, .sociais {
         display: none;
@@ -51,7 +51,6 @@
         width:100%;
     }
     .whats{
-        display: flex;
+        display: none;
     }
-
 }
