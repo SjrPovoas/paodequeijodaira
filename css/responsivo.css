@@ -50,7 +50,8 @@
     .card{
         width:100%;
     }
-    /*.whats{
-        display: none;
-    }*/
+    .whats{
+        display: flex;
+    }
+
 }
