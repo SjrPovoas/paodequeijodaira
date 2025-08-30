@@ -1,136 +1,159 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- CSP --
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- CSP --
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://pao-de-queijo-da-ira-vercel.app 'unsafe-eval' 'unsafe-inline'; style src 'unsafe-eval' 'unsafe-inline'; img-src 'self' mutillidae.local https://pao-de-queijo-da-ira-vercel.app; connect src 'self' mutillidae.local; form-action 'self' mutillidae.local; font src 'none'; frame src 'self' mutillidae.local; media src 'none'; onject src 'none; child-src 'none'; script-src 'self' https://pao-de-queijo-da-ira-vercel.app;">
         Content-Security-Policy-Report-Only: default-src https://pao-de-queijo-da-ira-vercel.app; report-uri /csp-violation-report-endpoint/>
         !-- /CSP-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="Keywords" content="Pão de Queijo da Irá,Cidade Ocidental,Brasil">
-        <meta name="title" Pão de Queijo da Irá>
-        <meta name="author" content="SjrPovoaS">
-        <meta name="google-site-verification" content="1RxIdEZul6Kumx4-EyrzSN2MZWVOtXI_qC6DRQIszg0">
-    
-        <meta property="fb:admins" content="1061960161">
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="Pão de Queijo da Irá">
-        <meta property="og:description" content="Pão de Queijo da Irá tem o melhor pão de queijo caseiro da Cidade Ocidental-Goiás.">
-        <meta property="og:site_name" content="Pão de Queijo da Irá">
-        <meta property="og:url" content="http://laden.freetzi.com">
-        <meta property="og:image" content="img/pqi.jpg">
-    
-        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-        <link rel="stylesheet" href="css/estilo.css">
-        <link rel="stylesheet" href="css/responsivo.css"  media="screen">
-        <!-- Google Fonts-->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-        <!-- /Google -->
-        <!-- Bootstrap Icons-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <!-- /Bootstrap Icons-->
-        <title>Pão de Queijo da Irá</title>
-    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Keywords" content="Pão de Queijo da Irá,Cidade Ocidental,Brasil">
+    <meta name="title" Pão de Queijo da Irá>
+    <meta name="author" content="SjrPovoaS">
+    <meta name="google-site-verification" content="1RxIdEZul6Kumx4-EyrzSN2MZWVOtXI_qC6DRQIszg0">
 
-    <body>
-        <header>
-            <div class="navbar">
-                <div class="logo">
-                    <h1><a href="index.html">Pão de Queijo da Irá</a></h1>
-                </div>
-                <div class="menu-desktop">
-                    <nav>
-                        <a href="index.html">Home</a>
-                        <a href="promocoes.html">Promoções</a>
-                        <a href="https://api.whatsapp.com/send?phone=5561981885715&text=Ol%C3%A1%20peguei%20seu%20contato%20no%20site" target="_blank">Fale Conosco</a>
-                        <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7" target="_blank">Instagram</a>
-                        <a href="https://www.youtube.com/@paodequeijodaira" target="_blank">YouTube</a>
-                        <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x93598532427ada55:0xedc9803f892654af?utm_source=mstt_1&entry=gps" target="_blank">Google Map</a>
-                    </nav>
-                </div>
-                <button onclick="animarMenu()" id="btn-menu">
-                    <span class="linha"></span>
-                    <span class="linha"></span>
-                    <span class="linha"></span>
-                </button>
-                <div class="menu-mobile" id="menu-mobile">
-                    <nav>
-                        <a href="index.html">&nbsp;Home&nbsp;</a><br>
-                        <a href="promocoes.html">&nbsp;Promoções&nbsp;</a><br>
-                        <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7" target="_blank">&nbsp;Instagram&nbsp;</a><br>
-                        <a href="https://www.youtube.com/@paodequeijodaira" target="_blank">&nbsp;YouTube&nbsp;</a><br>
-                        <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x93598532427ada55:0xedc9803f892654af?utm_source=mstt_1&entry=gps" target="_blank">&nbsp;Google Map&nbsp;</a><p>
-                    </nav> 
-                </div>
+    <meta property="fb:admins" content="1061960161">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Pão de Queijo da Irá">
+    <meta property="og:description"
+        content="Pão de Queijo da Irá tem o melhor pão de queijo caseiro da Cidade Ocidental-Goiás.">
+    <meta property="og:site_name" content="Pão de Queijo da Irá">
+    <meta property="og:url" content="http://laden.freetzi.com">
+    <meta property="og:image" content="img/pqi.jpg">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/responsivo.css" media="screen">
+    <!-- Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- /Google -->
+    <!-- Bootstrap Icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- /Bootstrap Icons-->
+    <title>Pão de Queijo da Irá</title>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <h1><a href="index.html">Pão de Queijo da Irá</a></h1>
             </div>
-        </header>
-
-        <section class="header">
-            <article class="headline">
-                <span class="span1">Sabor caseiro</span><br>
-                <span class="span2">Vendemos Pão de Queijo Congelado</span><br><br>
-                <p><b>Funcionamento:</b></p><br>
-                <p>De Segunda à Sábado de 08:00 hs às 18:00 hs e aos Domingos de 08:00 hs às 12:00 hs.</p><br>
-                <p>Ligue já &phone; (61) <b>98277-7196</b></p><br>
-                <a href="https://api.whatsapp.com/send?phone=5561981885715&text=Ol%C3%A1%20peguei%20seu%20contato%20no%20site" target="_blank" class="contact-btn">Faça seu Pedido</a><br><br>
-            </article>
-            <article class="img-headline">
-                <div>
-                <img style="max-width: 90%;" src="img/pqi.jpg"><br>
-                <span class="span3">Para assar: Leve ao forno pré-aquecido em 180°C entre 20 a 30 minutos, sem a necessidade de óleo na forma.</span>
-                </div>
-            </article>
-        </section>
-
-        <section>
-            <span class="span4">Leia as regras para retirar seu Cupom de Desconto</span>
-            <div class="promocao">
-                <div>
-                    <h3>Sobre o Preenchimento</h3>
-                    <p>Preencha o formulário para receber o 🔖DESCONTO DE 20% na próxima compra.</p><br>
-                    <h3>Siga as mídias sociais</h3>
-                    <ul>
-                        <li><a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7" target="_blank">Página do Instagram</a> e o Canal do <a href="https://www.youtube.com/@paodequeijodaira" target="_blank">YouTube</a>;</li>
-                    </ul><br>
-                    <h3>No Google Maps</h3>
-                    <ul>
-                        <li><a href="https://maps.app.goo.gl/vMvZZ2wnQMWZZ1vF7" target="_blank">Favorite o endereço do Pão de Queijo da Irá no Google Maps</a>;</li>
-                        <li><a href="https://g.page/paodequeijodaira/review?gm" target="_blank">Faça uma Avaliação, de preferência com 5 estrelas, do Pão de Queijo da Irá com Foto e descrição da experiência do Produto comprado conosco</a>;</li>
-                    </ul><br>
-                    <h3>Sobre o envio do Formulário</h3>
-                    <p>💡 Só envie formulário depois de ter cumprido todas as atividades corretamente.</p><br>
-                </div>
-            <div class="promocao-btn">
-            <span class="span5">
-                <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSeMPq6anph_RkRAokiVPVaEtyi_Rnrca-IlOZNhnGGtHEv61w/viewform?usp=sf_link" target="_blank" class="contact-btn">Acessar Formulário</a></p>
-            </span>
+            <div class="menu-desktop">
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="promocoes.html">Promoções</a>
+                    <a href="https://api.whatsapp.com/send?phone=5561981885715&text=Ol%C3%A1%20peguei%20seu%20contato%20no%20site"
+                        target="_blank">Fale Conosco</a>
+                    <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7"
+                        target="_blank">Instagram</a>
+                    <a href="https://www.youtube.com/@paodequeijodaira" target="_blank">YouTube</a>
+                    <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x93598532427ada55:0xedc9803f892654af?utm_source=mstt_1&entry=gps"
+                        target="_blank">Google Map</a>
+                </nav>
             </div>
-        </section>
-        
-        <footer>
+            <button onclick="animarMenu()" id="btn-menu">
+                <span class="linha"></span>
+                <span class="linha"></span>
+                <span class="linha"></span>
+            </button>
+            <div class="menu-mobile" id="menu-mobile">
+                <nav>
+                    <a href="index.html">&nbsp;<i class="bi bi-house-door-fill">&nbsp;Home&nbsp;</i></a><br>
+                    <a href="promocoes.html">&nbsp;<i class="bi bi-person-arms-up">&nbsp;Promoções&nbsp;</i></a><br>
+                    <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7"
+                        target="_blank">&nbsp;<i class="bi bi-instagram">&nbsp;Instagram&nbsp;</i></a><br>
+                    <a href="https://www.youtube.com/@paodequeijodaira" target="_blank">&nbsp;<i
+                            class="bi bi-youtube">&nbsp;YouTube&nbsp;</i></a><br>
+                    <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x93598532427ada55:0xedc9803f892654af?utm_source=mstt_1&entry=gps"
+                        target="_blank">&nbsp;<i class="bi bi-geo-alt-fill">&nbsp;Google Map&nbsp;</i></a>
+                    <p>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="header">
+        <article class="headline">
+            <span class="span1">Sabor caseiro</span><br>
+            <span class="span2">Vendemos Pão de Queijo Congelado</span><br><br>
+            <p><b>Funcionamento:</b></p><br>
+            <p>De Segunda à Sábado de 08:00 hs às 18:00 hs e aos Domingos de 08:00 hs às 12:00 hs.</p><br>
+            <p>Ligue já &phone; (61) <b>98277-7196</b></p><br>
+            <a href="https://api.whatsapp.com/send?phone=5561981885715&text=Ol%C3%A1%20peguei%20seu%20contato%20no%20site"
+                target="_blank" class="contact-btn">Faça seu Pedido</a><br><br>
+        </article>
+        <article class="img-headline">
             <div>
-                <p>&nbsp;</p>
+                <img style="max-width: 90%;" src="img/pqi.jpg"><br>
+                <span class="span3">Para assar: Leve ao forno pré-aquecido em 180°C entre 20 a 30 minutos, sem a
+                    necessidade de óleo na forma.</span>
             </div>
-            <div class="rodape-turma">
-                <span><a href="https://hotm.art/VxrpAOwD" target="_blank">🤝 JUNTE-SE A NOSSA NOVA TURMA 🤝</a></span><br>
+        </article>
+    </section>
+
+    <section>
+        <span class="span4">Leia as regras para retirar seu Cupom de Desconto</span>
+        <div class="promocao">
+            <div>
+                <h3>Sobre o Preenchimento</h3>
+                <p>Preencha o formulário para receber o 🔖DESCONTO DE 20% na próxima compra.</p><br>
+                <h3>Siga as mídias sociais</h3>
+                <ul>
+                    <li><a href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fpao.de.queijo.da.ira%3Figshid%3DYmMyMTA2M2Y%253D&sa=D&sntz=1&usg=AOvVaw3eagFYtoyiTjSr50rp51B7"
+                            target="_blank">Página do Instagram</a> e o Canal do <a
+                            href="https://www.youtube.com/@paodequeijodaira" target="_blank">YouTube</a>;</li>
+                </ul><br>
+                <h3>No Google Maps</h3>
+                <ul>
+                    <li><a href="https://maps.app.goo.gl/vMvZZ2wnQMWZZ1vF7" target="_blank">Favorite o endereço do Pão
+                            de Queijo da Irá no Google Maps</a>;</li>
+                    <li><a href="https://g.page/paodequeijodaira/review?gm" target="_blank">Faça uma Avaliação, de
+                            preferência com 5 estrelas, do Pão de Queijo da Irá com Foto e descrição da experiência do
+                            Produto comprado conosco</a>;</li>
+                </ul><br>
+                <h3>Sobre o envio do Formulário</h3>
+                <p>💡 Só envie formulário depois de ter cumprido todas as atividades corretamente.</p><br>
             </div>
-            <div class="rodape-text">
-                <span><p>Sentiu vontade de aprender a fazer um excelente pão de queijo ou quer aprender um negócio novo, acesse nosso produto digital abaixo:</p></span><br>
+            <div class="promocao-btn">
+                <span class="span5">
+                    <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSeMPq6anph_RkRAokiVPVaEtyi_Rnrca-IlOZNhnGGtHEv61w/viewform?usp=sf_link"
+                            target="_blank" class="contact-btn">Acessar Formulário</a></p>
+                </span>
             </div>
-            <div class="rodape-img">
-                <a href="https://hotm.art/VxrpAOwD" target="_blank"><img  src="img/criar-negocio.png"></a><br>
-            </div>
-            <div class="rodape-text">
-                <p>&copy; 2025 Pão de Queijo da Irá. Todos os direitos reservados.</p>
-            </div>
-        </footer>
-        
-        <a class="whats" target="_blank" href="https://api.whatsapp.com/send?phone=5561981885715&text=Ol%C3%A1%20peguei%20seu%20contato%20no%20site"><img style="width: 100px;" src="img/whats.png"></a>
-        <!-- Animar.js-->
-        <script src="js/animar.js"></script>
-        <!-- /Animar-->
-    </body>
+    </section>
+
+    <footer>
+        <div>
+            <p>&nbsp;</p>
+        </div>
+        <div class="rodape-turma">
+            <span><a href="https://hotm.art/VxrpAOwD" target="_blank">🤝 JUNTE-SE A NOSSA NOVA TURMA 🤝</a></span><br>
+        </div>
+        <div class="rodape-text">
+            <span>
+                <p>Sentiu vontade de aprender a fazer um excelente pão de queijo ou quer aprender um negócio novo,
+                    acesse nosso produto digital abaixo:</p>
+            </span><br>
+        </div>
+        <div class="rodape-img">
+            <a href="https://hotm.art/VxrpAOwD" target="_blank"><img src="img/criar-negocio.png"></a><br>
+        </div>
+        <div class="rodape-text">
+            <p>&copy; 2025 Pão de Queijo da Irá. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <a class="whats" target="_blank"
+        href="https://api.whatsapp.com/send?phone=5561981885715&text=Ol%C3%A1%20peguei%20seu%20contato%20no%20site"><img
+            style="width: 100px;" src="img/whats.png"></a>
+    <!-- Animar.js-->
+    <script src="js/animar.js"></script>
+    <!-- /Animar-->
+</body>
+
 </html>
