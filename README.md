@@ -3,19 +3,20 @@
 </p>
 
 ---
-## <p>SOBRE O PROJETO</p>
-<p>Site desenvolvido para comércio Web2 e muito importante para nossa Start Up SjrPovoaS.<br>
-Comércio IRL desejando ingressar processos na blockchain. <br>
-Agilizar e utilizar a força da web3. </p>
+## SOBRE O PROJETO
+
+Site desenvolvido para comércio Web2 e muito importante para nossa Start Up SjrPovoaS.
+Comércio IRL desejando ingressar processos na blockchain.
+Agilizar e utilizar a força da web3.
 
 ---
-## <p>MÍDIAS SOCIAIS</p>
+## MÍDIAS SOCIAIS
 - [Site](https://pao-de-queijo-da-ira.vercel.app/)
 - [Instagram](https://www.instagram.com/pao.de.queijo.da.ira/)
 - [YouTube](https://www.youtube.com/@paodequeijodaira/)
 
 ---
- ### Sumário
+### Sumário
 
 1. [Configurando conexão VScode com Github](https://github.com/SjrPovoas/Cafe-com-Povoas/#1-configurando-conexao-vscode-com-github)
 2. [Tecnologias Usadas](https://github.com/SjrPovoas/Cafe-com-Povoas/#2-tecnologias-usadas)
@@ -23,51 +24,54 @@ Agilizar e utilizar a força da web3. </p>
 4. [Conheça o Time](https://github.com/SjrPovoas/Cafe-com-Povoas/#4-conheca-o-time)
 
 ---
- ## 1. CONFIGURANDO CONEXÃO VSCODE COM GITHUB
+## 1. CONFIGURANDO CONEXÃO VSCODE COM GITHUB
 
-<p>Para clonar esse Projeto, use:</p>
-<ul>
-  <li>git clone https://github.com/SjrPovoas/Pao-de-Queijo-da-Ira.git</li>
-</ul>
+**Para clonar esse Projeto, use:**
 
-<p>Configure seus dados no VSCode:</p>
-<ul>
-  <li>git config --global user.email "seu-email@provedor.com"</li>
-  <li>git config --global user.name "Seu Nome e Sobrenome"</li>
-</ul>
+  - git clone https://github.com/SjrPovoas/Pao-de-Queijo-da-Ira.git
 
-<p>Faça suas edições e adicione-as com:</p>
-<ul>
-  <li>git add . <i>(adiciona todas as suas edições)</i></li>
-</ul>
+**Configure seus dados no VSCode:**
 
-<p>Crie um Commit com sua edição e logo em seguida faça uma branch além da Main:</p>
-<ul>
-  <li>git commit -m "entre aspas a descrição da atualização" <i>(COMMIT)</i></li>
-  <li>git branch -M main <i>(nome da 1ª branch via de regra)</i></li>
-  <li>git branch -M segunda-branch <i>(nome da 2ª branch é sem espaços e sem aspas)</i></li>
-</ul>
-<p>Para subir as suas atualizações para seu GitHub:</p>
-<ul>
-  <li>git push --set-upstream origin Main <i>(ou o nome da branch que você deseja, por ex: segunda-branch)</i></li>
-</ul>
+  - git config --global user.email *"seu-email@provedor.com"*
+  - git config --global user.name  *"Seu Nome e Sobrenome"*
+
+
+**Faça suas edições e adicione-as com:**
+
+  - git add . *(adiciona todas as suas edições)*
+
+**Crie um Commit com sua edição e logo em seguida faça uma branch além da Main:**
+
+  - git commit -m "entre aspas a descrição da atualização" (COMMIT)
+  - git branch -M main *(nome da 1ª branch via de regra)*
+  - git branch -M segunda-branch *(nome da 2ª branch é sem espaços e sem aspas)*
+
+**Para subir as suas atualizações para seu GitHub:**
+
+  - git push --set-upstream origin Main *(ou o nome da branch que você deseja, por ex: segunda-branch)*
 
 ---
 ## 2. TECNOLOGIAS USADAS
 
-- FRONTEND
+- **FRONTEND**
   - HTML
   - CSS
-- BACKEND
+- **BACKEND**
   - JAVASCRIPT
 
 ---
 ## 3. RECURSOS UTILIZADOS NA PARTE VISUAL
 
-- FONTS
+- **FONTS**
   - [Google Fonts](https://fonts.google.com/)
-- BOTÕES
+- **BOTÕES**
   - [Bootstrap](https://icons.getbootstrap.com/)
+- **GERADOR DE LINK DE WHATSAPP**
+  - [Zap Convertte](https://zap.convertte.com.br/gerador-link-whatsapp/)
+- **GERADOR DE BOTÃO DE REDE SOCIAIS**
+  - [Shields.io](https://shields.io/badges)
+- **CONSULTA A PALETA DE CORES**
+  - [Paleta de Cores](https://paletadecolores.online/)
 
 ---
 ## 4. CONHEÇA O TIME
