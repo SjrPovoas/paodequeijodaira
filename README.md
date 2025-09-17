@@ -5,9 +5,9 @@
 ---
 ## SOBRE O PROJETO
 
-Site desenvolvido para comércio Web2 e muito importante para nossa Start Up SjrPovoaS.
-Comércio IRL desejando ingressar processos na blockchain.
-Agilizar e utilizar a força da web3.
+Site desenvolvido por SjrPovoaS para comércio Web2.
+Comércio IRL desejando ingressar processos na blockchain e utilizar a força da Web3.
+
 
 ---
 ## MÍDIAS SOCIAIS
@@ -143,7 +143,7 @@ Silvio Povoas | Desenvolvedor e Fundador | [sjrpovoas](https://www.linkedin.com/
 Antônia Iraleide | Fundadora | X | X | X | [@pao.de.queijo.da.ira](https://www.instagram.com/pao.de.queijo.da.ira)
 ***
 
----
+
 <p align="center">
   &COPY; 2025 Pão de Queijo da Irá
 </p>
