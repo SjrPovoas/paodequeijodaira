@@ -6,11 +6,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-/*.container{
-    max-width: 1080px;
-    justify-content: center;
-    align-items: center;
-}*/
+
 body{
     margin:0;
     font-family: 'Roboto', sans-serif;
