@@ -1,27 +1,131 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+	http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <url>
   <loc>https://paodequeijodaira.vercel.app/</loc>
-  <lastmod>2025-09-17T17:24:33+00:00</lastmod>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/pqi.webp</image:loc>
+     <image:title>hero Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/cumpom.webp</image:loc>
+     <image:title>Cupom de Desconto Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/entrega.webp</image:loc>
+     <image:title>Entrega Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/curso.webp</image:loc>
+     <image:title>Curso Receita Secreta do Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/avatar-pqi.png</image:loc>
+     <image:title>Avatar Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/avatar-entrega.png</image:loc>
+     <image:title>Avatar entrega Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/acapa-curso.png</image:loc>
+     <image:title>Curso Receita Secreta do Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+    <image:loc>https://paodequeijodaira.vercel.app/criar-negocio</image:loc>
+    <image:title>Como criar seu negócio com Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+    <image:loc>https://paodequeijodaira.vercel.app/img/whats.webp</image:loc>
+    <image:title>Botão Whatsapp Flutuante do Pão de Queijo da Irá</image:title>
+  </image:image>
+  <lastmod>2025-09-19T17:24:33+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://paodequeijodaira.vercel.app/index.html</loc>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/pqi.webp</image:loc>
+     <image:title>hero Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/cumpom.webp</image:loc>
+     <image:title>Cupom de Desconto Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/entrega.webp</image:loc>
+     <image:title>Entrega Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/curso.webp</image:loc>
+     <image:title>Curso Receita Secreta do Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/avatar-pqi.png</image:loc>
+     <image:title>Avatar Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/avatar-entrega.png</image:loc>
+     <image:title>Avatar entrega Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/acapa-curso.png</image:loc>
+     <image:title>Curso Receita Secreta do Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+    <image:loc>https://paodequeijodaira.vercel.app/criar-negocio</image:loc>
+    <image:title>Como criar seu negócio com Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+    <image:loc>https://paodequeijodaira.vercel.app/img/whats.webp</image:loc>
+    <image:title>Botão Whatsapp Flutuante do Pão de Queijo da Irá</image:title>
+  </image:image>
   <lastmod>2025-09-17T17:24:34+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://paodequeijodaira.vercel.app/promocoes.html</loc>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/pqi.webp</image:loc>
+     <image:title>hero Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/cumpom.webp</image:loc>
+     <image:title>Cupom de Desconto Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/entrega.webp</image:loc>
+     <image:title>Entrega Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/curso.webp</image:loc>
+     <image:title>Curso Receita Secreta do Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/avatar-pqi.png</image:loc>
+     <image:title>Avatar Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/avatar-entrega.png</image:loc>
+     <image:title>Avatar entrega Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+     <image:loc>https://paodequeijodaira.vercel.app/img/acapa-curso.png</image:loc>
+     <image:title>Curso Receita Secreta do Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+    <image:loc>https://paodequeijodaira.vercel.app/criar-negocio</image:loc>
+    <image:title>Como criar seu negócio com Pão de Queijo da Irá</image:title>
+  </image:image>
+  <image:image>
+    <image:loc>https://paodequeijodaira.vercel.app/img/whats.webp</image:loc>
+    <image:title>Botão Whatsapp Flutuante do Pão de Queijo da Irá</image:title>
+  </image:image>
   <lastmod>2025-09-17T17:24:34+00:00</lastmod>
   <priority>0.80</priority>
 </url>
-
-
 </urlset>
