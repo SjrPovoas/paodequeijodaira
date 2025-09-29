@@ -11,8 +11,8 @@ Comércio IRL desejando ingressar processos na blockchain e utilizar a força da
 
 ---
 ## MÍDIAS SOCIAIS
-- [Site](https://pao-de-queijo-da-ira.vercel.app/)
-- [Instagram](https://www.instagram.com/pao.de.queijo.da.ira/)
+- [Site](https://paodequeijodaira.vercel.app/)
+- [Instagram](https://www.instagram.com/paodequeijodaira/)
 - [YouTube](https://www.youtube.com/@paodequeijodaira/)
 
 <br>
@@ -21,12 +21,12 @@ Comércio IRL desejando ingressar processos na blockchain e utilizar a força da
 ---
 ## SUMÁRIO
 👋 Bem-vindo ao repositório!
-Se encontrar algum problema ou tiver alguma dúvida, por favor compartilhe conosco na aba [discussões/issues](https://github.com/SjrPovoas/Pao-de-Queijo-da-Ira/issues).
+Se encontrar algum problema ou tiver alguma dúvida, por favor compartilhe conosco na aba [discussões/issues](https://github.com/SjrPovoas/paodequeijodaira/issues).
 
-1. [Configurando conexão VScode com Github](https://github.com/SjrPovoas/Pao-de-Queijo-da-Ira/#1-configurando-conexao-vscode-com-github)
-2. [Tecnologias Usadas](https://github.com/SjrPovoas/Pao-de-Queijo-da-Ira/#2-tecnologias-usadas)
-3. [Recursos Utilizados na parte Visual](https://github.com/SjrPovoas/Pao-de-Queijo-da-Ira/#3-recursos-utilizados-na-parte-visual)
-4. [Conheça o Time](https://github.com/SjrPovoas/Pao-de-Queijo-da-Ira/#4-conheca-o-time)
+1. [Configurando conexão VScode com Github](https://github.com/SjrPovoas/paodequeijodaira/#1-configurando-conexao-vscode-com-github)
+2. [Tecnologias Usadas](https://github.com/SjrPovoas/paodequeijodaira/#2-tecnologias-usadas)
+3. [Recursos Utilizados na parte Visual](https://github.com/SjrPovoas/paodequeijodaira/#3-recursos-utilizados-na-parte-visual)
+4. [Conheça o Time](https://github.com/SjrPovoas/paodequeijodaira/#4-conheca-o-time)
 
 ---
 ## 1. CONFIGURANDO CONEXÃO VSCODE COM GITHUB
@@ -34,7 +34,7 @@ Se encontrar algum problema ou tiver alguma dúvida, por favor compartilhe conos
 **Para clonar esse Projeto, use:**
 
 ```
-  git clone https://github.com/SjrPovoas/Pao-de-Queijo-da-Ira.git
+  git clone https://github.com/SjrPovoas/paodequeijodaira.git
 ```
 
 ### 1. Verifique a configuração do Git
@@ -140,7 +140,7 @@ Esses são apenas alguns dos comandos mais comuns do **Git** que você pode usar
 Nome | Título | Linkedin | X/Twitter | GitHub | Instagram
 ---|---|---|---|---|---
 Silvio Povoas | Desenvolvedor e Fundador | [sjrpovoas](https://www.linkedin.com/in/sjrpovoas) | [sjrpovoas](https://www.x.com/sjrpovoas) | [SjrPovoas](https://github.com/SjrPovoas) | [@silviopovoasjunior](https://www.instagram.com/silviopovoasjunior)
-Antônia Iraleide | Fundadora | X | X | X | [@pao.de.queijo.da.ira](https://www.instagram.com/pao.de.queijo.da.ira)
+Antônia Iraleide | Fundadora | X | X | X | [@paodequeijodaira](https://www.instagram.com/paodequeijodaira)
 ***
 
 
