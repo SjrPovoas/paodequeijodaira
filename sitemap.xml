@@ -1,10 +1,6 @@
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-	http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <url>
   <loc>https://paodequeijodaira.vercel.app/</loc>
   <image:image>
@@ -43,7 +39,7 @@
     <image:loc>https://paodequeijodaira.vercel.app/img/whats.webp</image:loc>
     <image:title>Botão Whatsapp Flutuante do Pão de Queijo da Irá</image:title>
   </image:image>
-  <lastmod>2025-09-19T23:24:34+00:00</lastmod>
+  <lastmod>2025-09-29T20:24:34+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
@@ -84,7 +80,7 @@
     <image:loc>https://paodequeijodaira.vercel.app/img/whats.webp</image:loc>
     <image:title>Botão Whatsapp Flutuante do Pão de Queijo da Irá</image:title>
   </image:image>
-  <lastmod>2025-09-19T23:24:34+00:00</lastmod>
+  <lastmod>2025-09-29T20:24:34+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
@@ -125,7 +121,7 @@
     <image:loc>https://paodequeijodaira.vercel.app/img/whats.webp</image:loc>
     <image:title>Botão Whatsapp Flutuante do Pão de Queijo da Irá</image:title>
   </image:image>
-  <lastmod>2025-09-19T23:24:34+00:00</lastmod>
+  <lastmod>2025-09-29T20:24:34+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 </urlset>
