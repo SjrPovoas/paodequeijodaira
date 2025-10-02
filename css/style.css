@@ -26,9 +26,9 @@
 :root[data-theme='light'] {
     --primary-color: #FFFFFF;
 
-    --background-bg-color1:  #f0b256;
+    --background-bg-color1: #f0b256;
     --background-bg-color2: #895013;
-    --background-bg-color3:  #f0b256cd;
+    --background-bg-color3: #f0b256cd;
 
     --primary-border-color: #895013;
     --secondary-border-color: #f0b256;
@@ -61,7 +61,7 @@ html[data-theme='light'] .brand__logo {
 
 body {
     background: var(--primary-color);
-    font-family:'Inter', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-color-palete1);
     width: 100%;
     text-align: center;
@@ -131,7 +131,7 @@ header .menu-desktop {
     margin-left: 5%;
     text-align: right;
     padding: 2.8%;
-    
+
 }
 
 header .menu-desktop a:hover {
@@ -167,6 +167,7 @@ header .menu-desktop nav a::after {
 header .menu-desktop nav a:hover::after {
     width: 100%;
 }
+
 /* Barra animada sobre Menu para Computador - Final */
 /* Menu do desktop em forma de barra fixa no topo - Final */
 /* Menu para smartphone - Início */
@@ -183,20 +184,20 @@ header .menu-desktop nav a:hover::after {
     background-color: #0000002c;
     backdrop-filter: blur(25px);
     position: fixed;
-    text-align:left;
+    text-align: left;
     padding: 6% 3%;
     top: 90px;
     line-height: 2.3rem;
     font-size: 20pt;
     width: 100%;
-     height: 20pt;
+    height: 20pt;
     visibility: hidden;
     transition: .5s;
     overflow: hidden;
-    
+
 }
 
-.menu-mobile a:hover{
+.menu-mobile a:hover {
     padding: 0.5% 5%;
 }
 
@@ -214,12 +215,13 @@ header .menu-desktop nav a:hover::after {
     height: 20pt;
     cursor: pointer;
 }
+
 /* Menu para smartphone - Final */
 /* Botão Menu Hamburguer para Smartphone - Início */
 #btn-menu {
     position: fixed;
     top: 20px;
-    right: 5%;
+    right: 10%;
     background: transparent;
     width: 50px;
     height: 50px;
@@ -343,12 +345,12 @@ article .headline {
     margin: 3% 5% 3% 5%;
     padding: 5%;
     color: var(--text-color-palete3);
-    border-radius: 5px;
+    border-radius: 3%;
+    border-color: var(--secondary-bg-color);
     text-decoration: none;
     text-align: center;
     line-height: 15%;
     font-size: 1.5rem;
-    border-radius: 3%;
     transition: .2s;
 }
 
@@ -389,7 +391,6 @@ section h3 {
     line-height: 60px;
     font-family: 'Lobster', cursive;
     color: var(--text-color-palete1);
-
 }
 
 section h3 a {
@@ -405,10 +406,12 @@ section button {
     border-radius: 40px;
     border: var(--background-bg-color1);
     cursor: pointer;
+    background: var(--background-bg-color3);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
-section button:hover{
-    background-color: rgb(223, 209, 190)
 
+section button:hover {
+    background-color: rgb(223, 209, 190);
 }
 
 section h4 {
@@ -426,7 +429,7 @@ section h4 a {
 
 #home {
     width: 100%;
-    padding: 5%;
+    padding: 5% 0 1% 0;
     background: var(--primary-color);
     display: inline-block;
     align-items: center;
@@ -437,13 +440,13 @@ section h4 a {
 #funcionamento,
 #garanta-seu-desconto {
     width: 100%;
-    padding: 9% 0;
+    padding: 6% 0 1% 0;
     background: var(--background-bg-color3);
 }
 
 #nossos-destaques {
     width: 100%;
-    padding: 9% 0;
+    padding: 6% 0 1% 0;
     background: var(--primary-color);
 }
 
@@ -461,7 +464,7 @@ section h4 a {
     font-weight: 900;
     font-size: 50px;
     text-align: center;
-    padding: 4%;
+    padding: 4% 0;
 }
 
 .servicos {
@@ -478,8 +481,8 @@ section h4 a {
     display: inline-block;
     width: 100%;
     padding: 5%;
-    margin: 3%;
-    border: 2px solid #895013;
+    margin: 3% 0;
+    border: 0.5px solid #895013;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -490,15 +493,17 @@ section h4 a {
 
 .box-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 4fr));
-    gap: 1.5rem;
-    background-color: var(--background-bg-color3);
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 4fr));
 }
 
 .menu .box-container .box {
     text-align: center;
-    padding: 2rem;
-    cursor: pointer;
+    background-color: var(--background-bg-color3);
+    padding: 1rem;
+    border: 0.5px solid var(--background-bg-color2);
+    border-radius: 20px;
+    background: transparent;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .menu .box-container .box:hover {
@@ -510,13 +515,13 @@ section h4 a {
 }
 
 .menu .box-container .box h3 {
-    color: var(--text-color-palete3);
+    border: var(--background-bg-color2);
     font-size: 1.5rem;
     padding: 2rem;
 }
 
 .menu .box-container .box .price {
-    color: var(--text-color-palete3);
+    color: var(--text-color-palete2);
     font-size: 2rem;
     padding: 0.5rem 0;
 
@@ -526,7 +531,7 @@ section h4 a {
     font-size: 1rem;
     text-decoration: line-through;
     font-weight: lighter;
-    border: #895013;
+    border: var(--background-bg-color2);
 }
 
 .menu .box-container .box:hover>* {
@@ -576,8 +581,8 @@ footer {
 /* Início do Efeito Flutuante do Botão Whatsapp */
 .whats {
     position: fixed;
-    bottom: 15px;
-    right: 20px;
+    bottom: 3%;
+    right: 8%;
     max-width: 250px;
     transform: translateY(0);
     animation: float 5s ease-in-out infinite;
@@ -604,10 +609,6 @@ footer .bot {
     color: var(--text-color-palete2);
 }
 
-footer marquee {
-    animation-duration: 5s;
-}
-
 .bot a {
     padding: 1%;
     font-size: 50px;
@@ -624,7 +625,10 @@ footer marquee {
     main {
         margin: 20% auto;
     }
-
+.box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+}
     #btn-menu {
         display: block;
         cursor: pointer;
