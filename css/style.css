@@ -127,7 +127,8 @@ header .menu-desktop {
     flex: 58%;
     margin-left: 5%;
     text-align: right;
-    padding: 2.8%;
+    padding: 1% 3% 2%;
+    line-height: 1.9rem;
 }
 
 header .menu-desktop a:hover {
@@ -136,7 +137,7 @@ header .menu-desktop a:hover {
     transition: .2s;
     background-color: #895013cd;
     border-radius: 40px;
-    padding: 0.8% 3%;
+    padding: 0.6% 0.9%;
 }
 
 header .menu-desktop nav a {
@@ -149,7 +150,7 @@ header .menu-desktop nav a {
 
 /* Menu para Computador - Final */
 /* Barra animada sobre Menu para Computador - Início */
-header .menu-desktop nav a::after {
+/*  header .menu-desktop nav a::after {
     content: " ";
     width: 0px;
     height: 4px;
@@ -181,9 +182,9 @@ header .menu-desktop nav a:hover::after {
     backdrop-filter: blur(25px);
     position: fixed;
     text-align: left;
-    padding: 6% 5%;
+    padding: 2% 5%;
     top: 90px;
-    line-height: 2.4rem;
+    line-height: 2.5rem;
     font-size: 20pt;
     width: 100%;
     height: 18pt;
@@ -391,6 +392,15 @@ section span3 a {
     text-decoration: none;
 }
 
+.span3 {
+    font-family: 'Lobster', cursive;
+    font-weight: 800;
+    font-size: 30px;
+    text-align: center;
+    color: var(--title-color-palete2);
+    width: 100%;
+}
+
 section button {
     font-weight: 400;
     font-size: 1.5rem;
@@ -407,19 +417,6 @@ section button:hover {
     background-color: rgb(223, 209, 190);
 }
 
-section h4 {
-    width: 100%;
-    font-size: 22px;
-    margin: 0;
-    font-weight: bold;
-    color: var(--text-color-palete3);
-}
-
-section h4 a {
-    color: var(--text-color-palete1);
-    text-decoration: none;
-}
-
 #home {
     width: 100%;
     padding: 5% 0 1% 0;
@@ -430,8 +427,7 @@ section h4 a {
     text-decoration: none;
 }
 
-#funcionamento,
-#garanta-seu-desconto {
+#funcionamento, #garanta-seu-desconto {
     width: 100%;
     padding: 6% 0 1% 0;
     background: var(--background-bg-color3);
@@ -443,8 +439,7 @@ section h4 a {
     background: var(--primary-color);
 }
 
-#nosso-porque,
-#detalhes-da-entrega {
+#nosso-porque, #detalhes-da-entrega {
     width: 100%;
     padding: 9% 0;
     background: var(--primary-color);
@@ -521,7 +516,7 @@ section h4 a {
     border-radius: 10px;
 }
 
-.menu .box-container .box h3 {
+.menu .box-container .box .span3 {
     border: var(--background-bg-color2);
     font-size: 1.5rem;
     padding: 2rem;
@@ -549,6 +544,13 @@ section .menu .box p {
 
 .menu .box-container .box:hover>* {
     color: var(--text-color-palete3);
+}
+
+.menu .box-container .box:hover a {
+    color: var(--text-color-palete2);
+    border: 1px solid var(--text-color-palete2);
+    border-radius: 5%;
+    padding: 8%;
 }
 
 footer {
