@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<url>
-  <loc>https://paodequeijodaira.vercel.app/</loc>
-  <lastmod>2025-10-03</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://paodequeijodaira.vercel.app/index.html</loc>
-  <lastmod>2025-10-03</lastmod>
-  <priority>0.80</priority>
-</url>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+	<url>
+  		<loc>https://paodequeijodaira.vercel.app/</loc>
+		<image:image>
+			<image:loc>https://paodequeijodaira.vercel.app/img/pqi.webp</image:loc>
+			<image:title>Pao de Queijo da Ira</image:title>
+		</image:image>
+		<image:image>
+			<image:loc>https://paodequeijodaira.vercel.app/img/avatar-pqi.png</image:loc>
+			<image:title>Avatar do Pao de Queijo da Ira</image:title>
+		</image:image>
+		<image:image>
+			<image:loc>https://paodequeijodaira.vercel.app/img/capa-curso.png</image:loc>
+			<image:title>Capa do Curso Receita Secreta do Pao de Queijo da Ira</image:title>
+		</image:image>
+		<image:image>
+			<image:loc>https://paodequeijodaira.vercel.app/img/criar-negocio.webp</image:loc>
+			<image:title>Crie seu Negocio com Pao de Queijo</image:title>
+		</image:image>
+  		<lastmod>2025-10-13T12:06:04+00:00</lastmod>
+  		<priority>1.00</priority>
+	</url>
+	<url>
+		<loc>https://paodequeijodaira.vercel.app/index.html</loc>
+		<lastmod>2025-10-13T12:06:04+00:00</lastmod>
+		<priority>0.80</priority>
+	</url>
 </urlset>
