@@ -131,7 +131,6 @@ header .menu-desktop {
     margin-left: 5%;
     text-align: right;
     padding: 2.8%;
-
 }
 
 header .menu-desktop a:hover {
@@ -140,7 +139,7 @@ header .menu-desktop a:hover {
     transition: .2s;
     background-color: #895013cd;
     border-radius: 40px;
-    padding: 0.5% 3%;
+    padding: 0.8% 3%;
 }
 
 header .menu-desktop nav a {
@@ -399,7 +398,7 @@ section button {
     font-weight: 400;
     font-size: 1.5rem;
     padding: 2% 3% 2% 3%;
-    margin: 4% 1% 4% 1%;
+    margin: 4% 1.5% 4% 1.5%;
     border-radius: 40px;
     border: var(--background-bg-color1);
     cursor: pointer;
@@ -454,12 +453,12 @@ section h4 a {
     background: var(--primary-color);
 }
 
-#funcionamento, #garanta-seu-desconto, #nossos-destaques, #nosso-porque p {
+#funcionamento, #garanta-seu-desconto, #nossos-destaques p {
     line-height: 35px;
-    padding: 3% 2% 1%;
+    padding: 7% 2% 1%;
 }
 
-#detalhes-da-entrega p {
+#detalhes-da-entrega p, #nosso-porque p {
     line-height: 10px;
     padding: 3% 2% 1%;
 }
@@ -642,15 +641,14 @@ footer .bot {
     main {
         margin: 20% auto;
     }
-.box-container {
+    .box-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-}
+    }
     #btn-menu {
         display: block;
         cursor: pointer;
     }
-
     .menu-mobile .nav a {
         cursor: pointer;
         flex-direction: column;
@@ -662,47 +660,45 @@ footer .bot {
         padding: 70px 20px 70px 20px;
         font-size: 26pt;
     }
-
     .menu-mobile .nav a:hover {
         cursor: pointer;
         color: #895013;
         background-color: #000000ce;
         font-size: 30pt;
     }
-
     .logo {
         margin: 0;
         width: 100%;
         text-align: center;
     }
-
     .menu-mobile.abrir {
         visibility: visible;
         height: calc(90vh - 50px);
     }
-
     .headline {
         flex: 100%;
         margin: 5%;
         text-align: center;
     }
-
     .headline p {
         text-align: center;
         margin-top: 25%;
     }
-
     .headline-img {
         flex: 100%;
         margin: 5%;
         text-align: center;
     }
-
     .card {
         width: 100%;
     }
-
     .whats {
         display: block;
+    }
+    #funcionamento, #garanta-seu-desconto {
+    padding: 20% 2% 1%;        
+    }
+    #detalhes-da-entrega, #nosso-porque, #nossos-destaques {
+    padding: 17% 2% 1%;
     }
 }

@@ -17,6 +17,7 @@
     <meta name="robots" content="follow, index" />
     <meta name="googlebot" content="index,follow" />
     <meta name="google-site-verification" content="rj9-yKQenuTL7WznZzLhnZhRRqalrW8B9ptmhuewFiA" />
+    <link rel="icon" sizes="32x32" href="/img/favicon.ico" />
     <link rel="icon" sizes="192x192" href="/img/favicon.ico" />
     <link rel="apple-touch-icon" type="image/x-icon" href="/img/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
@@ -72,7 +73,7 @@
                 </div>
         </nav>
 
-        <button onclick="animarMenu()" id="btn-menu" role="abrir menu de navegação" aria-expanded="false">
+        <button onclick="animarMenu()" id="btn-menu" role="menu" aria-expanded="false">
             <span class="linha"></span>
             <span class="linha"></span>
             <span class="linha"></span>
@@ -252,27 +253,86 @@
     </a>
     <script src="js/animar.js"></script>
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org/",
-        "@type": "WebSite",
-        "url": "https://paodequeijodaira.vercel.app",
-        "name": "Pão de Queijo da Irá | vai congelado e é bem caseiro",
-        "about": {
-          "@type": "Project",
-          "name": "Pão de Queijo da Irá",
-          "description": "O melhor pão de queijo congelado e caseiro de Cidade Ocidental",
-          "logo": "https://paodequeijodaira.vercel.app/img/favicon.ico",
-          "sameAs": "https://github.com/schemaorg/schemaorg/",
-          "foundingDate": "2016-04-08"},
-        "author": {
-          "@type": "Organization",
-          "name": "Antônia Iraleide de Oliveira",
-          "sameAs": "https://www.w3.org/community/schemaorg/"
-        }
-    }
+        {
+            "@context
+          ": "https://schema.org",
+            "@type
+          ": "LocalBusiness",
+            "name": "Pão de Queijo da Irá",
+            "url": "https://paodequeijodaira.vercel.app",
+            "description": "Vendemos Pão de Queijo Congelado com sabor caseiro. Ótimo para o café da manhã e horários de lanches. O pão de queijo cabe em todos os momentos do dia. Para assar: Leve ao forno pré-aquecido em 180°C entre 20 a 30 minutos, sem a necessidade de óleo na forma.",
+            "telephone": "+5561982777196",
+            "address": {
+              "@type
+          ": "PostalAddress",
+              "addressLocality": "Cidade Ocidental",
+              "addressRegion": "GO",
+              "addressCountry": "BR"
+            },
+            "openingHoursSpecification": [
+              {
+                "@type
+          ": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
+                ],
+                "opens": "08:00",
+                "closes": "18:00"
+              },
+              {
+                "@type
+          ": "OpeningHoursSpecification",
+                "dayOfWeek": "Sunday",
+                "opens": "08:00",
+                "closes": "12:00"
+              }
+            ],
+            "makesOffer": [
+              {
+                "@type
+          ": "Offer",
+                "itemOffered": {
+                  "@type
+          ": "Product",
+                  "name": "Pacote com 1 kg de pão de queijo congelado",
+                  "offers": {
+                    "@type
+          ": "Offer",
+                    "price": "25.00",
+                    "priceCurrency": "BRL"
+                  }
+                }
+              },
+              {
+                "@type
+          ": "Offer",
+                "itemOffered": {
+                  "@type
+          ": "Product",
+                  "name": "Pacote com 20 pães de queijo congelado",
+                  "offers": {
+                    "@type
+          ": "Offer",
+                    "price": "10.00",
+                    "priceCurrency": "BRL"
+                  }
+                }
+              }
+            ],
+            "areaServed": {
+              "@type
+          ": "Place",
+              "name": "Cidade Ocidental - GO"
+            },
+            "paymentAccepted": "Cartões e PIX"
+          }          
     </script>
 </body>
-
 
 </html>
 
