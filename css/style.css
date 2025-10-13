@@ -384,7 +384,7 @@ section span3 {
     font-size: 20px;
     line-height: 60px;
     font-family: 'Lobster', cursive;
-    color: var(--text-color-palete1);
+    color: var(--text-color-palete2);
 }
 
 section span3 a {
@@ -397,7 +397,7 @@ section span3 a {
     font-weight: 800;
     font-size: 30px;
     text-align: center;
-    color: var(--title-color-palete2);
+    color: var(--title-color-palete1);
     width: 100%;
 }
 
@@ -543,14 +543,18 @@ section .menu .box p {
 }
 
 .menu .box-container .box:hover>* {
-    color: var(--text-color-palete3);
+    color: var(--text-color-palete2);
 }
 
 .menu .box-container .box:hover a {
-    color: var(--text-color-palete2);
+    color: var(--text-color-palete3);
     border: 1px solid var(--text-color-palete2);
     border-radius: 5%;
     padding: 8%;
+}
+
+.menu .box-container .box:hover .span3 {
+    color: var(--text-color-1);
 }
 
 footer {
@@ -698,6 +702,9 @@ footer .bot {
     padding: 20% 2% 1%;        
     }
     #detalhes-da-entrega, #nosso-porque, #nossos-destaques {
-    padding: 17% 2% 1%;
+    padding: 17% 2% 8%;
+    }
+    #detalhes-da-entrega p {
+        line-height: 30px;
     }
 }
