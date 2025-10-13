@@ -369,16 +369,6 @@ section {
     max-width: 1200px;
 }
 
-section h2 {
-    width: 100%;
-    font-size: 50px;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    font-family: 'Lobster', cursive;
-    font-weight: bold;
-    color: var(--text-color-palete2);
-}
-
 section span3 {
     width: 100%;
     font-size: 20px;
@@ -699,10 +689,10 @@ footer .bot {
         display: block;
     }
     #funcionamento, #garanta-seu-desconto {
-    padding: 20% 2% 1%;        
+    padding: 22% 2% 1%;        
     }
     #detalhes-da-entrega, #nosso-porque, #nossos-destaques {
-    padding: 17% 2% 8%;
+    padding: 19% 2% 8%;
     }
     #detalhes-da-entrega p {
         line-height: 30px;
