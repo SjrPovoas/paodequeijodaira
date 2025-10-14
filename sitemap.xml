@@ -10,23 +10,23 @@
 			<image:title>Pao de Queijo da Ira</image:title>
 		</image:image>
 		<image:image>
-			<image:loc>https://paodequeijodaira.vercel.app/img/avatar-pqi.png</image:loc>
+			<image:loc>https://paodequeijodaira.vercel.app/img/avatar-pqi.webp</image:loc>
 			<image:title>Avatar do Pao de Queijo da Ira</image:title>
 		</image:image>
 		<image:image>
-			<image:loc>https://paodequeijodaira.vercel.app/img/capa-curso.png</image:loc>
+			<image:loc>https://paodequeijodaira.vercel.app/img/capa-curso.webp</image:loc>
 			<image:title>Capa do Curso Receita Secreta do Pao de Queijo da Ira</image:title>
 		</image:image>
 		<image:image>
 			<image:loc>https://paodequeijodaira.vercel.app/img/criar-negocio.webp</image:loc>
 			<image:title>Crie seu Negocio com Pao de Queijo</image:title>
 		</image:image>
-  		<lastmod>2025-10-13T15:06:04+00:00</lastmod>
+  		<lastmod>2025-10-13T23:06:04+00:00</lastmod>
   		<priority>1.00</priority>
 	</url>
 	<url>
 		<loc>https://paodequeijodaira.vercel.app/index.html</loc>
-		<lastmod>2025-10-13T15:06:04+00:00</lastmod>
+		<lastmod>2025-10-13T23:06:04+00:00</lastmod>
 		<priority>0.80</priority>
 	</url>
 </urlset>
