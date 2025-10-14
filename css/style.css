@@ -546,7 +546,18 @@ section .menu .box p {
 .menu .box-container .box:hover .span3 {
     color: var(--text-color-1);
 }
+.share {
+    background-color: #F0F0F0;
+    padding: 2% 7%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-content:center;
+    align-items: center;
+    width: 40vh;
+    font-size: smaller;
 
+}
 footer {
     margin-top: 10px;
     height: 450px;
