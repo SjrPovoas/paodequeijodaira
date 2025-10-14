@@ -547,11 +547,6 @@ section .menu .box p {
     color: var(--text-color-1);
 }
 
-.share {
-    z-index: -100;
-    background-color: red;
-}
-
 footer {
     margin-top: 10px;
     height: 450px;
