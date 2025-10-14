@@ -547,6 +547,11 @@ section .menu .box p {
     color: var(--text-color-1);
 }
 
+.share {
+    z-index: -100;
+    background-color: red;
+}
+
 footer {
     margin-top: 10px;
     height: 450px;
@@ -689,10 +694,10 @@ footer .bot {
         display: block;
     }
     #funcionamento, #garanta-seu-desconto {
-    padding: 22% 2% 1%;        
+    padding: 25% 2% 1%;        
     }
     #detalhes-da-entrega, #nosso-porque, #nossos-destaques {
-    padding: 19% 2% 8%;
+    padding: 22% 2% 8%;
     }
     #detalhes-da-entrega p {
         line-height: 30px;
