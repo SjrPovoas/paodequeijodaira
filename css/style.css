@@ -301,10 +301,10 @@ section .header {
     font-weight: 800;
     font-size: 50px;
     text-align: center;
-    color: var(--title-color-palete2);
+    color: #f0b256;
     width: 100%;
     -webkit-text-stroke-width: 0.5px; /* largura da borda */
-    -webkit-text-stroke-color: #f0b256; /* cor da borda */
+    -webkit-text-stroke-color: #643511; /* cor da borda */
 }
 .headline figcaption p {
     font-family: 'Roboto', sans-serif;
@@ -360,8 +360,8 @@ section span3 a {
 }
 .span3 {
     font-family: 'Lobster', cursive;
-    font-weight: 800;
-    font-size: 30px;
+    font-weight: 600;
+    font-size: 24px;
     text-align: center;
     color: var(--title-color-palete1);
     width: 100%;
@@ -369,7 +369,7 @@ section span3 a {
 section button {
     font-weight: 400;
     font-size: 1.5rem;
-    padding: 3% 4%;
+    padding: 2% 5%;
     margin: 4% 1.5% 4% 1.5%;
     border-radius: 40px;
     border: 2px solid var(--background-bg-color2);
@@ -475,9 +475,9 @@ section .menu .box p {
     border: var(--background-bg-color2);
 }
 .menu .box-container .box button {
-    background-color: var(--background-bg-color4);
     border: none;
     box-shadow: none;
+    background-color: transparent;
 }
 .menu .box-container .box button p {
     color: var(--title-color-palete3);
@@ -494,7 +494,7 @@ section .menu .box p {
     cursor: pointer;
     background: var(--background-bg-color3);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-    padding: 0.3rem 1.5rem;
+    padding: 0.3rem 2.5rem;
     margin: auto 1%;
 }
 .menu .box-container .box:hover button:hover {
@@ -506,7 +506,7 @@ section .menu .box p {
     background-color: rgb(223, 209, 190);
     box-shadow: 5px 5px 10px rgba(77, 134, 209, 0.5);
     color: var(--text-color-palete2);
-    padding: 0.3rem 1.rem;
+    padding: 0.3rem 2.5rem;
     margin: auto 1%;
 }
 .menu .box-container .box:hover>* {
@@ -533,23 +533,16 @@ footer {
     text-decoration: none;
 }
 .rodape-text {
-    size: 31rem;
-    margin-top: 12px;
-    margin-right: 10%;
-    margin-left: 10%;
+    margin: center;
     font-size: 18px;
-    flex: 50%;
-    width: 75%;
+    padding: 1% 5% 4%;
 }
 .rodape-text a {
     color: var(--text-color-palete3);
     text-decoration: none;
 }
 .rodape-img img {
-    margin-top: 8px;
-    margin-right: 10%;
-    margin-left: 10%;
-    width: auto;
+    margin: center;
     max-width: 250px;
 }
 
@@ -558,7 +551,6 @@ footer {
     position: fixed;
     bottom: 3%;
     right: 6%;
-    max-width: 250px;
     transform: translateY(0);
     animation: float 5s ease-in-out infinite;
 }
@@ -643,12 +635,20 @@ footer {
         display: block;
     }
     #funcionamento, #garanta-seu-desconto {
-    padding: 25% 2% 1%;        
+        padding: 25% 2% 5%;        
     }
-    #detalhes-da-entrega, #nosso-porque, #nossos-destaques {
-    padding: 22% 2% 8%;
+    #detalhes-da-entrega, #nosso-porque {
+        padding: 22% 2% 8%;
+    }
+    #nossos-destaques {
+        padding: 22% 2% 1%;        
     }
     #detalhes-da-entrega p {
         line-height: 30px;
     }
+    section button {
+        font-size: large;
+        padding: 4% 8%;
+    }
+
 }
