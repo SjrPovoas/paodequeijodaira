@@ -44,6 +44,7 @@
     --background-bg-color1: #F9D095;
     --background-bg-color2: #643511;
     --background-bg-color3: #F9D095cd;
+    --background-bg-color4: #FFFFFF;    
 
     --primary-border-color: #643511;
     --secondary-border-color: #F9D095;
@@ -55,6 +56,7 @@
     --text-color-palete1: #643511;
     --text-color-palete2: #F9D095;
     --text-color-palete3: #FFFFFF;
+    --text-color-palete4: #000000;
 
     --link-color: #F9D095;
     --icon-color: #F9D095;
@@ -289,61 +291,22 @@ section .header {
     background-image: linear-gradient(45deg, var(--background-bg-color3), var(--background-bg-color2));
     padding-top: 100px;
 }
-
-picture img {
+.headline picture img {
     margin: center;
-    padding: 1%;
-}
-
-article .headline {
-    margin-left: 10%;
-    margin-right: 10%;
-
-}
-
-.headline h2 {
-    font-weight: 900;
-    font-size: 20px;
-    color: var(--text-color-palete3);
-    padding: 0;
-    margin: 0;
-}
-
-.headline p {
-    color: black;
-    margin-top: 10%;
+    padding: 2% 0;
     text-align: center;
 }
-
-.span2 {
+.headline h2 {
     font-family: 'Lobster', cursive;
     font-weight: 800;
     font-size: 50px;
     text-align: center;
     color: var(--title-color-palete2);
     width: 100%;
+    -webkit-text-stroke-width: 0.5px; /* largura da borda */
+    -webkit-text-stroke-color: #f0b256; /* cor da borda */
 }
-
-.headline-text {
-    font-family: 'Roboto', sans-serif;
-    font-size: 14pt;
-    color: black;
-    margin-top: 30%;
-    margin-left: 5%;
-    display: flex;
-    flex: 35%;
-}
-
-.headline-img {
-    margin-right: 5%;
-    max-width: 96%;
-    display: flex;
-    flex: 35%;
-    text-align: center;
-}
-
-figcaption p {
-    margin: 1% 5%;
+.headline figcaption p {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     color: black;
@@ -351,7 +314,6 @@ figcaption p {
     line-height: 20px;
     padding: 0 2%;
 }
-
 .contact-btn {
     display: inline-block;
     margin: 3% 5% 3% 5%;
@@ -370,7 +332,6 @@ figcaption p {
     color: var(--text-color-palete2);
     font-weight: bold;
 }
-
 main {
     padding: 25%;
     text-align: center;
@@ -378,7 +339,6 @@ main {
     margin: 5% auto;
     max-width: 1200px;
 }
-
 section {
     display: inline-block;
     text-align: center;
@@ -394,12 +354,10 @@ section span3 {
     font-family: 'Lobster', cursive;
     color: var(--text-color-palete2);
 }
-
 section span3 a {
     color: var(--text-color-palete1);
     text-decoration: none;
 }
-
 .span3 {
     font-family: 'Lobster', cursive;
     font-weight: 800;
@@ -408,23 +366,21 @@ section span3 a {
     color: var(--title-color-palete1);
     width: 100%;
 }
-
 section button {
     font-weight: 400;
     font-size: 1.5rem;
     padding: 3% 4%;
     margin: 4% 1.5% 4% 1.5%;
     border-radius: 40px;
-    border: var(--background-bg-color1);
+    border: 2px solid var(--background-bg-color2);
     cursor: pointer;
     background: var(--background-bg-color3);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
-
 section button:hover {
     background-color: rgb(223, 209, 190);
+    box-shadow: 5px 5px 10px rgba(77, 134, 209, 0.5);
 }
-
 #home {
     width: 100%;
     padding: 5% 0 1% 0;
@@ -434,30 +390,27 @@ section button:hover {
     text-align: center;
     text-decoration: none;
 }
-
 #funcionamento, #garanta-seu-desconto {
     width: 100%;
     padding: 6% 0 1% 0;
     background: var(--background-bg-color3);
+    color: var(--text-color-palete4);
 }
-
 #nossos-destaques {
     width: 100%;
     padding: 6% 0 1% 0;
     background: var(--primary-color);
 }
-
 #nosso-porque, #detalhes-da-entrega {
     width: 100%;
     padding: 9% 0;
     background: var(--primary-color);
+    color: var(--text-color-palete4);
 }
-
 #funcionamento, #garanta-seu-desconto, #nossos-destaques p {
     line-height: 35px;
     padding: 7% 2% 1%;
 }
-
 #detalhes-da-entrega p, #nosso-porque p {
     line-height: 10px;
     padding: 3% 2% 1%;
@@ -473,35 +426,10 @@ section button:hover {
     padding: 4% 0;
 }
 
-.servicos {
-    display: inline-block;
-    margin-top: 5%;
-}
-
-.servicos a {
-    text-decoration: none;
-    color: var(--text-color-palete3);
-}
-
-.text-info {
-    display: inline-block;
-    width: 100%;
-    padding: 5%;
-    margin: 3% 0;
-    border: 0.5px solid #895013;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.text-info a {
-    text-decoration: none;
-}
-
 .box-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 4fr));
 }
-
 .menu .box-container .box {
     text-align: center;
     background-color: var(--background-bg-color3);
@@ -510,12 +438,11 @@ section button:hover {
     border-radius: 20px;
     background: transparent;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    max-height: 53rem;
 }
-
 .menu .box-container .box:hover {
     background: var(--background-bg-color2);
 }
-
 .menu .box-container .box img {
     height: 10rem;
     max-width: 16.5rem;
@@ -523,59 +450,69 @@ section button:hover {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
 }
-
 .menu .box-container .box .span3 {
     border: var(--background-bg-color2);
     font-size: 1.5rem;
     padding: 2rem;
 }
-
+.menu .box-container .box:hover .span3 {
+    color: var(--text-color-1);
+}
 section .menu .box p {
     font-size: 1.5rem;
     padding: 3rem;
     line-height: 20px;
 }
-
 .menu .box-container .box .price {
-    color: var(--text-color-palete2);
+    color: var(--text-color-palete1);
     font-size: 2rem;
     padding: 0.5rem 0;
-
 }
-
 .menu .box-container .box .price span {
     font-size: 1rem;
     text-decoration: line-through;
     font-weight: lighter;
     border: var(--background-bg-color2);
 }
-
+.menu .box-container .box button {
+    background-color: var(--background-bg-color4);
+    border: none;
+    box-shadow: none;
+}
+.menu .box-container .box button p {
+    color: var(--title-color-palete3);
+    font-size:large; 
+}
+.menu .box-container .box button:hover p {
+    color: var(--title-color-palete1); 
+}
+.menu .box-container .box:hover button {
+    font-weight: 400;
+    font-size: 1.5rem;
+    border-radius: 40px;
+    border: 2px solid var(--background-bg-color2);
+    cursor: pointer;
+    background: var(--background-bg-color3);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    padding: 0.3rem 1.5rem;
+    margin: auto 1%;
+}
+.menu .box-container .box:hover button:hover {
+    font-weight: 400;
+    font-size: 1.5rem;
+    border-radius: 40px;
+    border: 2px solid var(--background-bg-color2);
+    cursor: pointer;
+    background-color: rgb(223, 209, 190);
+    box-shadow: 5px 5px 10px rgba(77, 134, 209, 0.5);
+    color: var(--text-color-palete2);
+    padding: 0.3rem 1.rem;
+    margin: auto 1%;
+}
 .menu .box-container .box:hover>* {
     color: var(--text-color-palete2);
 }
 
-.menu .box-container .box:hover a {
-    color: var(--text-color-palete3);
-    border: 1px solid var(--text-color-palete2);
-    border-radius: 5%;
-    padding: 8%;
-}
-
-.menu .box-container .box:hover .span3 {
-    color: var(--text-color-1);
-}
-.share {
-    background-color: #F0F0F0;
-    padding: 2% 7%;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-content:center;
-    align-items: center;
-    width: 40vh;
-    font-size: smaller;
-
-}
 footer {
     margin-top: 10px;
     height: 450px;
@@ -584,7 +521,6 @@ footer {
     text-decoration: none;
     color: var(--text-color-palete3);
 }
-
 .rodape-turma {
     letter-spacing: 3px;
     font-family: 'Lobster', cursive;
@@ -592,12 +528,10 @@ footer {
     background-color: #073763;
     padding: 1rem 0.5rem;
 }
-
 .rodape-turma a {
     color: var(--text-color-palete3);
     text-decoration: none;
 }
-
 .rodape-text {
     size: 31rem;
     margin-top: 12px;
@@ -607,7 +541,10 @@ footer {
     flex: 50%;
     width: 75%;
 }
-
+.rodape-text a {
+    color: var(--text-color-palete3);
+    text-decoration: none;
+}
 .rodape-img img {
     margin-top: 8px;
     margin-right: 10%;
@@ -640,17 +577,6 @@ footer {
     }
 }
 
-footer .bot {
-    text-align: right;
-    line-height: 40%;
-    font-size: 20px;
-    color: var(--text-color-palete2);
-}
-
-.bot a {
-    padding: 1%;
-    font-size: 50px;
-}
 
 /* RESPONSIVO */
 @media screen and (max-width: 1055px) {
@@ -659,7 +585,6 @@ footer .bot {
     .sociais {
         display: none;
     }
-
     main {
         margin: 20% auto;
     }
@@ -702,9 +627,9 @@ footer .bot {
         margin: 5%;
         text-align: center;
     }
-    .headline p {
+    .headline figcaption p {
         text-align: center;
-        margin-top: 25%;
+        padding: 1% 5%;
     }
     .headline-img {
         flex: 100%;
