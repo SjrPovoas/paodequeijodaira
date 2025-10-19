@@ -291,7 +291,7 @@ section .header {
     background-image: linear-gradient(45deg, var(--background-bg-color3), var(--background-bg-color2));
     padding-top: 100px;
 }
-.headline picture img {
+.headline figure img {
     margin: center;
     padding: 2% 0;
     text-align: center;
