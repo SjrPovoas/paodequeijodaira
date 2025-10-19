@@ -40,7 +40,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Pão de Queijo da Irá">
     <meta property="og:url" content="https://paodequeijodaira.vercel.app">
-    <meta property="og:image:secure_url" media="image" content="https://paodequeijodaira.vercel.app/img/pqi.webp">
+    <meta property="og:image:secure_url" itemprop="image" content="https://paodequeijodaira.vercel.app/img/pqi.webp">
     <meta property="og:title" content="Pão de Queijo da Irá">
     <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado.">
     <!-- Bootstrap Icons-->
@@ -85,6 +85,7 @@
                                 Maps</i></a>
                     </p>
                 </div>
+            </div>
         </nav>
 
         <button onclick="animarMenu()" id="btn-menu" aria-label="menu">
@@ -122,14 +123,14 @@
         <div class="headline">
             <!--    <div class="header__toggle"><i id="toggleTheme" class="bi bi-sun"></i></div>  -->
             <h2>Vendemos Pão de Queijo Congelado<br>Sabor caseiro</h2>
-            <picture>
-                <img src="/img/pqi.webp" alt="Pão de Queijo da Irá" sizes="1040x584" style="max-width: 90%;">
+
+                <img srcset="/img/pqi.webp" alt="Pão de Queijo da Irá" sizes="1040x584" style="max-width: 90%;">
                 <figcaption>
                     <p>Para assar: Leve ao forno pré-aquecido em 180°C entre 20 a 30 minutos, sem a necessidade de óleo
                         na forma.</p>
                     <p>Na Fritadeira sem Óleo Air Fryer: basta colocar em  240°C e aguardar entre 10 a 20 minutos.</p>
                 </figcaption>
-            </picture>
+
         </div>
     </main>
 
@@ -142,7 +143,7 @@
         </div>
     </section>
 
-    <section id="funcionamento">
+    <section>
         <div>
             <p tabindex="0"><span class="span4"><b>Novidades</b></span></p>
             <p tabindex="0">Além do tradicional <a
@@ -191,7 +192,6 @@
                 <p tabindex="0">💰 ACEITAMOS PIX 💵</p>
             </div>
         </div>
-        </div>
     </section>
 
     <section id="garanta-seu-desconto">
@@ -219,7 +219,7 @@
         </div>
     </section>
 
-    <section class="menu" id="nossos-destaques">
+    <section class="menu">
         <div class="box-container">
             <div class="box">
                 <img src="/img/pqi20.webp" alt="Pacote com 20 pães de Queijo congelado" width="264" height="160">
@@ -236,8 +236,8 @@
                 <div class="price">R$ 25,00 <span>R$ 30,00</span></div>
                 <p tabindex="0">Pacote vai embalado com 20 pães1 kg de pão de Queijo congelado.<br> São feitos
                     manualmente e o queijo é ralado na hora.</p>
-                <button><a href="https://wa.me/5561982777196?text=*OBS%3A*%20Taxa%20de%20entrega%20fica%20por%20conta%20do%20cliente%20e%20%C3%A9%20adicionado%20ao%20pedido%20%2B%20R%249%2C00.%20%0AVoc%C3%AA%20est%C3%A1%20comprando%3A%0AQTD%3A%2001%20Pacote%20com%201%20kg%20de%20p%C3%A3o%20de%20queijo%20congelado%20por%20R%2425%2C00.%20%0APara%20confirmar%20seu%20pedido%2C%20escreva%20seu%20nome%20e%20informe%20o%20endere%C3%A7o%20para%20entrega.%0A"
-                    target="_blank" aria-label="Fazer Pedido" ><p>comprar</p></a></button>
+                <p tabindex="0"><a href="https://wa.me/5561982777196?text=*OBS%3A*%20Taxa%20de%20entrega%20fica%20por%20conta%20do%20cliente%20e%20%C3%A9%20adicionado%20ao%20pedido%20%2B%20R%249%2C00.%20%0AVoc%C3%AA%20est%C3%A1%20comprando%3A%0AQTD%3A%2001%20Pacote%20com%201%20kg%20de%20p%C3%A3o%20de%20queijo%20congelado%20por%20R%2425%2C00.%20%0APara%20confirmar%20seu%20pedido%2C%20escreva%20seu%20nome%20e%20informe%20o%20endere%C3%A7o%20para%20entrega.%0A"
+                    target="_blank" aria-label="Fazer Pedido" ><button>comprar</button></a></p>
             </div>
             <div class="box">
                 <img src="/img/criar-negocio.webp" alt="Curso Online Receita Secreta do Pão de Queijo da Irá" width="260" height="160">

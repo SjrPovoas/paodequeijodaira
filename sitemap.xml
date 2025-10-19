@@ -7,26 +7,30 @@
   		<loc>https://paodequeijodaira.vercel.app/</loc>
 		<image:image>
 			<image:loc>https://paodequeijodaira.vercel.app/img/pqi.webp</image:loc>
-			<image:title>Pao de Queijo da Ira</image:title>
+			<image:title>Pão de Queijo da Irá pacote com 1 kg de pão de queijo congelado</image:title>
+		</image:image>
+		<image:image>
+			<image:loc>https://paodequeijodaira.vercel.app/img/pqi20.webp</image:loc>
+			<image:title>Pão de Queijo da Irá pacote com 20 pães de queijo congelado </image:title>
 		</image:image>
 		<image:image>
 			<image:loc>https://paodequeijodaira.vercel.app/img/avatar-pqi.webp</image:loc>
-			<image:title>Avatar do Pao de Queijo da Ira</image:title>
+			<image:title>Avatar do Pão de Queijo da Irá</image:title>
 		</image:image>
 		<image:image>
 			<image:loc>https://paodequeijodaira.vercel.app/img/capa-curso.webp</image:loc>
-			<image:title>Capa do Curso Receita Secreta do Pao de Queijo da Ira</image:title>
+			<image:title>Capa do Curso Receita Secreta do Pão de Queijo da Irá</image:title>
 		</image:image>
 		<image:image>
 			<image:loc>https://paodequeijodaira.vercel.app/img/criar-negocio.webp</image:loc>
-			<image:title>Crie seu Negocio com Pao de Queijo</image:title>
+			<image:title>Crie seu Negócio com Pão de Queijo da Irá</image:title>
 		</image:image>
-  		<lastmod>2025-10-15T18:00:04+00:00</lastmod>
+  		<lastmod>2025-10-19T11:00:04+00:00</lastmod>
   		<priority>1.00</priority>
 	</url>
 	<url>
 		<loc>https://paodequeijodaira.vercel.app/index.html</loc>
-  		<lastmod>2025-10-15T18:00:04+00:00</lastmod>
+		<lastmod>2025-10-19T11:00:04+00:00</lastmod>
 		<priority>0.80</priority>
 	</url>
 </urlset>

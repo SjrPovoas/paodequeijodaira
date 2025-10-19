@@ -2,22 +2,5 @@
 Sitemap: https://paodequeijodaira.vercel.app/sitemap.xml
 
 User-agent: *
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /wp-login.php
-Disallow: /wp-signup.php
-Disallow: /press-this.php
-Disallow: /remote-login.php
-Disallow: /activate/
-Disallow: /cgi-bin/
-Disallow: /mshots/v1/
-Disallow: /next/
-Disallow: /public.api/
-User-agent: Googlebot
-Allow: /
-User-agent: googlebot-image
-Allow: /
-User-agent: googlebot-mobile
-Allow: /
 
-# This file was generated on Mon, 15 Oct 2025 18:00:35 +0000
+# This file was generated on Sun, 19 Oct 2025 11:00:35 +0000
