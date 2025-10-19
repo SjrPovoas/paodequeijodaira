@@ -365,18 +365,18 @@ section span3 a {
     color: var(--title-color-palete1);
     width: 100%;
 }
-section button {
+.btn-section {
     font-weight: 400;
     font-size: 1.5rem;
-    padding: 2% 5%;
-    margin: 4% 1.5% 4% 1.5%;
+    padding: 2% 3%;
+    margin: 4% 18%;
     border-radius: 40px;
     border: 2px solid var(--background-bg-color2);
     cursor: pointer;
     background: var(--background-bg-color3);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
-section button:hover {
+.btn-section:hover {
     background-color: rgb(223, 209, 190);
     box-shadow: 5px 5px 10px rgba(77, 134, 209, 0.5);
 }
@@ -508,7 +508,7 @@ section .menu .box p {
 
 footer {
     margin-top: 10px;
-    height: 450px;
+    height: 33rem;
     background-image: linear-gradient(180deg, #895013, #895013, black);
     text-align: center;
     text-decoration: none;
@@ -536,7 +536,13 @@ footer {
 .rodape-img img {
     max-width: 250px;
 }
-
+.selo {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: auto 1%;
+    padding: 0 1rem 0 1rem;
+}
 /* Início do Efeito Flutuante do Botão Whatsapp */
 .whats {
     position: fixed;
