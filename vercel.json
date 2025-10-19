@@ -1,0 +1,46 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.paodequeijodaira.vercel.app"
+        }
+      ],
+      "destination": "https://paodequeijodaira.vercel.app/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "http://www.paodequeijodaira.vercel.app"
+        }
+      ],
+      "destination": "https://paodequeijodaira.vercel.app/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "http://paodequeijodaira.vercel.app"
+        }
+      ],
+      "destination": "https://paodequeijodaira.vercel.app/:path*",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/404.html"
+    }
+  ]
+}
+
+
+
