@@ -428,7 +428,7 @@ section button:hover {
 
 .box-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 4fr));
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 4fr));
 }
 .menu .box-container .box {
     text-align: center;
@@ -438,7 +438,7 @@ section button:hover {
     border-radius: 20px;
     background: transparent;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-    max-height: 53rem;
+    max-height: 34rem;
 }
 .menu .box-container .box:hover {
     background: var(--background-bg-color2);
@@ -450,13 +450,13 @@ section button:hover {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
 }
-.menu .box-container .box .span3 {
+.menu .box-container .box span3 {
     border: var(--background-bg-color2);
     font-size: 1.5rem;
     padding: 2rem;
 }
-.menu .box-container .box:hover .span3 {
-    color: var(--text-color-1);
+.menu .box-container .box:hover span3 {
+    color: var(--text-color-2);
 }
 section .menu .box p {
     font-size: 1.5rem;
@@ -478,13 +478,7 @@ section .menu .box p {
     border: none;
     box-shadow: none;
     background-color: transparent;
-}
-.menu .box-container .box button p {
     color: var(--title-color-palete3);
-    font-size:large; 
-}
-.menu .box-container .box button:hover p {
-    color: var(--title-color-palete1); 
 }
 .menu .box-container .box:hover button {
     font-weight: 400;
@@ -505,7 +499,7 @@ section .menu .box p {
     cursor: pointer;
     background-color: rgb(223, 209, 190);
     box-shadow: 5px 5px 10px rgba(77, 134, 209, 0.5);
-    color: var(--text-color-palete2);
+    color: var(--text-color-palete1);
     padding: 0.3rem 2.5rem;
     margin: auto 1%;
 }
@@ -637,7 +631,7 @@ footer {
     #funcionamento, #garanta-seu-desconto {
         padding: 25% 2% 5%;        
     }
-    #detalhes-da-entrega, #nosso-porque {
+    #home, #detalhes-da-entrega, #nosso-porque {
         padding: 22% 2% 8%;
     }
     #nossos-destaques {
