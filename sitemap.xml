@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-	<url>
-  		<loc>https://paodequeijodaira.vercel.app/</loc>
-		<image:image>
-			<image:loc>https://paodequeijodaira.vercel.app/img/pqi.webp</image:loc>
-			<image:title>Pão de Queijo da Irá pacote com 1 kg de pão de queijo congelado</image:title>
-		</image:image>
-		<image:image>
-			<image:loc>https://paodequeijodaira.vercel.app/img/pqi20.webp</image:loc>
-			<image:title>Pão de Queijo da Irá pacote com 20 pães de queijo congelado </image:title>
-		</image:image>
-		<image:image>
-			<image:loc>https://paodequeijodaira.vercel.app/img/avatar-pqi.webp</image:loc>
-			<image:title>Avatar do Pão de Queijo da Irá</image:title>
-		</image:image>
-		<image:image>
-			<image:loc>https://paodequeijodaira.vercel.app/img/capa-curso.webp</image:loc>
-			<image:title>Capa do Curso Receita Secreta do Pão de Queijo da Irá</image:title>
-		</image:image>
-		<image:image>
-			<image:loc>https://paodequeijodaira.vercel.app/img/criar-negocio.webp</image:loc>
-			<image:title>Crie seu Negócio com Pão de Queijo da Irá</image:title>
-		</image:image>
-  		<lastmod>2025-10-19T18:00:04+00:00</lastmod>
-  		<priority>1.00</priority>
-	</url>
-	<url>
-		<loc>https://paodequeijodaira.vercel.app/index.html</loc>
-		<lastmod>2025-10-19T18:00:04+00:00</lastmod>
-		<priority>0.80</priority>
-	</url>
-</urlset>
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <url>
+        <loc>https://paodequeijodaira.vercel.app/</loc>
+        <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/img/pqi.webp</image:loc>
+            <image:title>Pão de Queijo da Irá pacote com 1 kg de pão de queijo congelado</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/img/pqi20.webp</image:loc>
+            <image:title>Pão de Queijo da Irá pacote com 20 pães de queijo congelado</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/img/avatar-pqi.webp</image:loc>
+            <image:title>Avatar do Pão de Queijo da Irá</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/img/capa-curso.webp</image:loc>
+            <image:title>Capa do Curso Receita Secreta do Pão de Queijo da Irá</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/img/criar-negocio.webp</image:loc>
+            <image:title>Crie seu Negócio com Pão de Queijo da Irá</image:title>
+        </image:image>
+        <lastmod>2025-10-19T21:00:04+00:00</lastmod> 
+        <priority>1.00</priority>
+    </url>
+    
+    </urlset>
