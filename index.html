@@ -314,85 +314,88 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="js/animar.js"></script>
     <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@graph": [
             {
-              "@type": "WebSite",
-              "url": "https://paodequeijodaira.vercel.app",
-              "name": "Pão de Queijo da Irá",
-              "about": {
-                "@type": "Project",
-                "name": "Pão de Queijo da Irá",
-                "description": "O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado.",
-                "logo": "https://paodequeijodaira.vercel.app/img/favicon.ico"
-              },
-              "author": {
-                "@type": "Person",
-                "name": "Antônia Iraleide de Oliveira"
-              }
-            },
-            {
-              "@type": "LocalBusiness",
-              "name": "Pão de Queijo da Irá",
-              "url": "https://paodequeijodaira.vercel.app",
-              "description": "O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado.",
-              "telephone": "+5561982777196",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Cidade Ocidental",
-                "addressRegion": "GO",
-                "addressCountry": "BR"
-              },
-              "openingHoursSpecification": [
+              "@context": "https://schema.org",
+              "@graph": [
                 {
-                  "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday"
+                  "@type": "WebSite",
+                  "url": "https://paodequeijodaira.vercel.app",
+                  "name": "Pão de Queijo da Irá",
+                  "description": "O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado.",
+                  "author": {
+                    "@type": "Person",
+                    "name": "Antônia Iraleide de Oliveira"
+                  }
+                },
+                {
+                  "@type": "LocalBusiness",
+                  "name": "Pão de Queijo da Irá",
+                  "url": "https://paodequeijodaira.vercel.app",
+                  "description": "O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado.",
+                  "telephone": "+5561982777196",
+                  "image": "https://paodequeijodaira.vercel.app/img/favicon.ico",
+                  "priceRange": "$",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Cidade Ocidental",
+                    "addressRegion": "GO",
+                    "addressCountry": "BR"
+                  },
+                  "openingHoursSpecification": [
+                    {
+                      "@type": "OpeningHoursSpecification",
+                      "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                      ],
+                      "opens": "08:00",
+                      "closes": "18:00"
+                    },
+                    {
+                      "@type": "OpeningHoursSpecification",
+                      "dayOfWeek": "Sunday",
+                      "opens": "08:00",
+                      "closes": "12:00"
+                    }
                   ],
-                  "opens": "08:00",
-                  "closes": "18:00"
-                },
-                {
-                  "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": "Sunday",
-                  "opens": "08:00",
-                  "closes": "12:00"
+                  "makesOffer": [
+                    {
+                      "@type": "Offer",
+                      "price": "25.00",
+                      "priceCurrency": "BRL",
+                      "availability": "https://schema.org/InStock",
+                      "itemOffered": {
+                        "@type": "Product",
+                        "name": "Pacote com 1 kg de pão de queijo congelado",
+                        "image": "https://paodequeijodaira.vercel.app/img/pqi.webp",
+                        "description": "Pacote com 1 kg de pão de queijo congelado caseiro."
+                      }
+                    },
+                    {
+                      "@type": "Offer",
+                      "price": "10.00",
+                      "priceCurrency": "BRL",
+                      "availability": "https://schema.org/InStock",
+                      "itemOffered": {
+                        "@type": "Product",
+                        "name": "Pacote com 20 pães de queijo congelado",
+                        "image": "https://paodequeijodaira.vercel.app/img/pqi20.webp",
+                        "description": "Pacote com 20 unidades de pão de queijo congelado caseiro."
+                      }
+                    }
+                  ],
+                  "areaServed": {
+                    "@type": "Place",
+                    "name": "Cidade Ocidental - GO"
+                  },
+                  "paymentAccepted": "PIX"
                 }
-              ],
-              "makesOffer": [
-                {
-                  "@type": "Offer",
-                  "price": "25.00",
-                  "priceCurrency": "BRL",
-                  "itemOffered": {
-                    "@type": "Product",
-                    "name": "Pacote com 1 kg de pão de queijo congelado"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "price": "10.00",
-                  "priceCurrency": "BRL",
-                  "itemOffered": {
-                    "@type": "Product",
-                    "name": "Pacote com 20 pães de queijo congelado"
-                  }
-                }
-              ],
-              "areaServed": {
-                "@type": "Place",
-                "name": "Cidade Ocidental - GO"
-              },
-              "paymentAccepted": "PIX"
+              ]
             }
-          ]
-        }
     </script>        
 </body>
 </html>
