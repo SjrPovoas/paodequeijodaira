@@ -10,6 +10,25 @@
       ],
       "destination": "https://paodequeijodaira.vercel.app/:path*",
       "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    },
+    {
+        "source": "/:path*",
+        "destination": "/" 
     }
   ]
 }
