@@ -205,7 +205,7 @@
 
     /* ----- SEÇÃO DE CURSO CTA ----- */
     .curso-cta-section {
-        background-image: url('/IMG/criar-negocio.webp'); /* Foto de fundo */
+        background-image: url('/img/criar-negocio.webp'); /* Foto de fundo */
         background-size: cover;
         background-position: top;
         height: 100vh;
