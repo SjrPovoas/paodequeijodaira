@@ -402,10 +402,10 @@
     .historia-section { padding: 80px 20px; background-color: var(--cor-texto-claro); }
     .depoimentos-section { padding: 60px 20px; background-color: #ededed; text-align: center; }
     .main-footer { background-color: var(--cor-secundaria); color: var(--cor-texto-claro); padding: 40px 20px; }
-    .tabela-precos-container { max-width: 900px; margin: 40px auto; padding: 20px; text-align: center; }
+    .tabela-precos-container { max-width: 900px; margin: 20px auto; padding: 5px; text-align: center; }
     
     .hero-content h1 { font-size: 3em; margin-bottom: 0.5em; text-shadow: 2px 2px 4px #000; }
-    .hero-content p { font-size: 1.5em; margin-bottom: 2em; font-weight: 300; }
+    .hero-content p { font-size: 1.5em; margin-bottom: 2em; font-weight: 200; }
     @media (max-width: 768px) {
         .hero-content h1 { font-size: 2.5em; }
         .hero-content p { font-size: 1.2em; }
