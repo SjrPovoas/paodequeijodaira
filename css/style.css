@@ -125,13 +125,13 @@
         }
         
         .main-nav.active {
-            max-height: 80vh; 
+            max-height: 90vh; 
             padding: 10px 0;
         }
 
         .main-nav ul {
             flex-direction: column; 
-            padding: 5px 20px;
+            padding: 10px 20px;
         }
         
         .main-nav ul li {
