@@ -75,7 +75,7 @@
     .nav-cta-button {
         background-color: #FFC300;
         color: var(--cor-secundaria);
-        padding: 8px 18px;
+        padding: 8px 15px;
         border-radius: 5px;
         text-decoration: none;
         font-weight: bold;
@@ -125,20 +125,20 @@
         }
         
         .main-nav.active {
-            max-height: 100vh; 
+            max-height: 55vh; 
             padding: 10px 0;
         }
 
         .main-nav ul {
             flex-direction: column; 
-            padding: 10px 20px;
+            padding: 5px 20px;
         }
         
         .main-nav ul li {
-            width: 100vw;
+            width: 90vw;
             text-align: center;
             margin: 5px 0;
-            padding: 10px 0;
+            padding: 5px 0;
             border-bottom: 1px solid #eee;
         }
         
