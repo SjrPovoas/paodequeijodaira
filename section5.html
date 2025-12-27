@@ -144,22 +144,23 @@
         }
         .price-text h2 {
             color: yellow; /* Amarelo */
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: bold;
         }
         .price-text span {
             color: red; /* Vermelho */
-            font-size: 1.8rem;
+            font-size: 1rem;
         }      
       
 
         /* --- RESPONSIVIDADE --- */
         @media (max-width: 992px) {
-            .section-hero, .section-content, .section-warranty {
+            .section-hero, .section-content, .video-container, .section-warranty, .section-price {
                 flex-direction: column;
                 text-align: center;
                 padding: 50px 5%;
             }
-            .hero-text, .video-container, .warranty-text {
+            .hero-text, .video-container, .warranty-text, .price-text {
                 padding-right: 0;
                 padding-left: 0;
                 margin-bottom: 40px;
@@ -226,7 +227,7 @@
 
       <section class="section-price">
         <div class="price-text">
-            <h3>APROVEITE O CONTEÚDO EM QUALQUER DISPOSITIVO.</h3>
+            <h3>Aproveite o conteúdo em qualquer dispositivo.</h3>
             <hr class="price-line">
             <p>Seus dados pessoais são confidenciais</p>
             <p>Compra 100% segura</p>
