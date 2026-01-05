@@ -18,7 +18,7 @@ export default async function handler(req, res) {
             body: JSON.stringify({
                 email: email,
                 attributes: { NOME: name, SMS: phone, WHATSAPP: phone },
-                listIds: [1], // ID da sua lista no Brevo
+                listIds: [2], // ID da sua lista no Brevo
                 updateEnabled: true
             })
         });
