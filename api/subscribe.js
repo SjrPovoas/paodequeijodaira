@@ -28,7 +28,7 @@ export default async function handler(req, res) {
                 email: email,
                 attributes: { 
                     // Mudamos para FIRSTNAME que é o padrão do Brevo
-                    FIRSTNAME: name, 
+                    NOME: name, 
                     // SMS é o campo padrão para celular no Brevo
                     SMS: cleanPhone 
                 },
