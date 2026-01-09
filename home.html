@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pão de Queijo da Irá | Caseiro e Congelado</title>
+    
+    <style>
+        /* --- VARIÁVEIS E ESTILOS GERAIS --- */
+        :root {
+            --cor-primaria: #FFC300; 
+            --cor-secundaria: #8B4513; 
+            --cor-texto-claro: #FFFFFF;
+            --cor-fundo-escuro: rgba(0, 0, 0, 0.5);
+            --cor-header-fundo: #FFFFFF;
+            --cor-header-texto: #333333;
+            --cor-modal-fundo: #fefefe;
+            --cor-modal-borda: #888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            padding-top: 80px;
+        }
+
+        /* --- HEADER --- */
+        .main-header {
+            background-color: var(--cor-header-fundo);
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed; 
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000; 
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo img { max-height: 60px; width: auto; }
+        
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .main-nav ul li a {
+            text-decoration: none;
+            color: var(--cor-header-texto);
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-cta-button {
+            background-color: var(--cor-primaria);
+            color: var(--cor-secundaria) !important;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .menu-toggle { display: none; font-size: 30px; background: none; border: none; cursor: pointer; }
+
+        /* --- HERO --- */
+        .hero-banner {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('hero-banner.png');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 { font-size: 3em; margin-bottom: 20px; }
+        .hero-content p { font-size: 1.4em; margin-bottom: 30px; }
+
+        .cta-button {
+            background-color: var(--cor-primaria);
+            color: var(--cor-secundaria);
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:hover { transform: scale(1.05); }
+
+        /* --- PRODUTOS --- */
+        .produtos-section { padding: 60px 20px; text-align: center; background: #f9f9f9; }
+        .produtos-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 40px; }
+        .produto-card { background: white; padding: 20px; border-radius: 15px; width: 300px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .produto-img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+        .btn-comprar { width: 100%; background: var(--cor-primaria); border: none; padding: 10px; margin-top: 15px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+
+        /* --- HISTÓRIA --- */
+        .historia-section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 40px; }
+        .historia-texto { flex: 1; }
+        .historia-imagem { flex: 1; border-radius: 15px; overflow: hidden; }
+        .historia-imagem img { width: 100%; display: block; }
+
+        /* --- ISCA DIGITAL --- */
+        .isca-digital-section { background-color: #FFFDF5; padding: 80px 20px; }
+        .isca-container { max-width: 1100px; margin: 0 auto; display: flex; gap: 40px; align-items: center; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .isca-imagem { flex: 1; }
+        .isca-imagem img { width: 100%; border-radius: 15px; }
+        .isca-texto { flex: 1; }
+        .isca-lista { list-style: none; margin: 20px 0; }
+        .isca-lista li { margin-bottom: 10px; }
+        .form-brevo { display: flex; flex-direction: column; gap: 10px; }
+        .form-brevo input { padding: 12px; border: 1px solid #ddd; border-radius: 5px; }
+        .btn-isca { background-color: #D35400; color: white; padding: 15px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+
+        /* --- CURSO --- */
+        .curso-cta-section { 
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('criar-negocio.webp');
+            background-size: cover; background-position: center; padding: 100px 20px; text-align: center; color: white;
+        }
+        .btn-curso { display: inline-block; background: var(--cor-primaria); color: var(--cor-secundaria); padding: 18px 40px; text-decoration: none; font-weight: bold; font-size: 1.3em; border-radius: 10px; margin-top: 20px; }
+
+        /* --- TABELA DE PREÇOS --- */
+        .tabela-container { max-width: 800px; margin: 60px auto; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th, td { padding: 15px; border: 1px solid #ddd; text-align: center; }
+        th { background: var(--cor-secundaria); color: white; }
+
+        /* --- FOOTER --- */
+        .main-footer { background: var(--cor-secundaria); color: white; padding: 40px 20px; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        .footer-info, .footer-contato, .footer-social { flex: 1; min-width: 250px; }
+        .footer-cta { background: #25D366; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .social-icons { display: flex; gap: 15px; margin-top: 10px; }
+        .social-icons a { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 50%; text-decoration: none; font-size: 20px; }
+
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
+        .modal-content { background: white; margin: 5% auto; padding: 30px; width: 90%; max-width: 500px; border-radius: 10px; position: relative; }
+        .close-button { float: right; font-size: 28px; cursor: pointer; }
+        .modal-content input, .modal-content select { width: 100%; padding: 10px; margin: 10px 0 20px; border: 1px solid #ccc; border-radius: 5px; }
+        .btn-enviar-pedido { background: #25D366; color: white; border: none; width: 100%; padding: 15px; font-weight: bold; border-radius: 5px; cursor: pointer; }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 900px) {
+            .menu-toggle { display: block; }
+            .main-nav { display: none; width: 100%; position: absolute; top: 70px; left: 0; background: white; box-shadow: 0 4px 5px rgba(0,0,0,0.1); }
+            .main-nav.active { display: block; }
+            .main-nav ul { flex-direction: column; padding: 20px; }
+            .historia-section, .isca-container { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo-paodequeijodaira.jpg" alt="Logo Pão de Queijo da Irá">
+            </div>
+            <button class="menu-toggle">☰</button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#produtos">Produtos</a></li>
+                    <li><a href="#nossa-historia">História</a></li>
+                    <li><a href="#guia-gratuito">Guia Grátis</a></li>
+                    <li><a href="#curso">Curso</a></li>
+                    <li><a href="#" id="openModalNav" class="nav-cta-button">PEDIR AGORA!</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <div class="hero-content">
+            <h1>Pão de Queijo da Irá</h1>
+            <p>O sabor caseiro que faz sua casa sorrir.</p>
+            <button id="openModalHero" class="cta-button">QUERO ENCOMENDAR AGORA!</button>
+        </div>
+    </section>
+
+    <section id="produtos" class="produtos-section">
+        <h2>🧀 Nossos Pacotes</h2>
+        <div class="produtos-container">
+            <div class="produto-card">
+                <img src="1000088363.png" class="produto-img">
+                <h3>Pacote 20 Unidades</h3>
+                <p>R$ 10,00</p>
+                <button class="btn-comprar" onclick="abrirModalComOpcao('Pacote com 20 Unidades', 1)">COMPRAR</button>
+            </div>
+            <div class="produto-card">
+                <img src="1000088387.png" class="produto-img">
+                <h3>Pacote 1 Kg</h3>
+                <p>R$ 25,00</p>
+                <button class="btn-comprar" onclick="abrirModalComOpcao('Pacote de 1 Kg', 1)">COMPRAR</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="nossa-historia" class="historia-section">
+        <div class="historia-texto">
+            <h2>👩‍🍳 A História da Irá</h2>
+            <p>Eu sou a Iraleide, e transformo carinho em pães de queijo congelados e fresquinhos para a sua mesa.</p>
+            <button class="cta-button" onclick="abrirModal()">FALE COM A IRÁ</button>
+        </div>
+        <div class="historia-imagem">
+            <img src="1000076911.webp">
+        </div>
+    </section>
+
+    <section id="guia-gratuito" class="isca-digital-section">
+        <div class="isca-container">
+            <div class="isca-imagem">
+                <img src="mesa-cafe-ira.png" alt="Mesa de café">
+            </div>
+            <div class="isca-texto">
+                <h2>Transforme seu café da tarde.</h2>
+                <p>Baixe nosso guia gratuito e descubra segredos de harmonização e mesa posta.</p>
+                <ul class="isca-lista">
+                    <li>☕ Harmonização com cafés especiais</li>
+                    <li>🍯 Receitas de geleias e patês</li>
+                    <li>🍽️ Dicas de mesa posta acolhedora</li>
+                    <li>🧀 O segredo da casquinha crocante</li>
+                </ul>
+                <form class="form-brevo" action="URL_DO_SEU_FORMULARIO_BREVO" method="POST">
+                    <input type="text" name="NOME" placeholder="Seu nome" required>
+                    <input type="email" name="EMAIL" placeholder="Seu e-mail" required>
+                    <button type="submit" class="btn-isca">QUERO MEU GUIA GRATUITO</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="curso" class="curso-cta-section">
+        <div class="curso-content">
+            <h2>COMECE SEU NEGÓCIO AGORA!</h2>
+            <p>Aprenda a receita secreta e transforme o pão de queijo em um negócio lucrativo.</p>
+            <a href="https://paodequeijodaira.kpages.online/receita-secreta-do-pao-de-queijo-da-ira" target="_blank" class="btn-curso">QUERO A RECEITA SECRETA!</a>
+        </div>
+    </section>
+
+    <div class="tabela-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Conteúdo</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Semana</td><td>20 Unidades</td><td>R$ 10,00</td></tr>
+                <tr><td>Família</td><td>1 Kg</td><td>R$ 25,00</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>Pão de Queijo da Irá</h3>
+                <p>&copy; 2026 Todos os direitos reservados.</p>
+            </div>
+            <div class="footer-contato">
+                <h3>Fale Conosco</h3>
+                <button class="footer-cta" onclick="abrirModal()">ENCOMENDAR WHATSAPP</button>
+                <p style="font-size: 12px; margin-top: 10px;">Retirada: Cidade Ocidental-GO</p>
+            </div>
+            <div class="footer-social">
+                <h3>Siga a Irá!</h3>
+                <div class="social-icons">
+                    <a href="#">📸</a>
+                    <a href="#">📘</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="pedidoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>✨ Monte seu Pedido</h3>
+            <form id="formPedido">
+                <label>Produto:</label>
+                <select id="produto" required>
+                    <option value="Pacote com 20 Unidades">Pacote com 20 Unidades</option>
+                    <option value="Pacote de 1 Kg">Pacote de 1 Kg</option>
+                </select>
+                <label>Quantidade:</label>
+                <input type="number" id="quantidade" value="1" min="1">
+                <label>Seu Nome:</label>
+                <input type="text" id="nome" required>
+                <label>Endereço:</label>
+                <input type="text" id="endereco" required>
+                <button type="submit" class="btn-enviar-pedido">ENVIAR WHATSAPP</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // MENU
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        menuToggle.addEventListener('click', () => mainNav.classList.toggle('active'));
+
+        // MODAL
+        const modal = document.getElementById('pedidoModal');
+        const spanClose = document.querySelector('.close-button');
+
+        const abrirModal = () => modal.style.display = 'block';
+        window.abrirModalComOpcao = (prod, qtd) => {
+            document.getElementById('produto').value = prod;
+            document.getElementById('quantidade').value = qtd;
+            abrirModal();
+        };
+
+        document.getElementById('openModalHero').onclick = abrirModal;
+        document.getElementById('openModalNav').onclick = (e) => { e.preventDefault(); abrirModal(); };
+        spanClose.onclick = () => modal.style.display = 'none';
+        window.onclick = (e) => { if(e.target == modal) modal.style.display = 'none'; };
+
+        // ENVIO WHATSAPP
+        document.getElementById('formPedido').onsubmit = function(e) {
+            e.preventDefault();
+            const msg = `*NOVO PEDIDO DA IRÁ*\n\n*Cliente:* ${document.getElementById('nome').value}\n*Produto:* ${document.getElementById('produto').value}\n*Qtd:* ${document.getElementById('quantidade').value}\n*Endereço:* ${document.getElementById('endereco').value}`;
+            window.open(`https://api.whatsapp.com/send?phone=5561982777196&text=${encodeURIComponent(msg)}`, '_blank');
+            modal.style.display = 'none';
+        };
+    </script>
+</body>
+</html>
