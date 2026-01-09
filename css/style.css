@@ -203,6 +203,106 @@
         background-color: #E6B800;
     }
 
+    /* ----- SEÇÃO ISCA DIGITAL ----- */
+        .isca-digital-section {
+            background-color: #FFFDF5; /* Fundo creme suave */
+            padding: 80px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .isca-container {
+            max-width: 1100px;
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .isca-imagem {
+            flex: 1;
+        }
+
+        .isca-imagem img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .isca-texto {
+            flex: 1;
+        }
+
+        .isca-texto h2 {
+            color: var(--cor-secundaria);
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .isca-texto .subtitulo {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .isca-lista {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .isca-lista li {
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        /* Estilo do Formulário Brevo */
+        .form-brevo {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-brevo input {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .btn-isca {
+            background-color: #D35400; /* Laranja queimado para destacar */
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-isca:hover {
+            background-color: #A04000;
+        }
+
+        @media (max-width: 900px) {
+            .isca-container {
+                flex-direction: column;
+                padding: 20px;
+            }
+            .isca-texto h2 {
+                font-size: 1.8em;
+            }
+
+
     /* ----- SEÇÃO DE CURSO CTA ----- */
     .curso-cta-section {
         background-image: url('/img/criar-negocio.webp'); /* Foto de fundo */
