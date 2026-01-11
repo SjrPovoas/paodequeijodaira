@@ -21,7 +21,8 @@
     <link rel="apple-touch-icon" type="image/x-icon" href="/img/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
     <link rel="mask-icon" href="/img/favicon.ico">
-    <!-- <link rel="stylesheet" href="/css/style.css" media="all">
+    <!--
+    <link rel="stylesheet" href="/css/style.css" media="all">
     -->
     <link rel="preload" href="/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
@@ -442,25 +443,38 @@
     </footer>
 
     <div id="pedidoModal" class="modal">
+
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <h3>✨ Monte seu Pedido</h3>
+            <h3>✨ Monte seu Pedido Agora!</h3>
+            
             <form id="formPedido">
-                <label>Produto:</label>
-                <select id="produto" required>
-                    <option value="Pacote com 20 Unidades">Pacote com 20 Unidades</option>
-                    <option value="Pacote de 1 Kg">Pacote de 1 Kg</option>
-                    <option value="Amnos">Ambos</option>
+                <label for="produto">Produto Desejado:</label>
+                <select id="produto" name="produto" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="Pacote com 20 Unidades">Pacote com 20 Unidades (R$ 10,00)</option>
+                    <option value="Pacote de 1 Kg">Pacote de 1 Kg (R$ 25,00)</option>
+                    <option value="Ambos os Pacotes">Ambos os Pacotes</option>
                 </select>
-                <label>Quantidade:</label>
-                <input type="number" id="quantidade" value="1" min="1">
-                <label>Seu Nome:</label>
-                <input type="text" id="nome" required>
-                <label>Endereço:</label>
-                <input type="text" id="endereco" required>
-                <button type="submit" class="btn-enviar-pedido">ENVIAR WHATSAPP</button>
+
+                <label for="quantidade">Quantidade de Pacotes:</label>
+                <input type="number" id="quantidade" name="quantidade" min="1" value="1" required>
+
+                <label for="nome">Seu Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu Nome Completo" required>
+
+                <label for="endereco">Endereço de Entrega:</label>
+                <input type="text" id="endereco" name="endereco" placeholder="Rua, Número, Bairro, Cidade" required>
+
+                <label for="observacoes">Observações (Opcional):</label>
+                <input type="text" id="observacoes" name="observacoes" placeholder="Ex: Retirar no local, pagar em PIX.">
+                
+                <button type="submit" class="btn-enviar-pedido" id="enviarPedido">
+                    ENVIAR PEDIDO PELO WHATSAPP
+                </button>
             </form>
         </div>
+
     </div>
 
     <script>
@@ -493,5 +507,118 @@
             modal.style.display = 'none';
         };
     </script>
+    <!--
+    <script src="/js/main.js"></script>
+    -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "url": "https://paodequeijodaira.vercel.app",
+                "name": "Pão de Queijo da Irá",
+                "description": "O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado.",
+                "author": {
+                  "@type": "Person",
+                  "name": "Antônia Iraleide de Oliveira"
+                }
+              },
+              {
+                "@type": "LocalBusiness",
+                "name": "Pão de Queijo da Irá",
+                "url": "https://paodequeijodaira.vercel.app",
+                "description": "O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado.",
+                "telephone": "+5561982777196",
+                "image": "https://paodequeijodaira.vercel.app/img/logo-paodequeijodaira.jpg",
+                "priceRange": "$",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Quadra 4 Lote 26 Residencial Flores do Cerrado 2 Casa 63 - Recreio Mossoró",
+                  "addressLocality": "Cidade Ocidental",
+                  "addressRegion": "GO",
+                  "postalCode": "72885-580",
+                  "addressCountry": "BR"
+                },
+                "geo": {
+                  "@type": "GeoCoordinates",
+                  "latitude": -16.0989184,
+                  "longitude": -47.9526912
+                },
+                "openingHoursSpecification": [
+                  {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                      "Monday",
+                      "Tuesday",
+                      "Wednesday",
+                      "Thursday",
+                      "Friday",
+                      "Saturday"
+                    ],
+                    "opens": "08:00",
+                    "closes": "18:00"
+                  },
+                  {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": "Sunday",
+                    "opens": "08:00",
+                    "closes": "12:00"
+                  }
+                ],
+                "makesOffer": [
+                  {
+                    "@type": "Offer",
+                    "price": "25.00",
+                    "priceCurrency": "BRL",
+                    "availability": "https://schema.org/InStock",
+                    "itemOffered": {
+                      "@type": "Product",
+                      "name": "Pacote com 1 kg de pão de queijo congelado",
+                      "image": "https://paodequeijodaira.vercel.app/img/imagem-embalagem-1kg.png",
+                      "description": "Pacote com 1 kg de pão de queijo congelado caseiro.",
+                      "aggregateRating": {
+                          "@type": "AggregateRating",
+                          "ratingValue": "5.0",
+                          "reviewCount": "15"
+                      }
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "price": "10.00",
+                    "priceCurrency": "BRL",
+                    "availability": "https://schema.org/InStock",
+                    "itemOffered": {
+                      "@type": "Product",
+                      "name": "Pacote com 20 pães de queijo congelado",
+                      "image": "https://paodequeijodaira.vercel.app/img/imagem-embalagem-20und.png",
+                      "description": "Pacote com 20 unidades de pão de queijo congelado caseiro.",
+                      "aggregateRating": {
+                          "@type": "AggregateRating",
+                          "ratingValue": "4.9",
+                          "reviewCount": "15"
+                      }
+                    }
+                  }
+                ],
+                "areaServed": {
+                  "@type": "Place",
+                  "name": "Cidade Ocidental - GO"
+                },
+                "paymentAccepted": "PIX",
+                
+                "logo": "https://paodequeijodaira.vercel.app/img/logo-paodequeijodaira.jpg", 
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.95",
+                  "bestRating": "5",
+                  "ratingCount": "20"
+                }
+              }
+            ]
+          }
+    </script>      
+    
 </body>
 </html>
