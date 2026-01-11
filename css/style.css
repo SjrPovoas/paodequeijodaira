@@ -67,6 +67,7 @@
         /* Seções Gerais */
         section { padding: 60px 5%; max-width: 1200px; margin: auto; }
         h2 { font-size: 2.5rem; margin-bottom: 40px; }
+        img { max-width: 100%; height: auto; }
         /* Estilos de outras seções (mantidos) */
         .main-footer { background-color: var(--cor-secundaria); color: var(--cor-texto-claro); padding: 40px 20px; }
         .nota-preparo { margin-top: 50px; font-size: 1.1em; font-style: italic; color: #555; }
