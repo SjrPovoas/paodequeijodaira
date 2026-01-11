@@ -166,7 +166,7 @@
         /* Estilo para a informação de retirada */
         .retirada-info { font-size: 0.8em; margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
         /* Ícones de Redes Sociais Melhorados */
-        .social-icons { display: flex; gap: 15px; margin-bottom: 20px;}
+        .social-icons { display: flex; gap: 15px; margin-bottom: 20px; text-align: center;}
         .social-icons a { font-size: 24px; line-height: 1; color: var(--cor-texto-claro); transition: color 0.3s; background-color: rgba(255, 255, 255, 0.1); padding: 8px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; text-decoration: none;}
         .social-icons a:hover { color: var(--cor-secundaria); background-color: var(--cor-primaria);}  
 
