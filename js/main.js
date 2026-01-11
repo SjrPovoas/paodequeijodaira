@@ -74,7 +74,7 @@
                  return;
             }
 
-            let mensagem = `*NOVO PEDIDO DE PÃO DE QUEIJO DA IRÁ!* \n\n`;
+            let mensagem = `*NOVO PEDIDO VIA SITE DO PÃO DE QUEIJO DA IRÁ!* \n\n`;
             mensagem += `*Cliente:* ${nome}\n`;
             mensagem += `*Produto:* ${produto}\n`;
             mensagem += `*Quantidade de Pacotes:* ${quantidade}\n`;
