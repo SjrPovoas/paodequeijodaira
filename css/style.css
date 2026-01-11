@@ -99,7 +99,8 @@
         /* --- HISTÓRIA --- */
         .historia-section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 40px; background-color: var(--cor-texto-claro);}
         .historia-imagem { flex: 1; border-radius: 15px; overflow: hidden; }
-        .historia-imagem img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 20px; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); }
+        .historia-imagem img { border-radius: 20px; box-shadow: var(--shadow); }
+        /*.historia-imagem img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 20px; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); }*/
         /*.historia-container { display: block; align-items: center; max-width: 1200px; margin: 0 auto; gap: 40px; }*/
         .historia-container { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; }
         .historia-texto { flex: 1; min-width: 300px; }
