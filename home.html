@@ -502,7 +502,7 @@
         // ENVIO WHATSAPP
         document.getElementById('formPedido').onsubmit = function(e) {
             e.preventDefault();
-            const msg = `*NOVO PEDIDO DA IRÁ*\n\n*Cliente:* ${document.getElementById('nome').value}\n*Produto:* ${document.getElementById('produto').value}\n*Qtd:* ${document.getElementById('quantidade').value}\n*Endereço:* ${document.getElementById('endereco').value}`;
+            const msg = `*NOVO PEDIDO VIA SITE DO PÃO DE QUEIJO DA IRÁ*\n\n*Cliente:* ${document.getElementById('nome').value}\n*Produto:* ${document.getElementById('produto').value}\n*Qtd:* ${document.getElementById('quantidade').value}\n*Endereço:* ${document.getElementById('endereco').value}`\n*Observações:* ${document.getElementById('observacoes').value};
             window.open(`https://api.whatsapp.com/send?phone=5561982777196&text=${encodeURIComponent(msg)}`, '_blank');
             modal.style.display = 'none';
         };
