@@ -75,12 +75,32 @@
         .menu-toggle { display: none; font-size: 30px; background: none; border: none; cursor: pointer; }
 
         /* --- HERO --- */
-        .hero-banner { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/img/hero-banner.png'); background-size: cover; background-position: center; height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+        /*.hero-banner { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/img/hero-banner.png'); background-size: cover; background-position: center; height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }*/
         .hero-content h1 { font-size: 3em; margin-bottom: 20px; }
         .hero-content p { font-size: 1.4em; margin-bottom: 30px; }
-        .cta-button { background-color: var(--cor-primaria); color: var(--cor-secundaria); padding: 15px 30px; font-size: 1.2em; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: transform 0.2s; }
-        .cta-button:hover { transform: scale(1.05); }
-
+       /* .cta-button { background-color: var(--cor-primaria); color: var(--cor-secundaria); padding: 15px 30px; font-size: 1.2em; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: transform 0.2s; }
+        .cta-button:hover { transform: scale(1.05); } */
+        
+        /* 1. Estilo do Hero Banner */
+        .hero-banner { background-image: url('/img/hero-banner.png');  background-size: cover; background-position: top; height: 85vh; display: flex; align-items: center;  justify-content: center; text-align: center; position: relative;}
+        .hero-banner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--cor-fundo-escuro); }
+        .hero-content { z-index: 10; color: var(--cor-texto-claro); max-width: 90%; }
+        /* 3. Estilo do Botão CTA (do Hero Banner) */
+        .cta-button {
+        display: inline-block;
+        background-color: var(--cor-primaria);
+        color: var(--cor-secundaria);
+        padding: 15px 30px;
+        text-decoration: none;
+        font-size: 1.3em;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        cursor: pointer; 
+        border: none; /* Adicionado para ser um botão padrão */ }
+        .cta-button:hover { background-color: #E6B800; }
+     
         /* --- PRODUTOS --- */
         .produtos-section { padding: 60px 20px; text-align: center; background: #f9f9f9; }
         .produtos-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 40px; }
@@ -210,7 +230,7 @@
             <h2>👩‍🍳 O Sabor Que Nasceu da Paixão: A História da Irá</h2>
             <p>Eu sou a Iraleide, e o **Pão de Queijo da Irá** nasceu de um desejo simples: compartilhar a melhor receita de pão de queijo da minha família. Cresci vendo o cuidado com cada ingrediente e a alegria que esse quitute trazia à nossa mesa.</p>
             <p>Hoje, esse mesmo carinho é transformado em cada pãozinho que você leva para casa, **congelado e fresquinho**. Com a nossa praticidade, você tem um lanche delicioso e caseiro a minutos de distância. Aqui, o sabor não tem pressa, mas a sua encomenda pode ser feita rapidinho! 😊</p>
-            <a href="https://g.page/r/Ca9UJok_gMntEBI/review" target="_blank" alt="Confira as nossas avaliações no Google" class="cta-button">Confira as nossas avaliações no Google</a>
+                            <a href="https://g.page/r/Ca9UJok_gMntEBI/review" target="_blank" style="color:var(--secondary); font-weight:bold;">⭐ Veja nossas avaliações no Google</a>
         </div>
         <div class="historia-imagem">
             <img src="/img/historia-contato.png" alt="Iraleide, a criadora do Pão de Queijo da Irá">
