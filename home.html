@@ -484,15 +484,15 @@
         menuToggle.addEventListener('click', () => mainNav.classList.toggle('active'));
 
         // MODAL
-        const modal = document.getElementById('pedidoModal');
-        const spanClose = document.querySelector('.close-button');
+        //const modal = document.getElementById('pedidoModal');
+        //const spanClose = document.querySelector('.close-button');
 
-        const abrirModal = () => modal.style.display = 'block';
-        window.abrirModalComOpcao = (prod, qtd) => {
-            document.getElementById('produto').value = prod;
-            document.getElementById('quantidade').value = qtd;
-            abrirModal();
-        };
+        //const abrirModal = () => modal.style.display = 'block';
+        //window.abrirModalComOpcao = (prod, qtd) => {
+        //    document.getElementById('produto').value = prod;
+        //    document.getElementById('quantidade').value = qtd;
+        //    abrirModal();
+        //};
 
         document.getElementById('openModalHero').onclick = abrirModal;
         document.getElementById('openModalNav').onclick = (e) => { e.preventDefault(); abrirModal(); };
@@ -507,9 +507,9 @@
             modal.style.display = 'none';
         };
     </script>
-    <!--
+    
     <script src="/js/main.js"></script>
-    -->
+
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
