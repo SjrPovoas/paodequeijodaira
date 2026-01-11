@@ -80,9 +80,30 @@
     .depoimentos-section { padding: 60px 20px; background-color: #ededed; text-align: center; }
     .main-footer { background-color: var(--cor-secundaria); color: var(--cor-texto-claro); padding: 40px 20px; }
     .tabela-precos-container { max-width: 900px; margin: 20px auto; padding: 5px; text-align: center; }
-    
     .hero-content h1 { font-size: 3em; margin-bottom: 0.5em; text-shadow: 2px 2px 4px #000; }
     .hero-content p { font-size: 1.5em; margin-bottom: 2em; font-weight: 200; }
+            .produtos-section h2 { font-size: 2em; margin-bottom: 40px; color: var(--cor-secundaria); }
+    .produtos-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1200px; margin: 0 auto; }
+    .produto-card { background-color: var(--cor-texto-claro); border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 30px; width: 100%; max-width: 350px; transition: transform 0.3s ease; }
+    .produto-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); }
+    .produto-card h3 { color: var(--cor-secundaria); margin-top: 15px; font-size: 1.5em; }
+    .produto-card .produto-img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+    .tag-produto { color: #E6B800; font-weight: bold; margin-bottom: 10px; }
+    .descricao-produto { margin: 15px 0; font-size: 0.95em; line-height: 1.4; }
+    .detalhe-produto { font-size: 0.85em; color: #777; margin-bottom: 20px; }
+    .btn-comprar { display: block; background-color: var(--cor-primaria); color: black; padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 6px; transition: background-color 0.3s ease; margin-top: 15px; border: none; cursor: pointer; width: 100% }
+    .btn-comprar:hover { background-color: #E6B800; }
+    .nota-preparo { margin-top: 50px; font-size: 1.1em; font-style: italic; color: #555; }
+    .historia-container { display: flex; align-items: center; max-width: 1200px; margin: 0 auto; gap: 40px; }
+    .historia-texto, .historia-imagem { flex: 1; }
+    .historia-section h2 { font-size: 2em; color: var(--cor-secundaria); margin-bottom: 25px; text-align: left; }
+    .historia-texto p { font-size: 1.1em; line-height: 1.6; margin-bottom: 20px; text-align: justify; }
+    .historia-texto strong { font-weight: bold; color: var(--cor-primaria); }
+    .historia-imagem img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); }
+    .btn-conhecer { display: inline-block; background-color: #5cb85c; color: var(--cor-texto-claro); padding: 10px 25px; text-decoration: none; font-weight: bold; border-radius: 6px; transition: background-color 0.3s ease; margin-top: 10px; border: none; cursor: pointer; }
+    .btn-conhecer:hover { background-color: #E6B800; }
+
+        
         /* --- HERO --- */
         /*.hero-banner { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/img/hero-banner.png'); background-size: cover; background-position: center; height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }*/
         .hero-content h1 { font-size: 3em; margin-bottom: 20px; }
