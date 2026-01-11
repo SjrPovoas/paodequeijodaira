@@ -157,7 +157,7 @@
         /* --- FOOTER (Rodapé) --- */
         .main-footer {  background-color: var(--cor-secundaria);  color: var(--cor-texto-claro);  padding: 40px 20px; }
         .footer-container {max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; text-align: center;}
-        .footer-info, .footer-contato, .footer-social { flex: 1; min-width: 250px; }
+        .footer-info, .footer-contato, .footer-social { flex: 1; min-width: 250px; text-align: center;}
         .main-footer h3 { color: var(--cor-primaria); margin-bottom: 15px; font-size: 1.3em; }
         .main-footer p, .main-footer a { font-size: 0.9em; color: #DDDDDD; text-decoration: none; line-height: 1.5; margin-bottom: 10px;}
         .main-footer a:hover { color: var(--cor-primaria);}
