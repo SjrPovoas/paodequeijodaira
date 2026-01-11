@@ -90,31 +90,28 @@
         .produto-card h3 { color: var(--cor-secundaria); margin-top: 15px; font-size: 1.5em; }
         .produto-card .produto-img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
         .tag-produto { color: #E6B800; font-weight: bold; margin-bottom: 10px; }
-        .descricao-produto { margin: 15px 0; font-size: 0.95em; line-height: 1.4; }
+        .descricao-produto { margin: 15px 0; font-size: 0.95em;  line-height: 1.4; }
         .detalhe-produto { font-size: 0.85em; color: #777; margin-bottom: 20px; }
         .btn-comprar { display: block; background-color: var(--cor-primaria); color: black; padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 6px; transition: background-color 0.3s ease; margin-top: 15px; border: none; cursor: pointer; width: 100% }
         .btn-comprar:hover { background-color: #E6B800; }
         .produto-img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
 
         /* --- HISTÓRIA --- */
-        .historia-section { padding: 80px 20px; background-color: var(--cor-texto-claro); }
-        .historia-section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 40px; }
+        .historia-section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 40px; background-color: var(--cor-texto-claro);}
         .historia-imagem { flex: 1; border-radius: 15px; overflow: hidden; }
-        .historia-imagem img { width: 100%; display: block; border-radius: 20px; box-shadow: var(--shadow); }
-        .historia-texto { flex: 1; min-width: 300px; }
-        .historia-imagem img { border-radius: 20px; box-shadow: var(--shadow); }
+        .historia-imagem img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 20px; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); }
         .historia-container { display: flex; align-items: center; max-width: 1200px; margin: 0 auto; gap: 40px; }
+        .historia-texto { flex: 1; min-width: 300px; }
         .historia-texto, .historia-imagem { flex: 1; }
         .historia-section h2 { font-size: 2em; color: var(--cor-secundaria); margin-bottom: 25px; text-align: left; }
         .historia-texto p { font-size: 1.1em; line-height: 1.6; margin-bottom: 20px; text-align: justify; }
         .historia-texto strong { font-weight: bold; color: var(--cor-primaria); }
-        .historia-imagem img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); }
     
         /* --- DEPOIMENTOS --- */
         .depoimentos-section { padding: 60px 20px; background-color: #ededed; text-align: center; }
         .depoimentos-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1200px; margin: 0 auto; }
         .depoimento-card { background-color: var(--cor-texto-claro); border-left: 5px solid var(--cor-primaria); border-radius: 8px; padding: 25px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; max-width: 350px; text-align: left; }
-        .depoimento-texto { font-style: italic; margin-bottom: 15px; color: #555; line-height: 1.5; }
+        . depoimento-texto { font-style: italic; margin-bottom: 15px; color: #555; line-height: 1.5; }
         .depoimento-autor { font-weight: bold; color: var(--cor-secundaria); font-size: 0.9em; }
         
         /* --- TABELA DE PREÇOS --- */
