@@ -10,18 +10,9 @@
             --cor-modal-borda: #888;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
-        body {
-            line-height: 1.6;
-            color: #333;
-            padding-top: 80px;
-        }
+        body { line-height: 1.6; color: #333; padding-top: 80px; }
 
         /* --- HEADER --- */
         .main-header {
@@ -40,28 +31,24 @@
             max-width: 1200px;
             margin: 0 auto; }
         .logo img { max-height: 60px; width: auto; }
-        
         .main-nav ul {
             list-style: none;
             display: flex;
             align-items: center;
             gap: 20px;
         }
-
         .main-nav ul li a {
             text-decoration: none;
             color: var(--cor-header-texto);
             font-weight: bold;
             transition: color 0.3s;
         }
-
         .nav-cta-button {
             background-color: var(--cor-primaria);
             color: var(--cor-secundaria) !important;
             padding: 10px 20px;
             border-radius: 5px;
         }
-
         .menu-toggle { display: none; font-size: 30px; background: none; border: none; cursor: pointer; }
       
         /* Seções Gerais */
@@ -73,7 +60,6 @@
         .nota-preparo { margin-top: 50px; font-size: 1.1em; font-style: italic; color: #555; }
         .btn-conhecer { display: inline-block; background-color: #5cb85c; color: var(--cor-texto-claro); padding: 10px 25px; text-decoration: none; font-weight: bold; border-radius: 6px; transition: background-color 0.3s ease; margin-top: 10px; border: none; cursor: pointer; }
         .btn-conhecer:hover { background-color: #E6B800; }
-
 
         /* --- HERO --- */
         /*  Estilo do Hero Banner */
@@ -106,13 +92,6 @@
         .historia-texto { flex: 1; min-width: 300px; }
         .historia-imagem { flex: 1; min-width: 300px; text-align: center; }
         .historia-imagem img { border-radius: 20px; box-shadow: var(--shadow); }
-
-        /*.historia-section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 40px; background-color: var(--cor-texto-claro);}
-        .historia-imagem { flex: 1; border-radius: 15px; overflow: hidden; }
-        .historia-imagem img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 20px; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); }
-        .historia-container { display: block; align-items: center; max-width: 1200px; margin: 0 auto; gap: 40px; }
-        .historia-texto { flex: 1; min-width: 300px; }
-        .historia-texto, .historia-imagem { flex: 1; }*/
         .historia-section h2 { font-size: 2em; color: var(--cor-secundaria); margin-bottom: 25px; text-align: left; }
         .historia-texto p { font-size: 1.1em; line-height: 1.6; margin-bottom: 20px; text-align: justify; }
         .historia-texto strong { font-weight: bold; color: var(--cor-primaria); }
