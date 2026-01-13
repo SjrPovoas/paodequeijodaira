@@ -1,34 +1,10 @@
 {
+  "framework": "nextjs",
   "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.paodequeijodaira.vercel.app"
-        }
-      ],
-      "destination": "https://paodequeijodaira.vercel.app/:path*",
-      "permanent": true
-    },
     {
       "source": "/index.html",
       "destination": "/",
       "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap.xml"
-    },
-    {
-      "source": "/robots.txt",
-      "destination": "/robots.txt"
-    },
-    {
-        "source": "/:path*",
-        "destination": "/" 
     }
   ]
 }
