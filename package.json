@@ -13,9 +13,10 @@
     "react": "latest",
     "react-dom": "latest"
   },
-  "devDependencies": {
+"devDependencies": {
     "autoprefixer": "latest",
     "postcss": "latest",
-    "tailwindcss": "latest"
+    "tailwindcss": "latest",
+    "@tailwindcss/postcss": "latest"
   }
 }
