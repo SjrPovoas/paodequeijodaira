@@ -1,0 +1,22 @@
+[00:00:08.990] Server  LOG     ✓ Ready in 6.6s
+[00:00:32.185] Server  LOG     ○ Compiling / ...
+[00:00:58.796] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:00:58.797] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:03:28.849] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:03:28.849] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:03:37.545] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:03:37.545] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:03:37.974] Browser LOG     [injected|debug]: Injecting
+[00:03:37.974] Browser LOG     [injected|debug]: Added proxy
+[00:03:37.974] Browser LOG     [injected|debug]: Pocket Universe is running!
+[00:03:37.974] Browser ERROR   uncaughtError: TypeError: Cannot redefine property: ethereum
+[00:03:50.486] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:03:50.486] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component

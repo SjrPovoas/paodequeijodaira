@@ -60,7 +60,7 @@ export default function Home() {
 
       {/* SEÇÃO PRODUTOS (Adaptada do seu HTML) */}
       <section id="produtos" className="py-24 px-6 max-w-7xl mx-auto">
-        <h2 className="text-center text-4xl font-black uppercase tracking-tighter mb-16 italic">🧀 Nossos Pacotes</h2>
+        <h2 className="text-center text-4xl font-black uppercase tracking-tighter mb-16 italic">🧀 Nossos Pacotes: Sabor Congelado, Feito na Hora!</h2>
         <div className="grid md:grid-cols-2 gap-12">
           {/* Pacote 20un */}
           <div className="border-4 border-black p-8 flex flex-col items-center text-center group hover:bg-black hover:text-white transition-all">
