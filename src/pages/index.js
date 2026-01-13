@@ -52,7 +52,7 @@ export default function Home() {
             </button>
           </div>
           <div className="relative">
-            <img src="/img/imagem-embalagem-1kg.png" alt="Pão de Queijo" className="relative z-10 w-full rounded-2xl shadow-2xl" />
+            <img src="/imagens/hero-banner.png" alt="Pão de Queijo" className="relative z-10 w-full rounded-2xl shadow-2xl" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-100 rounded-full blur-3xl -z-10 opacity-50"></div>
           </div>
         </div>
@@ -64,7 +64,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-12">
           {/* Pacote 20un */}
           <div className="border-4 border-black p-8 flex flex-col items-center text-center group hover:bg-black hover:text-white transition-all">
-            <img src="/img/imagem-embalagem-20und.png" className="h-64 object-contain mb-6 grayscale group-hover:grayscale-0 transition-all" />
+            <img src="/imagens/imagem-embalagem-20und.png" className="h-64 object-contain mb-6 grayscale group-hover:grayscale-0 transition-all" />
             <h3 className="text-2xl font-black uppercase">20 Unidades</h3>
             <p className="text-xs font-bold uppercase tracking-widest my-4 opacity-60">Ideal para a semana</p>
             <span className="text-3xl font-black mb-6">R$ 10,00</span>
@@ -72,7 +72,7 @@ export default function Home() {
           </div>
           {/* Pacote 1kg */}
           <div className="border-4 border-orange-600 p-8 flex flex-col items-center text-center bg-orange-50 group hover:bg-orange-600 hover:text-white transition-all">
-            <img src="/img/imagem-embalagem-1kg.png" className="h-64 object-contain mb-6 transition-all" />
+            <img src="/imagens/imagem-embalagem-1kg.png" className="h-64 object-contain mb-6 transition-all" />
             <h3 className="text-2xl font-black uppercase">Pacote de 1 KG</h3>
             <p className="text-xs font-bold uppercase tracking-widest my-4 opacity-60">Melhor Custo-Benefício!</p>
             <span className="text-3xl font-black mb-6">R$ 25,00</span>
@@ -84,7 +84,7 @@ export default function Home() {
       {/* GUIA GRATUITO (Brevo Form) */}
       <section className="bg-[#2D3134] text-white py-24 px-6">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          <img src="/img/caneca-isca.png" alt="Guia" className="rounded-3xl rotate-3" />
+          <img src="/imagens/caneca-isca.png" alt="Guia" className="rounded-3xl rotate-3" />
           <div>
             <h2 className="text-4xl font-black uppercase tracking-tighter leading-none mb-6">Transforme seu café em um momento inesquecível.</h2>
             <p className="text-gray-400 mb-8">Baixe nosso guia gratuito e descubra os segredos da harmonização perfeita.</p>
@@ -123,4 +123,4 @@ export default function Home() {
       </footer>
     </div>
   );
-        }
+}
