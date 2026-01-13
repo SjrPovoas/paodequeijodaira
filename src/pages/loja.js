@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 
 export default function Loja() {
-  const WHATSAPP_NUMBER = "5511999999999"; // SUBSTITUA PELO SEU NÚMERO
+  const WHATSAPP_NUMBER = "5561982777196"; // SUBSTITUA PELO SEU NÚMERO
 
   const handleOrder = (productName) => {
     const message = encodeURIComponent(`Olá Ira! Tenho interesse no: ${productName}. Como posso adquirir?`);
@@ -44,7 +44,7 @@ export default function Loja() {
           {/* Card 1kg */}
           <div className="product-card group cursor-pointer" onClick={() => handleOrder('Pão de Queijo 1kg')}>
             <div className="aspect-square bg-gray-100 overflow-hidden relative">
-              <img src="https://images.unsplash.com/photo-1598148331584-37f2670e2810?q=80&w=1000" className="w-full h-full object-cover grayscale hover:grayscale-0" alt="Pão de Queijo 1kg" />
+              <img src="/public/imagens/imagem-embalagem-1kg.png" className="w-full h-full object-cover grayscale hover:grayscale-0" alt="Pão de Queijo 1kg" />
               <div className="absolute bottom-4 left-4 bg-black text-white px-3 py-1 text-[10px] font-bold">R$ 38,00</div>
             </div>
             <div className="mt-6">
@@ -56,7 +56,7 @@ export default function Loja() {
           {/* Card 20 unidades */}
           <div className="product-card group cursor-pointer" onClick={() => handleOrder('Pacote 20 unidades')}>
             <div className="aspect-square bg-gray-100 overflow-hidden relative">
-              <img src="https://images.unsplash.com/photo-1628191010210-a59de33e5941?q=80&w=1000" className="w-full h-full object-cover grayscale hover:grayscale-0" alt="Pão de Queijo 20un" />
+              <img src="/public/imagens/imagem-embalagem-20und.png" className="w-full h-full object-cover grayscale hover:grayscale-0" alt="Pão de Queijo 20un" />
               <div className="absolute bottom-4 left-4 bg-black text-white px-3 py-1 text-[10px] font-bold">R$ 29,00</div>
             </div>
             <div className="mt-6">
