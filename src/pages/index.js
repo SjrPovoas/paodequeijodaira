@@ -124,7 +124,7 @@ export default function Home() {
             
             {/* COLUNA 1: LOGO E SOCIAL */}
             <div className="flex flex-col items-center md:items-start">
-              <img src="/img/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" />
+              <img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" />
               <div className="flex space-x-5">
                 <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></a>
                 <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></a>
