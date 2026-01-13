@@ -25,6 +25,7 @@ export default function Home() {
         <script dangerouslySetInnerHTML={{
           __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N25BXQZC');`
         }} />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
       {/* HEADER ADAPTADO COM LOGO */}
@@ -116,11 +117,57 @@ export default function Home() {
         </div>
       )}
 
-      {/* FOOTER */}
-      <footer className="py-20 px-6 border-t border-gray-100 text-center">
-        <img src="/logo-paodequeijodaira.jpg" className="h-20 mx-auto mb-8 grayscale opacity-30" />
-        <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400">© 2026 Pão de Queijo da Irá</p>
+      {/* FOOTER COMPLETO */}
+      <footer className="py-20 px-6 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start mb-16">
+            
+            {/* COLUNA 1: LOGO E SOCIAL */}
+            <div className="flex flex-col items-center md:items-start">
+              <img src="/img/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" />
+              <div className="flex space-x-5">
+                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></a>
+                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></a>
+                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-geo-alt-fill"></i></a>
+              </div>
+            </div>
+
+            {/* COLUNA 2: INFO DE RETIRADA */}
+            <div className="text-center md:text-left space-y-4">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                <strong>Horário:</strong> Seg a Sáb das 08:00 às 18:00.<br />
+                Dom das 08:00 às 12:00.
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Endereço:</strong> Quadra 4 Lote 26 Condomínio Flores do Cerrado II - Recreio Mossoró - Cidade Ocidental-GO
+              </p>
+            </div>
+
+            {/* COLUNA 3: LEGAL & CRÉDITOS */}
+            <div className="text-center md:text-right flex flex-col justify-between h-full">
+              <div>
+                <h3 className="text-lg font-black uppercase tracking-tighter mb-2">Pão de Queijo da Irá</h3>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
+              </div>
+              <div className="mt-8 space-x-4 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <a href="#" className="hover:text-black">Termos</a>
+                <span>|</span>
+                <a href="#" className="hover:text-black">Privacidade</a>
+              </div>
+            </div>
+          </div>
+
+          {/* ASSINATURA */}
+          <div className="pt-8 border-t border-gray-50 text-center">
+            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">
+              Desenvolvido por SjrPovoaS
+            </a>
+          </div>
+        </div>
       </footer>
+
     </div>
   );
 }
