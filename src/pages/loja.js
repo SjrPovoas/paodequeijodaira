@@ -33,7 +33,7 @@ export default function Loja() {
         <div className="flex items-center">
           <img 
             src="/logo-paodequeijodaira.jpg" 
-            alt="Pão de Queijo da Ira" 
+            alt="Pão de Queijo da Irá" 
             className="h-16 md:h-20 w-auto object-contain"
           />
         </div>
@@ -185,7 +185,7 @@ export default function Loja() {
       </section>
 
       <footer className="py-12 px-6 text-center border-t border-gray-100 bg-white">
-        <p className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-400 italic">© 2026 Pão de Queijo da Ira Studio — Design & Tradição</p>
+        <p className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-400 italic">© 2026 Pão de Queijo da Irá</p>
       </footer>
     </div>
   );
