@@ -27,11 +27,12 @@ export default function Loja() {
       {/* 1. NAVEGAÇÃO COM LOGO NO CANTO SUPERIOR ESQUERDO */}
       <nav className="border-b-2 border-black py-8 px-6 md:px-12 flex justify-between items-center sticky top-0 bg-white/95 backdrop-blur-sm z-50">
         <div className="flex flex-col">
+         <img src="/logo-paodequeijodaira.jpg">
           <span className="text-2xl font-[900] tracking-[ -0.05em] uppercase leading-[0.8]">Pão de Queijo</span>
           <span className="text-2xl font-[900] tracking-[ -0.05em] uppercase leading-[0.8] text-gray-400">da Ira</span>
         </div>
         <div className="text-[10px] font-bold uppercase tracking-[0.2em] space-x-6">
-          <a href="/" className="border-b-2 border-black pb-1">Home</a>
+          <a href="https://paodequeijodaira.vercel.app/" className="border-b-2 border-black pb-1">Home</a>
           <a href="#web3" className="text-yellow-600">Web3</a>
         </div>
       </nav>
@@ -75,7 +76,7 @@ export default function Loja() {
           {/* Camiseta 1 */}
           <div className="product-card group cursor-pointer" onClick={() => handleOrder('Camiseta Estampa Logo')}>
             <div className="aspect-[4/5] bg-white overflow-hidden border border-gray-200">
-              <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800" className="w-full h-full object-cover mix-blend-multiply" alt="Camiseta" />
+              <img src="/imagens/camiseta1.png" className="w-full h-full object-cover mix-blend-multiply" alt="Camiseta" />
             </div>
             <div className="mt-6">
               <h3 className="text-sm font-black uppercase tracking-widest">T-Shirt Ira Logo (Off-White)</h3>
@@ -86,7 +87,7 @@ export default function Loja() {
           {/* Camiseta 2 */}
           <div className="product-card group cursor-pointer" onClick={() => handleOrder('Camiseta Estampa Frase')}>
             <div className="aspect-[4/5] bg-white overflow-hidden border border-gray-200">
-              <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=800" className="w-full h-full object-cover mix-blend-multiply" alt="Camiseta" />
+              <img src="/imagens/camiseta2.png" className="w-full h-full object-cover mix-blend-multiply" alt="Camiseta" />
             </div>
             <div className="mt-6">
               <h3 className="text-sm font-black uppercase tracking-widest">T-Shirt "Cheese Bread Lover"</h3>
@@ -97,7 +98,7 @@ export default function Loja() {
           {/* Avental */}
           <div className="product-card group cursor-pointer" onClick={() => handleOrder('Avental Ira')}>
             <div className="aspect-[4/5] bg-white overflow-hidden border border-gray-200">
-              <img src="https://images.unsplash.com/photo-1533544431890-b0cf7f45039a?q=80&w=800" className="w-full h-full object-cover mix-blend-multiply" alt="Avental" />
+              <img src="/imagens/avental.png" className="w-full h-full object-cover mix-blend-multiply" alt="Avental" />
             </div>
             <div className="mt-6">
               <h3 className="text-sm font-black uppercase tracking-widest">Avental de Lona Ira Studio</h3>
@@ -108,7 +109,7 @@ export default function Loja() {
           {/* Caneca */}
           <div className="product-card group cursor-pointer" onClick={() => handleOrder('Caneca Ira')}>
             <div className="aspect-[4/5] bg-white overflow-hidden border border-gray-200">
-              <img src="/imagens/caneca-isca.png" className="w-full h-full object-cover mix-blend-multiply" alt="Caneca" />
+              <img src="/imagens/caneca.png" className="w-full h-full object-cover mix-blend-multiply" alt="Caneca" />
             </div>
             <div className="mt-6">
               <h3 className="text-sm font-black uppercase tracking-widest">Caneca Cerâmica Fosca</h3>
@@ -163,7 +164,7 @@ export default function Loja() {
       </section>
 
       <footer className="py-12 px-6 text-center border-t border-gray-100">
-        <p className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-400">© 2026 Pão de Queijo da Ira Studio</p>
+        <p className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-400">© 2026 Pão de Queijo da Irá</p>
       </footer>
     </div>
   );
