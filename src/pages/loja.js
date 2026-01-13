@@ -44,7 +44,7 @@ export default function Loja() {
           {/* Card 1kg */}
           <div className="product-card group cursor-pointer" onClick={() => handleOrder('Pão de Queijo 1kg')}>
             <div className="aspect-square bg-gray-100 overflow-hidden relative">
-              <img src="/public/imagens/imagem-embalagem-1kg.png" className="w-full h-full object-cover grayscale hover:grayscale-0" alt="Pão de Queijo 1kg" />
+              <img src="/imagens/imagem-embalagem-1kg.png" className="w-full h-full object-cover grayscale hover:grayscale-0" alt="Pão de Queijo 1kg" />
               <div className="absolute bottom-4 left-4 bg-black text-white px-3 py-1 text-[10px] font-bold">R$ 38,00</div>
             </div>
             <div className="mt-6">
@@ -56,7 +56,7 @@ export default function Loja() {
           {/* Card 20 unidades */}
           <div className="product-card group cursor-pointer" onClick={() => handleOrder('Pacote 20 unidades')}>
             <div className="aspect-square bg-gray-100 overflow-hidden relative">
-              <img src="/public/imagens/imagem-embalagem-20und.png" className="w-full h-full object-cover grayscale hover:grayscale-0" alt="Pão de Queijo 20un" />
+              <img src="/imagens/imagem-embalagem-20und.png" className="w-full h-full object-cover grayscale hover:grayscale-0" alt="Pão de Queijo 20un" />
               <div className="absolute bottom-4 left-4 bg-black text-white px-3 py-1 text-[10px] font-bold">R$ 29,00</div>
             </div>
             <div className="mt-6">
@@ -108,7 +108,7 @@ export default function Loja() {
           {/* Caneca */}
           <div className="product-card group cursor-pointer" onClick={() => handleOrder('Caneca Ira')}>
             <div className="aspect-[4/5] bg-white overflow-hidden border border-gray-200">
-              <img src="https://images.unsplash.com/photo-1514228742587-6b1558fbed20?q=80&w=800" className="w-full h-full object-cover mix-blend-multiply" alt="Caneca" />
+              <img src="/imagens/caneca-isca.png" className="w-full h-full object-cover mix-blend-multiply" alt="Caneca" />
             </div>
             <div className="mt-6">
               <h3 className="text-sm font-black uppercase tracking-widest">Caneca Cerâmica Fosca</h3>
