@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 
 export default function Loja() {
-  const WHATSAPP_NUMBER = "5561982777196"; // SUBSTITUA PELO SEU NÚMERO
+  const WHATSAPP_NUMBER = "5511999999999"; // SUBSTITUA PELO SEU NÚMERO
 
   const handleOrder = (productName) => {
     const message = encodeURIComponent(`Olá Ira! Tenho interesse no: ${productName}. Como posso adquirir?`);
@@ -143,4 +143,28 @@ export default function Loja() {
             <div className="space-y-8">
               <div>
                 <h4 className="font-black uppercase text-sm tracking-widest mb-2">Ira's Secret Club</h4>
-                <p className="text
+                <p className="text-gray-400 text-xs leading-relaxed">Acesso a um grupo fechado (Telegram/Discord) para receber dicas de preparo e receitas exclusivas de Minas.</p>
+              </div>
+              <div>
+                <h4 className="font-black uppercase text-sm tracking-widest mb-2">Physical Gift</h4>
+                <p className="text-gray-400 text-xs leading-relaxed">O primeiro holder de cada NFT recebe um kit físico exclusivo (Caneca + Avental) em casa.</p>
+              </div>
+            </div>
+          </div>
+
+          <button onClick={() => handleOrder('Interesse Genesis Pass Web3')} className="mt-16 border-2 border-yellow-500 text-yellow-500 px-10 py-5 text-[10px] font-black uppercase tracking-[0.4em] hover:bg-yellow-500 hover:text-black transition-all">
+            Entrar na Lista de Espera
+          </button>
+        </div>
+        {/* Elemento Decorativo Web3 */}
+        <div className="absolute top-1/2 right-[-10%] translate-y-[-50%] text-[20vw] font-black opacity-[0.03] select-none">
+          WEB3
+        </div>
+      </section>
+
+      <footer className="py-12 px-6 text-center border-t border-gray-100">
+        <p className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-400">© 2026 Pão de Queijo da Ira Studio</p>
+      </footer>
+    </div>
+  );
+}
