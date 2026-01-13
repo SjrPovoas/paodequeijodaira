@@ -27,7 +27,7 @@ export default function Loja() {
       {/* 1. NAVEGAÇÃO COM LOGO NO CANTO SUPERIOR ESQUERDO */}
       <nav className="border-b-2 border-black py-8 px-6 md:px-12 flex justify-between items-center sticky top-0 bg-white/95 backdrop-blur-sm z-50">
         <div className="flex flex-col">
-         <img src="/logo-paodequeijodaira.jpg">
+      
           <span className="text-2xl font-[900] tracking-[ -0.05em] uppercase leading-[0.8]">Pão de Queijo</span>
           <span className="text-2xl font-[900] tracking-[ -0.05em] uppercase leading-[0.8] text-gray-400">da Ira</span>
         </div>
