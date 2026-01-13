@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 
 export default function Loja() {
-  const WHATSAPP_NUMBER = "5511999999999"; // SUBSTITUA PELO SEU NÚMERO
+  const WHATSAPP_NUMBER = "5561982777196"; // SUBSTITUA PELO SEU NÚMERO
 
   const handleOrder = (productName) => {
     const message = encodeURIComponent(`Olá Ira! Tenho interesse no: ${productName}. Como posso adquirir?`);
