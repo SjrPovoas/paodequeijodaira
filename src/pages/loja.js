@@ -86,7 +86,7 @@ export default function Loja() {
             </div>
             <div className="mt-6 flex justify-between items-end">
               <div>
-                <h3 className="text-sm font-black uppercase tracking-widest">T-Shirt Ira Logo (Off-White)</h3>
+                <h3 className="text-sm font-black uppercase tracking-widest">T-Shirt Logo Pão de Queijo da Irá (M-White)</h3>
                 <p className="text-[10px] font-bold text-orange-600 uppercase mt-1">R$ 110,00</p>
               </div>
               <button className="border-b border-black text-[10px] font-bold uppercase tracking-widest pb-1 hover:text-orange-600 hover:border-orange-600 transition-all">Ver Detalhes</button>
@@ -99,7 +99,7 @@ export default function Loja() {
             </div>
             <div className="mt-6 flex justify-between items-end">
               <div>
-                <h3 className="text-sm font-black uppercase tracking-widest">T-Shirt "Cheese Bread Lover"</h3>
+                <h3 className="text-sm font-black uppercase tracking-widest">T-Shirt Logo Pão de Queijo da Irá (F-White)</h3>
                 <p className="text-[10px] font-bold text-orange-600 uppercase mt-1">R$ 110,00</p>
               </div>
               <button className="border-b border-black text-[10px] font-bold uppercase tracking-widest pb-1 hover:text-orange-600 hover:border-orange-600 transition-all">Ver Detalhes</button>
@@ -112,7 +112,7 @@ export default function Loja() {
             </div>
             <div className="mt-6 flex justify-between items-end">
               <div>
-                <h3 className="text-sm font-black uppercase tracking-widest">Avental de Lona Ira Studio</h3>
+                <h3 className="text-sm font-black uppercase tracking-widest">Avental de Lona Pão de Queijo da Irá</h3>
                 <p className="text-[10px] font-bold text-orange-600 uppercase mt-1">R$ 85,00</p>
               </div>
               <button className="border-b border-black text-[10px] font-bold uppercase tracking-widest pb-1 hover:text-orange-600 hover:border-orange-600 transition-all">Ver Detalhes</button>
@@ -125,7 +125,7 @@ export default function Loja() {
             </div>
             <div className="mt-6 flex justify-between items-end">
               <div>
-                <h3 className="text-sm font-black uppercase tracking-widest">Caneca Cerâmica Fosca</h3>
+                <h3 className="text-sm font-black uppercase tracking-widest">Caneca Cerâmica Fosca do Pão de Queijo da Irá</h3>
                 <p className="text-[10px] font-bold text-orange-600 uppercase mt-1">R$ 42,00</p>
               </div>
               <button className="border-b border-black text-[10px] font-bold uppercase tracking-widest pb-1 hover:text-orange-600 hover:border-orange-600 transition-all">Ver Detalhes</button>

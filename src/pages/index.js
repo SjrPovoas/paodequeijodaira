@@ -33,10 +33,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-16 w-auto" />
           <nav className="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest">
-            <a href="#produtos" className="hover:text-orange-600">Produtos</a>
+            <a href="#produtos" className="hover:text-orange-600 px-4 py-2 rounded-full">Produtos</a>
             <a href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">VISITAR LOJA LIFESTYLE</a>
           </nav>
-          <button onClick={() => setIsModalOpen(true)} className="bg-black text-white px-6 py-3 text-[10px] font-bold uppercase tracking-tighter">Pedir Agora</button>
+          <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-10 py-5 font-black uppercase tracking-widest text-xs hover:scale-105 transition-transform">Pedir Agora</button>
         </div>
       </header>
 
@@ -88,7 +88,7 @@ export default function Home() {
           <img src="/imagens/caneca-isca.png" alt="Guia" className="rounded-3xl rotate-3" />
           <div>
             <h2 className="text-4xl font-black uppercase tracking-tighter leading-none mb-6">Transforme seu café em um momento inesquecível.</h2>
-            <p className="text-gray-400 mb-8">Baixe nosso guia gratuito e descubra os segredos da harmonização perfeita.</p>
+            <p className="text-gray-400 mb-8">Baixe nosso guia gratuito e descubra os segredos da harmonização perfeita entre o pão de queijo quentinho, cafés especiais e acompanhamentos que abraçam a alma.</p>
             <form className="space-y-4" action="https://43782b7b.sibforms.com/serve/..." method="POST">
               <input type="text" placeholder="Seu nome" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
               <input type="email" placeholder="Seu melhor e-mail" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
@@ -125,7 +125,7 @@ export default function Home() {
             {/* COLUNA 1: LOGO E SOCIAL */}
             <div className="flex flex-col items-center md:items-start">
               <img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" />
-              <div className="flex space-x-5">
+              <div className="flex space-x-2">
                 <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></a>
                 <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></a>
                 <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></a>
@@ -151,8 +151,8 @@ export default function Home() {
                 <h3 className="text-lg font-black uppercase tracking-tighter mb-2">Pão de Queijo da Irá</h3>
                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
               </div>
-              <div className="mt-8 space-x-4 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                <a href="#" className="hover:text-black">Termos</a>
+              <div className="mt-8 space-x-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <a href="#" className="hover:text-black">Termos de Uso</a>
                 <span>|</span>
                 <a href="#" className="hover:text-black">Privacidade</a>
               </div>
