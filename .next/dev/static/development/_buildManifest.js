@@ -5,8 +5,8 @@ self.__BUILD_MANIFEST = {
   "/_error": [
     "static/chunks/pages/_error.js"
   ],
-  "/curso": [
-    "static/chunks/pages/curso.js"
+  "/loja": [
+    "static/chunks/pages/loja.js"
   ],
   "__rewrites": {
     "afterFiles": [],
