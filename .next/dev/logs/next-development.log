@@ -1,50 +1,1334 @@
-[00:00:04.023] Server  WARN    ⚠ Turbopack's filesystem cache has been deleted because we previously detected an internal error in Turbopack. Builds or page loads may be slower as a result.
-[00:00:05.228] Server  LOG     ✓ Ready in 3.6s
-[00:00:10.488] Server  LOG     ○ Compiling / ...
-[00:00:17.262] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
-See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:00:17.264] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
-See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:00:17.265] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:00:06.806] Server  WARN    ⚠ Turbopack's filesystem cache has been deleted because we previously detected an internal error in Turbopack. Builds or page loads may be slower as a result.
+[00:00:08.381] Server  LOG     ✓ Ready in 6.3s
+[00:00:11.701] Server  LOG     ○ Compiling / ...
+[00:00:18.124] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:00:22.815] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
-See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:00:22.815] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
-See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:00:22.815] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:00:18.125] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:01:15.055] Server  LOG     ✓ Compiled in 353ms
-[00:01:21.476] Server  LOG     ✓ Compiled in 721ms
-[00:01:22.824] Server  LOG     ✓ Compiled in 490ms
-[00:01:27.683] Server  LOG     ✓ Compiled in 749ms
-[00:02:29.967] Server  LOG     ✓ Compiled in 180ms
-[00:02:32.528] Server  LOG     ✓ Compiled in 981ms
-[00:02:34.428] Server  LOG     ✓ Compiled in 580ms
-[00:04:07.790] Server  LOG     ✓ Compiled in 192ms
-[00:04:21.528] Server  LOG     ✓ Compiled in 137ms
-[00:04:31.193] Server  LOG     ✓ Compiled in 235ms
-[00:04:50.256] Server  LOG     ✓ Compiled in 390ms
-[00:12:10.719] Server  LOG     ✓ Compiled in 5s
-[00:12:13.854] Server  LOG     ✓ Compiled in 282ms
-[00:12:44.188] Server  LOG     ✓ Compiled in 452ms
-[00:13:01.550] Server  LOG     ✓ Compiled in 245ms
-[00:13:04.145] Server  LOG     ✓ Compiled in 349ms
-[00:14:02.144] Server  LOG     ✓ Compiled in 176ms
-[00:14:37.120] Server  LOG     ✓ Compiled in 981ms
-[00:15:22.458] Server  LOG     ✓ Compiled in 273ms
-[00:15:38.801] Server  LOG     ✓ Compiled in 195ms
-[00:15:42.144] Server  LOG     ✓ Compiled in 1008ms
-[00:15:47.908] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+[00:00:18.127] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
 See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:15:47.911] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+[00:00:18.128] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
 See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:15:47.918] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:00:25.011] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:15:53.577] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
-See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:15:53.577] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
-See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:15:53.577] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:00:25.011] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:20:55.355] Server  LOG     ✓ Compiled in 1073ms
-[00:20:57.771] Browser ERROR   Use the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>.
+[00:00:25.011] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:00:25.011] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:00:37.974] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:00:37.974] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:03:57.143] Server  LOG     ✓ Compiled in 1482ms
+[00:04:44.785] Server  LOG     ✓ Compiled in 423ms
+[00:06:33.075] Server  LOG     ✓ Compiled in 290ms
+[00:06:38.377] Server  LOG     ✓ Compiled in 2.3s
+[00:06:52.622] Browser LOG     Refreshing page data due to server-side change
+[00:06:52.622] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { }
+      |               ^
+  160 |             ].map((faq, i) => (
+  161 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  162 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '{'
+[00:06:52.622] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q}
+      |               ^
+  160 |             ].map((faq, i) => (
+  161 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  162 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '{'
+[00:06:52.622] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: }
+      |               ^
+  160 |             ].map((faq, i) => (
+  161 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  162 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '{'
+[00:06:52.622] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?"}
+      |               ^
+  160 |             ].map((faq, i) => (
+  161 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  162 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '{'
+[00:06:53.829] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: }
+      |               ^
+  160 |             ].map((faq, i) => (
+  161 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  162 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '{'
+[00:06:56.334] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: ""}
+      |               ^
+  160 |             ].map((faq, i) => (
+  161 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  162 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '{'
+[00:07:40.157] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br>
+      |               ^
+  160 |                                          02 - Acesse o menu lateral, clique em 'Minha conta'<br>
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:07:53.855] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />
+      |               ^
+  160 |                                          02 - Acesse o menu lateral, clique em 'Minha conta'<br>
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:07:56.407] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />>
+      |               ^
+  160 |                                          02 - Acesse o menu lateral, clique em 'Minha conta'<br>
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:07:56.407] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />
+      |               ^
+  160 |                                          02 - Acesse o menu lateral, clique em 'Minha conta'<br>
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:07:56.407] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />>
+      |               ^
+  160 |                                          02 - Acesse o menu lateral, clique em 'Minha conta'<br>
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:07:57.136] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />">
+      |               ^
+  160 |                                          02 - Acesse o menu lateral, clique em 'Minha conta'<br>
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:08:03.501] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />"
+      |               ^
+  160 |                                          02 - Acesse o menu lateral, clique em 'Minha conta'<br>
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:08:04.302] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />"
+      |               ^
+  160 |                                          "02 - Acesse o menu lateral, clique em 'Minha conta'<br>
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:08:08.213] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />"
+      |               ^
+  160 |                                          "02 - Acesse o menu lateral, clique em 'Minha conta'<br>"
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:08:15.277] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />"
+      |               ^
+  160 |                                          "02 - Acesse o menu lateral, clique em 'Minha conta'<br />"
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:08:16.303] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />"
+      |               ^
+  160 |                                          "02 - Acesse o menu lateral, clique em 'Minha conta'<br />"
+  161 |                                          "03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:08:39.021] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />
+      |               ^
+  160 |                                          "02 - Acesse o menu lateral, clique em 'Minha conta'<br />"
+  161 |                                          "03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:08:39.945] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />
+      |               ^
+  160 |                                          "02 - Acesse o menu lateral, clique em 'Minha conta'<br />
+  161 |                                          "03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:08:47.196] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />
+      |               ^
+  160 |                                         02 - Acesse o menu lateral, clique em 'Minha conta'<br />
+  161 |                                          "03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:08:47.196] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'<br />
+      |               ^
+  160 |                                         02 - Acesse o menu lateral, clique em 'Minha conta'<br />
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:08:57.302] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'
+      |               ^
+  160 |                                         02 - Acesse o menu lateral, clique em 'Minha conta'<br />
+  161 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  162 |             ].map((faq, i) => (
+
+Expected '</', got '{'
+[00:09:06.511] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar' 02 - Acesse o menu lateral, clique em 'Minha conta'<br />
+      |               ^
+  160 |                                          03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+  161 |             ].map((faq, i) => (
+  162 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+
+Expected '</', got '{'
+[00:09:13.947] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar' 02 - Acesse o menu lateral, clique em 'Minha conta' 03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+      |               ^
+  160 |             ].map((faq, i) => (
+  161 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  162 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '{'
+[00:09:34.948] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'. 02 - Acesse o menu lateral, clique em 'Minha conta' 03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+      |               ^
+  160 |             ].map((faq, i) => (
+  161 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  162 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '{'
+[00:09:41.423] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'. 02 - Acesse o menu lateral, clique em 'Minha conta'. 03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!"}
+      |               ^
+  160 |             ].map((faq, i) => (
+  161 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  162 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '{'
+[00:10:18.944] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'. 02 - Acesse o menu lateral, clique em 'Minha conta'. 03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!" }
+      |               ^
+  160 |             ].map((faq, i) => (
+  161 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  162 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '{'
+[00:10:28.975] Browser ERROR   ./src/pages/curso.js:159:15
+Parsing ecmascript source code failed
+  157 |               { q: "POR QUANTO TEMPO TEREI ACESSO?", a: "O acesso é vitalício! Você poderá assistir às aulas quantas vezes quiser." },
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." }
+> 159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'. 02 - Acesse o menu lateral, clique em 'Minha conta'. 03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!" },
+      |               ^
+  160 |             ].map((faq, i) => (
+  161 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  162 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '{'
+[00:10:35.128] Server  LOG     ✓ Compiled in 279ms
+[00:10:37.954] Browser LOG     Refreshing page data due to server-side change
+[00:11:09.839] Server  LOG     ✓ Compiled in 377ms
+[00:11:12.869] Server  LOG     ✓ Compiled in 376ms
+[00:11:19.384] Server  LOG     ✓ Compiled in 995ms
+[00:11:20.423] Server  LOG     ✓ Compiled in 870ms
+[00:11:21.254] Server  LOG     ✓ Compiled in 370ms
+[00:11:23.949] Browser LOG     Refreshing page data due to server-side change
+[00:11:23.949] Browser ERROR   ./src/pages/curso.js:160:21
+Parsing ecmascript source code failed
+  158 |               { q: "COMO RECEBO O CURSO?", a: "O acesso é imediato via e-mail pela plataforma Hotmart." },
+  159 |               { q: "COMO ACESSO O PRODUTO?", a: "01 - Faça login na Hotmart clicando em 'Entrar'. 02 - Acesse o menu lateral, clique em 'Minha conta'. 03 - Clique em 'Minhas compras' e lá estarão todos os produtos que você já comprou!" },
+> 160 |               { q:  }
+      |                     ^
+  161 |             ].map((faq, i) => (
+  162 |               <details key={i} className="bg-white rounded-lg overflow-hidden group">
+  163 |                 <summary className="p-5 font-bold text-black cursor-pointer list-none flex justify-between items-center group-open:bg-[#ffcc00] transition-colors">
+
+Expected '</', got '}'
+[00:11:23.949] Browser LOG     Refreshing page data due to server-side change
+[00:11:26.750] Server  LOG     ✓ Compiled in 527ms
+[00:11:44.092] Server  LOG     ✓ Compiled in 178ms
+[00:12:19.627] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:12:19.627] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:12:19.627] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:12:19.627] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:12:28.877] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:12:32.157] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:13:57.949] Server  LOG     ✓ Compiled in 202ms
+[00:16:43.697] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:17:28.936] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:17:34.762] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:18:57.130] Server  LOG     ✓ Compiled in 388ms
+[00:19:07.510] Server  LOG     ✓ Compiled in 251ms
+[00:19:13.451] Server  LOG     ✓ Compiled in 178ms
+[00:19:18.628] Server  LOG     ✓ Compiled in 208ms
+[00:19:49.345] Server  LOG     ✓ Compiled in 253ms
+[00:20:20.501] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:20:20.501] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:20:20.501] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:20:20.501] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:20:27.929] Browser ERROR   Use the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>.
+[00:20:36.085] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:22:19.361] Server  LOG     ✓ Compiled in 1184ms
+[00:22:22.195] Server  LOG     ✓ Compiled in 1714ms
+[00:22:26.228] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:22:51.365] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:22:51.366] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:22:51.366] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:22:51.368] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:22:53.909] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:22:53.909] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:22:53.909] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:22:53.909] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:23:05.824] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:23:17.688] Browser ERROR   Use the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>.
+[00:24:02.939] Server  LOG     ✓ Compiled in 658ms
+[00:24:07.814] Server  LOG     ✓ Compiled in 630ms
+[00:24:46.597] Server  LOG     ✓ Compiled in 248ms
+[00:24:51.940] Server  LOG     ✓ Compiled in 362ms
+[00:25:34.108] Server  LOG     ✓ Compiled in 540ms
+[00:25:41.938] Server  LOG     ✓ Compiled in 565ms
+[00:26:15.718] Server  LOG     ✓ Compiled in 436ms
+[00:26:28.755] Server  LOG     ✓ Compiled in 363ms
+[00:26:43.190] Server  LOG     ✓ Compiled in 221ms
+[00:26:47.989] Server  LOG     ✓ Compiled in 416ms
+[00:26:53.694] Server  LOG     ✓ Compiled in 366ms
+[00:26:55.993] Server  LOG     ✓ Compiled in 595ms
+[00:27:00.196] Server  LOG     ✓ Compiled in 1075ms
+[00:27:03.844] Server  LOG     ✓ Compiled in 686ms
+[00:27:05.243] Server  LOG     ✓ Compiled in 350ms
+[00:27:12.816] Server  LOG     ✓ Compiled in 394ms
+[00:27:36.562] Server  LOG     ✓ Compiled in 236ms
+[00:27:44.170] Server  LOG     ✓ Compiled in 2.2s
+[00:27:50.158] Server  LOG     ✓ Compiled in 701ms
+[00:28:02.939] Server  LOG     ✓ Compiled in 2.5s
+[00:28:07.255] Server  LOG     ✓ Compiled in 855ms
+[00:28:09.912] Server  LOG     ✓ Compiled in 360ms
+[00:28:11.723] Server  LOG     ✓ Compiled in 315ms
+[00:28:14.115] Server  LOG     ✓ Compiled in 340ms
+[00:28:18.139] Server  LOG     ✓ Compiled in 526ms
+[00:28:29.316] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:28:29.731] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:28:29.966] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:28:30.057] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:28:35.767] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:28:35.767] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:28:35.767] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:28:35.767] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:31:03.774] Server  LOG     ✓ Compiled in 1039ms
+[00:31:07.226] Server  LOG     ✓ Compiled in 764ms
+[00:31:21.521] Browser LOG     Refreshing page data due to server-side change
+[00:31:21.521] Browser ERROR   ./src/pages/index.js:110:20
+Parsing ecmascript source code failed
+  108 |             <h2 className="text-4xl md:text-6xl font-[900] uppercase tracking-tighter mb-8 italic leading-none drop-shadow-lg">
+  109 |               TRANSFORME PÃO DE QUEIJO EM RENDA: <br className="hidden md:block" /> 
+> 110 |               <span
+      |                    ^
+
+Expected '</', got '<eof>'
+[00:31:21.963] Browser LOG     Refreshing page data due to server-side change
+[00:31:30.246] Server  LOG     ✓ Compiled in 435ms
+[00:31:49.541] Server  LOG     ✓ Compiled in 622ms
+[00:33:36.992] Server  LOG     ✓ Compiled in 606ms
+[00:33:41.950] Browser ERROR   ./src/pages/index.js:175:25
+Ecmascript file had an error
+  173 | }
+  174 |
+> 175 | export default function Home() {
+      |                         ^^^^
+  176 |   const WHATSAPP_NUMBER = "5561982777196";
+  177 |   const [isModalOpen, setIsModalOpen] = useState(false);
+  178 |
+
+the name `Home` is defined multiple times
+[00:33:41.950] Browser ERROR   ./src/pages/index.js:175:1
+Ecmascript file had an error
+  173 | }
+  174 |
+> 175 | export default function Home() {
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 176 |   const WHATSAPP_NUMBER = "5561982777196";
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 177 |   const [isModalOpen, setIsModalOpen] = useState(false);
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 178 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 179 |   // Função para abrir WhatsApp
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 180 |   const handleWhatsapp = (e) => {
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 181 |     e.preventDefault();
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 182 |     const nome = document.getElementById('nome').value;
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 183 |     const produto = document.getElementById('produto').value;
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 184 |     const qtd = document.getElementById('quantidade').value;
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 185 |     const msg = encodeURIComponent(`Olá Ira! Meu nome é ${nome}. Quero pedir ${qtd}x ${produto}.`);
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 186 |     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 187 |   };
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 188 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 189 |   return (
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 190 |     <div className="bg-white text-gray-900 antialiased font-['Inter']">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 191 |       <Head>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 192 |         <meta charSet="UTF-8" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 193 |         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 194 |         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 195 |         <meta name="format-detection" content="telephone=no" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 196 |         <meta name="title" content="Pão de Queijo da Irá" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 197 |         <meta name="author" content="SjrPovoaS" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 198 |         <meta name="description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 199 |         <meta name="Keywords" content="pao de queijo, pão de queijo, pão de queijo em Cidade Ocidental, pão de queijo congelado Cidade Ocidental, pão de queijo caseiro, Pão de Queijo da Irá, melhor lanche em cidade ocidental" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 200 |         <meta name="skype_toolbar" content="skype_toolbar_parser_compatible" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 201 |         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 202 |         <meta name="googlebot" content="index,follow" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 203 |         <meta name="google-site-verification" content="rj9-yKQenuTL7WznZzLhnZhRRqalrW8B9ptmhuewFiA" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 204 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 205 |         <link rel="icon" sizes="32x32" href="/img/favicon.ico" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 206 |         <link rel="icon" sizes="192x192" href="/img/favicon.ico" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 207 |         <link rel="apple-touch-icon" type="image/x-icon" href="/img/favicon.ico" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 208 |         <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 209 |         <link rel="mask-icon" href="/img/favicon.ico" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 210 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 211 |         {/* Fontes e Estilos Externos */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 212 |         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 213 |         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 214 |         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 215 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 216 |         <link rel="canonical" href="https://paodequeijodaira.vercel.app" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 217 |         <link rel="profile" href="https://gmpg.org/xfn/11" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 218 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 219 |         {/* Open Graph / Facebook */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 220 |         <meta property="og:locale" content="pt_BR" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 221 |         <meta property="og:title" content="Pão de Queijo da Irá" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 222 |         <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 223 |         <meta property="og:image" content="https://paodequeijodaira.vercel.app/img/logo-paodequeijodaira.jpg" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 224 |         <meta property="og:site_name" content="Pão de Queijo da Irá" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 225 |         <meta property="og:url" content="https://www.facebook.com/paodeuqiejodaira.iraleide" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 226 |         <meta property="og:image:width" content="1200" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 227 |         <meta property="og:image:height" content="630" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 228 |         <meta property="og:type" content="website" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 229 |         <meta property="fb:pages" content="359950968036532" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 230 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 231 |         {/* Twitter Card */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 232 |         <meta name="twitter:card" content="summary_large_image" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 233 |         <meta name="twitter:site" content="@PaodQueijodaIra" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 234 |         <meta name="twitter:creator" content="@PaodQueijodaIra" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 235 |         <meta name="twitter:title" content="Pão de Queijo da Irá" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 236 |         <meta name="twitter:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 237 |         <meta name="twitter:image" content="https://paodequeijodaira.vercel.app/img/logo-paodequeijodaira.jpg" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 238 |         <meta name="twitter:url" content="https://x.com/PaodQueijodaIra" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 239 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 240 |         <title>Pão de Queijo da Irá | O melhor pão de queijo congelado e caseiro da Cidade Ocidental</title>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 241 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 242 |         <script src="https://cdn.tailwindcss.com"></script>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 243 |         {/* Google Tag Manager original */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 244 |         <script dangerouslySetInnerHTML={{
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 245 |           __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N25BXQZC');`
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 246 |         }} />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 247 |         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 248 |       </Head>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 249 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 250 |       {/* HEADER ADAPTADO COM LOGO */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 251 |       <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/90 backdrop-blur-md z-50">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 252 |         <div className="max-w-7xl mx-auto flex justify-between items-center">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 253 |           <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-16 w-auto" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 254 |           <nav className="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 255 |             <a href="#produtos" className="hover:text-orange-600 px-2 py-2 rounded-full">Produtos</a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 256 |             <a href="#nossa-historia" className="hover:text-orange-600 px-2 py-2 rounded-full">Nossa História</a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 257 |             <a href="#depoimentos" className="hover:text-orange-600 px-2 py-2 rounded-full">Depoimentos</a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 258 |             <a href="#guia-gratuito" className="hover:text-orange-600 px-2 py-2 rounded-full">Guia Gratuito</a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 259 |             <a href="#curso" className="hover:text-orange-600 px-2 py-2 rounded-full">Curso</a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 260 |             <a href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">VISITAR LOJA LIFESTYLE</a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 261 |           </nav>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 262 |           <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs hover:scale-105 transition-transform">Pedir Agora</button>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 263 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 264 |       </header>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 265 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 266 |       {/* HERO SECTION */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 267 |       <section className="relative py-20 px-6 bg-gray-50 overflow-hidden">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 268 |         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 269 |           <div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 270 |             <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 271 |               O sabor caseiro que faz sua casa <span className="text-orange-600 italic">sorrir.</span>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 272 |             </h1>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 273 |             <p className="text-lg text-gray-600 mb-8 max-w-md">Pão de Queijo de Verdade, Congelado Para Facilitar a Sua Vida. Peça e Surpreenda-se!</p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 274 |             <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-10 py-5 font-black uppercase tracking-widest text-xs hover:scale-105 transition-transform">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 275 |               Quero encomendar agora!
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 276 |             </button>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 277 |           </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 278 |           <div className="relative">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 279 |             <img src="/imagens/hero-banner.png" alt="Pão de Queijo" className="relative z-10 w-full rounded-2xl shadow-2xl" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 280 |             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-100 rounded-full blur-3xl -z-10 opacity-50"></div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 281 |           </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 282 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 283 |       </section>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 284 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 285 |       {/* SEÇÃO PRODUTOS (Adaptada do seu HTML) */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 286 |       <section id="produtos" className="py-24 px-6 max-w-7xl mx-auto">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 287 |         <h2 className="text-center text-4xl font-black uppercase tracking-tighter mb-16 italic">🧀 Nossos Pacotes: Sabor Congelado, Feito na Hora!</h2>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 288 |         <div className="grid md:grid-cols-2 gap-12">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 289 |           {/* Pacote 20un */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 290 |           <div className="border-4 border-black p-8 flex flex-col items-center text-center group hover:bg-black hover:text-white transition-all">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 291 |             <img src="/imagens/imagem-embalagem-20und.png" className="h-64 object-contain mb-6 grayscale group-hover:grayscale-0 transition-all" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 292 |             <h3 className="text-2xl font-black uppercase">20 Unidades</h3>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 293 |             <p className="text-xs font-bold uppercase tracking-widest my-4 opacity-60">Ideal para a semana</p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 294 |             <span className="text-3xl font-black mb-6">R$ 10,00</span>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 295 |             <button onClick={() => setIsModalOpen(true)} className="w-full bg-orange-600 text-white py-4 font-bold uppercase">Comprar 20 Und</button>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 296 |           </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 297 |           {/* Pacote 1kg */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 298 |           <div className="border-4 border-orange-600 p-8 flex flex-col items-center text-center bg-orange-50 group hover:bg-orange-600 hover:text-white transition-all">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 299 |             <img src="/imagens/imagem-embalagem-1kg.png" className="h-64 object-contain mb-6 transition-all" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 300 |             <h3 className="text-2xl font-black uppercase">Pacote de 1 KG</h3>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 301 |             <p className="text-xs font-bold uppercase tracking-widest my-4 opacity-60">Melhor Custo-Benefício!</p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 302 |             <span className="text-3xl font-black mb-6">R$ 25,00</span>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 303 |             <button onClick={() => setIsModalOpen(true)} className="w-full bg-black text-white py-4 font-bold uppercase">Comprar 1 KG</button>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 304 |           </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 305 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 306 |       </section>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 307 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 308 |       {/* NOSSA HISTÓRIA */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 309 |       <section id="nossa-historia" className="py-24 px-6 bg-white border-t border-gray-50">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 310 |         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 311 |           <div className="order-2 md:order-1">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 312 |             <h2 className="text-4xl font-black uppercase tracking-tighter mb-8 italic">👩‍🍳 A História da Irá</h2>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 313 |             <div className="space-y-6 text-gray-600 leading-relaxed">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 314 |               <p>Eu sou a Iraleide, e o <strong>Pão de Queijo da Irá</strong> nasceu de um desejo simples: compartilhar a melhor receita de pão de queijo da minha família.</p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 315 |               <p>Hoje, esse mesmo carinho é transformado em cada pãozinho que você leva para casa, <strong>congelado e fresquinho</strong>. Com a nossa praticidade, você tem um lanche delicioso e caseiro a minutos de distância.</p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 316 |             </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 317 |             <a href="https://g.page/r/Ca9UJok_gMntEBI/review" target="_blank" className="inline-block mt-8 border-b-2 border-orange-600 pb-1 font-bold text-sm uppercase tracking-widest text-orange-600">⭐ Confira nossas avaliações no Google</a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 318 |           </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 319 |           <div className="order-1 md:order-2">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 320 |             <img src="/imagens/historia-contato.png" alt="Iraleide" className="w-full rounded-2xl shadow-2xl" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 321 |           </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 322 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 323 |       </section>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 324 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 325 |       {/* DEPOIMENTOS */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 326 |       <section id="depoimentos" className="py-24 px-6 bg-gray-50">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 327 |         <div className="max-w-7xl mx-auto text-center">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 328 |           <h2 className="text-4xl font-black uppercase tracking-tighter mb-16 italic">💬 O Que Dizem Nossos Clientes?</h2>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 329 |           <div className="grid md:grid-cols-3 gap-8">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 330 |             {[
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 331 |               { text: "O melhor pão de queijo congelado que já comi! Crocante por fora e super macio por dentro.", author: "Kelly M., GO" },
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 332 |               { text: "Acabei com o pacote de 1kg em um fim de semana. É viciante! Entrega super rápida.", author: "Pedro B., DF" },
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 333 |               { text: "Receita de vó com cara nova! O sabor é muito fiel ao caseiro de Minas.", author: "Yeda M., GO" }
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 334 |             ].map((d, i) => (
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 335 |               <div key={i} className="bg-white p-8 shadow-sm border border-gray-100 rounded-xl">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 336 |                 <p className="text-sm italic text-gray-600 mb-6">"{d.text}"</p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 337 |                 <p className="text-[10px] font-black uppercase tracking-widest text-orange-600">— {d.author}</p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 338 |               </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 339 |             ))}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 340 |           </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 341 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 342 |       </section>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 344 |       {/* GUIA GRATUITO (Brevo Form) */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 345 |       <section id="guia-gratuito" className="bg-[#2D3134] text-white py-24 px-6">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 346 |         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 347 |           <img src="/imagens/caneca-isca.png" alt="Guia" className="rounded-3xl rotate-3" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 348 |           <div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 349 |             <h2 className="text-4xl font-black uppercase tracking-tighter leading-none mb-6">Transforme seu café em um momento inesquecível.</h2>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 350 |             <p className="text-gray-400 mb-8">Baixe nosso guia gratuito e descubra os segredos da harmonização perfeita entre o pão de queijo quentinho, cafés especiais e acompanhamentos que abraçam a alma.</p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 351 |             <form className="space-y-4" action="https://43782b7b.sibforms.com/serve/..." method="POST">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 352 |               <input type="text" placeholder="Seu nome" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 353 |               <input type="email" placeholder="Seu melhor e-mail" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 354 |               <button className="w-full bg-orange-600 py-4 font-black uppercase tracking-widest">Quero meu guia gratuito</button>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 355 |             </form>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 356 |           </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 357 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 358 |       </section>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 359 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 360 |       {/* CURSO */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 361 |       <section id="curso" className="relative py-32 px-8 overflow-hidden text-white text-center">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 362 |         {/* Camada da Imagem de Fundo */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 363 |         <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 364 |           style={{ backgroundImage: "url('/imagens/criar-negocio.webp')" }}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 365 |         ></div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 366 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 367 |         {/* Camada de Sobreposição Alaranjada Transparente (Overlay) */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 368 |         <div className="absolute inset-0 z-10 bg-orange-600/60 mix-blend-multiply"></div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 369 |         <div className="absolute inset-0 z-10 bg-gradient-to-b from-orange-600/40 to-orange-700/90"></div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 370 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 371 |         {/* Conteúdo da Seção */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 372 |         <div className="relative z-20 max-w-4xl mx-auto">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 373 |           <h2 className="text-4xl md:text-6xl font-[900] uppercase tracking-tighter mb-8 italic leading-none drop-shadow-lg">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 374 |             TRANSFORME PÃO DE QUEIJO EM RENDA: <br className="hidden md:block" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 375 |             <span className="text-black">COMECE SEU NEGÓCIO!</span>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 376 |           </h2>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 377 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 378 |           <p className="text-lg md:text-xl font-medium opacity-95 mb-12 leading-relaxed drop-shadow">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 379 |             Aprenda a fazer e como vender pão de queijo com sucesso. Descubra os segredos por trás da
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 380 |             Receita Secreta do Pão de Queijo da Irá. Aprenda a preparar o petisco mais amado do Brasil
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 381 |             e transforme-o em um negócio lucrativo. Adquira o curso agora e inicie sua jornada para
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 382 |             se tornar um mestre na arte de fazer e vender pão de queijo.</p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 383 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 384 |           {/* CURSO NA HOME */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 385 |           <a href="/curso" target="_blank"
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 386 |             className="inline-block bg-black text-white px-12 py-6 font-black uppercase tracking-widest text-sm hover:bg-white hover:text-orange-600 transition-all shadow-2xl"
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 387 |           >EU QUERO A RECEITA SECRETA!</a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 388 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 389 |       </section>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 390 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 391 |       {/* MODAL DE PEDIDO COMPLETO */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 392 |       {isModalOpen && (
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 393 |         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 394 |           {/* Background com desfoque */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 395 |           <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => setIsModalOpen(false)}></div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 396 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 397 |           <div className="relative bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 398 |             {/* Cabeçalho do Modal */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 399 |             <div className="bg-orange-600 p-6 text-white flex justify-between items-center">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 400 |               <h3 className="text-xl font-black uppercase tracking-tighter">✨ Monte seu Pedido Agora!</h3>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 401 |               <button onClick={() => setIsModalOpen(false)} className="text-2xl font-bold hover:rotate-90 transition-transform">&times;</button>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 402 |             </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 403 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 404 |             {/* Formulário */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 405 |             <form onSubmit={handleWhatsapp} className="p-8 space-y-4 overflow-y-auto max-h-[80vh]">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 406 |               <div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 407 |                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Produto Desejado:</label>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 408 |                 <select id="produto" name="produto" required className="w-full p-3 border-2 border-gray-100 rounded-xl font-bold text-sm outline-none focus:border-orange-600 transition-colors">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 409 |                   <option value="" disabled selected>Selecione uma opção</option>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 410 |                   <option value="Pacote com 20 Unidades">Pacote com 20 Unidades (R$ 10,00)</option>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 411 |                   <option value="Pacote de 1 Kg">Pacote de 1 Kg (R$ 25,00)</option>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 412 |                   <option value="Ambos os Pacotes">Ambos os Pacotes</option>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 413 |                 </select>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 414 |               </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 415 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 416 |               <div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 417 |                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Quantidade de Pacotes:</label>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 418 |                 <input type="number" id="quantidade" name="quantidade" min="1" defaultValue="1" required className="w-full p-3 border-2 border-gray-100 rounded-xl outline-none focus:border-orange-600" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 419 |               </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 420 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 421 |               <div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 422 |                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Seu Nome:</label>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 423 |                 <input type="text" id="nome" name="nome" placeholder="Seu Nome Completo" required className="w-full p-3 border-2 border-gray-100 rounded-xl outline-none focus:border-orange-600" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 424 |               </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 425 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 426 |               <div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 427 |                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Endereço de Entrega:</label>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 428 |                 <input type="text" id="endereco" name="endereco" placeholder="Rua, Número, Bairro, Cidade" required className="w-full p-3 border-2 border-gray-100 rounded-xl outline-none focus:border-orange-600" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 429 |               </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 430 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 431 |               <div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 432 |                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Observações (Opcional):</label>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 433 |                 <input type="text" id="observacoes" name="observacoes" placeholder="Ex: Retirar no local, pagar em PIX." className="w-full p-3 border-2 border-gray-100 rounded-xl outline-none focus:border-orange-600" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 434 |               </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 435 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 436 |               <button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs shadow-lg shadow-green-200 transition-all flex items-center justify-center gap-2">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 437 |                 <i className="bi bi-whatsapp text-lg"></i>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 438 |                 ENVIAR PEDIDO PELO WHATSAPP
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 439 |               </button>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 440 |             </form>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 441 |           </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 442 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 443 |       )}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 444 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 445 |       {/* FOOTER COMPLETO */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 446 |       <footer className="py-20 px-6 bg-white border-t border-gray-100">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 447 |         <div className="max-w-7xl mx-auto">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 448 |           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start mb-16">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 449 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 450 |             {/* COLUNA 1: LOGO E SOCIAL */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 451 |             <div className="flex flex-col items-center md:items-start">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 452 |               <img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 453 |               <div className="flex space-x-2">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 454 |                 <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 455 |                 <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 456 |                 <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 457 |                 <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-geo-alt-fill"></i></a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 458 |               </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 459 |             </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 460 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 461 |             {/* COLUNA 2: INFO DE RETIRADA */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 462 |             <div className="text-center md:text-left space-y-4">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 463 |               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 464 |               <p className="text-sm text-gray-600 leading-relaxed">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 465 |                 <strong>Horário:</strong> Seg a Sáb das 08:00 às 18:00.<br />
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 466 |                 Dom das 08:00 às 12:00.
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 467 |               </p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 468 |               <p className="text-sm text-gray-600">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 469 |                 <strong>Endereço:</strong> Quadra 4 Lote 26 Condomínio Flores do Cerrado II - Recreio Mossoró - Cidade Ocidental-GO
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 470 |               </p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 471 |             </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 472 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 473 |             {/* COLUNA 3: LEGAL & CRÉDITOS */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 474 |             <div className="text-center md:text-right flex flex-col justify-between h-full">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 475 |               <div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 476 |                 <h3 className="text-lg font-black uppercase tracking-tighter mb-2">Pão de Queijo da Irá</h3>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 477 |                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 478 |               </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 479 |               <div className="mt-8 space-x-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 480 |                 <a href="#" className="hover:text-black">Termos de Uso</a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 481 |                 <span>|</span>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 482 |                 <a href="#" className="hover:text-black">Privacidade</a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 483 |               </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 484 |             </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 485 |           </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 486 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 487 |           {/* ASSINATURA */}
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 488 |           <div className="pt-8 border-t border-gray-50 text-center">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 489 |             <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 490 |               Desenvolvido por SjrPovoaS
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 491 |             </a>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 492 |           </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 493 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 494 |       </footer>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 495 |
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 496 |     </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 497 |   );
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 498 | }
+      | ^^
+
+the name `default` is exported multiple times
+[00:34:56.407] Server  LOG     ✓ Compiled in 395ms
+[00:35:02.640] Server  LOG     ✓ Compiled in 631ms
+[00:35:03.951] Server  LOG     ✓ Compiled in 487ms
+[00:35:09.971] Browser LOG     Refreshing page data due to server-side change
+[00:35:09.971] Browser ERROR   ./src/pages/index.js:7:3
+Parsing ecmascript source code failed
+   5 |   const WHATSAPP_NUMBER = "5561982777196";
+   6 |   const [isModalOpen, setIsModalOpen] = useState(false);
+>  7 |   export default function Home() {
+     |   ^^^^^^
+   8 |   const WHATSAPP_NUMBER = "5561982777196";
+   9 |   const [isModalOpen, setIsModalOpen] = useState(false);
+  10 |
+
+'import', and 'export' cannot be used outside of module code
+[00:35:17.220] Server  LOG     ✓ Compiled in 390ms
+[00:35:20.130] Browser ERROR   ./src/pages/index.js:19:9
+Ecmascript file had an error
+  17 |
+  18 |   // Função para abrir WhatsApp
+> 19 |   const handleWhatsapp = (e) => {
+     |         ^^^^^^^^^^^^^^
+  20 |     e.preventDefault();
+  21 |     const nome = document.getElementById('nome').value;
+  22 |     const produto = document.getElementById('produto').value;
+
+the name `handleWhatsapp` is defined multiple times
+[00:35:36.049] Server  LOG     ✓ Compiled in 186ms
+[00:35:39.100] Browser LOG     Refreshing page data due to server-side change
+[00:37:01.507] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:37:01.508] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:37:01.508] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:37:01.508] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:39:06.596] Server  LOG     ✓ Compiled in 175ms
+[00:39:11.859] Browser LOG     Refreshing page data due to server-side change
+[00:39:11.859] Browser ERROR   ./src/pages/index.js:351:1
+Parsing ecmascript source code failed
+  349 |     </div>
+  350 |   );
+> 351 | }
+      | ^
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[00:39:22.272] Server  LOG     ✓ Compiled in 310ms
+[00:39:25.490] Browser LOG     Refreshing page data due to server-side change
+[00:39:25.958] Browser WARN    cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation
+[00:39:52.864] Server  LOG     ✓ Compiled in 347ms
+[00:39:59.956] Browser LOG     Refreshing page data due to server-side change
+[00:39:59.956] Browser ERROR   ./src/pages/index.js:88:9
+Parsing ecmascript source code failed
+  86 |         }} />
+  87 |         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
+> 88 |       </Head>
+     |         ^^^^
+  89 |
+  90 |       {/* HEADER ADAPTADO COM LOGO */}
+  91 |       <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/90 backdrop-blur-md z-50">
+
+Expected corresponding JSX closing tag for <div>
+[00:40:02.790] Server  LOG     ✓ Compiled in 848ms
+[00:40:08.945] Browser LOG     Refreshing page data due to server-side change
+[00:40:11.635] Server  LOG     ✓ Compiled in 644ms
+[00:40:15.984] Browser LOG     Refreshing page data due to server-side change
+[00:40:15.984] Browser ERROR   ./src/pages/index.js:93:9
+Parsing ecmascript source code failed
+  91 |         }} />
+  92 |         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
+> 93 |       </Head>
+     |         ^^^^
+  94 |
+  95 |       {/* HEADER ADAPTADO COM LOGO */}
+  96 |       <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/90 backdrop-blur-md z-50">
+
+Expected corresponding JSX closing tag for <div>
+[00:40:33.898] Server  LOG     ✓ Compiled in 340ms
+[00:40:36.558] Browser LOG     Refreshing page data due to server-side change
+[00:40:37.338] Browser WARN    cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation
+[00:41:03.035] Server  LOG     ✓ Compiled in 558ms
+[00:41:04.623] Server  LOG     ✓ Compiled in 334ms
+[00:41:19.275] Server  LOG     ✓ Compiled in 239ms
+[00:41:22.561] Server  LOG     ✓ Compiled in 291ms
+[00:41:24.168] Server  LOG     ✓ Compiled in 588ms
+[00:41:27.851] Server  LOG     ✓ Compiled in 245ms
+[00:41:32.755] Server  LOG     ✓ Compiled in 509ms
+[00:41:37.633] Server  LOG     ✓ Compiled in 1065ms
+[00:41:53.269] Server  LOG     ✓ Compiled in 286ms
+[00:42:04.751] Server  LOG     ✓ Compiled in 296ms
+[00:42:11.908] Server  LOG     ✓ Compiled in 451ms
+[00:42:36.627] Server  LOG     ✓ Compiled in 468ms
+[00:42:40.811] Server  LOG     ✓ Compiled in 544ms
+[00:42:56.236] Server  LOG     ✓ Compiled in 297ms
+[00:43:01.684] Server  LOG     ✓ Compiled in 430ms
+[00:43:18.740] Server  LOG     ✓ Compiled in 872ms
+[00:43:20.698] Server  LOG     ✓ Compiled in 256ms
+[00:43:27.569] Server  LOG     ✓ Compiled in 265ms
+[00:43:44.275] Server  LOG     ✓ Compiled in 302ms
+[00:43:49.139] Server  LOG     ✓ Compiled in 230ms
+[00:43:52.106] Server  LOG     ✓ Compiled in 458ms
+[00:43:57.934] Server  LOG     ✓ Compiled in 600ms
+[00:44:02.752] Server  LOG     ✓ Compiled in 338ms
+[00:44:11.676] Server  LOG     ✓ Compiled in 185ms
+[00:44:18.985] Server  LOG     ✓ Compiled in 383ms
+[00:44:34.128] Server  LOG     ✓ Compiled in 356ms
+[00:44:42.668] Server  LOG     ✓ Compiled in 592ms
+[00:44:51.206] Server  LOG     ✓ Compiled in 345ms
+[00:46:15.990] Server  LOG     ✓ Compiled in 378ms
+[00:46:21.945] Browser LOG     Refreshing page data due to server-side change
+[00:46:21.945] Browser ERROR   ./src/pages/index.js:184:57
+Parsing ecmascript source code failed
+  182 |             <h2 className="text-4xl font-black uppercase tracking-tighter leading-none mb-6">Transforme seu café em um momento inesquecível.</h2>
+  183 |             <p className="text-gray-400 mb-8">Baixe nosso guia gratuito e descubra os segredos da harmonização perfeita entre o pão de queijo quentinho, cafés especiais e acompanhamentos que abraçam a alma.</p>
+> 184 |             <form className="space-y-4"                 <form class="form-brevo" action="https://43782b7b.sibforms.com/serve/MUIFADVOaKFQT5-e79pfcuRymIn3mT3LpZ6jTYiaabJu4jshHz-B2CX67o1k7j8_Jj8t0kir0rvKsU606Nhx7P2_uNRORnZ_5B-wVs18TtNjYGtXnkqclgkUanefRoM1T1-jLskVawichbZvQ4ojESQ2bzzCVA0xEodVW76v349_vKowtR085QjMa-mytw4PTgqyI1c2awQVte9ZMw==" method="POST">
+      |                                                         ^
+  185 |               <input type="text" placeholder="Seu nome" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
+  186 |               <input type="email" placeholder="Seu melhor e-mail" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
+  187 |               <button className="w-full bg-orange-600 py-4 font-black uppercase tracking-widest">Quero meu guia gratuito</button>
+
+Expression expected
+[00:46:38.595] Server  LOG     ✓ Compiled in 328ms
+[00:46:42.982] Browser ERROR   ./src/pages/index.js:188:21
+Parsing ecmascript source code failed
+  186 |               <input type="email" placeholder="Seu melhor e-mail" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
+  187 |               <button className="w-full bg-orange-600 py-4 font-black uppercase tracking-widest">Quero meu guia gratuito</button>
+> 188 |             </folass=>
+      |                     ^^
+  189 |           </div>
+  190 |         </div>
+  191 |       </section>
+
+Expected '</', got '=>'
+[00:46:42.982] Browser ERROR   ./src/pages/index.js:188:21
+Parsing ecmascript source code failed
+  186 |               <input type="email" placeholder="Seu melhor e-mail" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
+  187 |               <button className="w-full bg-orange-600 py-4 font-black uppercase tracking-widest">Quero meu guia gratuito</button>
+> 188 |             </folass=>
+      |                     ^^
+  189 |           </div>
+  190 |         </div>
+  191 |       </section>
+
+Expected '</', got '=>'
+[00:47:01.465] Browser ERROR   ./src/pages/index.js:188:21
+Parsing ecmascript source code failed
+  186 |               <input type="email" placeholder="Seu melhor e-mail" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
+  187 |               <button className="w-full bg-orange-600 py-4 font-black uppercase tracking-widest">Quero meu guia gratuito</button>
+> 188 |             </folass=>
+      |                     ^^
+  189 |           </div>
+  190 |         </div>
+  191 |       </section>
+
+Expected '</', got '=>'
+[00:47:13.864] Server  LOG     ✓ Compiled in 428ms
+[00:47:15.768] Server  LOG     ✓ Compiled in 963ms
+[00:47:18.895] Browser ERROR   ./src/pages/index.js:188:18
+Parsing ecmascript source code failed
+  186 |               <input type="email" placeholder="Seu melhor e-mail" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
+  187 |               <button className="w-full bg-orange-600 py-4 font-black uppercase tracking-widest">Quero meu guia gratuito</button>
+> 188 |             </fo>
+      |                  ^
+> 189 |           </div>
+      | ^^^^^^^^^^^
+  190 |         </div>
+  191 |       </section>
+  192 |
+
+Expected '</', got 'jsx text (
+          )'
+[00:47:18.895] Browser LOG     Refreshing page data due to server-side change
+[00:47:36.308] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:47:36.342] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:47:36.352] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:47:36.355] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:47:43.207] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[00:47:43.207] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:47:43.208] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:47:43.208] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:04:31.180] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:04:31.180] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:04:31.180] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:04:31.180] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component

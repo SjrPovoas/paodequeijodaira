@@ -16,10 +16,62 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white text-gray-900 antialiased font-['Inter']">
+    <div className="bg-white text-[#2D3134] antialiased font-['Inter']">
       <Head>
-        <title>Pão de Queijo da Irá | O melhor de Cidade Ocidental</title>
-        <meta name="description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Pacotes de 20 unidades e 1kg." />
+        {/* SEO COMPLETO */}
+        <meta charSet="UTF-8" />
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="title" content="Pão de Queijo da Irá" />
+        <meta name="author" content="SjrPovoaS" />
+        <meta name="description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
+        <meta name="Keywords" content="pao de queijo, pão de queijo, pão de queijo em Cidade Ocidental, pão de queijo congelado Cidade Ocidental, pão de queijo caseiro, Pão de Queijo da Irá, melhor lanche em cidade ocidental" />
+        <meta name="skype_toolbar" content="skype_toolbar_parser_compatible" />
+        <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+        <meta name="googlebot" content="index,follow" />
+        <meta name="google-site-verification" content="rj9-yKQenuTL7WznZzLhnZhRRqalrW8B9ptmhuewFiA" />
+        
+        {/* OPEN GRAPH */}
+        <meta property="og:locale" content="pt_BR" />
+        <meta property="og:title" content="Pão de Queijo da Irá" />
+        <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
+        <meta property="og:image" content="https://paodequeijodaira.vercel.app/imagens/logo-paodequeijodaira.jpg" />
+        <meta property="og:site_name" content="Pão de Queijo da Irá" />
+        <meta property="og:url" content="https://www.facebook.com/paodeuqiejodaira.iraleide" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:type" content="website" />
+        <meta property="fb:pages" content="359950968036532" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@PaodQueijodaIra" />
+        <meta name="twitter:creator" content="@PaodQueijodaIra" />
+        <meta name="twitter:title" content="Pão de Queijo da Irá" />
+        <meta name="twitter:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
+        <meta name="twitter:image" content="https://paodequeijodaira.vercel.app/imagens/logo-paodequeijodaira.jpg" />
+        <meta name="twitter:url" content="https://x.com/PaodQueijodaIra" />
+
+        <title>Pão de Queijo da Irá | O melhor pão de queijo congelado e caseiro da Cidade Ocidental</title>
+        <link rel="icon" sizes="32x32" href="/imagens/favicon.ico" />
+        <link rel="icon" sizes="192x192" href="/imagens/favicon.ico" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="/imagens/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="/imagens/favicon.ico" />
+        <link rel="mask-icon" href="/imagens/favicon.ico" />
+
+        {/* SCRIPTS EXTERNOS */}
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
+   
+        {/* Fontes e Estilos Externos */}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
+
+        <link rel="canonical" href="https://paodequeijodaira.vercel.app" />
+        <link rel="profile" href="https://gmpg.org/xfn/11" />
+
         <script src="https://cdn.tailwindcss.com"></script>
         {/* Google Tag Manager original */}
         <script dangerouslySetInnerHTML={{
@@ -33,14 +85,18 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-16 w-auto" />
           <nav className="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest">
-            <a href="#produtos" className="hover:text-orange-600 px-4 py-2 rounded-full">Produtos</a>
+            <a href="#produtos" className="hover:text-orange-600 px-2 py-2 rounded-full">Produtos</a>
+            <a href="#nossa-historia" className="hover:text-orange-600 px-2 py-2 rounded-full">Nossa História</a>
+            <a href="#depoimentos" className="hover:text-orange-600 px-2 py-2 rounded-full">Depoimentos</a>
+            <a href="#guia-gratuito" className="hover:text-orange-600 px-2 py-2 rounded-full">Guia Gratuito</a>
+            <a href="#curso" className="hover:text-orange-600 px-2 py-2 rounded-full">Curso</a>
             <a href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">VISITAR LOJA LIFESTYLE</a>
           </nav>
           <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs hover:scale-105 transition-transform">Pedir Agora</button>
         </div>
       </header>
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <section className="relative py-20 px-6 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
@@ -59,7 +115,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SEÇÃO PRODUTOS (Adaptada do seu HTML) */}
+      {/* PRODUTOS */}
       <section id="produtos" className="py-24 px-6 max-w-7xl mx-auto">
         <h2 className="text-center text-4xl font-black uppercase tracking-tighter mb-16 italic">🧀 Nossos Pacotes: Sabor Congelado, Feito na Hora!</h2>
         <div className="grid md:grid-cols-2 gap-12">
@@ -100,7 +156,7 @@ export default function Home() {
       </section>
 
       {/* DEPOIMENTOS */}
-      <section className="py-24 px-6 bg-gray-50">
+      <section id="depoimentos" className="py-24 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl font-black uppercase tracking-tighter mb-16 italic">💬 O Que Dizem Nossos Clientes?</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -119,13 +175,13 @@ export default function Home() {
       </section>
 
       {/* GUIA GRATUITO (Brevo Form) */}
-      <section className="bg-[#2D3134] text-white py-24 px-6">
+      <section id="guia-gratuito" className="bg-[#2D3134] text-white py-24 px-6">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <img src="/imagens/caneca-isca.png" alt="Guia" className="rounded-3xl rotate-3" />
           <div>
             <h2 className="text-4xl font-black uppercase tracking-tighter leading-none mb-6">Transforme seu café em um momento inesquecível.</h2>
             <p className="text-gray-400 mb-8">Baixe nosso guia gratuito e descubra os segredos da harmonização perfeita entre o pão de queijo quentinho, cafés especiais e acompanhamentos que abraçam a alma.</p>
-            <form className="space-y-4" action="https://43782b7b.sibforms.com/serve/..." method="POST">
+            <form className="space-y-4" action="https://43782b7b.sibforms.com/serve/MUIFADVOaKFQT5-e79pfcuRymIn3mT3LpZ6jTYiaabJu4jshHz-B2CX67o1k7j8_Jj8t0kir0rvKsU606Nhx7P2_uNRORnZ_5B-wVs18TtNjYGtXnkqclgkUanefRoM1T1-jLskVawichbZvQ4ojESQ2bzzCVA0xEodVW76v349_vKowtR085QjMa-mytw4PTgqyI1c2awQVte9ZMw==" method="POST">
               <input type="text" placeholder="Seu nome" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
               <input type="email" placeholder="Seu melhor e-mail" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
               <button className="w-full bg-orange-600 py-4 font-black uppercase tracking-widest">Quero meu guia gratuito</button>
@@ -158,12 +214,10 @@ export default function Home() {
             e transforme-o em um negócio lucrativo. Adquira o curso agora e inicie sua jornada para
             se tornar um mestre na arte de fazer e vender pão de queijo.</p>
 
-          <a href="https://paodequeijodaira.vercel.app/receita-secreta-do-pao-de-queijo-da-ira.html"
-            target="_blank"
-            className="inline-block bg-black text-white px-12 py-6 font-black uppercase tracking-widest text-sm hover:bg-white hover:text-orange-600 transition-all shadow-2xl hover:-translate-y-1"
-          >
-            EU QUERO A RECEITA SECRETA!
-          </a>
+          {/* CURSO NA HOME */}
+          <a href="/curso" target="_blank"
+            className="inline-block bg-black text-white px-12 py-6 font-black uppercase tracking-widest text-sm hover:bg-white hover:text-orange-600 transition-all shadow-2xl"
+          >EU QUERO A RECEITA SECRETA!</a>
         </div>
       </section>
 
@@ -172,7 +226,7 @@ export default function Home() {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           {/* Background com desfoque */}
           <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => setIsModalOpen(false)}></div>
-          
+
           <div className="relative bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
             {/* Cabeçalho do Modal */}
             <div className="bg-orange-600 p-6 text-white flex justify-between items-center">
@@ -185,10 +239,10 @@ export default function Home() {
               <div>
                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Produto Desejado:</label>
                 <select id="produto" name="produto" required className="w-full p-3 border-2 border-gray-100 rounded-xl font-bold text-sm outline-none focus:border-orange-600 transition-colors">
-                    <option value="" disabled selected>Selecione uma opção</option>
-                    <option value="Pacote com 20 Unidades">Pacote com 20 Unidades (R$ 10,00)</option>
-                    <option value="Pacote de 1 Kg">Pacote de 1 Kg (R$ 25,00)</option>
-                    <option value="Ambos os Pacotes">Ambos os Pacotes</option>
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="Pacote com 20 Unidades">Pacote com 20 Unidades (R$ 10,00)</option>
+                  <option value="Pacote de 1 Kg">Pacote de 1 Kg (R$ 25,00)</option>
+                  <option value="Ambos os Pacotes">Ambos os Pacotes</option>
                 </select>
               </div>
 
@@ -211,7 +265,7 @@ export default function Home() {
                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Observações (Opcional):</label>
                 <input type="text" id="observacoes" name="observacoes" placeholder="Ex: Retirar no local, pagar em PIX." className="w-full p-3 border-2 border-gray-100 rounded-xl outline-none focus:border-orange-600" />
               </div>
-              
+
               <button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs shadow-lg shadow-green-200 transition-all flex items-center justify-center gap-2">
                 <i className="bi bi-whatsapp text-lg"></i>
                 ENVIAR PEDIDO PELO WHATSAPP
