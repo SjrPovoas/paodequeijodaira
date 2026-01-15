@@ -480,16 +480,55 @@ var _s = __turbopack_context__.k.signature();
 ;
 const Loja = ()=>{
     _s();
-    const LINK_LISTA_ESPERA = "https://7c8b4a21.sibforms.com/serve/SUA_URL_AQUI";
+    const LINK_LISTA_ESPERA = "https://43782b7b.sibforms.com/serve/MUIFAC4AxTEnI80RImF7seW5i2MRkz5EqdqtMse22-stmvG7jsOqdFhZ6mmpfwRA-2skU_c3GJF8YXD6k-K_kNE6_gFeWIFbCIxIEWpknHGH8m6tdQMhTuqNG7-e_tsEQRBC4-pjosH0TVoqcW1UonSiJnd2E378zedWIJRs_Dhj9R9v8_VCpmg9Kebo_wFD_WsvLIPqwRBVBCNh8w==";
     const WHATSAPP_FONE = "5561982777196";
     const [cart, setCart] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [isCartOpen, setIsCartOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isMenuOpen, setIsMenuOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [showScrollTop, setShowScrollTop] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    // Estado para armazenar o tamanho selecionado de cada produto antes de adicionar ao carrinho
+    const [selectedSizes, setSelectedSizes] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])({});
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "Loja.useEffect": ()=>{
+            const handleScroll = {
+                "Loja.useEffect.handleScroll": ()=>{
+                    if (window.scrollY > 400) {
+                        setShowScrollTop(true);
+                    } else {
+                        setShowScrollTop(false);
+                    }
+                }
+            }["Loja.useEffect.handleScroll"];
+            window.addEventListener('scroll', handleScroll);
+            return ({
+                "Loja.useEffect": ()=>window.removeEventListener('scroll', handleScroll)
+            })["Loja.useEffect"];
+        }
+    }["Loja.useEffect"], []);
+    const scrollToTop = ()=>{
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+    const handleSizeChange = (productId, size)=>{
+        setSelectedSizes((prev)=>({
+                ...prev,
+                [productId]: size
+            }));
+    };
     const handleAddToCart = (product)=>{
+        // Se for vestuário e não tiver tamanho selecionado, avisa o usuário
+        if (product.category === 'vestuario' && !selectedSizes[product.id]) {
+            alert("Por favor, selecione um tamanho (P, M ou G) antes de adicionar.");
+            return;
+        }
+        const tamanhoEscolhido = selectedSizes[product.id] || null;
         setCart((prevCart)=>{
-            const itemExistente = prevCart.find((item)=>item.id === product.id);
+            // O item é único pela combinação de ID + Tamanho
+            const itemExistente = prevCart.find((item)=>item.id === product.id && item.size === tamanhoEscolhido);
             if (itemExistente) {
-                return prevCart.map((item)=>item.id === product.id ? {
+                return prevCart.map((item)=>item.id === product.id && item.size === tamanhoEscolhido ? {
                         ...item,
                         quantity: item.quantity + 1
                     } : item);
@@ -498,14 +537,16 @@ const Loja = ()=>{
                 ...prevCart,
                 {
                     ...product,
-                    quantity: 1
+                    quantity: 1,
+                    size: tamanhoEscolhido
                 }
             ];
         });
         setIsCartOpen(true);
     };
-    const removeItem = (id)=>{
-        setCart(cart.filter((item)=>item.id !== id));
+    const removeItem = (uniqueId)=>{
+        // No carrinho, usamos index ou a combinação id+size para remover corretamente
+        setCart(cart.filter((_, index)=>index !== uniqueId));
     };
     const toggleMenu = ()=>setIsMenuOpen(!isMenuOpen);
     const totalCarrinho = cart.reduce((acc, item)=>acc + item.price * item.quantity, 0);
@@ -513,11 +554,42 @@ const Loja = ()=>{
     const finalizarPedidoWhatsApp = ()=>{
         let mensagem = `Olá Irá! Gostaria de fazer um pedido Lifestyle:\n\n`;
         cart.forEach((item)=>{
-            mensagem += `*${item.quantity}x* ${item.name} - R$ ${item.price * item.quantity},00\n`;
+            const infoTamanho = item.size ? ` [Tamanho: ${item.size}]` : "";
+            mensagem += `*${item.quantity}x* ${item.name}${infoTamanho} - R$ ${item.price * item.quantity},00\n`;
         });
         mensagem += `\n*Total: R$ ${totalCarrinho},00*`;
         window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_FONE}&text=${encodeURIComponent(mensagem)}`, '_blank');
     };
+    const produtos = [
+        {
+            id: 1,
+            name: 'T-Shirt Logo Pão de Queijo da Irá (Masculina)',
+            price: 110,
+            img: '/imagens/camiseta1.png',
+            category: 'vestuario'
+        },
+        {
+            id: 2,
+            name: 'T-Shirt Logo Pão de Queijo da Irá (Feminina)',
+            price: 110,
+            img: '/imagens/camiseta2.png',
+            category: 'vestuario'
+        },
+        {
+            id: 3,
+            name: 'Avental de Lona Pão de Queijo da Irá',
+            price: 85,
+            img: '/imagens/avental.png',
+            category: 'acessorio'
+        },
+        {
+            id: 4,
+            name: 'Caneca Cerâmica Fosca do Pão de Queijo da Irá',
+            price: 42,
+            img: '/imagens/caneca.png',
+            category: 'acessorio'
+        }
+    ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "jsx-df9f824b7f1858e8" + " " + "relative min-h-screen bg-white font-sans text-black overflow-x-hidden",
         children: [
@@ -528,7 +600,7 @@ const Loja = ()=>{
                         children: "Loja Lifestyle | Pão de Queijo da Irá"
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 45,
+                        lineNumber: 92,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("link", {
@@ -537,13 +609,13 @@ const Loja = ()=>{
                         className: "jsx-df9f824b7f1858e8"
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 46,
+                        lineNumber: 93,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 44,
+                lineNumber: 91,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
@@ -561,12 +633,12 @@ const Loja = ()=>{
                                     className: "jsx-df9f824b7f1858e8" + " " + "h-12 md:h-16 w-auto"
                                 }, void 0, false, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 52,
+                                    lineNumber: 99,
                                     columnNumber: 23
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 52,
+                                lineNumber: 99,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -578,7 +650,7 @@ const Loja = ()=>{
                                         children: "IRÁ DIGITAL GENESIS PASS"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 56,
+                                        lineNumber: 102,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -587,7 +659,7 @@ const Loja = ()=>{
                                         children: "COMPRAR PÃO DE QUEIJO"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 57,
+                                        lineNumber: 103,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -599,7 +671,7 @@ const Loja = ()=>{
                                                 children: "Carrinho"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 61,
+                                                lineNumber: 105,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -607,19 +679,19 @@ const Loja = ()=>{
                                                 children: totalItens
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 62,
+                                                lineNumber: 106,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 60,
-                                        columnNumber: 11
+                                        lineNumber: 104,
+                                        columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 55,
+                                lineNumber: 101,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -633,7 +705,7 @@ const Loja = ()=>{
                                                 className: "jsx-df9f824b7f1858e8" + " " + "bi bi-bag text-2xl"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 67,
+                                                lineNumber: 112,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             totalItens > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -641,13 +713,13 @@ const Loja = ()=>{
                                                 children: totalItens
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 68,
+                                                lineNumber: 113,
                                                 columnNumber: 34
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 66,
+                                        lineNumber: 111,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -657,66 +729,30 @@ const Loja = ()=>{
                                             className: "jsx-df9f824b7f1858e8" + " " + ((isMenuOpen ? "bi bi-x-lg" : "bi bi-list") || "")
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 71,
+                                            lineNumber: 116,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0))
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 70,
+                                        lineNumber: 115,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 65,
+                                lineNumber: 110,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 51,
+                        lineNumber: 98,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-df9f824b7f1858e8" + " " + `fixed inset-[60] bg-white z-[2] transition-transform duration-500 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`,
+                        className: "jsx-df9f824b7f1858e8" + " " + `fixed inset-20 bg-white z-[50] transition-transform duration-500 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`,
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
-                            className: "jsx-df9f824b7f1858e8" + " " + "flex flex-col bg-white items-center pt-32 space-y-8 text-xl font-black uppercase tracking-tighter italic text-center text-black",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                    href: "#web3",
-                                    onClick: toggleMenu,
-                                    className: "jsx-df9f824b7f1858e8" + " " + "uppercase border-b-2 hover:text-orange-600 border-black pb-1",
-                                    children: "Lista de espera do Genesis Pass"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 79,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                    href: "#web3",
-                                    onClick: toggleMenu,
-                                    className: "jsx-df9f824b7f1858e8" + " " + "uppercase border-b-2 hover:text-orange-600 border-black pb-1",
-                                    children: "Ver Carrinho"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 80,
-                                    columnNumber: 25
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/pages/loja.js",
-                            lineNumber: 78,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0))
-                    }, void 0, false, {
-                        fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 77,
-                        columnNumber: 9
-                    }, ("TURBOPACK compile-time value", void 0)),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-df9f824b7f1858e8" + " " + `fixed inset-0 bg-white z-[2000] transition-transform duration-500 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`,
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
-                            className: "jsx-df9f824b7f1858e8" + " " + "flex flex-col bg-white items-center pt-32 space-y-8 text-xl font-black uppercase tracking-tighter italic text-center text-black",
+                            className: "jsx-df9f824b7f1858e8" + " " + "flex flex-col bg-white  items-center pt-32 space-y-8 text-xl font-black uppercase tracking-tighter italic text-center text-black",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                     href: "#web3",
@@ -728,20 +764,20 @@ const Loja = ()=>{
                                             children: "Lista de espera Genesis Pass"
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 89,
+                                            lineNumber: 125,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
                                             className: "jsx-df9f824b7f1858e8" + " " + "bi bi-ticket-perforated text-2xl"
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 89,
+                                            lineNumber: 125,
                                             columnNumber: 56
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 88,
+                                    lineNumber: 124,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -760,47 +796,37 @@ const Loja = ()=>{
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 94,
+                                            lineNumber: 129,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
                                             className: "jsx-df9f824b7f1858e8" + " " + "bi bi-cart3 text-2xl"
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 94,
+                                            lineNumber: 129,
                                             columnNumber: 55
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 92,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                    href: "/",
-                                    onClick: toggleMenu,
-                                    className: "jsx-df9f824b7f1858e8" + " " + "text-orange-600 text-sm not-italic font-bold tracking-widest mt-10",
-                                    children: "← VOLTAR PARA HOME"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 96,
+                                    lineNumber: 127,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/pages/loja.js",
-                            lineNumber: 86,
+                            lineNumber: 123,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 85,
+                        lineNumber: 122,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 50,
+                lineNumber: 97,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -814,7 +840,7 @@ const Loja = ()=>{
                                 children: "Loja Oficial"
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 105,
+                                lineNumber: 137,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -825,131 +851,132 @@ const Loja = ()=>{
                                         className: "jsx-df9f824b7f1858e8"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 106,
+                                        lineNumber: 138,
                                         columnNumber: 111
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     " Acessórios"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 106,
+                                lineNumber: 138,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 104,
+                        lineNumber: 136,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "jsx-df9f824b7f1858e8" + " " + "grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-x-12 md:gap-y-24",
-                        children: [
-                            {
-                                id: 1,
-                                name: 'T-Shirt Logo Pão de Queijo da Irá (M-White)',
-                                price: 110,
-                                img: '/imagens/camiseta1.png'
-                            },
-                            {
-                                id: 2,
-                                name: 'T-Shirt Logo Pão de Queijo da Irá (F-White)',
-                                price: 110,
-                                img: '/imagens/camiseta2.png'
-                            },
-                            {
-                                id: 3,
-                                name: 'Avental de Lona Pão de Queijo da Irá',
-                                price: 85,
-                                img: '/imagens/avental.png'
-                            },
-                            {
-                                id: 4,
-                                name: 'Caneca Cerâmica Fosca do Pão de Queijo da Irá',
-                                price: 42,
-                                img: '/imagens/caneca.png'
-                            }
-                        ].map((produto)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: produtos.map((produto)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "jsx-df9f824b7f1858e8" + " " + "product-card group",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        onClick: ()=>handleAddToCart(produto),
-                                        className: "jsx-df9f824b7f1858e8" + " " + "aspect-[4/5] bg-gray-50 overflow-hidden border border-gray-100 cursor-pointer relative",
+                                        className: "jsx-df9f824b7f1858e8" + " " + "aspect-[4/5] bg-gray-50 overflow-hidden border border-gray-100 relative",
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                             src: produto.img,
                                             alt: produto.name,
                                             className: "jsx-df9f824b7f1858e8" + " " + "w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700"
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 117,
+                                            lineNumber: 145,
                                             columnNumber: 17
                                         }, ("TURBOPACK compile-time value", void 0))
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 116,
+                                        lineNumber: 144,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-df9f824b7f1858e8" + " " + "mt-8 flex justify-between items-start",
+                                        className: "jsx-df9f824b7f1858e8" + " " + "mt-8",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-df9f824b7f1858e8" + " " + "flex-1 pr-4",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                        className: "jsx-df9f824b7f1858e8" + " " + "text-sm font-black uppercase tracking-widest leading-tight",
-                                                        children: produto.name
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 121,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                        className: "jsx-df9f824b7f1858e8" + " " + "text-xs font-bold text-orange-600 uppercase mt-2",
-                                                        children: [
-                                                            "R$ ",
-                                                            produto.price,
-                                                            ",00"
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 122,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0))
-                                                ]
-                                            }, void 0, true, {
+                                                className: "jsx-df9f824b7f1858e8" + " " + "flex justify-between items-start mb-4",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "jsx-df9f824b7f1858e8" + " " + "flex-1 pr-4",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                            className: "jsx-df9f824b7f1858e8" + " " + "text-sm font-black uppercase tracking-widest leading-tight",
+                                                            children: produto.name
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/pages/loja.js",
+                                                            lineNumber: 150,
+                                                            columnNumber: 21
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                            className: "jsx-df9f824b7f1858e8" + " " + "text-xs font-bold text-orange-600 uppercase mt-2",
+                                                            children: [
+                                                                "R$ ",
+                                                                produto.price,
+                                                                ",00"
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/pages/loja.js",
+                                                            lineNumber: 151,
+                                                            columnNumber: 21
+                                                        }, ("TURBOPACK compile-time value", void 0))
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/pages/loja.js",
+                                                    lineNumber: 149,
+                                                    columnNumber: 19
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 120,
+                                                lineNumber: 148,
                                                 columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            produto.category === 'vestuario' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "jsx-df9f824b7f1858e8" + " " + "flex gap-2 mb-6",
+                                                children: [
+                                                    'P',
+                                                    'M',
+                                                    'G'
+                                                ].map((size)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                        onClick: ()=>handleSizeChange(produto.id, size),
+                                                        className: "jsx-df9f824b7f1858e8" + " " + `w-10 h-10 border-2 font-black text-xs transition-all ${selectedSizes[produto.id] === size ? 'border-orange-600 bg-orange-600 text-white' : 'border-gray-200 hover:border-black text-gray-400'}`,
+                                                        children: size
+                                                    }, size, false, {
+                                                        fileName: "[project]/src/pages/loja.js",
+                                                        lineNumber: 159,
+                                                        columnNumber: 23
+                                                    }, ("TURBOPACK compile-time value", void 0)))
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/pages/loja.js",
+                                                lineNumber: 157,
+                                                columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 onClick: ()=>handleAddToCart(produto),
-                                                className: "jsx-df9f824b7f1858e8" + " " + "border-b-2 border-black text-[10px] font-black uppercase tracking-widest pb-1 hover:text-orange-600 hover:border-orange-600 transition-all shrink-0",
-                                                children: "Adicionar"
+                                                className: "jsx-df9f824b7f1858e8" + " " + "w-full border-2 border-black py-4 text-[10px] font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all",
+                                                children: "Adicionar ao Carrinho"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 124,
+                                                lineNumber: 174,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 119,
+                                        lineNumber: 147,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, produto.id, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 115,
+                                lineNumber: 143,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)))
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 108,
+                        lineNumber: 141,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 103,
+                lineNumber: 135,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -967,7 +994,7 @@ const Loja = ()=>{
                                         className: "jsx-df9f824b7f1858e8"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 135,
+                                        lineNumber: 190,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     " ",
@@ -980,13 +1007,13 @@ const Loja = ()=>{
                                         children: "Genesis Pass"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 135,
+                                        lineNumber: 190,
                                         columnNumber: 32
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 134,
+                                lineNumber: 189,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -994,7 +1021,7 @@ const Loja = ()=>{
                                 children: "(Genesis Pass): Os Benefícios na sua carteira digital."
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 137,
+                                lineNumber: 192,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1011,21 +1038,21 @@ const Loja = ()=>{
                                                         children: "Golden Discount"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 144,
+                                                        lineNumber: 198,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "jsx-df9f824b7f1858e8" + " " + "text-gray-300 text-xs leading-relaxed",
-                                                        children: "10% de desconto fixo em todos os itens da loja (físicos e digitais) via cupom exclusivo para holders."
+                                                        children: "10% de desconto fixo em todos os itens da loja."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 145,
+                                                        lineNumber: 199,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 143,
+                                                lineNumber: 197,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1036,27 +1063,27 @@ const Loja = ()=>{
                                                         children: "Early Access"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 148,
+                                                        lineNumber: 202,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "jsx-df9f824b7f1858e8" + " " + "text-gray-300 text-xs leading-relaxed",
-                                                        children: "Acesso a novas fornadas de pão de queijo e lançamentos de vestuário 24h antes do público geral."
+                                                        children: "Acesso a novas fornadas 24h antes do público geral."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 149,
+                                                        lineNumber: 203,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 147,
+                                                lineNumber: 201,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 142,
+                                        lineNumber: 196,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1070,21 +1097,21 @@ const Loja = ()=>{
                                                         children: "Ira's Secret Club"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 154,
+                                                        lineNumber: 208,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "jsx-df9f824b7f1858e8" + " " + "text-gray-300 text-xs leading-relaxed",
-                                                        children: "Acesso a um grupo fechado (Telegram/Discord) para receber dicas de preparo e receitas exclusivas de Minas."
+                                                        children: "Acesso a um grupo fechado com receitas exclusivas."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 155,
+                                                        lineNumber: 209,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 153,
+                                                lineNumber: 207,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1095,33 +1122,33 @@ const Loja = ()=>{
                                                         children: "Physical Gift"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 158,
+                                                        lineNumber: 212,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "jsx-df9f824b7f1858e8" + " " + "text-gray-300 text-xs leading-relaxed",
-                                                        children: "O primeiro holder de cada NFT recebe um kit físico exclusivo (Caneca + Avental) em casa."
+                                                        children: "Primeiro holder recebe kit físico exclusivo."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 159,
+                                                        lineNumber: 213,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 157,
+                                                lineNumber: 211,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 152,
+                                        lineNumber: 206,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 141,
+                                lineNumber: 195,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1132,13 +1159,13 @@ const Loja = ()=>{
                                 children: "Entrar na Lista de Espera"
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 164,
+                                lineNumber: 217,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 133,
+                        lineNumber: 188,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1146,13 +1173,13 @@ const Loja = ()=>{
                         children: "WEB3"
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 170,
+                        lineNumber: 221,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 132,
+                lineNumber: 187,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
@@ -1175,12 +1202,12 @@ const Loja = ()=>{
                                                 className: "jsx-df9f824b7f1858e8" + " " + "h-20 mb-6"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 180,
+                                                lineNumber: 231,
                                                 columnNumber: 27
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 180,
+                                            lineNumber: 231,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1194,12 +1221,12 @@ const Loja = ()=>{
                                                         className: "jsx-df9f824b7f1858e8" + " " + "bi bi-instagram"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 182,
+                                                        lineNumber: 233,
                                                         columnNumber: 129
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 182,
+                                                    lineNumber: 233,
                                                     columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1210,12 +1237,12 @@ const Loja = ()=>{
                                                         className: "jsx-df9f824b7f1858e8" + " " + "bi bi-facebook"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 183,
+                                                        lineNumber: 234,
                                                         columnNumber: 129
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 183,
+                                                    lineNumber: 234,
                                                     columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1226,12 +1253,12 @@ const Loja = ()=>{
                                                         className: "jsx-df9f824b7f1858e8" + " " + "bi bi-youtube"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 184,
+                                                        lineNumber: 235,
                                                         columnNumber: 128
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 184,
+                                                    lineNumber: 235,
                                                     columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1242,24 +1269,24 @@ const Loja = ()=>{
                                                         className: "jsx-df9f824b7f1858e8" + " " + "bi bi-geo-alt-fill"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 185,
+                                                        lineNumber: 236,
                                                         columnNumber: 128
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 185,
+                                                    lineNumber: 236,
                                                     columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 181,
+                                            lineNumber: 232,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 179,
+                                    lineNumber: 230,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1270,7 +1297,7 @@ const Loja = ()=>{
                                             children: "Funcionamento & Retirada"
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 189,
+                                            lineNumber: 240,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1281,7 +1308,7 @@ const Loja = ()=>{
                                                     children: "Horário:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 191,
+                                                    lineNumber: 242,
                                                     columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 " Seg a Sáb das 08:00 às 18:00.",
@@ -1289,14 +1316,14 @@ const Loja = ()=>{
                                                     className: "jsx-df9f824b7f1858e8"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 191,
+                                                    lineNumber: 242,
                                                     columnNumber: 72
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 "Dom das 08:00 às 12:00."
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 190,
+                                            lineNumber: 241,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1307,7 +1334,7 @@ const Loja = ()=>{
                                                     children: "Endereço:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 193,
+                                                    lineNumber: 244,
                                                     columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 " Quadra 4 Lote 26 Condomínio Flores do Cerrado II",
@@ -1315,31 +1342,31 @@ const Loja = ()=>{
                                                     className: "jsx-df9f824b7f1858e8"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 193,
+                                                    lineNumber: 244,
                                                     columnNumber: 92
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 "Recreio Mossoró - Cidade Ocidental-GO"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 192,
+                                            lineNumber: 243,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 188,
+                                    lineNumber: 239,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "jsx-df9f824b7f1858e8" + " " + "text-center md:text-right",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                            className: "jsx-df9f824b7f1858e8" + " " + "text-lg font-black uppercase mb-2 italic",
+                                            className: "jsx-df9f824b7f1858e8" + " " + "text-lg font-black uppercase mb-2",
                                             children: "Pão de Queijo da Irá"
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 196,
+                                            lineNumber: 247,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1347,7 +1374,7 @@ const Loja = ()=>{
                                             children: "© 2026 - Todos os direitos reservados."
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 197,
+                                            lineNumber: 248,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1359,7 +1386,7 @@ const Loja = ()=>{
                                                     children: "Termos de Uso"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 199,
+                                                    lineNumber: 250,
                                                     columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1367,7 +1394,7 @@ const Loja = ()=>{
                                                     children: "|"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 200,
+                                                    lineNumber: 251,
                                                     columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1376,25 +1403,25 @@ const Loja = ()=>{
                                                     children: "Privacidade"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 201,
+                                                    lineNumber: 252,
                                                     columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 198,
+                                            lineNumber: 249,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 195,
+                                    lineNumber: 246,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/pages/loja.js",
-                            lineNumber: 178,
+                            lineNumber: 229,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1406,34 +1433,34 @@ const Loja = ()=>{
                                 children: "Desenvolvido por SjrPovoaS"
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 205,
+                                lineNumber: 256,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/src/pages/loja.js",
-                            lineNumber: 204,
+                            lineNumber: 255,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/pages/loja.js",
-                    lineNumber: 177,
+                    lineNumber: 228,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 176,
+                lineNumber: 227,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             isCartOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "jsx-df9f824b7f1858e8" + " " + "fixed inset-0 z-[2000] flex justify-end",
+                className: "jsx-df9f824b7f1858e8" + " " + "fixed inset-0 z-[3000] flex justify-end",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         onClick: ()=>setIsCartOpen(false),
                         className: "jsx-df9f824b7f1858e8" + " " + "absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 213,
+                        lineNumber: 264,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1447,7 +1474,7 @@ const Loja = ()=>{
                                         children: "Seu Carrinho"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 216,
+                                        lineNumber: 267,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1456,18 +1483,18 @@ const Loja = ()=>{
                                         children: "Fechar"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 217,
+                                        lineNumber: 268,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 215,
+                                lineNumber: 266,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "jsx-df9f824b7f1858e8" + " " + "flex-1 overflow-y-auto",
-                                children: cart.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                children: cart.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "jsx-df9f824b7f1858e8" + " " + "flex gap-6 mb-8 items-center border-b border-gray-50 pb-8",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
@@ -1476,7 +1503,7 @@ const Loja = ()=>{
                                                 className: "jsx-df9f824b7f1858e8" + " " + "w-20 h-24 object-cover"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 222,
+                                                lineNumber: 273,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1487,8 +1514,19 @@ const Loja = ()=>{
                                                         children: item.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 224,
+                                                        lineNumber: 275,
                                                         columnNumber: 21
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    item.size && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                        className: "jsx-df9f824b7f1858e8" + " " + "text-[10px] font-bold text-orange-600 mt-1 uppercase",
+                                                        children: [
+                                                            "Tamanho: ",
+                                                            item.size
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/src/pages/loja.js",
+                                                        lineNumber: 276,
+                                                        columnNumber: 35
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "jsx-df9f824b7f1858e8" + " " + "text-[10px] font-bold text-gray-400 mt-1 uppercase",
@@ -1498,7 +1536,7 @@ const Loja = ()=>{
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 225,
+                                                        lineNumber: 277,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1513,39 +1551,39 @@ const Loja = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/pages/loja.js",
-                                                                lineNumber: 227,
+                                                                lineNumber: 279,
                                                                 columnNumber: 23
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                onClick: ()=>removeItem(item.id),
+                                                                onClick: ()=>removeItem(index),
                                                                 className: "jsx-df9f824b7f1858e8" + " " + "text-[9px] font-black uppercase text-red-600 hover:underline",
                                                                 children: "Remover"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/pages/loja.js",
-                                                                lineNumber: 228,
+                                                                lineNumber: 280,
                                                                 columnNumber: 23
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 226,
+                                                        lineNumber: 278,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 223,
+                                                lineNumber: 274,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
-                                    }, item.id, true, {
+                                    }, `${item.id}-${item.size}-${index}`, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 221,
+                                        lineNumber: 272,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0)))
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 219,
+                                lineNumber: 270,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             cart.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1559,7 +1597,7 @@ const Loja = ()=>{
                                                 children: "Total"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 237,
+                                                lineNumber: 289,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1571,13 +1609,13 @@ const Loja = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 238,
+                                                lineNumber: 290,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 236,
+                                        lineNumber: 288,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1586,26 +1624,41 @@ const Loja = ()=>{
                                         children: "Finalizar no WhatsApp"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 240,
+                                        lineNumber: 292,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 235,
+                                lineNumber: 287,
                                 columnNumber: 15
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 214,
+                        lineNumber: 265,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 212,
+                lineNumber: 263,
                 columnNumber: 9
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                onClick: scrollToTop,
+                className: "jsx-df9f824b7f1858e8" + " " + `fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'}`,
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
+                    className: "jsx-df9f824b7f1858e8" + " " + "bi bi-arrow-up text-xl font-bold"
+                }, void 0, false, {
+                    fileName: "[project]/src/pages/loja.js",
+                    lineNumber: 306,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0))
+            }, void 0, false, {
+                fileName: "[project]/src/pages/loja.js",
+                lineNumber: 300,
+                columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                 id: "df9f824b7f1858e8",
@@ -1614,11 +1667,11 @@ const Loja = ()=>{
         ]
     }, void 0, true, {
         fileName: "[project]/src/pages/loja.js",
-        lineNumber: 43,
+        lineNumber: 90,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
-_s(Loja, "L9uf/GO5q9jdF0ZlgYw/gYrqyzo=");
+_s(Loja, "+V8IULOyLX+dJmyK5Q830LDpXFA=");
 _c = Loja;
 const __TURBOPACK__default__export__ = Loja;
 var _c;

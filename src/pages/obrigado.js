@@ -50,30 +50,16 @@ export default function Obrigado() {
       <main className="min-h-[70vh] flex items-center justify-center py-20 px-6 bg-gray-50">
         <div className="max-w-2xl w-full bg-white p-8 md:p-16 rounded-[40px] shadow-2xl text-center border border-gray-100 relative overflow-hidden">
           <div className="absolute -top-2 -right-10 text-orange-600/5 text-9xl font-black rotate-12 select-none">GUIA</div>
-          
-          <div className="bg-orange-100 text-orange-600 w-20 h-20 rounded-full flex items-center justify-center text-4xl mx-auto mb-8 animate-bounce">
-            <i className="bi bi-cloud-arrow-down-fill"></i>
-          </div>
 
           <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-6 italic">
-            Seu guia está <span className="text-orange-600">disponível!</span>
+           Agradecemos sua <span className="text-orange-600">inscrição.</span>
           </h1>
           
           <p className="text-gray-600 text-lg mb-10 leading-relaxed font-medium">
-            Obrigado por se inscrever! Preparamos esse conteúdo com muito carinho para deixar seus momentos com pão de queijo ainda mais saborosos.
+            Agora você foi adicionado à nossa lista de envio.
           </p>
           
-          <div className="flex flex-col gap-4 relative z-10">
-            <a 
-              href={LINK_PDF_GUIA} 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-black hover:bg-orange-600 text-white px-10 py-6 font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-2xl flex items-center justify-center gap-3 group"
-            >
-              <i className="bi bi-file-earmark-pdf-fill text-xl group-hover:scale-125 transition-transform"></i> 
-              Baixar Guia Gratuito
-            </a>
-            
+          <div className="flex flex-col gap-4 relative z-10">           
             <a href="/" className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 hover:text-orange-600 transition-colors py-4">
               Voltar para a página inicial
             </a>

@@ -8,6 +8,9 @@ self.__BUILD_MANIFEST = {
   "/loja": [
     "static/chunks/pages/loja.js"
   ],
+  "/obrigado-pela-assinatura": [
+    "static/chunks/pages/obrigado-pela-assinatura.js"
+  ],
   "__rewrites": {
     "afterFiles": [],
     "beforeFiles": [],
@@ -20,6 +23,7 @@ self.__BUILD_MANIFEST = {
     "/curso",
     "/loja",
     "/obrigado",
+    "/obrigado-pela-assinatura",
     "/privacidade",
     "/termos"
   ]

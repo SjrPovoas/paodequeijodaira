@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirme sua Inscrição</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            background-color: #f4f4f4;
+            padding-bottom: 40px;
+        }
+
+        .main {
+            background-color: #2D3134;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+            border-spacing: 0;
+            color: #ffffff;
+        }
+
+        .content {
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header-text {
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            color: #ea580c;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #cccccc;
+            margin-bottom: 30px;
+        }
+
+        .btn-container {
+            padding: 20px 0;
+        }
+
+        .button {
+            background-color: #ea580c;
+            color: #ffffff !important;
+            padding: 20px 40px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            border-radius: 2px;
+        }
+
+        .footer {
+            padding: 30px;
+            background-color: #ffffff;
+            color: #999999;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .footer a {
+            color: #ea580c;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <center class="wrapper">
+        <table class="main" width="100%">
+            <tr>
+                <td style="padding: 40px 0 20px 0; text-align: center;">
+                    <img src="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" alt="Logo Irá" width="120"
+                        style="display: block; margin: 0 auto;">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="content">
+                    <p class="header-text">Genesis Pass</p>
+                    <h1 class="title">Confirme seu lugar <br> na lista</h1>
+                    <p class="text">
+                        Você está a um passo de garantir o acesso antecipado à Web3 da Irá.
+                        Clique no botão abaixo para validar seu e-mail e ativar seus benefícios exclusivos.
+                    </p>
+
+                    <div class="btn-container">
+                        <a href="{{ doubleoptin }}" class="button">Sim, me inscreva nesta lista de espera</a>
+                    </div>
+
+                    <p style="font-size: 12px; color: #666; margin-top: 30px;">
+                        *Ao confirmar, você receberá 10% vitalício de desconto nas camisetas e acesso ao Clube Secreto.*
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="footer">
+                    <p style="font-size: 14px; margin: 0;">
+                        <strong>Pão de Queijo da Irá</strong> © 2026 - Todos os direitos reservados.</p>
+                    <p><a href="https://paodequeijodaira.vercel.app"
+                        style="color: #FFC300; text-decoration: none; font-size: 12px;">Visite nosso site</a></p>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+
+</html>

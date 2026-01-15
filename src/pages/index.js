@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 
 export default function Home() {
@@ -6,7 +6,28 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  // NOVO: Estado para controlar a visibilidade da seta
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // NOVO: Lógica para mostrar a seta após 400px de rolagem (fim do hero)
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);  
 
   const handleWhatsapp = (e) => {
     e.preventDefault();
@@ -386,6 +407,14 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* BOTÃO VOLTAR AO TOPO */}
+      <button onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${
+          showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'
+        }`} aria-label="Voltar ao topo"><i className="bi bi-arrow-up text-xl font-bold"></i>
+      </button>
+
     </div>
   );
 }
