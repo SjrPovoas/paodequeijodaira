@@ -15,11 +15,12 @@ self.__BUILD_MANIFEST = {
   },
   "sortedPages": [
     "/",
-    "/1loja",
-    "/2loja",
     "/_app",
     "/_error",
     "/curso",
-    "/loja"
+    "/loja",
+    "/obrigado",
+    "/privacidade",
+    "/termos"
   ]
 };self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

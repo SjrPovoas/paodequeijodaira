@@ -4,19 +4,23 @@ import Head from 'next/head';
 export default function Home() {
   const WHATSAPP_NUMBER = "5561982777196";
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Função para abrir WhatsApp
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   const handleWhatsapp = (e) => {
     e.preventDefault();
     const nome = document.getElementById('nome').value;
     const produto = document.getElementById('produto').value;
     const qtd = document.getElementById('quantidade').value;
-    const msg = encodeURIComponent(`Olá Ira! Meu nome é ${nome}. Quero pedir ${qtd}x ${produto}.`);
+    const endereco = document.getElementById('endereco').value;
+    const obs = document.getElementById('observacoes').value;
+    const msg = encodeURIComponent(`Olá Ira! Meu nome é ${nome}.\nQuero pedir: ${qtd}x ${produto}.\nEntrega em: ${endereco}.\nObs: ${obs}`);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
   };
 
   return (
-    <div className="bg-white text-[#2D3134] antialiased font-['Inter']">
+    <div className="bg-white text-[#2D3134] antialiased font-['Inter'] overflow-x-hidden">
       <Head>
         {/* SEO COMPLETO */}
         <meta charSet="UTF-8" />
@@ -31,7 +35,7 @@ export default function Home() {
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
         <meta name="googlebot" content="index,follow" />
         <meta name="google-site-verification" content="rj9-yKQenuTL7WznZzLhnZhRRqalrW8B9ptmhuewFiA" />
-        
+
         {/* OPEN GRAPH */}
         <meta property="og:locale" content="pt_BR" />
         <meta property="og:title" content="Pão de Queijo da Irá" />
@@ -43,7 +47,7 @@ export default function Home() {
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
         <meta property="fb:pages" content="359950968036532" />
-        
+
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@PaodQueijodaIra" />
@@ -63,7 +67,7 @@ export default function Home() {
         {/* SCRIPTS EXTERNOS */}
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
-   
+
         {/* Fontes e Estilos Externos */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
@@ -80,31 +84,53 @@ export default function Home() {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
-      {/* HEADER ADAPTADO COM LOGO */}
-      <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/90 backdrop-blur-md z-50">
+      {/* HEADER COM MENU HAMBÚRGUER */}
+      <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-16 w-auto" />
-          <nav className="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest">
-            <a href="#produtos" className="hover:text-orange-600 px-2 py-2 rounded-full">Produtos</a>
-            <a href="#nossa-historia" className="hover:text-orange-600 px-2 py-2 rounded-full">Nossa História</a>
-            <a href="#depoimentos" className="hover:text-orange-600 px-2 py-2 rounded-full">Depoimentos</a>
-            <a href="#guia-gratuito" className="hover:text-orange-600 px-2 py-2 rounded-full">Guia Gratuito</a>
-            <a href="#curso" className="hover:text-orange-600 px-2 py-2 rounded-full">Curso</a>
-            <a href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">VISITAR LOJA LIFESTYLE</a>
+          <a href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></a>
+
+          {/* Navegação Desktop */}
+          <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
+            <a href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</a>
+            <a href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</a>
+            <a href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</a>
+            <a href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</a>
+            <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
           </nav>
-          <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs hover:scale-105 transition-transform">Pedir Agora</button>
+
+          {/* Botão Hambúrguer Mobile */}
+          <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 z-[110] relative">
+            <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
+          </button>
+        </div>
+
+        {/* Overlay Menu Mobile */}
+        <div className={`fixed inset-[5] bg-white z-[-89] transition-transform duration-500 ease-in-out lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <nav className="flex flex-col bg-white items-center pt-32 space-y-4 text-xl font-black uppercase tracking-tighter italic text-center text-[#2D3134]">
+            <a href="#produtos" onClick={toggleMenu} className="hover:text-orange-600 transition-colors">Produtos</a>
+            <a href="#nossa-historia" onClick={toggleMenu} className="hover:text-orange-600 transition-colors">Nossa História</a>
+            <a href="#depoimentos" onClick={toggleMenu} className="hover:text-orange-600 transition-colors">Depoimentos</a>
+            <a href="#guia-gratuito" onClick={toggleMenu} className="hover:text-orange-600 transition-colors">Guia Gratuito</a>
+            <a href="#curso" onClick={toggleMenu} className="hover:text-orange-600 transition-colors">Curso</a>
+            <a href="/loja" onClick={toggleMenu} className="text-orange-600 hover:scale-110 transition-transform">Loja Lifestyle</a>
+            <div className="pt-4">
+              <button onClick={() => { setIsModalOpen(true); toggleMenu(); }} className="bg-orange-600 text-white px-10 py-5 font-black uppercase tracking-widest text-xs not-italic shadow-xl active:scale-95 transition-all"
+              >Pedir Agora
+              </button>
+            </div>
+          </nav>
         </div>
       </header>
 
       {/* HERO */}
-      <section className="relative py-20 px-6 bg-gray-50 overflow-hidden">
+      <section className="relative py-12 md:py-20 px-6 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6">
+          <div className="text-center md:text-left">
+            <h1 className="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6">
               O sabor caseiro que faz sua casa <span className="text-orange-600 italic">sorrir.</span>
             </h1>
-            <p className="text-lg text-gray-600 mb-8 max-w-md">Pão de Queijo de Verdade, Congelado Para Facilitar a Sua Vida. Peça e Surpreenda-se!</p>
-            <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-10 py-5 font-black uppercase tracking-widest text-xs hover:scale-105 transition-transform">
+            <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto md:mx-0">Pão de Queijo de Verdade, Congelado Para Facilitar a Sua Vida. Peça e Surpreenda-se!</p>
+            <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-10 py-5 font-black uppercase tracking-widest text-xs hover:scale-105 transition-transform shadow-xl">
               Quero encomendar agora!
             </button>
           </div>
@@ -117,23 +143,19 @@ export default function Home() {
 
       {/* PRODUTOS */}
       <section id="produtos" className="py-24 px-6 max-w-7xl mx-auto">
-        <h2 className="text-center text-4xl font-black uppercase tracking-tighter mb-16 italic">🧀 Nossos Pacotes: Sabor Congelado, Feito na Hora!</h2>
+        <h2 className="text-center text-3xl md:text-4xl font-black uppercase tracking-tighter mb-16 italic">🧀 Nossos Pacotes: Sabor Congelado!</h2>
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Pacote 20un */}
           <div className="border-4 border-black p-8 flex flex-col items-center text-center group hover:bg-black hover:text-white transition-all">
-            <img src="/imagens/imagem-embalagem-20und.png" className="h-64 object-contain mb-6 grayscale group-hover:grayscale-0 transition-all" />
+            <img src="/imagens/imagem-embalagem-20und.png" className="h-48 md:h-64 object-contain mb-6 grayscale group-hover:grayscale-0 transition-all" />
             <h3 className="text-2xl font-black uppercase">20 Unidades</h3>
-            <p className="text-xs font-bold uppercase tracking-widest my-4 opacity-60">Ideal para a semana</p>
-            <span className="text-3xl font-black mb-6">R$ 10,00</span>
-            <button onClick={() => setIsModalOpen(true)} className="w-full bg-orange-600 text-white py-4 font-bold uppercase">Comprar 20 Und</button>
+            <span className="text-3xl font-black my-4">R$ 10,00</span>
+            <button onClick={() => setIsModalOpen(true)} className="w-full bg-orange-600 text-white py-4 font-bold uppercase hover:bg-white hover:text-orange-600 transition-colors">Comprar 20 Und</button>
           </div>
-          {/* Pacote 1kg */}
           <div className="border-4 border-orange-600 p-8 flex flex-col items-center text-center bg-orange-50 group hover:bg-orange-600 hover:text-white transition-all">
-            <img src="/imagens/imagem-embalagem-1kg.png" className="h-64 object-contain mb-6 transition-all" />
+            <img src="/imagens/imagem-embalagem-1kg.png" className="h-48 md:h-64 object-contain mb-6 transition-all" />
             <h3 className="text-2xl font-black uppercase">Pacote de 1 KG</h3>
-            <p className="text-xs font-bold uppercase tracking-widest my-4 opacity-60">Melhor Custo-Benefício!</p>
-            <span className="text-3xl font-black mb-6">R$ 25,00</span>
-            <button onClick={() => setIsModalOpen(true)} className="w-full bg-black text-white py-4 font-bold uppercase">Comprar 1 KG</button>
+            <span className="text-3xl font-black my-4">R$ 25,00</span>
+            <button onClick={() => setIsModalOpen(true)} className="w-full bg-black text-white py-4 font-bold uppercase hover:bg-white hover:text-black transition-colors">Comprar 1 KG</button>
           </div>
         </div>
       </section>
@@ -174,19 +196,78 @@ export default function Home() {
         </div>
       </section>
 
-      {/* GUIA GRATUITO (Brevo Form) */}
-      <section id="guia-gratuito" className="bg-[#2D3134] text-white py-24 px-6">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          <img src="/imagens/caneca-isca.png" alt="Guia" className="rounded-3xl rotate-3" />
-          <div>
-            <h2 className="text-4xl font-black uppercase tracking-tighter leading-none mb-6">Transforme seu café em um momento inesquecível.</h2>
-            <p className="text-gray-400 mb-8">Baixe nosso guia gratuito e descubra os segredos da harmonização perfeita entre o pão de queijo quentinho, cafés especiais e acompanhamentos que abraçam a alma.</p>
-            <form className="space-y-4" action="https://43782b7b.sibforms.com/serve/MUIFADVOaKFQT5-e79pfcuRymIn3mT3LpZ6jTYiaabJu4jshHz-B2CX67o1k7j8_Jj8t0kir0rvKsU606Nhx7P2_uNRORnZ_5B-wVs18TtNjYGtXnkqclgkUanefRoM1T1-jLskVawichbZvQ4ojESQ2bzzCVA0xEodVW76v349_vKowtR085QjMa-mytw4PTgqyI1c2awQVte9ZMw==" method="POST">
-              <input type="text" placeholder="Seu nome" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
-              <input type="email" placeholder="Seu melhor e-mail" className="w-full p-4 bg-transparent border-2 border-gray-700 focus:border-orange-600 outline-none transition-colors" />
-              <button className="w-full bg-orange-600 py-4 font-black uppercase tracking-widest">Quero meu guia gratuito</button>
-            </form>
+      {/* SEÇÃO GUIA GRATUITO - IDENTIDADE VISUAL COMPLETA */}
+      <section id="guia-gratuito" className="bg-[#2D3134] text-white py-24 px-6 overflow-hidden">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+
+          {/* LADO ESQUERDO: IMAGEM/ISCA */}
+          <div className="relative group">
+            <div className="absolute -inset-4 bg-orange-600/20 rounded-full blur-3xl group-hover:bg-orange-600/30 transition-all duration-700"></div>
+            <img
+              src="/imagens/caneca-isca.png"
+              alt="Guia Harmonização"
+              className="relative rounded-3xl shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-500 z-10 w-full object-cover"
+            />
+            {/* Selo Flutuante */}
+            <div className="absolute -bottom-6 -right-6 bg-orange-600 text-white p-6 rounded-full font-black text-xs uppercase tracking-tighter leading-none shadow-2xl z-20 animate-bounce">
+              Grátis<br />PDF
+            </div>
           </div>
+
+          {/* LADO DIREITO: FORMULÁRIO */}
+          <div className="flex flex-col">
+            <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500 mb-4">
+              Conteúdo Exclusivo
+            </h2>
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-6 italic">
+              Aprenda a arte da <br /> <span className="text-orange-600">harmonização.</span>
+            </h2>
+            <p className="text-gray-400 text-lg mb-10 leading-relaxed max-w-md">
+              Baixe nosso guia gratuito e descubra quais cafés e acompanhamentos combinam perfeitamente com o seu pão de queijo.
+            </p>
+
+            {/* INÍCIO DO FORMULÁRIO BREVO */}
+            <form
+              id="sib-form"
+              method="POST"
+              action="https://43782b7b.sibforms.com/serve/MUIFADVOaKFQT5-e79pfcuRymIn3mT3LpZ6jTYiaabJu4jshHz-B2CX67o1k7j8_Jj8t0kir0rvKsU606Nhx7P2_uNRORnZ_5B-wVs18TtNjYGtXnkqclgkUanefRoM1T1-jLskVawichbZvQ4ojESQ2bzzCVA0xEodVW76v349_vKowtR085QjMa-mytw4PTgqyI1c2awQVte9ZMw=="
+              className="space-y-4"
+            >
+              {/* Honeypot para evitar SPAM (Não remover) */}
+              <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+                <input type="text" name="email_address_check" tabIndex="-1" value="" readOnly />
+              </div>
+
+              <div className="relative">
+                <input
+                  type="text"
+                  name="NOME"
+                  id="NOME"
+                  placeholder="COMO PODEMOS TE CHAMAR?"
+                  required
+                  className="w-full bg-white/5 border-2 border-gray-700 p-5 text-xs font-black uppercase tracking-widest outline-none focus:border-orange-600 focus:bg-white/10 transition-all placeholder:text-gray-600"
+                />
+              </div>
+
+              <div className="relative">
+                <input
+                  type="email"
+                  name="EMAIL"
+                  id="EMAIL"
+                  placeholder="SEU MELHOR E-MAIL"
+                  required
+                  className="w-full bg-white/5 border-2 border-gray-700 p-5 text-xs font-black uppercase tracking-widest outline-none focus:border-orange-600 focus:bg-white/10 transition-all placeholder:text-gray-600"
+                />
+              </div>
+
+              <button type="submit" className="w-full bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">Enviar meu guia agora!</button>
+
+              <p className="text-[9px] text-gray-500 uppercase tracking-widest text-center mt-4">
+                Prometemos não enviar spam. Você pode sair da lista a qualquer momento.</p>
+            </form>
+            {/* FIM DO FORMULÁRIO BREVO */}
+          </div>
+
         </div>
       </section>
 
@@ -205,7 +286,7 @@ export default function Home() {
         <div className="relative z-20 max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-[900] uppercase tracking-tighter mb-8 italic leading-none drop-shadow-lg">
             TRANSFORME PÃO DE QUEIJO EM RENDA: <br className="hidden md:block" />
-            <span className="text-black">COMECE SEU NEGÓCIO!</span>
+            <span className="text-#B4B4B4">COMECE SEU NEGÓCIO!</span>
           </h2>
 
           <p className="text-lg md:text-xl font-medium opacity-95 mb-12 leading-relaxed drop-shadow">
@@ -245,22 +326,18 @@ export default function Home() {
                   <option value="Ambos os Pacotes">Ambos os Pacotes</option>
                 </select>
               </div>
-
               <div>
                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Quantidade de Pacotes:</label>
                 <input type="number" id="quantidade" name="quantidade" min="1" defaultValue="1" required className="w-full p-3 border-2 border-gray-100 rounded-xl outline-none focus:border-orange-600" />
               </div>
-
               <div>
                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Seu Nome:</label>
                 <input type="text" id="nome" name="nome" placeholder="Seu Nome Completo" required className="w-full p-3 border-2 border-gray-100 rounded-xl outline-none focus:border-orange-600" />
               </div>
-
               <div>
                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Endereço de Entrega:</label>
                 <input type="text" id="endereco" name="endereco" placeholder="Rua, Número, Bairro, Cidade" required className="w-full p-3 border-2 border-gray-100 rounded-xl outline-none focus:border-orange-600" />
               </div>
-
               <div>
                 <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Observações (Opcional):</label>
                 <input type="text" id="observacoes" name="observacoes" placeholder="Ex: Retirar no local, pagar em PIX." className="w-full p-3 border-2 border-gray-100 rounded-xl outline-none focus:border-orange-600" />
@@ -275,57 +352,40 @@ export default function Home() {
         </div>
       )}
 
-      {/* FOOTER COMPLETO */}
+      {/* FOOTER E ASSINATURA */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start mb-16">
-
-            {/* COLUNA 1: LOGO E SOCIAL */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             <div className="flex flex-col items-center md:items-start">
-              <img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" />
+              <a href="/"><img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" /></a>
               <div className="flex space-x-2">
-                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></a>
-                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></a>
-                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></a>
-                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-geo-alt-fill"></i></a>
+                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
+                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-geo-alt-fill"></i></a>
               </div>
             </div>
-
-            {/* COLUNA 2: INFO DE RETIRADA */}
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                <strong>Horário:</strong> Seg a Sáb das 08:00 às 18:00.<br />
-                Dom das 08:00 às 12:00.
-              </p>
+                <strong>Horário:</strong> Seg a Sáb das 08:00 às 18:00.<br />Dom das 08:00 às 12:00.</p>
               <p className="text-sm text-gray-600">
-                <strong>Endereço:</strong> Quadra 4 Lote 26 Condomínio Flores do Cerrado II - Recreio Mossoró - Cidade Ocidental-GO
-              </p>
+                <strong>Endereço:</strong> Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
             </div>
-
-            {/* COLUNA 3: LEGAL & CRÉDITOS */}
-            <div className="text-center md:text-right flex flex-col justify-between h-full">
-              <div>
-                <h3 className="text-lg font-black uppercase tracking-tighter mb-2">Pão de Queijo da Irá</h3>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
-              </div>
-              <div className="mt-8 space-x-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                <a href="#" className="hover:text-black">Termos de Uso</a>
+            <div className="text-center md:text-right">
+              <h3 className="text-lg font-black uppercase mb-2">Pão de Queijo da Irá</h3>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
+              <p className="mt-2 space-x-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <a href="/termos" className="hover:text-black">Termos de Uso</a>
                 <span>|</span>
-                <a href="#" className="hover:text-black">Privacidade</a>
-              </div>
+                <a href="/privacidade" className="hover:text-black">Privacidade</a></p>
             </div>
           </div>
-
-          {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
-            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">
-              Desenvolvido por SjrPovoaS
-            </a>
+            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
           </div>
         </div>
       </footer>
-
     </div>
   );
 }

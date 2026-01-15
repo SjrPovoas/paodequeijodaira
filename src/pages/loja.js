@@ -1,23 +1,14 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 
 const Loja = () => {
-  // --- CONFIGURAÇÕES E LINKS ---
-  const LINK_LISTA_ESPERA = "https://7c8b4a21.sibforms.com/serve/SUA_URL_AQUI"; // Substitua pelo link real
+  const LINK_LISTA_ESPERA = "https://7c8b4a21.sibforms.com/serve/SUA_URL_AQUI";
   const WHATSAPP_FONE = "5561982777196";
 
-  // --- ESTADOS ---
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // --- PRODUTOS ---
-  const produtos = [
-    { id: 1, name: 'T-Shirt Logo Pão de Queijo da Irá (M-White)', price: 110, img: '/imagens/camiseta1.png' },
-    { id: 2, name: 'T-Shirt Logo Pão de Queijo da Irá (F-White)', price: 110, img: '/imagens/camiseta2.png' },
-    { id: 3, name: 'Avental de Lona Pão de Queijo da Irá', price: 85, img: '/imagens/avental.png' },
-    { id: 4, name: 'Caneca Cerâmica Fosca do Pão de Queijo da Irá', price: 42, img: '/imagens/caneca.png' },
-  ];
-
-  // --- LÓGICA DO CARRINHO ---
   const handleAddToCart = (product) => {
     setCart((prevCart) => {
       const itemExistente = prevCart.find((item) => item.id === product.id);
@@ -35,11 +26,12 @@ const Loja = () => {
     setCart(cart.filter(item => item.id !== id));
   };
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const totalCarrinho = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
   const totalItens = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const finalizarPedidoWhatsApp = () => {
-    let mensagem = `Olá Irá! Gostaria de fazer um pedido:\n\n`;
+    let mensagem = `Olá Irá! Gostaria de fazer um pedido Lifestyle:\n\n`;
     cart.forEach((item) => {
       mensagem += `*${item.quantity}x* ${item.name} - R$ ${item.price * item.quantity},00\n`;
     });
@@ -48,73 +40,96 @@ const Loja = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-white font-sans text-black">
+    <div className="relative min-h-screen bg-white font-sans text-black overflow-x-hidden">
+      <Head>
+        <title>Loja Lifestyle | Pão de Queijo da Irá</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
+      </Head>
 
-      {/* HEADER ADAPTADO COM LOGO */}
-      <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/90 backdrop-blur-md z-50">
+      {/* HEADER COM MENU HAMBÚRGUER */}
+      <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[1000]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-16 w-auto" />
-          <nav className="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest">
-            <a href="#web3" className="hover:text-orange-600 px-2 py-2 rounded-full">IRÁ DIGITAL GENESIS PASS</a>
-            <a href="/" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">COMPRAR PÃO DE QUEIJO DA IRÁ</a>
-            <button onClick={() => setIsCartOpen(true)} className="flex items-center gap-2 group"
-            >
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] group-hover:text-orange-600 transition-colors">Carrinho Lifestyle & Acessórios</span>
-              <div className="bg-black text-white text-[9px] font-black w-5 h-5 flex items-center justify-center rounded-full group-hover:bg-orange-600 transition-colors">
-                {totalItens}
-              </div>
-            </button>
+          <a href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></a>
+
+          {/* Navegação Desktop */}
+          <nav className="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest items-center">
+            <a href="#web3" className="hover:text-orange-600">IRÁ DIGITAL GENESIS PASS</a>
+            <a href="/" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">COMPRAR PÃO DE QUEIJO</a>
+
+          {/* Botão Hambúrguer Mobile */}
+          <button onClick={() => setIsCartOpen(true)} className="flex items-center gap-2 group">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] group-hover:text-orange-600 transition-colors">Carrinho</span>
+              <div className="bg-black text-white text-[9px] font-black w-5 h-5 flex items-center justify-center rounded-full group-hover:bg-orange-600 transition-colors">{totalItens}</div>
+          </button>
           </nav>
+          <div className="flex items-center gap-4 md:hidden">
+            <button onClick={() => setIsCartOpen(true)} className="relative p-2">
+              <i className="bi bi-bag text-2xl"></i>
+              {totalItens > 0 && <span className="absolute top-0 right-0 bg-orange-600 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold">{totalItens}</span>}
+            </button>
+            <button onClick={toggleMenu} className="text-3xl text-orange-600 z-[2001] relative">
+              <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
+            </button>
+          </div>
         </div>
 
-        <nav className="flex items-center gap-6 md:gap-10">
-
-
-        </nav>
+        {/* Overlay Menu Mobile */}
+        <div className={`fixed inset-[60] bg-white z-[2] transition-transform duration-500 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <nav className="flex flex-col bg-white items-center pt-32 space-y-8 text-xl font-black uppercase tracking-tighter italic text-center text-black">
+            <a href="#web3" onClick={toggleMenu} className="uppercase border-b-2 hover:text-orange-600 border-black pb-1">Lista de espera do Genesis Pass</a>
+                        <a href="#web3" onClick={toggleMenu} className="uppercase border-b-2 hover:text-orange-600 border-black pb-1">Ver Carrinho</a>
+            {/*<button onClick={() => { setIsCartOpen(true); toggleMenu(); }} className="uppercase border-b-2 text-orange-600 border-black pb-1">Ver Carrinho ({totalItens})</button>*/}
+          </nav>
+        </div>
+        {/* Overlay Menu Mobile */}
+        <div className={`fixed inset-0 bg-white z-[2000] transition-transform duration-500 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <nav className="flex flex-col bg-white items-center pt-32 space-y-8 text-xl font-black uppercase tracking-tighter italic text-center text-black">
+            {/* Link Lista de Espera com ícone de Ticket/Pass */}
+            <a href="#web3" onClick={toggleMenu} className="flex items-center gap-3 border-b-2 border-black pb-1 hover:text-orange-600 transition-colors">
+              <span>Lista de espera Genesis Pass</span><i className="bi bi-ticket-perforated text-2xl"></i>
+            </a>
+            {/* Link Ver Carrinho com ícone de Sacola/Carrinho */}
+            <button onClick={() => { setIsCartOpen(true); toggleMenu(); }} 
+              className="flex items-center gap-3 border-b-2 border-black pb-1 hover:text-orange-600 transition-colors uppercase font-black">
+              <span>Ver Carrinho ({totalItens})</span><i className="bi bi-cart3 text-2xl"></i>
+            </button>
+            <a href="/" onClick={toggleMenu} className="text-orange-600 text-sm not-italic font-bold tracking-widest mt-10">
+              ← VOLTAR PARA HOME
+            </a>
+          </nav>
+        </div>
       </header>
 
-      <div className="h-24"></div> {/* Espaçador */}
-
-      {/* --- 2. CONTEÚDO PRINCIPAL (LOJA) --- */}
       <main className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
-        <header className="mb-20 text-center md:text-left">
+        <header className="mb-20 text-center md:text-left pt-10">
           <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 mb-4">Loja Oficial</h2>
           <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none">Lifestyle & <br /> Acessórios</h1>
         </header>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-x-12 md:gap-y-24">
-          {produtos.map((produto) => (
+          {[
+            { id: 1, name: 'T-Shirt Logo Pão de Queijo da Irá (M-White)', price: 110, img: '/imagens/camiseta1.png' },
+            { id: 2, name: 'T-Shirt Logo Pão de Queijo da Irá (F-White)', price: 110, img: '/imagens/camiseta2.png' },
+            { id: 3, name: 'Avental de Lona Pão de Queijo da Irá', price: 85, img: '/imagens/avental.png' },
+            { id: 4, name: 'Caneca Cerâmica Fosca do Pão de Queijo da Irá', price: 42, img: '/imagens/caneca.png' },
+          ].map((produto) => (
             <div key={produto.id} className="product-card group">
-              <div
-                className="aspect-[4/5] bg-gray-50 overflow-hidden border border-gray-100 cursor-pointer relative"
-                onClick={() => handleAddToCart(produto)}
-              >
-                <img
-                  src={produto.img}
-                  className="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700"
-                  alt={produto.name}
-                />
-                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="aspect-[4/5] bg-gray-50 overflow-hidden border border-gray-100 cursor-pointer relative" onClick={() => handleAddToCart(produto)}>
+                <img src={produto.img} className="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700" alt={produto.name} />
               </div>
               <div className="mt-8 flex justify-between items-start">
                 <div className="flex-1 pr-4">
                   <h3 className="text-sm font-black uppercase tracking-widest leading-tight">{produto.name}</h3>
                   <p className="text-xs font-bold text-orange-600 uppercase mt-2">R$ {produto.price},00</p>
                 </div>
-                <button
-                  onClick={() => handleAddToCart(produto)}
-                  className="border-b-2 border-black text-[10px] font-black uppercase tracking-widest pb-1 hover:text-orange-600 hover:border-orange-600 transition-all shrink-0"
-                >
-                  Adicionar ao Carrinho
-                </button>
+                <button onClick={() => handleAddToCart(produto)} className="border-b-2 border-black text-[10px] font-black uppercase tracking-widest pb-1 hover:text-orange-600 hover:border-orange-600 transition-all shrink-0">Adicionar</button>
               </div>
             </div>
           ))}
         </div>
       </main>
 
-      {/* --- 3. SEÇÃO WEB3 --- */}
-      <section id="web3" className="py-24 px-6 md:px-12 bg-[#2D3134] text-white overflow-hidden relative">
+      {/* WEB3 SECTION */}
+      <section id="web3" className="py-24 px-6 md:px-12 bg-[#2D3134] text-white relative overflow-hidden">
         <div className="max-w-4xl relative z-10 mx-auto md:mx-0">
           <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-4 italic">
             IRÁ Digital <br /> <span className="outline-text" style={{ WebkitTextStroke: '1px white', color: 'transparent' }}>Genesis Pass</span>
@@ -146,75 +161,53 @@ const Loja = () => {
             </div>
           </div>
 
-          {/* BOTÃO DA BREVO */}
-          <a
-            href={LINK_LISTA_ESPERA}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-16 inline-block bg-orange-600 text-white px-10 py-5 text-[10px] font-black uppercase tracking-[0.4em] hover:bg-orange-500 transition-all shadow-xl"
-          >
-            Entrar na Lista de Espera (Em breve)
+          <a href={LINK_LISTA_ESPERA} target="_blank" rel="noopener noreferrer" className="mt-16 inline-block bg-orange-600 text-white px-10 py-5 text-[10px] font-black uppercase tracking-[0.4em] hover:bg-orange-500 transition-all shadow-xl">
+            Entrar na Lista de Espera
           </a>
         </div>
 
-        {/* Decorativo de fundo */}
-        <div className="absolute top-1/2 right-[-10%] translate-y-[-50%] text-[20vw] font-black opacity-[0.05] select-none text-orange-500 pointer-events-none">
+        {/* Decorativo de fundo ajustado para não criar scroll */}
+        <div className="absolute top-1/2 right-[-5%] translate-y-[-50%] text-[25vw] font-black opacity-[0.05] select-none text-orange-500 pointer-events-none whitespace-nowrap">
           WEB3
         </div>
       </section>
 
-      {/* FOOTER COMPLETO */}
+      {/* FOOTER E ASSINATURA */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start mb-16">
-
-            {/* COLUNA 1: LOGO E SOCIAL */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             <div className="flex flex-col items-center md:items-start">
-              <img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" />
+              <a href="/"><img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" /></a>
               <div className="flex space-x-2">
-                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></a>
-                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></a>
-                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></a>
-                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-geo-alt-fill"></i></a>
+                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
+                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-geo-alt-fill"></i></a>
               </div>
             </div>
-
-            {/* COLUNA 2: INFO DE RETIRADA */}
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                <strong>Horário:</strong> Seg a Sáb das 08:00 às 18:00.<br />
-                Dom das 08:00 às 12:00.
-              </p>
+                <strong>Horário:</strong> Seg a Sáb das 08:00 às 18:00.<br />Dom das 08:00 às 12:00.</p>
               <p className="text-sm text-gray-600">
-                <strong>Endereço:</strong> Quadra 4 Lote 26 Condomínio Flores do Cerrado II - Recreio Mossoró - Cidade Ocidental-GO
-              </p>
+                <strong>Endereço:</strong> Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
             </div>
-
-            {/* COLUNA 3: LEGAL & CRÉDITOS */}
-            <div className="text-center md:text-right flex flex-col justify-between h-full">
-              <div>
-                <h3 className="text-lg font-black uppercase tracking-tighter mb-2">Pão de Queijo da Irá</h3>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
-              </div>
-              <div className="mt-8 space-x-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                <a href="#" className="hover:text-black">Termos de Uso</a>
+            <div className="text-center md:text-right">
+              <h3 className="text-lg font-black uppercase mb-2 italic">Pão de Queijo da Irá</h3>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
+              <p className="mt-2 space-x-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <a href="/termos" className="hover:text-black">Termos de Uso</a>
                 <span>|</span>
-                <a href="#" className="hover:text-black">Privacidade</a>
-              </div>
+                <a href="/privacidade" className="hover:text-black">Privacidade</a></p>
             </div>
           </div>
-
-          {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
-            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">
-              Desenvolvido por SjrPovoaS
-            </a>
+            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
           </div>
         </div>
       </footer>
 
-      {/* --- 5. MODAL DO CARRINHO --- */}
+      {/* CARRINHO */}
       {isCartOpen && (
         <div className="fixed inset-0 z-[2000] flex justify-end">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in" onClick={() => setIsCartOpen(false)} />
@@ -224,27 +217,19 @@ const Loja = () => {
               <button onClick={() => setIsCartOpen(false)} className="text-[10px] font-black uppercase tracking-widest border-b-2 border-black">Fechar</button>
             </div>
             <div className="flex-1 overflow-y-auto">
-              {cart.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center text-center">
-                  <p className="text-gray-300 uppercase text-[10px] font-black tracking-[0.3em]">Carrinho Vazio</p>
-                </div>
-              ) : (
-                cart.map((item) => (
-                  <div key={item.id} className="flex gap-6 mb-8 items-center group">
-                    <div className="w-20 h-24 bg-gray-50 border border-gray-100 overflow-hidden shrink-0">
-                      <img src={item.img} className="w-full h-full object-cover mix-blend-multiply" alt={item.name} />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-[10px] font-black uppercase tracking-widest leading-tight">{item.name}</h4>
-                      <p className="text-[10px] font-bold text-gray-400 mt-1 uppercase">Qtd: {item.quantity}</p>
-                      <div className="flex justify-between items-center mt-3">
-                        <p className="font-black text-sm tracking-tighter">R$ {item.price * item.quantity},00</p>
-                        <button onClick={() => removeItem(item.id)} className="text-[9px] font-black uppercase text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">Remover</button>
-                      </div>
+              {cart.map((item) => (
+                <div key={item.id} className="flex gap-6 mb-8 items-center border-b border-gray-50 pb-8">
+                  <img src={item.img} className="w-20 h-24 object-cover" alt={item.name} />
+                  <div className="flex-1">
+                    <h4 className="text-[10px] font-black uppercase tracking-widest leading-tight">{item.name}</h4>
+                    <p className="text-[10px] font-bold text-gray-400 mt-1 uppercase">Qtd: {item.quantity}</p>
+                    <div className="flex justify-between items-center mt-3">
+                      <p className="font-black text-sm tracking-tighter">R$ {item.price * item.quantity},00</p>
+                      <button onClick={() => removeItem(item.id)} className="text-[9px] font-black uppercase text-red-600 hover:underline">Remover</button>
                     </div>
                   </div>
-                ))
-              )}
+                </div>
+              ))}
             </div>
             {cart.length > 0 && (
               <div className="mt-10 pt-10 border-t-4 border-black">
