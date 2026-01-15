@@ -1,410 +1,48 @@
-[00:00:04.342] Server  WARN    ⚠ Turbopack's filesystem cache has been deleted because we previously detected an internal error in Turbopack. Builds or page loads may be slower as a result.
-[00:00:05.673] Server  LOG     ✓ Ready in 3.8s
-[00:00:17.785] Server  LOG     ○ Compiling / ...
-[00:00:27.502] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+[00:00:10.401] Server  WARN    ⚠ Turbopack's filesystem cache has been deleted because we previously detected an internal error in Turbopack. Builds or page loads may be slower as a result.
+[00:00:12.239] Server  LOG     ✓ Ready in 8.7s
+[00:00:15.839] Server  LOG     ○ Compiling / ...
+[00:00:29.020] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
 See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:00:27.504] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:00:29.022] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:00:27.514] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+[00:00:29.024] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:00:27.521] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+[00:00:29.028] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
 See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:00:35.312] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+[00:00:35.338] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:00:43.530] Browser LOG     [injected|debug]: Injecting
+[00:00:43.530] Browser LOG     [injected|debug]: Added proxy
+[00:00:43.531] Browser LOG     [injected|debug]: Pocket Universe is running!
+[00:00:43.531] Browser ERROR   uncaughtError: TypeError: Cannot redefine property: ethereum
+[00:01:19.242] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:01:31.723] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
 See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:00:35.313] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:01:31.723] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:00:35.313] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+[00:01:31.723] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:00:35.313] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+[00:01:31.723] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
 See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:00:41.278] Browser ERROR   unhandledRejection: i: Failed to connect to MetaMask
-[00:01:20.438] Browser ERROR   unhandledRejection: i: Failed to connect to MetaMask
-[00:01:44.616] Server  LOG     ✓ Compiled in 584ms
-[00:02:35.290] Server  LOG     ✓ Compiled in 1023ms
-[00:02:35.842] Server  LOG     ✓ Compiled in 350ms
-[00:02:43.562] Server  LOG     ✓ Compiled in 285ms
-[00:03:23.287] Server  LOG     ✓ Compiled in 335ms
-[00:03:27.664] Server  LOG     ✓ Compiled in 203ms
-[00:03:30.283] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:01:37.960] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:03:36.801] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:02:53.866] Server  LOG     ✓ Compiled in 2.9s
+[00:03:08.168] Server  LOG     ✓ Compiled in 394ms
+[00:03:24.796] Server  LOG     ✓ Compiled in 174ms
+[00:03:57.125] Server  LOG     ✓ Compiled in 341ms
+[00:04:12.593] Server  LOG     ✓ Compiled in 543ms
+[00:04:24.660] Server  LOG     ✓ Compiled in 211ms
+[00:04:26.447] Server  LOG     ✓ Compiled in 839ms
+[00:05:02.734] Server  LOG     ✓ Compiled in 436ms
+[00:05:12.023] Server  LOG     ✓ Compiled in 607ms
+[00:05:17.687] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:03:43.044] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:05:21.010] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:03:51.800] Browser ERROR   unhandledRejection: i: Failed to connect to MetaMask
-[00:05:18.752] Server  LOG     ✓ Compiled in 1574ms
-[00:06:45.633] Server  LOG     ✓ Compiled in 645ms
-[00:07:42.218] Server  LOG     ✓ Compiled in 207ms
-[00:07:49.575] Server  LOG     ✓ Compiled in 284ms
-[00:07:54.716] Server  LOG     ✓ Compiled in 337ms
-[00:08:31.126] Server  LOG     ✓ Compiled in 527ms
-[00:08:32.368] Server  LOG     ✓ Compiled in 712ms
-[00:08:46.405] Server  LOG     ✓ Compiled in 402ms
-[00:09:03.167] Server  LOG     ✓ Compiled in 360ms
-[00:09:23.959] Server  LOG     ✓ Compiled in 614ms
-[00:09:33.191] Server  LOG     ✓ Compiled in 342ms
-[00:12:02.663] Server  LOG     ✓ Compiled in 830ms
-[00:12:09.196] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:05:36.911] Server  LOG     ✓ Compiled in 427ms
+[00:08:50.450] Server  LOG     ✓ Compiled in 1699ms
+[00:08:53.627] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:12:15.663] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:08:56.454] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:12:23.960] Browser ERROR   unhandledRejection: i: Failed to connect to MetaMask
-[00:13:13.658] Server  LOG     ✓ Compiled in 911ms
-[00:13:18.540] Server  LOG     ✓ Compiled in 1142ms
-[00:13:18.541] Browser LOG     Refreshing page data due to server-side change
-[00:13:19.489] Browser ERROR   ./src/pages/loja.js:269:8
-Ecmascript file had an error
-  267 |
-  268 | import React, { useState, useEffect } from 'react';
-> 269 | import Head from 'next/head';
-      |        ^^^^
-  270 |
-  271 | const Loja = () => {
-  272 |   const LINK_LISTA_ESPERA = "https://7c8b4a21.sibforms.com/serve/SUA_URL_AQUI";
-
-the name `Head` is defined multiple times
-[00:13:19.489] Browser ERROR   ./src/pages/loja.js:271:7
-Ecmascript file had an error
-  269 | import Head from 'next/head';
-  270 |
-> 271 | const Loja = () => {
-      |       ^^^^
-  272 |   const LINK_LISTA_ESPERA = "https://7c8b4a21.sibforms.com/serve/SUA_URL_AQUI";
-  273 |   const WHATSAPP_FONE = "5561982777196";
-  274 |
-
-the name `Loja` is defined multiple times
-[00:13:19.489] Browser ERROR   ./src/pages/loja.js:268:8
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |        ^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `React` is defined multiple times
-[00:13:19.489] Browser ERROR   ./src/pages/loja.js:539:1
-Ecmascript file had an error
-  537 | };
-  538 |
-> 539 | export default Loja;
-      | ^^^^^^^^^^^^^^^^^^^^
-
-the name `default` is exported multiple times
-[00:13:19.489] Browser ERROR   ./src/pages/loja.js:268:27
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |                           ^^^^^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `useEffect` is defined multiple times
-[00:13:19.489] Browser ERROR   ./src/pages/loja.js:268:17
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |                 ^^^^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `useState` is defined multiple times
-[00:13:42.474] Server  LOG     ✓ Compiled in 570ms
-[00:13:43.799] Browser ERROR   ./src/pages/loja.js:519:21
-Parsing ecmascript source code failed
-  517 |       )}
-  518 |
-> 519 | export default Loja;
-      |                     ^
-
-Expected '</', got '<eof>'
-[00:14:03.704] Server  LOG     ✓ Compiled in 454ms
-[00:14:04.496] Browser ERROR   ./src/pages/loja.js:269:8
-Ecmascript file had an error
-  267 |
-  268 | import React, { useState, useEffect } from 'react';
-> 269 | import Head from 'next/head';
-      |        ^^^^
-  270 |
-  271 | const Loja = () => {
-  272 |   const LINK_LISTA_ESPERA = "https://7c8b4a21.sibforms.com/serve/SUA_URL_AQUI";
-
-the name `Head` is defined multiple times
-[00:14:04.496] Browser ERROR   ./src/pages/loja.js:271:7
-Ecmascript file had an error
-  269 | import Head from 'next/head';
-  270 |
-> 271 | const Loja = () => {
-      |       ^^^^
-  272 |   const LINK_LISTA_ESPERA = "https://7c8b4a21.sibforms.com/serve/SUA_URL_AQUI";
-  273 |   const WHATSAPP_FONE = "5561982777196";
-  274 |
-
-the name `Loja` is defined multiple times
-[00:14:04.496] Browser ERROR   ./src/pages/loja.js:268:8
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |        ^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `React` is defined multiple times
-[00:14:04.496] Browser ERROR   ./src/pages/loja.js:539:1
-Ecmascript file had an error
-  537 | };
-  538 |
-> 539 | export default Loja;
-      | ^^^^^^^^^^^^^^^^^^^^
-
-the name `default` is exported multiple times
-[00:14:04.496] Browser ERROR   ./src/pages/loja.js:268:27
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |                           ^^^^^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `useEffect` is defined multiple times
-[00:14:04.496] Browser ERROR   ./src/pages/loja.js:268:17
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |                 ^^^^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `useState` is defined multiple times
-[00:14:12.470] Server  LOG     ✓ Compiled in 298ms
-[00:14:15.118] Browser LOG     Refreshing page data due to server-side change
-[00:14:51.212] Server  LOG     ✓ Compiled in 1556ms
-[00:14:53.448] Browser LOG     Refreshing page data due to server-side change
-[00:14:53.448] Browser ERROR   ./src/pages/loja.js:269:8
-Ecmascript file had an error
-  267 |
-  268 | import React, { useState, useEffect } from 'react';
-> 269 | import Head from 'next/head';
-      |        ^^^^
-  270 |
-  271 | const Loja = () => {
-  272 |   const LINK_LISTA_ESPERA = "https://7c8b4a21.sibforms.com/serve/SUA_URL_AQUI";
-
-the name `Head` is defined multiple times
-[00:14:53.448] Browser ERROR   ./src/pages/loja.js:271:7
-Ecmascript file had an error
-  269 | import Head from 'next/head';
-  270 |
-> 271 | const Loja = () => {
-      |       ^^^^
-  272 |   const LINK_LISTA_ESPERA = "https://7c8b4a21.sibforms.com/serve/SUA_URL_AQUI";
-  273 |   const WHATSAPP_FONE = "5561982777196";
-  274 |
-
-the name `Loja` is defined multiple times
-[00:14:53.448] Browser ERROR   ./src/pages/loja.js:268:8
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |        ^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `React` is defined multiple times
-[00:14:53.448] Browser ERROR   ./src/pages/loja.js:539:1
-Ecmascript file had an error
-  537 | };
-  538 |
-> 539 | export default Loja;
-      | ^^^^^^^^^^^^^^^^^^^^
-
-the name `default` is exported multiple times
-[00:14:53.448] Browser ERROR   ./src/pages/loja.js:268:27
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |                           ^^^^^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `useEffect` is defined multiple times
-[00:14:53.448] Browser ERROR   ./src/pages/loja.js:268:17
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |                 ^^^^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `useState` is defined multiple times
-[00:15:35.843] Server  LOG     ✓ Compiled in 388ms
-[00:15:36.634] Browser ERROR   ./src/pages/loja.js:448:3
-Parsing ecmascript source code failed
-  446 |       `}</style>
-  447 |     </div>
-> 448 |   );
-      |   ^
-  449 | };
-  450 |
-  451 | export default Loja;
-
-Expression expected
-[00:15:49.689] Browser ERROR   ./src/pages/loja.js:478:3
-Parsing ecmascript source code failed
-  476 |       `}</style>
-  477 |     </div>
-> 478 |   );
-      |   ^
-  479 | };
-  480 |
-  481 | export default Loja;
-
-Expression expected
-[00:16:24.783] Browser ERROR   ./src/pages/loja.js:478:3
-Parsing ecmascript source code failed
-  476 |       `}</style>
-  477 |     </div>
-> 478 |   );
-      |   ^
-  479 | };
-  480 |
-  481 | export default Loja;
-
-Expression expected
-[00:17:58.896] Server  LOG     ✓ Compiled in 500ms
-[00:18:00.618] Server  LOG     ✓ Compiled in 728ms
-[00:18:02.275] Browser ERROR   ./src/pages/loja.js:448:3
-Parsing ecmascript source code failed
-  446 |       `}</style>
-  447 |     </div>
-> 448 |   );
-      |   ^
-  449 | };
-  450 |
-  451 | export default Loja;
-
-Expression expected
-[00:18:02.494] Browser ERROR   ./src/pages/loja.js:269:8
-Ecmascript file had an error
-  267 |
-  268 | import React, { useState, useEffect } from 'react';
-> 269 | import Head from 'next/head';
-      |        ^^^^
-  270 |
-  271 | const Loja = () => {
-  272 |   const LINK_LISTA_ESPERA = "https://7c8b4a21.sibforms.com/serve/SUA_URL_AQUI";
-
-the name `Head` is defined multiple times
-[00:18:02.494] Browser ERROR   ./src/pages/loja.js:271:7
-Ecmascript file had an error
-  269 | import Head from 'next/head';
-  270 |
-> 271 | const Loja = () => {
-      |       ^^^^
-  272 |   const LINK_LISTA_ESPERA = "https://7c8b4a21.sibforms.com/serve/SUA_URL_AQUI";
-  273 |   const WHATSAPP_FONE = "5561982777196";
-  274 |
-
-the name `Loja` is defined multiple times
-[00:18:02.494] Browser ERROR   ./src/pages/loja.js:268:8
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |        ^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `React` is defined multiple times
-[00:18:02.494] Browser ERROR   ./src/pages/loja.js:539:1
-Ecmascript file had an error
-  537 | };
-  538 |
-> 539 | export default Loja;
-      | ^^^^^^^^^^^^^^^^^^^^
-
-the name `default` is exported multiple times
-[00:18:02.494] Browser ERROR   ./src/pages/loja.js:268:27
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |                           ^^^^^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `useEffect` is defined multiple times
-[00:18:02.494] Browser ERROR   ./src/pages/loja.js:268:17
-Ecmascript file had an error
-  266 | export default Loja;
-  267 |
-> 268 | import React, { useState, useEffect } from 'react';
-      |                 ^^^^^^^^
-  269 | import Head from 'next/head';
-  270 |
-  271 | const Loja = () => {
-
-the name `useState` is defined multiple times
-[00:18:02.494] Browser LOG     Refreshing page data due to server-side change
-[00:19:38.849] Server  LOG     ✓ Compiled in 543ms
-[00:20:41.637] Server  LOG     ✓ Compiled in 234ms
-[00:21:32.123] Server  LOG     ✓ Compiled in 166ms
-[00:21:40.985] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
-See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:21:46.262] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
-See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:21:54.611] Browser ERROR   unhandledRejection: i: Failed to connect to MetaMask
-[00:22:43.926] Server  LOG     ✓ Compiled in 1185ms
-[00:34:14.358] Server  LOG     ✓ Compiled in 2.8s
-[01:00:33.107] Server  LOG     ✓ Compiled in 4.5s
-[01:10:15.429] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
-See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[01:10:24.619] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
-See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[01:10:35.642] Browser ERROR   unhandledRejection: i: Failed to connect to MetaMask
-[02:22:10.122] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
-See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[02:22:23.884] Server  LOG     ○ Compiling /obrigado-pela-assinatura ...
-[02:22:25.347] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
-See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[02:22:25.356] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lobster&display=swap"). Use Document instead. 
-See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[02:22:31.092] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
-See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[02:22:31.092] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
-See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[02:22:31.092] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lobster&display=swap"). Use Document instead. 
-See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[02:22:59.900] Server  LOG     ✓ Compiled in 1032ms
-[02:23:13.865] Server  LOG     ✓ Compiled in 316ms
-[02:23:28.343] Server  LOG     ✓ Compiled in 320ms
-[02:23:55.758] Server  LOG     ✓ Compiled in 233ms
-[02:23:58.060] Server  LOG     ✓ Compiled in 338ms
-[02:23:59.166] Server  LOG     ✓ Compiled in 240ms
-[02:24:01.765] Server  LOG     ✓ Compiled in 199ms
-[02:24:03.243] Server  LOG     ✓ Compiled in 219ms
-[02:24:10.775] Server  LOG     ✓ Compiled in 480ms
-[02:24:15.682] Server  LOG     ✓ Compiled in 325ms
-[02:24:25.308] Server  LOG     ✓ Compiled in 309ms
-[02:25:22.123] Server  LOG     ✓ Compiled in 1113ms
-[02:25:37.306] Server  LOG     ✓ Compiled in 4.3s

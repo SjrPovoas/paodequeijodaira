@@ -5,11 +5,11 @@ self.__BUILD_MANIFEST = {
   "/_error": [
     "static/chunks/pages/_error.js"
   ],
-  "/loja": [
-    "static/chunks/pages/loja.js"
+  "/confirmacao-inscricao": [
+    "static/chunks/pages/confirmacao-inscricao.js"
   ],
-  "/obrigado-pela-assinatura": [
-    "static/chunks/pages/obrigado-pela-assinatura.js"
+  "/confirmacao_de_inscricao": [
+    "static/chunks/pages/confirmacao_de_inscricao.js"
   ],
   "__rewrites": {
     "afterFiles": [],
@@ -20,10 +20,11 @@ self.__BUILD_MANIFEST = {
     "/",
     "/_app",
     "/_error",
+    "/baixar_guia_gratuito",
+    "/confirmacao_de_inscricao",
     "/curso",
     "/loja",
     "/obrigado",
-    "/obrigado-pela-assinatura",
     "/privacidade",
     "/termos"
   ]

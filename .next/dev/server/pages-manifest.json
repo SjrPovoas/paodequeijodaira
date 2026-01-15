@@ -3,6 +3,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/loja": "pages/loja.js",
-  "/obrigado-pela-assinatura": "pages/obrigado-pela-assinatura.js"
+  "/confirmacao-inscricao": "pages/confirmacao-inscricao.js",
+  "/confirmacao_de_inscricao": "pages/confirmacao_de_inscricao.js"
 }

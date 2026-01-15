@@ -119,7 +119,7 @@ const Loja = () => {
         </div>
 
         {/* Overlay Menu Mobile (Corrigido: Único e com Z-index adequado) */}
-        <div className={`fixed inset-20 bg-white z-[50] transition-transform duration-500 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`fixed inset-0 bg-white z-[50] transition-transform duration-500 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <nav className="flex flex-col bg-white  items-center pt-32 space-y-8 text-xl font-black uppercase tracking-tighter italic text-center text-black">
             <a href="#web3" onClick={toggleMenu} className="flex items-center gap-3 border-b-2 border-black pb-1 hover:text-orange-600 transition-colors">
               <span>Lista de espera Genesis Pass</span><i className="bi bi-ticket-perforated text-2xl"></i>
