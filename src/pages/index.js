@@ -274,7 +274,7 @@ export default function Home() {
 
               <p className="text-[9px] text-gray-500 uppercase tracking-widest text-center mt-4">
                 Prometemos não enviar spam. Você pode sair da lista a qualquer momento.</p>
-            </form>
+            {/*</form>*/}
             {/* FIM DO FORMULÁRIO BREVO */}
           </div>
 
