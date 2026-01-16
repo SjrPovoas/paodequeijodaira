@@ -252,6 +252,10 @@ export default function Home() {
           <a href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="mt-16 inline-block bg-orange-600 text-white px-10 py-5 text-[10px] font-black uppercase tracking-[0.4em] hover:bg-orange-500 transition-all shadow-xl">
             Baixar meu Guia Gratuito agora!
           </a>
+          <a href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="w-full bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
+            Baixar meu Guia Gratuito agora!
+          </a>
+              
             <form id="sib-form" method="POST"
               action={LINK_BAIXAR_GUIA} className="space-y-4">
                 
