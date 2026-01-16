@@ -32,9 +32,6 @@ function MyApp({ Component, pageProps }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Pão de Queijo da Irá" />
         <meta name="twitter:image" content="https://paodequeijodaira.vercek.app/logo-paodequeijodaira.jpg" />
-
-        {/* Cor da barra do navegador no celular */}
-        <meta name="theme-color" content="#ea580c" />
       </Head>
       
       <Component {...pageProps} />
