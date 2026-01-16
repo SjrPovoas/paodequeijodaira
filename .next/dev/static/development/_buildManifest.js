@@ -5,11 +5,8 @@ self.__BUILD_MANIFEST = {
   "/_error": [
     "static/chunks/pages/_error.js"
   ],
-  "/confirmacao-inscricao": [
-    "static/chunks/pages/confirmacao-inscricao.js"
-  ],
-  "/confirmacao_de_inscricao": [
-    "static/chunks/pages/confirmacao_de_inscricao.js"
+  "/baixar_guia_gratuito": [
+    "static/chunks/pages/baixar_guia_gratuito.js"
   ],
   "__rewrites": {
     "afterFiles": [],
@@ -21,7 +18,7 @@ self.__BUILD_MANIFEST = {
     "/_app",
     "/_error",
     "/baixar_guia_gratuito",
-    "/confirmacao_de_inscricao",
+    "/confirmacao",
     "/curso",
     "/loja",
     "/obrigado",

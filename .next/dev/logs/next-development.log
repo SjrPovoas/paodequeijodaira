@@ -1,48 +1,170 @@
-[00:00:10.401] Server  WARN    ⚠ Turbopack's filesystem cache has been deleted because we previously detected an internal error in Turbopack. Builds or page loads may be slower as a result.
-[00:00:12.239] Server  LOG     ✓ Ready in 8.7s
-[00:00:15.839] Server  LOG     ○ Compiling / ...
-[00:00:29.020] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+[00:00:10.632] Server  WARN    ⚠ Turbopack's filesystem cache has been deleted because we previously detected an internal error in Turbopack. Builds or page loads may be slower as a result.
+[00:00:14.406] Server  LOG     ✓ Ready in 12.1s
+[00:00:19.172] Server  LOG     ○ Compiling / ...
+[00:00:38.336] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
 See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:00:29.022] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:00:38.338] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:00:29.024] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+[00:00:38.340] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:00:29.028] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+[00:00:38.351] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
 See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:00:35.338] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
-See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:00:43.530] Browser LOG     [injected|debug]: Injecting
-[00:00:43.530] Browser LOG     [injected|debug]: Added proxy
-[00:00:43.531] Browser LOG     [injected|debug]: Pocket Universe is running!
-[00:00:43.531] Browser ERROR   uncaughtError: TypeError: Cannot redefine property: ethereum
-[00:01:19.242] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
-See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:01:31.723] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+[00:00:43.683] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
 See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:01:31.723] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:00:43.684] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:01:31.723] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+[00:00:43.684] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:01:31.723] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+[00:00:43.684] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
 See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
-[00:01:37.960] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[00:01:13.935] Server  LOG     ✓ Compiled in 1116ms
+[00:10:30.677] Server  LOG     ✓ Compiled in 4s
+[01:05:33.598] Server  LOG     ✓ Compiled in 5.7s
+[01:06:48.313] Server  LOG     ✓ Compiled in 1265ms
+[01:07:21.552] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:07:21.555] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:02:53.866] Server  LOG     ✓ Compiled in 2.9s
-[00:03:08.168] Server  LOG     ✓ Compiled in 394ms
-[00:03:24.796] Server  LOG     ✓ Compiled in 174ms
-[00:03:57.125] Server  LOG     ✓ Compiled in 341ms
-[00:04:12.593] Server  LOG     ✓ Compiled in 543ms
-[00:04:24.660] Server  LOG     ✓ Compiled in 211ms
-[00:04:26.447] Server  LOG     ✓ Compiled in 839ms
-[00:05:02.734] Server  LOG     ✓ Compiled in 436ms
-[00:05:12.023] Server  LOG     ✓ Compiled in 607ms
-[00:05:17.687] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[01:07:21.557] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:05:21.010] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[01:07:21.558] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:07:29.217] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:07:29.217] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:05:36.911] Server  LOG     ✓ Compiled in 427ms
-[00:08:50.450] Server  LOG     ✓ Compiled in 1699ms
-[00:08:53.627] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[01:07:29.217] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:08:56.454] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+[01:07:29.217] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:13:14.777] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:13:14.780] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:13:14.781] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:13:14.781] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:13:58.556] Server  LOG     ✓ Compiled in 3.2s
+[01:14:04.280] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:14:04.284] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:14:04.298] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:14:04.299] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:14:12.166] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:14:12.166] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:14:12.166] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:14:12.166] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:14:21.697] Browser LOG     [injected|debug]: Injecting
+[01:14:21.697] Browser LOG     [injected|debug]: Added proxy
+[01:14:21.697] Browser LOG     [injected|debug]: Pocket Universe is running!
+[01:14:21.697] Browser ERROR   uncaughtError: TypeError: Cannot redefine property: ethereum
+[01:15:50.686] Server  LOG     ✓ Compiled in 2.8s
+[01:15:59.550] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:15:59.559] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:15:59.644] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:15:59.713] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:16:13.118] Server  LOG     ✓ Compiled in 2.1s
+[01:16:16.356] Server  LOG     ✓ Compiled in 1940ms
+[01:16:19.024] Browser ERROR   ./src/pages/index.js:277:17
+Parsing ecmascript source code failed
+  275 |             </form>
+  276 |             {/* FIM DO FORMULÁRIO BREVO */}
+> 277 |           </div>
+      |                 ^
+> 278 |
+      | ^
+> 279 |         </div>
+      | ^^^^^^^^^
+  280 |       </section>
+  281 |
+  282 |       {/* CURSO */}
+
+Expected '</', got 'jsx text (
+
+        )'
+[01:16:21.950] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <PathnameContextProviderAdapter router={{sdc:{},sbc:{}, ...}} isAutoExport={true}>
+      <MyApp pageProps={{}} Component={function Home} err={undefined} router={{sdc:{},sbc:{}, ...}}>
+        <Home>
+          <div className={"bg-white..."}>
+            <Head>
+            <header>
+            <section>
+            <section>
+            <section>
+            <section>
+            <section id="guia-gratuito" className="bg-[#2D313...">
+              <div className="max-w-6xl ...">
+                <div>
+                <div className="flex flex-col">
+                  <h2>
+                  <h2>
+                  <p>
+                  <form id="sib-form" method="POST" action="https://43..." className="space-y-4">
+                    <div>
++                   <button
++                     type="submit"
++                     className="w-full bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppe..."
++                   >
+-                   <div className="relative">
+                    ...
+            ...
+      ...
+
+[01:16:21.950] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:16:21.950] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:16:21.950] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:16:21.950] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:16:53.174] Server  LOG     ✓ Compiled in 1066ms
+[01:16:56.221] Server  LOG     ✓ Compiled in 450ms
+[01:16:59.513] Server  LOG     ✓ Compiled in 340ms
+[01:17:03.526] Server  LOG     ✓ Compiled in 325ms
+[01:17:04.886] Server  LOG     ✓ Compiled in 374ms
+[01:17:11.350] Server  LOG     ✓ Compiled in 474ms
+[01:23:35.594] Server  WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:23:35.608] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:23:35.614] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:23:35.621] Server  WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:23:47.935] Browser WARN    Do not add <script> tags using next/head (see <script> tag with src="https://cdn.tailwindcss.com"). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:23:47.935] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:23:47.935] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[01:23:47.935] Browser WARN    Do not add <script> tags using next/head (see inline <script>). Use next/script instead. 
+See more info here: https://nextjs.org/docs/messages/no-script-tags-in-head-component
+[01:23:50.636] Server  LOG     ○ Compiling /baixar_guia_gratuito ...
+[01:24:09.904] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lobster&display=swap"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component

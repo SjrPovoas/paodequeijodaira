@@ -259,29 +259,17 @@ export default function Home() {
                 <input type="text" name="email_address_check" tabIndex="-1" value="" readOnly />
               </div>
 
-              <div className="relative">
-                <input
-                  type="text"
-                  name="NOME"
-                  id="NOME"
-                  placeholder="COMO PODEMOS TE CHAMAR?"
-                  required
-                  className="w-full bg-white/5 border-2 border-gray-700 p-5 text-xs font-black uppercase tracking-widest outline-none focus:border-orange-600 focus:bg-white/10 transition-all placeholder:text-gray-600"
-                />
+              {/*<div className="relative">
+                <input type="text" name="NOME" id="NOME" placeholder="SEU NOME COMPLETO" required
+                  className="w-full bg-white/5 border-2 border-gray-700 p-5 text-xs font-black uppercase tracking-widest outline-none focus:border-orange-600 focus:bg-white/10 transition-all placeholder:text-gray-600"/>
               </div>
-
               <div className="relative">
-                <input
-                  type="email"
-                  name="EMAIL"
-                  id="EMAIL"
-                  placeholder="SEU MELHOR E-MAIL"
-                  required
-                  className="w-full bg-white/5 border-2 border-gray-700 p-5 text-xs font-black uppercase tracking-widest outline-none focus:border-orange-600 focus:bg-white/10 transition-all placeholder:text-gray-600"
-                />
-              </div>
+                <input type="email" name="EMAIL" id="EMAIL" placeholder="SEU MELHOR E-MAIL" required
+                  className="w-full bg-white/5 border-2 border-gray-700 p-5 text-xs font-black uppercase tracking-widest outline-none focus:border-orange-600 focus:bg-white/10 transition-all placeholder:text-gray-600"/>
+              </div>*/}
 
-              <button type="submit" className="w-full bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">Enviar meu guia agora!</button>
+              <button type="submit" className="w-full bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
+                Baixar meu Guia Gratuito agora!</button>
 
               <p className="text-[9px] text-gray-500 uppercase tracking-widest text-center mt-4">
                 Prometemos não enviar spam. Você pode sair da lista a qualquer momento.</p>

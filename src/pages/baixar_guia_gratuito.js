@@ -6,7 +6,7 @@ export default function Obrigado() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   // LINK DO PDF (/guias/guia-harmonizacao-paodequeijodaira.pdf)
-  const LINK_PDF_GUIA = "https://docs.google.com/document/d/1frlojaaWXcHeL9SWpGOIXf0YE0pqTc0V4Fe1eiSWi-Q/edit?usp=sharing";
+  const LINK_PDF_GUIA = "https://drive.google.com/file/d/1i7Du9UmYkx9UWbztc7U5HgRfqVn1RRkF/view?usp=drive_link";
 
   return (
     /* Adicionado overflow-x-hidden para matar a barra de rolagem lateral */

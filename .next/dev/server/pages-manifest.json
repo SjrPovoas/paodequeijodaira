@@ -3,6 +3,5 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/confirmacao-inscricao": "pages/confirmacao-inscricao.js",
-  "/confirmacao_de_inscricao": "pages/confirmacao_de_inscricao.js"
+  "/baixar_guia_gratuito": "pages/baixar_guia_gratuito.js"
 }

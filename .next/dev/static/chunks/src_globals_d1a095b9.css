@@ -922,6 +922,10 @@
     rotate: 2deg;
   }
 
+  .rotate-3 {
+    rotate: 3deg;
+  }
+
   .rotate-12 {
     rotate: 12deg;
   }
@@ -1196,6 +1200,16 @@
     border-color: var(--color-gray-100);
   }
 
+  .border-gray-100\/10 {
+    border-color: #f3f4f61a;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .border-gray-100\/10 {
+      border-color: color-mix(in oklab, var(--color-gray-100) 10%, transparent);
+    }
+  }
+
   .border-gray-200 {
     border-color: var(--color-gray-200);
   }
@@ -1310,6 +1324,10 @@
     .bg-orange-600\/60 {
       background-color: color-mix(in oklab, var(--color-orange-600) 60%, transparent);
     }
+  }
+
+  .bg-transparent {
+    background-color: #0000;
   }
 
   .bg-white {
