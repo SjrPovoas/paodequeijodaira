@@ -65,12 +65,14 @@ export default function ConfirmacaoInscricao() {
                 href="/loja" // Link final de confirmação ou retorno
                 className="inline-block bg-[#ea580c] hover:bg-[#f97316] text-white font-black uppercase text-xs md:text-sm tracking-[0.2em] px-8 py-5 transition-all transform hover:scale-105 active:scale-95 shadow-xl"
               >
-                Sim, desejo garantir meus benefícios!
+                Garantir e Voltar para Loja!
               </a>
             </div>
 
             <p className="text-[10px] text-gray-500 uppercase tracking-widest leading-relaxed italic">
-              *Parabéns, você receberá 10% vitalício de desconto <br /> nas camisetas e acesso ao Clube Secreto.*
+              *Parabéns, você receberá 10% vitalício de desconto <br />
+              nas camisetas e acesso ao Clube Secreto.<br />
+              Guarde este e-mail, ele serve como cupom, para apresentar sempre que for solicitado o desconto*
             </p>
           </div>
 
