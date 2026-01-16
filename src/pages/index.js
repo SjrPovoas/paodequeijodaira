@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 export default function Home() {
   const WHATSAPP_NUMBER = "5561982777196";
+  const LINK_BAIXAR_GUIA = "https://43782b7b.sibforms.com/serve/MUIFADVOaKFQT5-e79pfcuRymIn3mT3LpZ6jTYiaabJu4jshHz-B2CX67o1k7j8_Jj8t0kir0rvKsU606Nhx7P2_uNRORnZ_5B-wVs18TtNjYGtXnkqclgkUanefRoM1T1-jLskVawichbZvQ4ojESQ2bzzCVA0xEodVW76v349_vKowtR085QjMa-mytw4PTgqyI1c2awQVte9ZMw=="
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -248,16 +249,16 @@ export default function Home() {
             </p>
 
             {/* INÍCIO DO FORMULÁRIO BREVO */}
-            <form
-              id="sib-form"
-              method="POST"
-              action="https://43782b7b.sibforms.com/serve/MUIFADVOaKFQT5-e79pfcuRymIn3mT3LpZ6jTYiaabJu4jshHz-B2CX67o1k7j8_Jj8t0kir0rvKsU606Nhx7P2_uNRORnZ_5B-wVs18TtNjYGtXnkqclgkUanefRoM1T1-jLskVawichbZvQ4ojESQ2bzzCVA0xEodVW76v349_vKowtR085QjMa-mytw4PTgqyI1c2awQVte9ZMw=="
-              className="space-y-4"
-            >
-              {/* Honeypot para evitar SPAM (Não remover) */}
+          <a href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="mt-16 inline-block bg-orange-600 text-white px-10 py-5 text-[10px] font-black uppercase tracking-[0.4em] hover:bg-orange-500 transition-all shadow-xl">
+            Baixar meu Guia Gratuito agora!
+          </a>
+            <form id="sib-form" method="POST"
+              action={LINK_BAIXAR_GUIA} className="space-y-4">
+                
+              {/* Honeypot para evitar SPAM (Não remover) 
               <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
                 <input type="text" name="email_address_check" tabIndex="-1" value="" readOnly />
-              </div>
+              </div> */}
 
               {/*<div className="relative">
                 <input type="text" name="NOME" id="NOME" placeholder="SEU NOME COMPLETO" required
