@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }) {
   
         {/* Título e URL para o card */}
         <meta property="og:title" content="Pão de Queijo da Irá" />
-        <meta property="og:url" content="https://paodequeijodaira.vercel.app/" />
+        <meta property="og:url" content="https://paodequeijodaira.vercel.app/?v=1" />
         <meta property="og:type" content="website" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
