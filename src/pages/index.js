@@ -248,16 +248,12 @@ export default function Home() {
               Baixe nosso guia gratuito e descubra quais cafés e acompanhamentos combinam perfeitamente com o seu pão de queijo.
             </p>
 
-            {/* INÍCIO DO FORMULÁRIO BREVO */}
-          <a href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="mt-16 inline-block bg-orange-600 text-white px-10 py-5 text-[10px] font-black uppercase tracking-[0.4em] hover:bg-orange-500 transition-all shadow-xl">
-            Baixar meu Guia Gratuito agora!
-          </a>
+          {/* INÍCIO DO FORMULÁRIO BREVO */}
           <a href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="w-full bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
             Baixar meu Guia Gratuito agora!
           </a>
-              
-            <form id="sib-form" method="POST"
-              action={LINK_BAIXAR_GUIA} className="space-y-4">
+          {/* <form id="sib-form" method="POST"
+              action={LINK_BAIXAR_GUIA} className="space-y-4"> */}
                 
               {/* Honeypot para evitar SPAM (Não remover) 
               <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
@@ -273,8 +269,8 @@ export default function Home() {
                   className="w-full bg-white/5 border-2 border-gray-700 p-5 text-xs font-black uppercase tracking-widest outline-none focus:border-orange-600 focus:bg-white/10 transition-all placeholder:text-gray-600"/>
               </div>*/}
 
-              <button type="submit" className="w-full bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
-                Baixar meu Guia Gratuito agora!</button>
+             {/*<button type="submit" className="w-full bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
+                Baixar meu Guia Gratuito agora!</button> */}
 
               <p className="text-[9px] text-gray-500 uppercase tracking-widest text-center mt-4">
                 Prometemos não enviar spam. Você pode sair da lista a qualquer momento.</p>
