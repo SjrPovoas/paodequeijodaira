@@ -248,9 +248,9 @@ export default function Home() {
               Baixe nosso guia gratuito e descubra quais cafés e acompanhamentos combinam perfeitamente com o seu pão de queijo.
             </p>
 
-          {/* INÍCIO DO FORMULÁRIO BREVO */}
-          <a href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="w-full bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
-            Baixar meu Guia Gratuito agora!
+          {/* BAIXAR GUIA GRATUITO */}
+          <a href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
+             Baixar meu Guia Gratuito agora!
           </a>
           {/* <form id="sib-form" method="POST"
               action={LINK_BAIXAR_GUIA} className="space-y-4"> */}
