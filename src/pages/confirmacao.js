@@ -8,7 +8,7 @@ export default function ConfirmacaoInscricao() {
   return (
     <div className="bg-[#f4f4f4] text-[#2D3134] antialiased font-sans min-h-screen overflow-x-hidden">
       <Head>
-        <title>Confirmar Inscrição | Pão de Queijo da Irá</title>
+        <title>Inscrição Confirmada | Pão de Queijo da Irá</title>
         <meta name="robots" content="noindex" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
@@ -47,15 +47,15 @@ export default function ConfirmacaoInscricao() {
           {/* BLOCO ESCURO (ESTILO WEB3/EMAIL) */}
           <div className="bg-[#2D3134] p-8 md:p-12 text-center text-white">
             <p className="text-[#ea580c] text-[10px] md:text-[12px] font-black uppercase tracking-[0.4em] mb-4">
-              Genesis Pass
+              Irá Digital GENESIS PASS
             </p>
             
             <h1 className="text-3xl md:text-5xl font-black uppercase italic leading-none tracking-tighter mb-8">
-              Confirme seu lugar <br /> na lista
+              Seu lugar na lista foi <br />Confirmado Com Sucesso!
             </h1>
             
             <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-10 max-w-md mx-auto">
-              Você está a um passo de garantir o acesso antecipado à Web3 da Irá. 
+              Você foi adicionado com sucesso à nossa lista de espera do Irá Digital GENESIS PASS.<br />              
               Ao clicar no botão abaixo, você valida seu interesse e ativa seus benefícios exclusivos.
             </p>
 
@@ -65,12 +65,12 @@ export default function ConfirmacaoInscricao() {
                 href="/loja" // Link final de confirmação ou retorno
                 className="inline-block bg-[#ea580c] hover:bg-[#f97316] text-white font-black uppercase text-xs md:text-sm tracking-[0.2em] px-8 py-5 transition-all transform hover:scale-105 active:scale-95 shadow-xl"
               >
-                Sim, me inscreva nesta lista de espera
+                Sim, desejo garantir meus benefícios!
               </a>
             </div>
 
             <p className="text-[10px] text-gray-500 uppercase tracking-widest leading-relaxed italic">
-              *Ao confirmar, você receberá 10% vitalício de desconto <br /> nas camisetas e acesso ao Clube Secreto.*
+              *Parabéns, você receberá 10% vitalício de desconto <br /> nas camisetas e acesso ao Clube Secreto.*
             </p>
           </div>
 
