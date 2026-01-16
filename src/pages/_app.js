@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import '../styles/globals.css'; 
+import '../globals.css'; 
 
 function MyApp({ Component, pageProps }) {
   const URL_SITE = "https://paodequeijodaira.vercel.app";
