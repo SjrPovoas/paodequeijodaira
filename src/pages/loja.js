@@ -36,7 +36,7 @@ const Loja = () => {
   const handleAddToCart = (product) => {
     // Se for vestuário e não tiver tamanho selecionado, avisa o usuário
     if (product.category === 'vestuario' && !selectedSizes[product.id]) {
-      alert("Por favor, selecione um tamanho (P, M ou G) antes de adicionar.");
+      alert("Por favor, selecione um tamanho (P, M G ou GG) antes de adicionar.");
       return;
     }
 
