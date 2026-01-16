@@ -11,10 +11,6 @@ function MyApp({ Component, pageProps }) {
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
         <meta name="format-detection" content="telephone=no" />
-        <title>Pão de Queijo da Irá | O melhor pão de queijo congelado e caseiro da Cidade Ocidental</title>       <meta name="description" content="O legítimo pão de queijo artesanal da Cidade Ocidental. Peça o seu congelado e fresquinho!" />
-        <meta name="author" content="SjrPovoaS" />
-        <meta name="description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
-        <meta name="Keywords" content="pao de queijo, pão de queijo, pão de queijo em Cidade Ocidental, pão de queijo congelado Cidade Ocidental, pão de queijo caseiro, Pão de Queijo da Irá, melhor lanche em cidade ocidental" />
         <meta name="skype_toolbar" content="skype_toolbar_parser_compatible" />
 
         {/* Ícones do Navegador (Favicons) */}
