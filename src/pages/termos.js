@@ -5,6 +5,10 @@ export default function Termos() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  // NOVO: Estado para controlar a visibilidade da seta
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // NOVO: Lógica para mostrar a seta após 400px de rolagem (fim do hero)
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 400) {
@@ -13,6 +17,7 @@ export default function Termos() {
         setShowScrollTop(false);
       }
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -20,6 +25,7 @@ export default function Termos() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
     
     return (
         <div className="bg-white text-[#2D3134] antialiased font-['Inter'] overflow-x-hidden">
