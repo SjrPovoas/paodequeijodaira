@@ -155,7 +155,7 @@ const Loja = () => {
                 {/* Seleção de Tamanho para Camisetas */}
                 {produto.category === 'vestuario' && (
                   <div className="flex gap-2 mb-6">
-                    {['P', 'M', 'G'].map((size) => (
+                    {['P', 'M', 'G', 'GG'].map((size) => (
                       <button
                         key={size}
                         onClick={() => handleSizeChange(produto.id, size)}
