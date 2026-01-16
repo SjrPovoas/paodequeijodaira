@@ -62,7 +62,7 @@ export default function ConfirmacaoInscricao() {
             {/* BOTÃO DE AÇÃO */}
             <div className="mb-10">
               <a 
-                href="/" // Link final de confirmação ou retorno
+                href="/loja" // Link final de confirmação ou retorno
                 className="inline-block bg-[#ea580c] hover:bg-[#f97316] text-white font-black uppercase text-xs md:text-sm tracking-[0.2em] px-8 py-5 transition-all transform hover:scale-105 active:scale-95 shadow-xl"
               >
                 Sim, me inscreva nesta lista de espera
