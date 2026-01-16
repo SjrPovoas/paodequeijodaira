@@ -1,29 +1,24 @@
 import Head from 'next/head';
-import '../styles/globals.css'; // Seus estilos globais
+import '../styles/globals.css'; 
 
 function MyApp({ Component, pageProps }) {
+  const URL_SITE = "https://paodequeijodaira.vercel.app";
+  const IMAGEM_PREVIEW = `${URL_SITE}/favicon.png`;
+
   return (
     <>
       <Head>
-  {/* 1. Ícone para a aba do navegador (Padrão) */}
-  <link rel="shortcut icon" href="/favicon.ico" />
-  
-  {/* 2. Ícone em alta definição (Navegadores modernos) */}
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-  
-  {/* 3. Ícone para iPhone/iOS */}
-  <link rel="apple-touch-icon" href="/favicon.png" />
-
-  {/* 4. Preview para WhatsApp/Redes Sociais */}
-  {/* (O WhatsApp prefere PNG ou JPG. Vamos usar o PNG para melhor qualidade) */}
-  <meta property="og:image" content="https://paodequeijodaira.vercel.app/favicon.png" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="512" />
-  <meta property="og:image:height" content="512" />
-
-  {/* Mantém a cor da barra no mobile */}
-  <meta name="theme-color" content="#ea580c" />
-</Head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+        
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={URL_SITE} />
+        <meta property="og:title" content="Pão de Queijo da Irá" />
+        <meta property="og:image" content={IMAGEM_PREVIEW} />
+        <meta name="theme-color" content="#ea580c" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <Component {...pageProps} />
     </>
   );
