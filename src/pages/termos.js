@@ -5,6 +5,22 @@ export default function Termos() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+    
     return (
         <div className="bg-white text-[#2D3134] antialiased font-['Inter'] overflow-x-hidden">
             <Head>
@@ -142,6 +158,15 @@ export default function Termos() {
                     </div>
                 </div>
             </footer>
+
+      {/* BOTÃO VOLTAR AO TOPO */}
+      <button 
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${
+          showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible' }`} >
+        <i className="bi bi-arrow-up text-xl font-bold"></i>
+      </button>             
+                
         </div>
     );
 }
