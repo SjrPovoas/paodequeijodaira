@@ -9,14 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.90.1",
+    "ethers": "^6.16.0",
+    "mercadopago": "^2.12.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
   },
-"devDependencies": {
+  "devDependencies": {
+    "@tailwindcss/postcss": "latest",
     "autoprefixer": "latest",
     "postcss": "latest",
-    "tailwindcss": "latest",
-    "@tailwindcss/postcss": "latest"
+    "tailwindcss": "latest"
   }
 }

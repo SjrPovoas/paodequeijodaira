@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import FormularioTroca from '../components/FormularioTroca'; 
 import { supabase } from '../lib/supabaseClient';
-import FormularioTroca from '../components/FormularioTroca';
 
 export default function Pedidos() {
   const [pedidos, setPedidos] = useState([]);

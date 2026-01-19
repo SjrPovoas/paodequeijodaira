@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://paodequeijodaira.vercel.app/img/logo-paodequeijodaira.jpg">
+  <img src="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg">
 </p>
 
 ---
@@ -74,6 +74,12 @@ Você pode fazer isso com os seguintes comandos, substituindo "Seu Nome" e "seu@
 ```
 
 Esses são apenas alguns dos comandos mais comuns do **Git** que você pode usar na linha de comando.
+```
+npm install mercadopago ethers @supabase/supabase-js
+```
+```
+npm install @supabase/supabase-js
+```
 
 ---
 ## 2. TECNOLOGIAS USADAS
