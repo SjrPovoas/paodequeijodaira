@@ -9,12 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.90.1",
+    "@rainbow-me/rainbowkit": "^2.0.0",
+    "@supabase/supabase-js": "^2.39.0",
+    "@tanstack/react-query": "^5.0.0",
     "ethers": "^6.16.0",
     "mercadopago": "^2.12.0",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "viem": "^2.0.0",
+    "wagmi": "^2.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "latest",
