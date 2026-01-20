@@ -3,7 +3,7 @@ import { useSendTransaction, useAccount, useWaitForTransactionReceipt, useChainI
 import { parseEther } from 'viem';
 import { polygon } from 'wagmi/chains';
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '../lib/supabaseClient';
 
 export default function BotaoPagamentoWeb3({ totalBRL, itens, dadosEntrega }) {
   const { isConnected, address } = useAccount();
