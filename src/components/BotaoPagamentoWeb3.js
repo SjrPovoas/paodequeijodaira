@@ -1,3 +1,4 @@
+"use client";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useSendTransaction, useAccount, useWaitForTransactionReceipt, useChainId, useSwitchChain } from 'wagmi';
 import { parseEther } from 'viem';
