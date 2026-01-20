@@ -1,17 +1,46 @@
 import Head from 'next/head';
-import '../globals.css'; // Ajustado para o caminho correto que você usava
+import '../globals.css'; 
 import '@rainbow-me/rainbowkit/styles.css';
 
-import { getDefaultConfig, RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit';
-import { WagmiProvider } from 'wagmi';
+import { 
+  getDefaultConfig, 
+  RainbowKitProvider, 
+  lightTheme,
+  connectorsForWallets 
+} from '@rainbow-me/rainbowkit';
+import { 
+  metaMaskWallet, 
+  coinbaseWallet, 
+  rainbowWallet 
+} from '@rainbow-me/rainbowkit/wallets';
+import { WagmiProvider, createConfig, http } from 'wagmi';
 import { polygon } from 'wagmi/chains';
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
-// 1. Configuração usando a Variável de Ambiente
-const config = getDefaultConfig({
-  appName: 'Pão de Queijo da Irá',
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID, 
+// CONFIGURAÇÃO MODERNA DOS CONECTORES
+const connectors = connectorsForWallets(
+  [
+    {
+      groupName: 'Recomendadas',
+      wallets: [
+        metaMaskWallet,
+        coinbaseWallet, // Aqui ele já usa o suporte para Smart Wallet (nova Coinbase)
+        rainbowWallet,
+      ],
+    },
+  ],
+  {
+    appName: 'Pão de Queijo da Irá',
+    projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
+  }
+);
+
+const config = createConfig({
+  connectors,
   chains: [polygon],
+  transports: {
+    [polygon.id]: http(), // Conexão direta via RPC
+  },
   ssr: true,
 });
 
@@ -22,11 +51,9 @@ function MyApp({ Component, pageProps }) {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider 
-          theme={lightTheme({
-            accentColor: '#ea580c',
-            accentColorForeground: 'white',
-          })}
+          theme={lightTheme({ accentColor: '#ea580c' })}
           locale="pt-BR"
+          initialChain={polygon} // FORÇA a Polygon ao abrir
         >
           <Head>
             <meta charSet="UTF-8" />
@@ -43,7 +70,7 @@ function MyApp({ Component, pageProps }) {
 
             <meta name="theme-color" content="#ea580c" />
           </Head>
-
+            
           <Component {...pageProps} />
         </RainbowKitProvider>
       </QueryClientProvider>
