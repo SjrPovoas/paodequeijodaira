@@ -9,7 +9,7 @@ import {
   lightTheme 
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
-import { polygon } from 'wagmi/chains';
+import { polygon } from 'viem/chains';
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 // Configuração do RainbowKit e Wagmi
