@@ -54,13 +54,35 @@ export default function Loja() {
     }
   };
 
-  const add = (p) => {
-    const existe = carrinho.find(item => item.id === p.id);
-    if (existe) {
-      setCarrinho(carrinho.map(item => item.id === p.id ? { ...existe, quantidade: existe.quantidade + 1 } : item));
-    } else {
-      setCarrinho([...carrinho, { ...p, quantidade: 1 }]);
+  // FUNÇÃO ADD CORRIGIDA COM VALIDAÇÃO DE TAMANHO
+  const add = (p, tamanhoSelecionado = null) => {
+    // Verificar se é uma camiseta e se o tamanho foi selecionado
+    if (p.category === 'vestuario' && !tamanhoSelecionado) {
+      alert('⚠️ Por favor, selecione um tamanho: P, M, G ou GG');
+      return; // Interrompe a execução
     }
+    
+    // Criar o item com tamanho (se aplicável)
+    const itemParaAdicionar = tamanhoSelecionado 
+      ? { ...p, tamanho: tamanhoSelecionado }
+      : p;
+    
+    // Verificar se já existe no carrinho (considerando o tamanho para camisetas)
+    const existe = carrinho.find(item => 
+      item.id === p.id && 
+      (p.category === 'vestuario' ? item.tamanho === tamanhoSelecionado : true)
+    );
+    
+    if (existe) {
+      setCarrinho(carrinho.map(item => 
+        item.id === p.id && (p.category === 'vestuario' ? item.tamanho === tamanhoSelecionado : true)
+          ? { ...existe, quantidade: existe.quantidade + 1 } 
+          : item
+      ));
+    } else {
+      setCarrinho([...carrinho, { ...itemParaAdicionar, quantidade: 1 }]);
+    }
+    
     setModalAberto(true);
   };
 
@@ -161,14 +183,41 @@ export default function Loja() {
               </div>
               <h3 className="font-black uppercase text-sm tracking-widest mb-1">{p.nome}</h3>
               <p className="text-orange-600 font-bold mb-6 italic">R$ {p.preco.toFixed(2)}</p>
+              
+              {/* SELETOR DE TAMANHO PARA VESTUÁRIO */}
               {p.category === 'vestuario' && (
-                <div className="flex gap-2 mb-6">
-                  {['P', 'M', 'G', 'GG'].map(s => (
-                    <button key={s} onClick={() => setSelectedSizes({ ...selectedSizes, [p.id]: s })} className={`w-10 h-10 border-2 font-black text-[10px] ${selectedSizes[p.id] === s ? 'border-orange-600 bg-orange-600 text-white' : 'border-gray-200'}`}>{s}</button>
-                  ))}
+                <div className="mb-6">
+                  <p className="text-[10px] font-black uppercase tracking-widest mb-3 text-gray-600">Selecione o tamanho:</p>
+                  <div className="flex gap-2">
+                    {['P', 'M', 'G', 'GG'].map(s => (
+                      <button 
+                        key={s} 
+                        onClick={() => {
+                          setSelectedSizes({ ...selectedSizes, [p.id]: s });
+                          add(p, s);
+                        }}
+                        className={`w-12 h-12 border-2 font-black text-xs transition-all hover:scale-105 ${
+                          selectedSizes[p.id] === s 
+                            ? 'border-orange-600 bg-orange-600 text-white shadow-lg' 
+                            : 'border-gray-300 hover:border-orange-400'
+                        }`}
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
-              <button onClick={() => add(p)} className="mt-auto w-full py-5 border-2 border-[#3D2B1F] font-black uppercase text-[10px] tracking-widest hover:bg-[#3D2B1F] hover:text-white transition-all">Adicionar ao Carrinho</button>
+
+              {/* BOTÃO NORMAL PARA ACESSÓRIOS */}
+              {p.category !== 'vestuario' && (
+                <button 
+                  onClick={() => add(p)} 
+                  className="mt-auto w-full py-5 border-2 border-[#3D2B1F] font-black uppercase text-[10px] tracking-widest hover:bg-[#3D2B1F] hover:text-white transition-all"
+                >
+                  Adicionar ao Carrinho
+                </button>
+              )}
             </div>
           ))}
         </div>
@@ -215,6 +264,36 @@ export default function Loja() {
           WEB3
         </div>
       </section>
+
+      {/* FOOTER E ASSINATURA */}
+      <footer className="py-20 px-6 bg-white border-t border-gray-100 text-center md:text-left">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+            <div className="flex flex-col items-center md:items-start">
+              <a href="/"><img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" /></a>
+              <div className="flex space-x-4">
+                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
+                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                <strong>Horário:</strong> Seg a Sáb das 08:00 às 18:00.<br />Dom das 08:00 às 12:00.</p>
+              <p className="text-sm text-gray-600">
+                <strong>Endereço:</strong> Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
+            </div>
+            <div className="md:text-right">
+              <h3 className="text-lg font-black uppercase mb-2">Pão de Queijo da Irá</h3>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
+            </div>
+          </div>
+          <div className="pt-8 border-t border-gray-50 text-center">
+            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+          </div>
+        </div>
+      </footer>
 
       {/* MODAL CARRINHO */}
       {modalAberto && (
@@ -272,37 +351,7 @@ export default function Loja() {
         </div>
       )}
 
-      {/* FOOTER E ASSINATURA */}
-      <footer className="py-20 px-6 bg-white border-t border-gray-100 text-center md:text-left">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-            <div className="flex flex-col items-center md:items-start">
-              <a href="/"><img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" /></a>
-              <div className="flex space-x-4">
-                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
-                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
-                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                <strong>Horário:</strong> Seg a Sáb das 08:00 às 18:00.<br />Dom das 08:00 às 12:00.</p>
-              <p className="text-sm text-gray-600">
-                <strong>Endereço:</strong> Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
-            </div>
-            <div className="md:text-right">
-              <h3 className="text-lg font-black uppercase mb-2">Pão de Queijo da Irá</h3>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
-            </div>
-          </div>
-          <div className="pt-8 border-t border-gray-50 text-center">
-            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
-          </div>
-        </div>
-      </footer>
-
-{/* VOLTAR AO TOPO */}
+      {/* VOLTAR AO TOPO */}
       <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`fixed bottom-8 right-8 z-[100] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl items-center justify-center transition-all ${showScrollTop ? 'flex opacity-100' : 'hidden opacity-0'}`}><i className="bi bi-arrow-up text-xl"></i></button>
 
       <style jsx global>{`
