@@ -1,78 +1,72 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-// 1. Configuração do Cliente com seu Access Token
-// IMPORTANTE: Adicione MP_ACCESS_TOKEN no seu arquivo .env.local
+// 1. Configuração do Cliente com seu Token de Produção (APP_USR-...)
 const client = new MercadoPagoConfig({ 
   accessToken: process.env.MP_ACCESS_TOKEN 
 });
 
 export default async function handler(req, res) {
-  // Garantir que apenas requisições POST sejam aceitas
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Método não permitido' });
   }
 
-  const { itens, total, cpf, email, endereco } = req.body;
-
   try {
+    const { itens, email, frete } = req.body;
+
+    // 2. Garantir que o email esteja limpo para servir de referência no Webhook
+    const emailLimpo = email.toLowerCase().trim();
+
+    // 3. Mapeamento dos itens
+    const itemsMP = itens.map(item => ({
+      id: String(item.id),
+      title: item.nome,
+      unit_price: Number(item.preco),
+      quantity: Number(item.quantidade),
+      currency_id: 'BRL'
+    }));
+
+    // 4. Adiciona o frete como item se houver valor
+    if (frete && Number(frete) > 0) {
+      itemsMP.push({
+        id: 'custo-frete',
+        title: 'Taxa de Entrega / Frete',
+        unit_price: Number(frete),
+        quantity: 1,
+        currency_id: 'BRL'
+      });
+    }
+
     const preference = new Preference(client);
 
-    // 2. Criar a estrutura da preferência
+    // 5. Criação da Preferência
     const response = await preference.create({
       body: {
-        // Mapeia os itens do carrinho para o formato do Mercado Pago
-        items: itens.map(item => ({
-          id: item.id.toString(),
-          title: item.nome,
-          unit_price: Number(item.preco),
-          quantity: Number(item.quantidade),
-          currency_id: 'BRL'
-        })),
-        
-        // Dados do comprador (ajuda na aprovação do antifraude)
+        items: itemsMP,
         payer: {
-          email: email || "comprador@email.com",
-          identification: {
-            type: 'CPF',
-            number: cpf.replace(/\D/g, '') // Remove pontos e traços do CPF
-          }
+          email: emailLimpo
         },
-
-        // URLs de retorno que criamos anteriormente
-        back_urls: {
-          success: "https://paodequeijodaira.vercel.app/sucesso",
-          failure: "https://paodequeijodaira.vercel.app/erro",
-          pending: "https://paodequeijodaira.vercel.app/sucesso",
-        },
+        // ESTA LINHA É A CHAVE PARA O WEBHOOK FUNCIONAR:
+        external_reference: emailLimpo, 
         
-        // Redireciona automaticamente após o sucesso
+        back_urls: {
+          success: `${process.env.NEXT_PUBLIC_SITE_URL}/sucesso`,
+          failure: `${process.env.NEXT_PUBLIC_SITE_URL}/erro`,
+          pending: `${process.env.NEXT_PUBLIC_SITE_URL}/pendente`,
+        },
         auto_return: "approved",
-
-        // Metadados para você identificar o pedido no seu banco depois
-        metadata: {
-          id_referencia: `pedido_${Date.now()}`,
-          endereco_entrega: endereco
-        },
-
-        // Métodos de pagamento permitidos (opcional)
-        payment_methods: {
-          excluded_payment_types: [], // Pode excluir boleto se quiser apenas Pix/Cartão
-          installments: 12, // Máximo de parcelas
-        },
+        
+        // URL que você confirmou que funcionou no teste do Mercado Pago
+        notification_url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/webhooks/mercadopago`,
       }
     });
 
-    // 3. Retornar os dados do checkout para o frontend
-    // O 'init_point' é o link oficial do checkout do Mercado Pago
-    res.status(200).json({ 
-      id: response.id, 
-      init_point: response.init_point 
-    });
+    // 6. Retorna o link para o frontend
+    res.status(200).json({ init_point: response.init_point });
 
   } catch (error) {
-    console.error("Erro no Mercado Pago:", error);
+    console.error("Erro ao gerar link MP:", error);
     res.status(500).json({ 
-      error: "Erro ao processar o checkout", 
+      error: "Erro ao gerar link de pagamento", 
       details: error.message 
     });
   }

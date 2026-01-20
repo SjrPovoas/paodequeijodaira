@@ -75,7 +75,7 @@ Você pode fazer isso com os seguintes comandos, substituindo "Seu Nome" e "seu@
 
 Esses são apenas alguns dos comandos mais comuns do **Git** que você pode usar na linha de comando.
 ```
-npm install mercadopago ethers @supabase/supabase-js
+npm install mercadopago
 ```
 ```
 npm install @supabase/supabase-js

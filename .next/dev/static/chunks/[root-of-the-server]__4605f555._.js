@@ -650,7 +650,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/styled-jsx/style.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react/index.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$head$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/head.js [client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabaseClient$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/supabaseClient.js [client] (ecmascript)"); // Certifique-se de criar este arquivo
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabaseClient$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/supabaseClient.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$BotaoPagamentoWeb3$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/BotaoPagamentoWeb3.js [client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
@@ -661,28 +661,26 @@ var _s = __turbopack_context__.k.signature();
 ;
 function Loja() {
     _s();
-    // CONFIGURAÇÕES E LINKS
     const LINK_LISTA_ESPERA = "https://43782b7b.sibforms.com/serve/MUIFAC4AxTEnI80RImF7seW5i2MRkz5EqdqtMse22-stmvG7jsOqdFhZ6mmpfwRA-2skU_c3GJF8YXD6k-K_kNE6_gFeWIFbCIxIEWpknHGH8m6tdQMhTuqNG7-e_tsEQRBC4-pjosH0TVoqcW1UonSiJnd2E378zedWIJRs_Dhj9R9v8_VCpmg9Kebo_wFD_WsvLIPqwRBVBCNh8w==";
     const VALOR_FRETE_GRATIS = 500;
-    // ESTADOS DE INTERFACE
+    // ESTADOS
     const [carrinho, setCarrinho] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [modalAberto, setModalAberto] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [menuMobileAberto, setMenuMobileAberto] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [showScrollTop, setShowScrollTop] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    // ESTADOS DE DADOS E PRODUTOS
+    const [selectedSizes, setSelectedSizes] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])({});
     const [dados, setDados] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])({
         email: '',
         cpf: '',
         cep: '',
         endereco: ''
     });
-    const [selectedSizes, setSelectedSizes] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])({});
     const [frete, setFrete] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])(0);
-    // CÁLCULO DE VALORES
+    // CÁLCULOS
     const subtotal = carrinho.reduce((acc, item)=>acc + item.preco * item.quantidade, 0);
     const totalGeral = subtotal + frete;
-    // 1. MONITORAR SCROLL (BOTÃO VOLTAR AO TOPO)
+    // MONITORAR SCROLL PARA BOTÃO VOLTAR AO TOPO
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Loja.useEffect": ()=>{
             const handleScroll = {
@@ -694,142 +692,87 @@ function Loja() {
             })["Loja.useEffect"];
         }
     }["Loja.useEffect"], []);
-    // 2. LÓGICA DE FRETE (DF/GO vs BRASIL)
+    // LÓGICA DE FRETE
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Loja.useEffect": ()=>{
-            if (subtotal === 0) {
+            if (subtotal === 0 || subtotal >= VALOR_FRETE_GRATIS) {
                 setFrete(0);
                 return;
             }
-            if (subtotal >= VALOR_FRETE_GRATIS) {
-                setFrete(0);
-            } else if (dados.cep.length === 8) {
-                const prefixo = dados.cep.substring(0, 2);
-                // Região 70 a 73 (DF e Entorno próximo)
-                if ([
+            if (dados.cep.length === 8) {
+                const regiao = dados.cep.substring(0, 2);
+                setFrete([
                     "70",
                     "71",
                     "72",
                     "73"
-                ].includes(prefixo)) {
-                    setFrete(25.00);
-                } else {
-                    setFrete(50.00);
-                }
-            } else {
-                setFrete(0);
+                ].includes(regiao) ? 25 : 50);
             }
         }
     }["Loja.useEffect"], [
         subtotal,
         dados.cep
     ]);
-    // 3. BUSCA AUTOMÁTICA DE CEP (ViaCEP)
-    const handleCEP = async (valor)=>{
-        const cepLimpo = valor.replace(/\D/g, '').substring(0, 8);
-        setDados((prev)=>({
-                ...prev,
-                cep: cepLimpo
-            }));
-        if (cepLimpo.length === 8) {
+    const handleCEP = async (v)=>{
+        const cep = v.replace(/\D/g, '').substring(0, 8);
+        setDados({
+            ...dados,
+            cep
+        });
+        if (cep.length === 8) {
             try {
-                const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+                const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
                 const json = await res.json();
                 if (!json.erro) {
-                    setDados((prev)=>({
-                            ...prev,
+                    setDados((d)=>({
+                            ...d,
                             endereco: `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`
                         }));
                 }
             } catch (e) {
-                console.error("Erro na busca do CEP");
+                console.error("Erro CEP");
             }
         }
     };
-    // 4. ADICIONAR AO CARRINHO COM VALIDAÇÃO DE TAMANHO
     const add = (p)=>{
-        if (p.category === 'vestuario' && !selectedSizes[p.id]) {
-            alert("Por favor, selecione um tamanho!");
-            return;
-        }
-        const idUnico = p.category === 'vestuario' ? `${p.id}-${selectedSizes[p.id]}` : p.id;
-        const nomeComTamanho = p.category === 'vestuario' ? `${p.nome} (${selectedSizes[p.id]})` : p.nome;
-        const existe = carrinho.find((x)=>x.id === idUnico);
+        const existe = carrinho.find((item)=>item.id === p.id);
         if (existe) {
-            setCarrinho(carrinho.map((x)=>x.id === idUnico ? {
+            setCarrinho(carrinho.map((item)=>item.id === p.id ? {
                     ...existe,
                     quantidade: existe.quantidade + 1
-                } : x));
+                } : item));
         } else {
             setCarrinho([
                 ...carrinho,
                 {
                     ...p,
-                    id: idUnico,
-                    nome: nomeComTamanho,
                     quantidade: 1
                 }
             ]);
         }
         setModalAberto(true);
     };
-    // 5. SALVAR NO SUPABASE (BANCO DE DADOS)
-    const salvarPedidoNoSupabase = async (metodoPagamento)=>{
-        try {
-            const { data, error } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabaseClient$2e$js__$5b$client$5d$__$28$ecmascript$29$__["supabase"].from('pedidos').insert([
-                {
-                    email: dados.email,
-                    cpf: dados.cpf,
-                    cep: dados.cep,
-                    endereco: dados.endereco,
-                    total_geral: totalGeral,
-                    frete: frete,
-                    itens: carrinho,
-                    metodo_pagamento: metodoPagamento,
-                    status: 'pendente'
-                }
-            ]);
-            if (error) {
-                // ESTE LOG É IMPORTANTE:
-                console.error("ERRO DETALHADO DO SUPABASE:", error.message, error.details, error.hint);
-                alert("Erro técnico: " + error.message); // Isso vai mostrar o erro na tela para você
-                return false;
-            }
-            return true;
-        } catch (error) {
-            console.error("Erro Crítico:", error);
-            return false;
-        }
-    };
-    // 6. INICIAR CHECKOUT MERCADO PAGO
     const iniciarCheckoutMP = async ()=>{
-        // Debug para você ver o que está preenchido no Console (F12)
-        console.log("Dados atuais:", dados);
-        // Validação detalhada
-        if (!dados.email) {
-            alert("E-mail é obrigatório!");
-            return;
+        if (!dados.email || !dados.cpf || !dados.endereco || dados.cep.length < 8) {
+            return alert("Preencha todos os dados de entrega corretamente!");
         }
-        if (!dados.cpf) {
-            alert("CPF é obrigatório!");
-            return;
-        }
-        if (!dados.endereco) {
-            alert("Endereço é obrigatório!");
-            return;
-        }
-        if (dados.cep.length < 8) {
-            alert("CEP incompleto!");
-            return;
-        }
-        if (carrinho.length === 0) {
-            alert("Seu carrinho está vazio!");
-            return;
-        }
+        if (carrinho.length === 0) return alert("Carrinho vazio!");
         setLoading(true);
-        // Salva no banco de dados
-        const salvo = await salvarPedidoNoSupabase('Mercado Pago');
-        if (salvo) {
+        // Salva no Supabase
+        const { error } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabaseClient$2e$js__$5b$client$5d$__$28$ecmascript$29$__["supabase"].from('pedidos').insert([
+            {
+                email: dados.email,
+                cpf: dados.cpf,
+                cep: dados.cep,
+                endereco: dados.endereco,
+                total_geral: totalGeral,
+                frete,
+                itens: carrinho,
+                metodo_pagamento: 'Mercado Pago',
+                status: 'pendente'
+            }
+        ]);
+        if (!error) {
             try {
                 const res = await fetch('/api/checkout-mp', {
                     method: 'POST',
@@ -838,28 +781,20 @@ function Loja() {
                     },
                     body: JSON.stringify({
                         itens: carrinho,
-                        total: totalGeral,
-                        frete,
-                        ...dados
+                        email: dados.email,
+                        frete
                     })
                 });
                 const data = await res.json();
-                if (data.init_point) {
-                    window.location.href = data.init_point;
-                } else {
-                    console.error("Erro na API do Mercado Pago:", data);
-                    alert("Erro ao gerar link de pagamento.");
-                }
+                if (data.init_point) window.location.href = data.init_point;
             } catch (err) {
-                console.error("Erro na chamada da API:", err);
-                alert("Falha na conexão com o servidor.");
+                alert("Erro ao conectar com Mercado Pago.");
             }
         } else {
-            alert("Houve um erro ao registrar seu pedido no banco de dados. Verifique sua conexão.");
+            alert("Erro ao registrar pedido no banco de dados.");
         }
         setLoading(false);
     };
-    // LISTA DE PRODUTOS
     const produtos = [
         {
             id: 1,
@@ -900,7 +835,7 @@ function Loja() {
                         children: "Loja Lifestyle | Pão de Queijo da Irá"
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 180,
+                        lineNumber: 107,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("link", {
@@ -909,13 +844,13 @@ function Loja() {
                         className: "jsx-8553d4424295cc02"
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 181,
+                        lineNumber: 108,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 179,
+                lineNumber: 106,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -923,7 +858,7 @@ function Loja() {
                 children: "Loja Lifestyle • Entrega em todo Brasil • Frete Grátis acima de R$ 500"
             }, void 0, false, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 185,
+                lineNumber: 111,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
@@ -940,12 +875,12 @@ function Loja() {
                                 className: "jsx-8553d4424295cc02" + " " + "h-12 md:h-16 w-auto"
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 192,
+                                lineNumber: 117,
                                 columnNumber: 23
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/pages/loja.js",
-                            lineNumber: 192,
+                            lineNumber: 117,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -957,7 +892,7 @@ function Loja() {
                                     children: "IRÁ DIGITAL GENESIS PASS"
                                 }, void 0, false, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 196,
+                                    lineNumber: 119,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -966,7 +901,7 @@ function Loja() {
                                     children: "COMPRAR PÃO DE QUEIJO"
                                 }, void 0, false, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 197,
+                                    lineNumber: 120,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -978,7 +913,7 @@ function Loja() {
                                             children: "Carrinho"
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 199,
+                                            lineNumber: 122,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -986,19 +921,19 @@ function Loja() {
                                             children: carrinho.length
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 200,
+                                            lineNumber: 123,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 198,
+                                    lineNumber: 121,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/pages/loja.js",
-                            lineNumber: 195,
+                            lineNumber: 118,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1012,7 +947,7 @@ function Loja() {
                                             className: "jsx-8553d4424295cc02" + " " + "bi bi-bag text-2xl"
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 207,
+                                            lineNumber: 128,
                                             columnNumber: 15
                                         }, this),
                                         carrinho.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1020,13 +955,13 @@ function Loja() {
                                             children: carrinho.length
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 209,
-                                            columnNumber: 17
+                                            lineNumber: 129,
+                                            columnNumber: 39
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 206,
+                                    lineNumber: 127,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1036,29 +971,29 @@ function Loja() {
                                         className: "jsx-8553d4424295cc02" + " " + "bi bi-list text-3xl"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 215,
-                                        columnNumber: 15
+                                        lineNumber: 131,
+                                        columnNumber: 79
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 214,
+                                    lineNumber: 131,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/pages/loja.js",
-                            lineNumber: 205,
+                            lineNumber: 126,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/pages/loja.js",
-                    lineNumber: 191,
+                    lineNumber: 116,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 190,
+                lineNumber: 115,
                 columnNumber: 7
             }, this),
             menuMobileAberto && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1069,7 +1004,7 @@ function Loja() {
                         className: "jsx-8553d4424295cc02" + " " + "absolute inset-0 bg-black/60 backdrop-blur-md"
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 224,
+                        lineNumber: 138,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -1082,12 +1017,12 @@ function Loja() {
                                     className: "jsx-8553d4424295cc02" + " " + "bi bi-x-lg"
                                 }, void 0, false, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 227,
-                                    columnNumber: 15
+                                    lineNumber: 140,
+                                    columnNumber: 108
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 226,
+                                lineNumber: 140,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1097,7 +1032,7 @@ function Loja() {
                                 children: "IRÁ DIGITAL GENESIS PASS"
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 229,
+                                lineNumber: 141,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1106,76 +1041,19 @@ function Loja() {
                                 children: "COMPRAR PÃO DE QUEIJO"
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 230,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "jsx-8553d4424295cc02" + " " + "pt-4 border-t border-gray-100 flex justify-center gap-6 text-2xl",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                        href: "https://www.instagram.com/paodequeijodaira",
-                                        target: "_blank",
-                                        className: "jsx-8553d4424295cc02" + " " + "text-2xl hover:text-orange-600",
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                            className: "jsx-8553d4424295cc02" + " " + "bi bi-instagram"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 232,
-                                            columnNumber: 129
-                                        }, this)
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 232,
-                                        columnNumber: 17
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                        href: "https://www.facebook.com/share/1GWWjcK1xr/",
-                                        target: "_blank",
-                                        className: "jsx-8553d4424295cc02" + " " + "text-2xl hover:text-orange-600",
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                            className: "jsx-8553d4424295cc02" + " " + "bi bi-facebook"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 233,
-                                            columnNumber: 129
-                                        }, this)
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 233,
-                                        columnNumber: 17
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                        href: "https://www.youtube.com/@paodequeijodaira",
-                                        target: "_blank",
-                                        className: "jsx-8553d4424295cc02" + " " + "text-2xl hover:text-orange-600",
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                            className: "jsx-8553d4424295cc02" + " " + "bi bi-youtube"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 234,
-                                            columnNumber: 128
-                                        }, this)
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 234,
-                                        columnNumber: 17
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 231,
+                                lineNumber: 142,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 225,
+                        lineNumber: 139,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 223,
+                lineNumber: 137,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -1191,19 +1069,19 @@ function Loja() {
                                     className: "jsx-8553d4424295cc02"
                                 }, void 0, false, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 242,
+                                    lineNumber: 149,
                                     columnNumber: 117
                                 }, this),
                                 "Acessórios"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/pages/loja.js",
-                            lineNumber: 242,
+                            lineNumber: 149,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 241,
+                        lineNumber: 148,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1219,12 +1097,12 @@ function Loja() {
                                             className: "jsx-8553d4424295cc02" + " " + "w-full h-full object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-700"
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 249,
+                                            lineNumber: 155,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 248,
+                                        lineNumber: 154,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1232,7 +1110,7 @@ function Loja() {
                                         children: p.nome
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 251,
+                                        lineNumber: 157,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1243,7 +1121,7 @@ function Loja() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 252,
+                                        lineNumber: 158,
                                         columnNumber: 15
                                     }, this),
                                     p.category === 'vestuario' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1258,16 +1136,16 @@ function Loja() {
                                                         ...selectedSizes,
                                                         [p.id]: s
                                                     }),
-                                                className: "jsx-8553d4424295cc02" + " " + `w-10 h-10 border-2 font-black text-[10px] transition-all ${selectedSizes[p.id] === s ? 'border-orange-600 bg-orange-600 text-white' : 'border-gray-200'}`,
+                                                className: "jsx-8553d4424295cc02" + " " + `w-10 h-10 border-2 font-black text-[10px] ${selectedSizes[p.id] === s ? 'border-orange-600 bg-orange-600 text-white' : 'border-gray-200'}`,
                                                 children: s
                                             }, s, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 257,
+                                                lineNumber: 162,
                                                 columnNumber: 21
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 255,
+                                        lineNumber: 160,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1276,24 +1154,24 @@ function Loja() {
                                         children: "Adicionar ao Carrinho"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 261,
+                                        lineNumber: 166,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, p.id, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 247,
+                                lineNumber: 153,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 245,
+                        lineNumber: 151,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 240,
+                lineNumber: 147,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1311,7 +1189,7 @@ function Loja() {
                                         className: "jsx-8553d4424295cc02"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 271,
+                                        lineNumber: 176,
                                         columnNumber: 25
                                     }, this),
                                     " ",
@@ -1325,13 +1203,13 @@ function Loja() {
                                         children: "Genesis Pass"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 271,
+                                        lineNumber: 176,
                                         columnNumber: 32
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 270,
+                                lineNumber: 175,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1339,7 +1217,7 @@ function Loja() {
                                 children: "(Genesis Pass): Os Benefícios na sua carteira digital."
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 273,
+                                lineNumber: 178,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1356,7 +1234,7 @@ function Loja() {
                                                         children: "Golden Discount"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 279,
+                                                        lineNumber: 184,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1364,13 +1242,13 @@ function Loja() {
                                                         children: "10% de desconto fixo em todos os itens da loja."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 280,
+                                                        lineNumber: 185,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 278,
+                                                lineNumber: 183,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1381,7 +1259,7 @@ function Loja() {
                                                         children: "Early Access"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 283,
+                                                        lineNumber: 188,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1389,19 +1267,19 @@ function Loja() {
                                                         children: "Acesso a novas fornadas 24h antes do público geral."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 284,
+                                                        lineNumber: 189,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 282,
+                                                lineNumber: 187,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 277,
+                                        lineNumber: 182,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1415,7 +1293,7 @@ function Loja() {
                                                         children: "Ira's Secret Club"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 289,
+                                                        lineNumber: 194,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1423,13 +1301,13 @@ function Loja() {
                                                         children: "Acesso a um grupo fechado com receitas exclusivas."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 290,
+                                                        lineNumber: 195,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 288,
+                                                lineNumber: 193,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1440,7 +1318,7 @@ function Loja() {
                                                         children: "Physical Gift"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 293,
+                                                        lineNumber: 198,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1448,25 +1326,25 @@ function Loja() {
                                                         children: "Primeiro holder recebe kit físico exclusivo."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 294,
+                                                        lineNumber: 199,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 292,
+                                                lineNumber: 197,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 287,
+                                        lineNumber: 192,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 276,
+                                lineNumber: 181,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1479,18 +1357,18 @@ function Loja() {
                                     children: "Entrar na Lista de Espera"
                                 }, void 0, false, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 299,
+                                    lineNumber: 204,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 298,
+                                lineNumber: 203,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 269,
+                        lineNumber: 174,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1498,13 +1376,13 @@ function Loja() {
                         children: "WEB3"
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 304,
+                        lineNumber: 209,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 268,
+                lineNumber: 173,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
@@ -1527,12 +1405,12 @@ function Loja() {
                                                 className: "jsx-8553d4424295cc02" + " " + "h-20 mb-6"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 314,
+                                                lineNumber: 219,
                                                 columnNumber: 27
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 314,
+                                            lineNumber: 219,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1546,12 +1424,12 @@ function Loja() {
                                                         className: "jsx-8553d4424295cc02" + " " + "bi bi-instagram"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 316,
+                                                        lineNumber: 221,
                                                         columnNumber: 129
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 316,
+                                                    lineNumber: 221,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1562,12 +1440,12 @@ function Loja() {
                                                         className: "jsx-8553d4424295cc02" + " " + "bi bi-facebook"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 317,
+                                                        lineNumber: 222,
                                                         columnNumber: 129
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 317,
+                                                    lineNumber: 222,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1578,24 +1456,24 @@ function Loja() {
                                                         className: "jsx-8553d4424295cc02" + " " + "bi bi-youtube"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 318,
+                                                        lineNumber: 223,
                                                         columnNumber: 128
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 318,
+                                                    lineNumber: 223,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 315,
+                                            lineNumber: 220,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 313,
+                                    lineNumber: 218,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1606,7 +1484,7 @@ function Loja() {
                                             children: "Funcionamento & Retirada"
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 322,
+                                            lineNumber: 227,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1617,7 +1495,7 @@ function Loja() {
                                                     children: "Horário:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 324,
+                                                    lineNumber: 229,
                                                     columnNumber: 17
                                                 }, this),
                                                 " Seg a Sáb das 08:00 às 18:00.",
@@ -1625,14 +1503,14 @@ function Loja() {
                                                     className: "jsx-8553d4424295cc02"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 324,
+                                                    lineNumber: 229,
                                                     columnNumber: 72
                                                 }, this),
                                                 "Dom das 08:00 às 12:00."
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 323,
+                                            lineNumber: 228,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1643,7 +1521,7 @@ function Loja() {
                                                     children: "Endereço:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 326,
+                                                    lineNumber: 231,
                                                     columnNumber: 17
                                                 }, this),
                                                 " Quadra 4 Lote 26 Condomínio Flores do Cerrado II",
@@ -1651,20 +1529,20 @@ function Loja() {
                                                     className: "jsx-8553d4424295cc02"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 326,
+                                                    lineNumber: 231,
                                                     columnNumber: 92
                                                 }, this),
                                                 "Recreio Mossoró - Cidade Ocidental-GO"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 325,
+                                            lineNumber: 230,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 321,
+                                    lineNumber: 226,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1675,7 +1553,7 @@ function Loja() {
                                             children: "Pão de Queijo da Irá"
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 329,
+                                            lineNumber: 234,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1683,19 +1561,19 @@ function Loja() {
                                             children: "© 2026 - Todos os direitos reservados."
                                         }, void 0, false, {
                                             fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 330,
+                                            lineNumber: 235,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/pages/loja.js",
-                                    lineNumber: 328,
+                                    lineNumber: 233,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/pages/loja.js",
-                            lineNumber: 312,
+                            lineNumber: 217,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1707,23 +1585,23 @@ function Loja() {
                                 children: "Desenvolvido por SjrPovoaS"
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 334,
+                                lineNumber: 239,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/pages/loja.js",
-                            lineNumber: 333,
+                            lineNumber: 238,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/pages/loja.js",
-                    lineNumber: 311,
+                    lineNumber: 216,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 310,
+                lineNumber: 215,
                 columnNumber: 7
             }, this),
             modalAberto && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1734,7 +1612,7 @@ function Loja() {
                         className: "jsx-8553d4424295cc02" + " " + "absolute inset-0 bg-black/40 backdrop-blur-sm"
                     }, void 0, false, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 342,
+                        lineNumber: 247,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1748,7 +1626,7 @@ function Loja() {
                                         children: "Seu Carrinho"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 345,
+                                        lineNumber: 250,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1757,51 +1635,17 @@ function Loja() {
                                         children: "FECHAR"
                                     }, void 0, false, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 346,
+                                        lineNumber: 251,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 344,
+                                lineNumber: 249,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "jsx-8553d4424295cc02" + " " + "mb-6 bg-white p-4 rounded-xl border border-orange-100 shadow-sm",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "jsx-8553d4424295cc02" + " " + "text-[9px] font-black uppercase text-center mb-2 tracking-widest",
-                                        children: subtotal >= 500 ? "🎉 Você ganhou frete grátis!" : `Faltam R$ ${(500 - subtotal).toFixed(2)} para frete grátis`
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 351,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-8553d4424295cc02" + " " + "w-full h-1 bg-gray-100 rounded-full overflow-hidden",
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            style: {
-                                                width: `${Math.min(subtotal / 500 * 100, 100)}%`
-                                            },
-                                            className: "jsx-8553d4424295cc02" + " " + "h-full bg-orange-600 transition-all duration-1000"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/pages/loja.js",
-                                            lineNumber: 355,
-                                            columnNumber: 17
-                                        }, this)
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 354,
-                                        columnNumber: 15
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 350,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "jsx-8553d4424295cc02" + " " + "flex-1 overflow-y-auto pr-2 custom-scroll",
+                                className: "jsx-8553d4424295cc02" + " " + "flex-1 overflow-y-auto custom-scroll",
                                 children: carrinho.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "jsx-8553d4424295cc02" + " " + "flex gap-4 mb-6 border-b border-orange-50 pb-6 items-center",
                                         children: [
@@ -1812,93 +1656,75 @@ function Loja() {
                                                     className: "jsx-8553d4424295cc02" + " " + "w-full h-full object-cover mix-blend-multiply"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 363,
+                                                    lineNumber: 258,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 362,
+                                                lineNumber: 257,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "jsx-8553d4424295cc02" + " " + "flex-1",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                                        className: "jsx-8553d4424295cc02" + " " + "text-[10px] font-black uppercase leading-tight tracking-widest",
+                                                        className: "jsx-8553d4424295cc02" + " " + "text-[10px] font-black uppercase tracking-widest",
                                                         children: item.nome
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 366,
+                                                        lineNumber: 261,
                                                         columnNumber: 21
                                                     }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "jsx-8553d4424295cc02" + " " + "mt-1 flex gap-3 text-[10px] font-black uppercase",
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                        className: "jsx-8553d4424295cc02" + " " + "text-[10px] font-black",
                                                         children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                className: "jsx-8553d4424295cc02" + " " + "text-gray-400",
-                                                                children: [
-                                                                    "QTD: ",
-                                                                    item.quantidade
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/src/pages/loja.js",
-                                                                lineNumber: 368,
-                                                                columnNumber: 23
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                className: "jsx-8553d4424295cc02" + " " + "text-black",
-                                                                children: [
-                                                                    "R$ ",
-                                                                    (item.preco * item.quantidade).toFixed(2)
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/src/pages/loja.js",
-                                                                lineNumber: 369,
-                                                                columnNumber: 23
-                                                            }, this)
+                                                            "QTD: ",
+                                                            item.quantidade,
+                                                            " | R$ ",
+                                                            (item.preco * item.quantidade).toFixed(2)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 367,
+                                                        lineNumber: 262,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 365,
+                                                lineNumber: 260,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 onClick: ()=>setCarrinho(carrinho.filter((i)=>i.id !== item.id)),
-                                                className: "jsx-8553d4424295cc02" + " " + "text-gray-400 p-2",
+                                                className: "jsx-8553d4424295cc02" + " " + "text-gray-400",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                                    className: "jsx-8553d4424295cc02" + " " + "bi bi-trash3 text-lg"
+                                                    className: "jsx-8553d4424295cc02" + " " + "bi bi-trash3"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/pages/loja.js",
-                                                    lineNumber: 372,
-                                                    columnNumber: 125
+                                                    lineNumber: 264,
+                                                    columnNumber: 121
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 372,
+                                                lineNumber: 264,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, item.id, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 361,
+                                        lineNumber: 256,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 359,
+                                lineNumber: 254,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "jsx-8553d4424295cc02" + " " + "mt-auto pt-6 border-t-2 border-[#3D2B1F] space-y-1",
+                                className: "jsx-8553d4424295cc02" + " " + "mt-auto pt-6 border-t-2 border-[#3D2B1F] space-y-4",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-8553d4424295cc02" + " " + "text-[10px] font-black uppercase space-y-[-15]",
+                                        className: "jsx-8553d4424295cc02" + " " + "text-[10px] font-black uppercase",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "jsx-8553d4424295cc02" + " " + "flex justify-between opacity-50",
@@ -1908,7 +1734,7 @@ function Loja() {
                                                         children: "Subtotal"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 380,
+                                                        lineNumber: 271,
                                                         columnNumber: 66
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1919,13 +1745,13 @@ function Loja() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 380,
+                                                        lineNumber: 271,
                                                         columnNumber: 87
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 380,
+                                                lineNumber: 271,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1933,39 +1759,36 @@ function Loja() {
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "jsx-8553d4424295cc02",
-                                                        children: [
-                                                            "Frete ",
-                                                            dados.cep.length < 8 && subtotal < 500 ? '(insira o CEP)' : ''
-                                                        ]
-                                                    }, void 0, true, {
+                                                        children: "Frete"
+                                                    }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 382,
-                                                        columnNumber: 19
+                                                        lineNumber: 272,
+                                                        columnNumber: 71
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "jsx-8553d4424295cc02",
-                                                        children: subtotal >= VALOR_FRETE_GRATIS ? "GRÁTIS" : dados.cep.length === 8 ? `R$ ${frete.toFixed(2)}` : "R$ 0,00"
+                                                        children: subtotal >= VALOR_FRETE_GRATIS ? "GRÁTIS" : `R$ ${frete.toFixed(2)}`
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 383,
-                                                        columnNumber: 19
+                                                        lineNumber: 272,
+                                                        columnNumber: 89
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 381,
+                                                lineNumber: 272,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-8553d4424295cc02" + " " + "flex justify-between text-2xl pt-2 border-t border-[#3D2B1F]/10 italic",
+                                                className: "jsx-8553d4424295cc02" + " " + "flex justify-between text-2xl pt-2 italic",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "jsx-8553d4424295cc02",
                                                         children: "Total"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 385,
-                                                        columnNumber: 105
+                                                        lineNumber: 273,
+                                                        columnNumber: 76
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "jsx-8553d4424295cc02",
@@ -1975,114 +1798,92 @@ function Loja() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 385,
-                                                        columnNumber: 123
+                                                        lineNumber: 273,
+                                                        columnNumber: 94
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 385,
+                                                lineNumber: 273,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 379,
+                                        lineNumber: 270,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-8553d4424295cc02" + " " + "space-y-[-20]",
+                                        className: "jsx-8553d4424295cc02" + " " + "grid grid-cols-2 gap-2",
                                         children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-8553d4424295cc02" + " " + "grid grid-cols-2 gap-1",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                        type: "text",
-                                                        placeholder: "CEP",
-                                                        maxLength: "8",
-                                                        value: dados.cep,
-                                                        onChange: (e)=>handleCEP(e.target.value),
-                                                        className: "jsx-8553d4424295cc02" + " " + "bg-white border border-gray-200 p-3 rounded-lg text-xs outline-none focus:border-orange-600 transition-all"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 390,
-                                                        columnNumber: 19
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                        type: "text",
-                                                        placeholder: "CPF",
-                                                        onChange: (e)=>setDados({
-                                                                ...dados,
-                                                                cpf: e.target.value
-                                                            }),
-                                                        className: "jsx-8553d4424295cc02" + " " + "bg-white border border-gray-200 p-3 rounded-lg text-xs outline-none focus:border-orange-600 transition-all"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 391,
-                                                        columnNumber: 19
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "text",
+                                                placeholder: "CEP",
+                                                maxLength: "8",
+                                                value: dados.cep,
+                                                onChange: (e)=>handleCEP(e.target.value),
+                                                className: "jsx-8553d4424295cc02" + " " + "border p-2 text-xs rounded"
+                                            }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 389,
+                                                lineNumber: 277,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 type: "text",
-                                                placeholder: "Endereço Completo",
-                                                value: dados.endereco,
-                                                readOnly: true,
-                                                className: "jsx-8553d4424295cc02" + " " + "w-full bg-gray-50 border border-gray-100 p-3 rounded-lg text-[10px] font-bold text-orange-600 outline-none"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 393,
-                                                columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                type: "email",
-                                                placeholder: "E-mail",
+                                                placeholder: "CPF",
+                                                value: dados.cpf,
                                                 onChange: (e)=>setDados({
                                                         ...dados,
-                                                        email: e.target.value
+                                                        cpf: e.target.value
                                                     }),
-                                                className: "jsx-8553d4424295cc02" + " " + "w-full bg-white border border-gray-200 p-3 rounded-lg text-xs outline-none focus:border-orange-600 transition-all"
+                                                className: "jsx-8553d4424295cc02" + " " + "border p-2 text-xs rounded"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 394,
+                                                lineNumber: 278,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 388,
+                                        lineNumber: 276,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        type: "text",
+                                        placeholder: "Endereço",
+                                        value: dados.endereco,
+                                        readOnly: true,
+                                        className: "jsx-8553d4424295cc02" + " " + "w-full border p-2 text-[10px] bg-gray-50"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/pages/loja.js",
+                                        lineNumber: 280,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        type: "email",
+                                        placeholder: "E-mail",
+                                        value: dados.email,
+                                        onChange: (e)=>setDados({
+                                                ...dados,
+                                                email: e.target.value
+                                            }),
+                                        className: "jsx-8553d4424295cc02" + " " + "w-full border p-2 text-xs rounded"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/pages/loja.js",
+                                        lineNumber: 281,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-8553d4424295cc02" + " " + "grid grid-cols-2 gap-1 pt-1",
+                                        className: "jsx-8553d4424295cc02" + " " + "grid grid-cols-2 gap-2",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 onClick: iniciarCheckoutMP,
-                                                className: "jsx-8553d4424295cc02" + " " + "bg-black text-white py-4 font-black uppercase text-[12px] flex flex-col items-center justify-center hover:bg-orange-600 transition-all shadow-lg",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                                        className: "jsx-8553d4424295cc02" + " " + "bi bi-credit-card-2-back text-lg"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 399,
-                                                        columnNumber: 19
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "jsx-8553d4424295cc02",
-                                                        children: "Cartão ou Pix"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/pages/loja.js",
-                                                        lineNumber: 400,
-                                                        columnNumber: 19
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
+                                                disabled: loading,
+                                                className: "jsx-8553d4424295cc02" + " " + "bg-black text-white py-4 font-black uppercase text-[10px] hover:bg-orange-600 transition-all disabled:opacity-50",
+                                                children: loading ? 'Processando...' : 'Cartão ou Pix'
+                                            }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 398,
+                                                lineNumber: 284,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$BotaoPagamentoWeb3$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2091,31 +1892,31 @@ function Loja() {
                                                 dadosEntrega: dados
                                             }, void 0, false, {
                                                 fileName: "[project]/src/pages/loja.js",
-                                                lineNumber: 402,
+                                                lineNumber: 287,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/pages/loja.js",
-                                        lineNumber: 397,
+                                        lineNumber: 283,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/pages/loja.js",
-                                lineNumber: 378,
+                                lineNumber: 269,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/pages/loja.js",
-                        lineNumber: 343,
+                        lineNumber: 248,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 341,
+                lineNumber: 246,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2123,17 +1924,17 @@ function Loja() {
                         top: 0,
                         behavior: 'smooth'
                     }),
-                className: "jsx-8553d4424295cc02" + " " + `fixed bottom-8 right-8 z-[100] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl items-center justify-center transition-all duration-500 ${showScrollTop ? 'translate-y-0 opacity-100 flex' : 'translate-y-20 opacity-0'}`,
+                className: "jsx-8553d4424295cc02" + " " + `fixed bottom-8 right-8 z-[100] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl items-center justify-center transition-all ${showScrollTop ? 'flex opacity-100' : 'hidden opacity-0'}`,
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
                     className: "jsx-8553d4424295cc02" + " " + "bi bi-arrow-up text-xl"
                 }, void 0, false, {
                     fileName: "[project]/src/pages/loja.js",
-                    lineNumber: 414,
-                    columnNumber: 9
+                    lineNumber: 295,
+                    columnNumber: 285
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/pages/loja.js",
-                lineNumber: 410,
+                lineNumber: 295,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2143,11 +1944,11 @@ function Loja() {
         ]
     }, void 0, true, {
         fileName: "[project]/src/pages/loja.js",
-        lineNumber: 178,
+        lineNumber: 105,
         columnNumber: 5
     }, this);
 }
-_s(Loja, "yeQltP3Zyr/x3rAaAq85paJYsJw=");
+_s(Loja, "lsuJZEtnOohMw347Pjyq/04skXU=");
 _c = Loja;
 var _c;
 __turbopack_context__.k.register(_c, "Loja");

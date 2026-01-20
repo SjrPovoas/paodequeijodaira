@@ -20,70 +20,60 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$externals$5d2f$mercadopago__$5b$external$5d$__$28$mercadopago$2c$__cjs$2c$__$5b$project$5d2f$node_modules$2f$mercadopago$29$__ = __turbopack_context__.i("[externals]/mercadopago [external] (mercadopago, cjs, [project]/node_modules/mercadopago)");
 ;
-// 1. Configuração do Cliente com seu Access Token
-// IMPORTANTE: Adicione MP_ACCESS_TOKEN no seu arquivo .env.local
+// 1. Configuração do Cliente (O Token deve estar no seu .env.local)
 const client = new __TURBOPACK__imported__module__$5b$externals$5d2f$mercadopago__$5b$external$5d$__$28$mercadopago$2c$__cjs$2c$__$5b$project$5d2f$node_modules$2f$mercadopago$29$__["MercadoPagoConfig"]({
     accessToken: process.env.MP_ACCESS_TOKEN
 });
 async function handler(req, res) {
-    // Garantir que apenas requisições POST sejam aceitas
     if (req.method !== 'POST') {
         return res.status(405).json({
             message: 'Método não permitido'
         });
     }
-    const { itens, total, cpf, email, endereco } = req.body;
     try {
+        const { itens, email, frete } = req.body;
+        // 2. Formatação dos itens para o Mercado Pago
+        const itemsMP = itens.map((item)=>({
+                id: String(item.id),
+                title: item.nome,
+                unit_price: Number(item.preco),
+                quantity: Number(item.quantidade),
+                currency_id: 'BRL'
+            }));
+        // 3. Adicionar Frete se existir
+        if (frete && Number(frete) > 0) {
+            itemsMP.push({
+                id: 'frete-entrega',
+                title: 'Taxa de Entrega',
+                unit_price: Number(frete),
+                quantity: 1,
+                currency_id: 'BRL'
+            });
+        }
         const preference = new __TURBOPACK__imported__module__$5b$externals$5d2f$mercadopago__$5b$external$5d$__$28$mercadopago$2c$__cjs$2c$__$5b$project$5d2f$node_modules$2f$mercadopago$29$__["Preference"](client);
-        // 2. Criar a estrutura da preferência
         const response = await preference.create({
             body: {
-                // Mapeia os itens do carrinho para o formato do Mercado Pago
-                items: itens.map((item)=>({
-                        id: item.id.toString(),
-                        title: item.nome,
-                        unit_price: Number(item.preco),
-                        quantity: Number(item.quantidade),
-                        currency_id: 'BRL'
-                    })),
-                // Dados do comprador (ajuda na aprovação do antifraude)
+                items: itemsMP,
                 payer: {
-                    email: email || "comprador@email.com",
-                    identification: {
-                        type: 'CPF',
-                        number: cpf.replace(/\D/g, '') // Remove pontos e traços do CPF
-                    }
+                    email: email
                 },
-                // URLs de retorno que criamos anteriormente
+                external_reference: email,
                 back_urls: {
-                    success: "https://paodequeijodaira.vercel.app/sucesso",
-                    failure: "https://paodequeijodaira.vercel.app/erro",
-                    pending: "https://paodequeijodaira.vercel.app/sucesso"
+                    success: `${process.env.NEXT_PUBLIC_SITE_URL}/sucesso`,
+                    failure: `${process.env.NEXT_PUBLIC_SITE_URL}/erro`,
+                    pending: `${process.env.NEXT_PUBLIC_SITE_URL}/pendente`
                 },
-                // Redireciona automaticamente após o sucesso
                 auto_return: "approved",
-                // Metadados para você identificar o pedido no seu banco depois
-                metadata: {
-                    id_referencia: `pedido_${Date.now()}`,
-                    endereco_entrega: endereco
-                },
-                // Métodos de pagamento permitidos (opcional)
-                payment_methods: {
-                    excluded_payment_types: [],
-                    installments: 12
-                }
+                notification_url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/webhook-mp`
             }
         });
-        // 3. Retornar os dados do checkout para o frontend
-        // O 'init_point' é o link oficial do checkout do Mercado Pago
         res.status(200).json({
-            id: response.id,
             init_point: response.init_point
         });
     } catch (error) {
-        console.error("Erro no Mercado Pago:", error);
+        console.error("Erro MP:", error);
         res.status(500).json({
-            error: "Erro ao processar o checkout",
+            error: "Erro ao gerar link",
             details: error.message
         });
     }
