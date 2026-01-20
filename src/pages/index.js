@@ -28,7 +28,7 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);  
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleWhatsapp = (e) => {
     e.preventDefault();
@@ -80,13 +80,13 @@ export default function Home() {
         <meta name="twitter:title" content="Pão de Queijo da Irá" />
         <meta name="twitter:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
         <meta name="twitter:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
-        <meta name="twitter:url" content="https://x.com/PaodQueijodaIra" />    
+        <meta name="twitter:url" content="https://x.com/PaodQueijodaIra" />
 
         <title>Pão de Queijo da Irá | O melhor pão de queijo congelado e caseiro da Cidade Ocidental</title>
         <meta name="author" content="SjrPovoaS" />
         <meta name="description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
         <meta name="Keywords" content="pao de queijo, pão de queijo, pão de queijo em Cidade Ocidental, pão de queijo congelado Cidade Ocidental, pão de queijo caseiro, Pão de Queijo da Irá, melhor lanche em cidade ocidental" />
-       
+
         {/* SCRIPTS EXTERNOS */}
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
@@ -249,34 +249,14 @@ export default function Home() {
               Baixe nosso guia gratuito e descubra quais cafés e acompanhamentos combinam perfeitamente com o seu pão de queijo.
             </p>
 
-          {/* BAIXAR GUIA GRATUITO */}
-          <a href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
-             Baixar meu Guia Gratuito agora!
-          </a>
-          {/* <form id="sib-form" method="POST"
-              action={LINK_BAIXAR_GUIA} className="space-y-4"> */}
-                
-              {/* Honeypot para evitar SPAM (Não remover) 
-              <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
-                <input type="text" name="email_address_check" tabIndex="-1" value="" readOnly />
-              </div> */}
+            {/* BAIXAR GUIA GRATUITO */}
+            <a href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
+              Baixar meu Guia Gratuito agora!
+            </a>
 
-              {/*<div className="relative">
-                <input type="text" name="NOME" id="NOME" placeholder="SEU NOME COMPLETO" required
-                  className="w-full bg-white/5 border-2 border-gray-700 p-5 text-xs font-black uppercase tracking-widest outline-none focus:border-orange-600 focus:bg-white/10 transition-all placeholder:text-gray-600"/>
-              </div>
-              <div className="relative">
-                <input type="email" name="EMAIL" id="EMAIL" placeholder="SEU MELHOR E-MAIL" required
-                  className="w-full bg-white/5 border-2 border-gray-700 p-5 text-xs font-black uppercase tracking-widest outline-none focus:border-orange-600 focus:bg-white/10 transition-all placeholder:text-gray-600"/>
-              </div>*/}
+            <p className="text-[9px] text-gray-500 uppercase tracking-widest text-center mt-4">
+              Prometemos não enviar spam. Você pode sair da lista a qualquer momento.</p>
 
-             {/*<button type="submit" className="w-full bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
-                Baixar meu Guia Gratuito agora!</button> */}
-
-              <p className="text-[9px] text-gray-500 uppercase tracking-widest text-center mt-4">
-                Prometemos não enviar spam. Você pode sair da lista a qualquer momento.</p>
-            {/*</form>*/}
-            {/* FIM DO FORMULÁRIO BREVO */}
           </div>
 
         </div>
@@ -400,9 +380,8 @@ export default function Home() {
 
       {/* BOTÃO VOLTAR AO TOPO */}
       <button onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${
-          showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'
-        }`} aria-label="Voltar ao topo"><i className="bi bi-arrow-up text-xl font-bold"></i>
+        className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'
+          }`} aria-label="Voltar ao topo"><i className="bi bi-arrow-up text-xl font-bold"></i>
       </button>
 
     </div>

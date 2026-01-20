@@ -3,5 +3,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/baixar_guia_gratuito": "pages/baixar_guia_gratuito.js"
+  "/api/checkout-mp": "pages/api/checkout-mp.js",
+  "/loja": "pages/loja.js"
 }

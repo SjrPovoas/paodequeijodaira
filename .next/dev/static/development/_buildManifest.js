@@ -5,8 +5,8 @@ self.__BUILD_MANIFEST = {
   "/_error": [
     "static/chunks/pages/_error.js"
   ],
-  "/baixar_guia_gratuito": [
-    "static/chunks/pages/baixar_guia_gratuito.js"
+  "/loja": [
+    "static/chunks/pages/loja.js"
   ],
   "__rewrites": {
     "afterFiles": [],
@@ -15,14 +15,23 @@ self.__BUILD_MANIFEST = {
   },
   "sortedPages": [
     "/",
+    "/0loja",
     "/_app",
     "/_error",
+    "/api/checkout-mp",
+    "/api/webhooks/mercadopago",
     "/baixar_guia_gratuito",
+    "/carrinho",
+    "/checkout",
     "/confirmacao",
     "/curso",
+    "/erro",
     "/loja",
+    "/loja copy",
     "/obrigado",
+    "/pedidos",
     "/privacidade",
+    "/sucesso",
     "/termos"
   ]
 };self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

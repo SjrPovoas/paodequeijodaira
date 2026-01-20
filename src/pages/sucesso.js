@@ -1,27 +1,49 @@
-import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 export default function Sucesso() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-      <Head><title>Pedido Confirmado! | Pão de Queijo da Irá</title></Head>
-      
-      <div className="max-w-md w-full bg-white p-8 rounded-3xl shadow-xl text-center">
-        <div className="text-6xl mb-4">🎉</div>
-        <h1 className="text-3xl font-black text-green-600 mb-2">Pedido Recebido!</h1>
-        <p className="text-gray-600 mb-6">
-          Obrigado por apoiar o Pão de Queijo da Irá. Você receberá os detalhes da entrega por e-mail em breve.
-        </p>
-        
-        <div className="bg-green-50 p-4 rounded-2xl mb-8">
-          <p className="text-sm text-green-800 font-medium">
-            Se você pagou via POL (Cripto), a confirmação pode levar alguns minutos dependendo da rede Polygon.
-          </p>
-        </div>
+  const router = useRouter();
+  const { tx, payment_id } = router.query; // Detecta parâmetros da URL
 
-        <Link href="/loja" className="block w-full py-4 bg-black text-white rounded-xl font-bold hover:opacity-90 transition">
-          Voltar para a Loja
-        </Link>
+  return (
+    <div className="min-h-screen bg-orange-50 flex items-center justify-center p-6">
+      <div className="bg-white p-10 rounded-3xl shadow-xl max-w-md w-full text-center">
+        <div className="text-6xl mb-4">🎉</div>
+        <h1 className="text-3xl font-black text-orange-600 mb-2">SUCESSO!</h1>
+
+        {tx ? (
+          // Mensagem para quem pagou com POL
+          <div className="mb-8">
+            <p className="text-gray-600 mb-4">Sua transação na Polygon foi enviada!</p>
+            <a
+              href={`https://polygonscan.com/tx/${tx}`}
+              target="_blank"
+              className="text-xs bg-purple-100 text-purple-700 px-3 py-2 rounded-lg break-all block"
+            >
+              Ver comprovante na Blockchain ↗
+            </a>
+            <div className="bg-orange-200 p-4 rounded-2xl mb-8">
+              <p className="text-sm text-orange-600 font-medium">
+                Se você pagou via POL (Cripto), a confirmação pode levar alguns minutos dependendo da rede Polygon.
+              </p>
+            </div>
+          </div>
+        ) : (
+        // Mensagem para quem pagou com Mercado Pago
+          <p className="text-gray-600 mb-8">
+            Obrigado por apoiar o Pão de Queijo da Irá.<br />Seu pagamento via {payment_id ? 'Mercado Pago' : 'plataforma'} foi confirmado.
+          </p>
+        )}
+
+        <div className="space-y-4">
+          <Link href="/pedidos" 
+            className="block w-full bg-black text-white py-4 rounded-2xl font-bold hover:bg-gray-800 transition">
+            Ver Meus Pedidos
+          </Link>
+          <Link href="/loja" className="block text-sm text-gray-400 font-bold">
+            Voltar para o Início
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -80,6 +80,9 @@ npm install mercadopago ethers @supabase/supabase-js
 ```
 npm install @supabase/supabase-js
 ```
+```
+npm install ethers
+```
 
 ---
 ## 2. TECNOLOGIAS USADAS
