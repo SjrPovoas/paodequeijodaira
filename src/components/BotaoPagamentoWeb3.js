@@ -87,14 +87,15 @@ export default function BotaoPagamentoWeb3({ totalBRL, itens, dadosEntrega }) {
   return (
     <div className="w-full flex flex-col gap-2">
       {!isConnected ? (
-        <ConnectButton.Custom>
-          {({ openConnectModal }) => (
-            <button onClick={openConnectModal} className="bg-[#2D3134] text-white py-4 font-black uppercase text-[12px] w-full flex flex-col items-center shadow-lg">
-              <i className="bi bi-wallet2 text-lg"></i>
-              <span>Conectar Carteira (POL)</span>
-            </button>
-          )}
-        </ConnectButton.Custom>
+       <ConnectButton.Custom>
+  {({ openConnectModal, connectModalOpen }) => {
+    return (
+      <button onClick={openConnectModal} type="button">
+        {connectModalOpen ? "Abrindo..." : "Conectar Carteira"}
+      </button>
+    );
+  }}
+</ConnectButton.Custom>
       ) : isRedeErrada ? (
         <button 
           onClick={() => switchChain({ chainId: polygon.id })}
