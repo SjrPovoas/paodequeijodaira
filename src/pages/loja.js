@@ -127,7 +127,57 @@ export default function Loja() {
   return (
     <div className="relative min-h-screen bg-white font-sans text-black overflow-x-hidden">
       <Head>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
+      </Head>
+    <Head>
+        {/* SEO COMPLETO */}
+        <meta charSet="UTF-8" />
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="title" content="Loja Lifestyle | Pão de Queijo da Irá" />
+        <meta name="author" content="SjrPovoaS" />
+        <meta name="description" content="Loja Lifestyle vendendo Camiseta, caneca e avental utilizando blockchain polygon. Wntregamos para o Brasil todo. Frete grátis a partir de R$500." />
+        <meta name="Keywords" content="Loja Lifestyle Pão de Queijo da Irá, loja, lifesryle" />
+        <meta name="skype_toolbar" content="skype_toolbar_parser_compatible" />
+        <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+        <meta name="googlebot" content="index,follow" />
+        <meta name="google-site-verification" content="rj9-yKQenuTL7WznZzLhnZhRRqalrW8B9ptmhuewFiA" />
+
+        {/* Meta Tags para WhatsApp / Facebook (Open Graph) */}
+        <meta property="og:locale" content="pt_BR" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.facebook.com/paodequeijodaira.iraleide" />
+        <meta property="og:title" content="Loja Lifestyle | Pão de Queijo da Irá" />
+        <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
+        <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        <meta property="og:site_name" content="Loja Lifestyle | Pão de Queijo da Irá" />
+        <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        <meta property="og:image:secure_url" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="fb:pages" content="359950968036532" />
+    
         <title>Loja Lifestyle | Pão de Queijo da Irá</title>
+
+        {/* SCRIPTS EXTERNOS */}
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
+
+        {/* Fontes e Estilos Externos */}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
+
+        <link rel="canonical" href="https://paodequeijodaira.vercel.app/loja" />
+        <link rel="profile" href="https://gmpg.org/xfn/11" />
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        {/* Google Tag Manager original */}
+        <script dangerouslySetInnerHTML={{
+          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N25BXQZC');`
+        }} />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
