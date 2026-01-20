@@ -2,9 +2,6 @@ self.__BUILD_MANIFEST = {
   "/": [
     "static/chunks/pages/index.js"
   ],
-  "/_error": [
-    "static/chunks/pages/_error.js"
-  ],
   "/loja": [
     "static/chunks/pages/loja.js"
   ],
@@ -15,7 +12,6 @@ self.__BUILD_MANIFEST = {
   },
   "sortedPages": [
     "/",
-    "/0loja",
     "/_app",
     "/_error",
     "/api/checkout-mp",
@@ -27,7 +23,6 @@ self.__BUILD_MANIFEST = {
     "/curso",
     "/erro",
     "/loja",
-    "/loja copy",
     "/obrigado",
     "/pedidos",
     "/privacidade",

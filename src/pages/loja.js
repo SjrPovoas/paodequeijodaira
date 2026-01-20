@@ -1,35 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import { supabase } from '../lib/supabaseClient'; // Certifique-se de criar este arquivo
 import BotaoPagamentoWeb3 from '../components/BotaoPagamentoWeb3';
 
 export default function Loja() {
+  // CONFIGURAÇÕES E LINKS
   const LINK_LISTA_ESPERA = "https://43782b7b.sibforms.com/serve/MUIFAC4AxTEnI80RImF7seW5i2MRkz5EqdqtMse22-stmvG7jsOqdFhZ6mmpfwRA-2skU_c3GJF8YXD6k-K_kNE6_gFeWIFbCIxIEWpknHGH8m6tdQMhTuqNG7-e_tsEQRBC4-pjosH0TVoqcW1UonSiJnd2E378zedWIJRs_Dhj9R9v8_VCpmg9Kebo_wFD_WsvLIPqwRBVBCNh8w==";
-  
+  const VALOR_FRETE_GRATIS = 500;
+
+  // ESTADOS DE INTERFACE
   const [carrinho, setCarrinho] = useState([]);
   const [modalAberto, setModalAberto] = useState(false);
-  const [menuMobileAberto, setMenuMobileAberto] = useState(false); // NOVO ESTADO
-  const [dados, setDados] = useState({ email: '', cpf: '', cep: '', endereco: '' });
+  const [menuMobileAberto, setMenuMobileAberto] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // ESTADOS DE DADOS E PRODUTOS
+  const [dados, setDados] = useState({ email: '', cpf: '', cep: '', endereco: '' });
   const [selectedSizes, setSelectedSizes] = useState({});
   const [frete, setFrete] = useState(0);
 
-  const VALOR_FRETE_GRATIS = 500;
-  const ORIGEM_CEP = "72885580";
+  // CÁLCULO DE VALORES
+  const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+  const totalGeral = subtotal + frete;
 
+  // 1. MONITORAR SCROLL (BOTÃO VOLTAR AO TOPO)
   useEffect(() => {
     const handleScroll = () => setShowScrollTop(window.scrollY > 400);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
-
+  // 2. LÓGICA DE FRETE (DF/GO vs BRASIL)
   useEffect(() => {
-    if (subtotal === 0) { setFrete(0); return; }
+    if (subtotal === 0) {
+      setFrete(0);
+      return;
+    }
+
     if (subtotal >= VALOR_FRETE_GRATIS) {
       setFrete(0);
     } else if (dados.cep.length === 8) {
       const prefixo = dados.cep.substring(0, 2);
+      // Região 70 a 73 (DF e Entorno próximo)
       if (["70", "71", "72", "73"].includes(prefixo)) {
         setFrete(25.00);
       } else {
@@ -40,11 +53,11 @@ export default function Loja() {
     }
   }, [subtotal, dados.cep]);
 
-  const totalGeral = subtotal + frete;
-
+  // 3. BUSCA AUTOMÁTICA DE CEP (ViaCEP)
   const handleCEP = async (valor) => {
     const cepLimpo = valor.replace(/\D/g, '').substring(0, 8);
     setDados(prev => ({ ...prev, cep: cepLimpo }));
+
     if (cepLimpo.length === 8) {
       try {
         const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
@@ -55,10 +68,13 @@ export default function Loja() {
             endereco: `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`
           }));
         }
-      } catch (e) { console.error("Erro na busca do CEP"); }
+      } catch (e) {
+        console.error("Erro na busca do CEP");
+      }
     }
   };
 
+  // 4. ADICIONAR AO CARRINHO COM VALIDAÇÃO DE TAMANHO
   const add = (p) => {
     if (p.category === 'vestuario' && !selectedSizes[p.id]) {
       alert("Por favor, selecione um tamanho!");
@@ -66,6 +82,7 @@ export default function Loja() {
     }
     const idUnico = p.category === 'vestuario' ? `${p.id}-${selectedSizes[p.id]}` : p.id;
     const nomeComTamanho = p.category === 'vestuario' ? `${p.nome} (${selectedSizes[p.id]})` : p.nome;
+
     const existe = carrinho.find(x => x.id === idUnico);
     if (existe) {
       setCarrinho(carrinho.map(x => x.id === idUnico ? { ...existe, quantidade: existe.quantidade + 1 } : x));
@@ -75,20 +92,81 @@ export default function Loja() {
     setModalAberto(true);
   };
 
-  const iniciarCheckoutMP = async () => {
-    if (!dados.email || !dados.cpf || !dados.endereco) {
-      alert("Preencha todos os campos e o CEP para continuar!");
-      return;
-    }
-    const res = await fetch('/api/checkout-mp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ itens: carrinho, total: totalGeral, frete, ...dados })
-    });
-    const data = await res.json();
-    if (data.init_point) window.location.href = data.init_point;
-  };
+  // 5. SALVAR NO SUPABASE (BANCO DE DADOS)
+const salvarPedidoNoSupabase = async (metodoPagamento) => {
+  try {
+    const { data, error } = await supabase
+      .from('pedidos')
+      .insert([
+        {
+          email: dados.email,
+          cpf: dados.cpf,
+          cep: dados.cep,
+          endereco: dados.endereco,
+          total_geral: totalGeral,
+          frete: frete,
+          itens: carrinho,
+          metodo_pagamento: metodoPagamento,
+          status: 'pendente'
+        }
+      ]);
 
+    if (error) {
+      // ESTE LOG É IMPORTANTE:
+      console.error("ERRO DETALHADO DO SUPABASE:", error.message, error.details, error.hint);
+      alert("Erro técnico: " + error.message); // Isso vai mostrar o erro na tela para você
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error("Erro Crítico:", error);
+    return false;
+  }
+};
+
+  // 6. INICIAR CHECKOUT MERCADO PAGO
+const iniciarCheckoutMP = async () => {
+  // Debug para você ver o que está preenchido no Console (F12)
+  console.log("Dados atuais:", dados);
+
+  // Validação detalhada
+  if (!dados.email) { alert("E-mail é obrigatório!"); return; }
+  if (!dados.cpf) { alert("CPF é obrigatório!"); return; }
+  if (!dados.endereco) { alert("Endereço é obrigatório!"); return; }
+  if (dados.cep.length < 8) { alert("CEP incompleto!"); return; }
+  if (carrinho.length === 0) { alert("Seu carrinho está vazio!"); return; }
+
+  setLoading(true);
+  
+  // Salva no banco de dados
+  const salvo = await salvarPedidoNoSupabase('Mercado Pago');
+  
+  if (salvo) {
+    try {
+      const res = await fetch('/api/checkout-mp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ itens: carrinho, total: totalGeral, frete, ...dados })
+      });
+      const data = await res.json();
+      
+      if (data.init_point) {
+        window.location.href = data.init_point;
+      } else {
+        console.error("Erro na API do Mercado Pago:", data);
+        alert("Erro ao gerar link de pagamento.");
+      }
+    } catch (err) {
+      console.error("Erro na chamada da API:", err);
+      alert("Falha na conexão com o servidor.");
+    }
+  } else {
+    alert("Houve um erro ao registrar seu pedido no banco de dados. Verifique sua conexão.");
+  }
+  setLoading(false);
+};
+
+  // LISTA DE PRODUTOS
   const produtos = [
     { id: 1, nome: 'T-Shirt Logo Pão de Queijo da Irá (Masc)', preco: 110, img: '/imagens/camiseta1.png', category: 'vestuario' },
     { id: 2, nome: 'T-Shirt Logo Pão de Queijo da Irá (Fem)', preco: 110, img: '/imagens/camiseta2.png', category: 'vestuario' },

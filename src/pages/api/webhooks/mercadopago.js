@@ -1,41 +1,55 @@
 // src/pages/api/webhooks/mercadopago.js
 
-import { MercadoPagoConfig, Payment } from 'mercadopago';
-import { supabase } from '../../../lib/supabaseClient';
+import { createClient } from '@supabase/supabase-js';
 
-const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN });
+// Configuração do cliente Supabase interna para a API
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).end();
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Método não permitido' });
+  }
 
-  // O Mercado Pago envia o ID do pagamento no corpo ou na query
-  const { id, type } = req.body;
-  const paymentId = id || req.query['data.id'];
+  try {
+    const { type, data } = req.body;
 
-  if (type === 'payment' || req.query.topic === 'payment') {
-    try {
-      const payment = new Payment(client);
-      const data = await payment.get({ id: paymentId });
+    // O Mercado Pago envia vários avisos, o que nos importa é o 'payment'
+    if (type === 'payment') {
+      const paymentId = data.id;
 
-      // Se o pagamento foi aprovado
-      if (data.status === 'approved') {
-        const pedidoId = data.metadata.id_referencia; // O ID que enviamos no checkout-mp.js
+      // 1. Consultar o status do pagamento no Mercado Pago
+      const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
+        headers: {
+          Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
+        },
+      });
 
-        // Atualiza o status no Supabase automaticamente
+      const paymentData = await response.json();
+
+      // 2. Se o status for 'approved', atualizamos o Supabase
+      if (paymentData.status === 'approved') {
+        const emailCliente = paymentData.payer.email;
+        const valorPago = paymentData.transaction_amount;
+
         const { error } = await supabase
           .from('pedidos')
-          .update({ status: 'Preparando' })
-          .eq('id', pedidoId);
+          .update({ status: 'pago' })
+          .eq('email', emailCliente)
+          .eq('status', 'pendente'); // Garante que só atualiza o correto
 
-        if (error) console.error("Erro ao atualizar Supabase:", error);
+        if (error) throw error;
+        
+        console.log(`Pedido de ${emailCliente} aprovado e atualizado!`);
       }
-
-      res.status(200).send('OK');
-    } catch (error) {
-      console.error("Erro no Webhook:", error);
-      res.status(500).end();
     }
-  } else {
-    res.status(200).send('Evento ignorado');
+
+    // O Mercado Pago exige um retorno 200 ou 201 para parar de enviar o aviso
+    return res.status(200).send('OK');
+  } catch (error) {
+    console.error('Erro no Webhook:', error);
+    return res.status(500).json({ error: error.message });
   }
 }
