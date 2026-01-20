@@ -83,6 +83,10 @@ npm install @supabase/supabase-js
 ```
 npm install ethers
 ```
+npm install @rainbow-me/rainbowkit wagmi 
+```
+viem @tanstack/react-query
+```
 
 ---
 ## 2. TECNOLOGIAS USADAS
