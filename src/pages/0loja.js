@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { supabase } from '../lib/supabaseClient';
-import BotaoPagamentoWeb3 from '../components/BotaoPagamentoWeb3';
+//import BotaoPagamentoWeb3 from '../components/BotaoPagamentoWeb3';
+import BotaoPagamentoWeb3 from '@/components/BotaoPagamentoWeb3';
 
 export default function Loja() {
   const LINK_LISTA_ESPERA = "https://43782b7b.sibforms.com/serve/MUIFAC4AxTEnI80RImF7seW5i2MRkz5EqdqtMse22-stmvG7jsOqdFhZ6mmpfwRA-2skU_c3GJF8YXD6k-K_kNE6_gFeWIFbCIxIEWpknHGH8m6tdQMhTuqNG7-e_tsEQRBC4-pjosH0TVoqcW1UonSiJnd2E378zedWIJRs_Dhj9R9v8_VCpmg9Kebo_wFD_WsvLIPqwRBVBCNh8w==";
