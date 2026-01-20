@@ -1,87 +1,108 @@
-import { useState } from 'react';
-import { ethers } from 'ethers';
-import { useRouter } from 'next/router';
-import { converterRealParaPOL } from '../lib/priceService';
-import { supabase } from '../lib/supabaseClient';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useSendTransaction, useAccount, useWaitForTransactionReceipt } from 'wagmi';
+import { parseEther } from 'viem';
+import { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabaseClient'; // Importe seu cliente supabase
 
 export default function BotaoPagamentoWeb3({ totalBRL, itens, dadosEntrega }) {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const { isConnected, address } = useAccount();
+  const [hash, setHash] = useState(null);
+  const [valorPOL, setValorPOL] = useState('0');
+  const [carregando, setCarregando] = useState(false);
 
-  const realizarPagamentoCripto = async () => {
-    // 1. Verificações Iniciais
-    if (!window.ethereum) {
-      alert("Por favor, instale a MetaMask para pagar com POL.");
-      return;
+  const { sendTransactionAsync } = useSendTransaction();
+
+  // 1. Monitoriza o status da transação na Blockchain
+  const { isLoading: confirmando, isSuccess } = useWaitForTransactionReceipt({
+    hash,
+  });
+
+  // 2. Cálculo da cotação (mantido)
+  useEffect(() => {
+    async function obterPreco() {
+      try {
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=brl');
+        const data = await res.json();
+        setValorPOL((totalBRL / data['matic-network'].brl).toFixed(6));
+      } catch (e) { console.error("Erro cotação"); }
     }
+    if (totalBRL > 0) obterPreco();
+  }, [totalBRL]);
 
-    const carteiraDestino = process.env.NEXT_PUBLIC_WALLET_DESTINO;
-    if (!carteiraDestino) {
-      alert("Erro técnico: Carteira de destino não configurada.");
-      return;
-    }
-
-    setLoading(true);
-
+  // 3. Função para salvar no Supabase após o pagamento
+  const salvarPedidoWeb3 = async (txHash) => {
     try {
-      // 2. Conexão com a Carteira do Cliente
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const walletAddress = await signer.getAddress();
-
-      // 3. Conversão de Preço (Oráculo)
-      const valorEmPOL = await converterRealParaPOL(totalBRL);
-      if (!valorEmPOL) throw new Error("Não foi possível obter a cotação do POL.");
-
-      // 4. Execução da Transação
-      const tx = await signer.sendTransaction({
-        to: carteiraDestino,
-        value: ethers.parseEther(valorEmPOL)
-      });
-
-      // 5. Registro no Banco de Dados (Supabase)
-      // Salvamos o hash IMEDIATAMENTE após o envio
-      await supabase.from('pedidos').insert([{
-        cliente_email: dadosEntrega.email,
-        wallet_address: walletAddress,
-        total: totalBRL,
-        resumo_itens: itens.map(i => `${i.quantidade}x ${i.nome}`).join(", "),
-        status: 'Aguardando Confirmação',
-        tx_hash: tx.hash,
+      const { error } = await supabase.from('pedidos').insert([{
+        email: dadosEntrega.email,
+        cpf: dadosEntrega.cpf,
         cep: dadosEntrega.cep,
-        endereco_completo: dadosEntrega.endereco
+        endereco: dadosEntrega.endereco,
+        total_geral: totalBRL,
+        itens: itens,
+        metodo_pagamento: 'POL (Polygon)',
+        status: 'pago', // Já entra como pago pois a transação foi confirmada
+        tx_hash: txHash, // Guardamos o comprovativo da blockchain
+        wallet_address: address
       }]);
 
-      // 6. Aguarda a confirmação da Blockchain
-      await tx.wait();
+      if (error) throw error;
+      alert("Pagamento confirmado e pedido registado!");
+      window.location.href = "/sucesso";
+    } catch (err) {
+      console.error("Erro ao salvar pedido:", err);
+      alert("Pagamento feito, mas erro ao registar. Contacte o suporte com o seu Hash: " + txHash);
+    }
+  };
 
-      // 7. Sucesso!
-      router.push(`/sucesso?tx=${tx.hash}`);
+  // 4. Executa o salvamento assim que a blockchain confirmar
+  useEffect(() => {
+    if (isSuccess && hash) {
+      salvarPedidoWeb3(hash);
+    }
+  }, [isSuccess]);
 
+  const realizarPagamento = async () => {
+    if (!dadosEntrega.email || !dadosEntrega.endereco) return alert("Preencha os dados de entrega no carrinho!");
+    
+    try {
+      setCarregando(true);
+      const tx = await sendTransactionAsync({
+        to: process.env.NEXT_PUBLIC_MY_WALLET,
+        value: parseEther(valorPOL),
+      });
+      
+      setHash(tx); // Define o hash para o useWaitForTransactionReceipt começar a vigiar
     } catch (error) {
       console.error("Erro na transação:", error);
-      alert("A transação foi cancelada ou falhou. Tente novamente.");
-    } finally {
-      setLoading(false);
+      alert("Transação cancelada.");
+      setCarregando(false);
     }
   };
 
   return (
-    <button
-      onClick={realizarPagamentoCripto}
-      disabled={loading}
-      className="w-full bg-[#8247E5] text-white pt-4 px-4 py-4 font-bold hover:shadow-purple-500/50 shadow-lg transition-all flex items-center justify-center gap-3"
-    >
-      {loading ? (
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-          <span>Validando na Blockchain...</span>
-        </div>
+    <div className="w-full">
+      {!isConnected ? (
+        <ConnectButton.Custom>
+          {({ openConnectModal }) => (
+            <button onClick={openConnectModal} className="bg-[#2D3134] text-white py-4 font-black uppercase text-[12px] w-full flex flex-col items-center">
+              <i className="bi bi-wallet2 text-lg"></i>
+              <span>Conectar Carteira (POL)</span>
+            </button>
+          )}
+        </ConnectButton.Custom>
       ) : (
-        <>
-          <span>Pagar com Polygon (POL)</span>
-        </>
+        <button 
+          onClick={realizarPagamento} 
+          disabled={carregando || confirmando}
+          className="bg-purple-600 text-white py-4 font-black uppercase text-[12px] w-full flex flex-col items-center disabled:opacity-50"
+        >
+          <i className="bi bi-currency-bitcoin text-lg"></i>
+          <span>
+            {confirmando ? "Confirmando na Blockchain..." : 
+             carregando ? "Aguardando Assinatura..." : `Pagar ${valorPOL} POL`}
+          </span>
+        </button>
       )}
-    </button>
+    </div>
   );
 }
