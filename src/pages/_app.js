@@ -1,7 +1,6 @@
 import Head from 'next/head';
-import '../globals.css';
+import '@/styles/globals.css'; // ou o caminho do seu css
 import '@rainbow-me/rainbowkit/styles.css';
-
 import { getDefaultConfig, RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import { polygon } from 'wagmi/chains';
