@@ -3,9 +3,12 @@ import { useSendTransaction, useAccount, useWaitForTransactionReceipt, useChainI
 import { parseEther } from 'viem';
 import { polygon } from 'wagmi/chains';
 import { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from '../lib/supabaseClient'; // Caminho relativo corrigido
 
 export default function BotaoPagamentoWeb3({ totalBRL, itens, dadosEntrega }) {
+  // --- SEGURANÇA CONTRA CLIENT-SIDE EXCEPTION (HYDRATION FIX) ---
+  const [montado, setMontado] = useState(false);
+  
   const { isConnected, address } = useAccount();
   const chainId = useChainId();
   const { switchChain } = useSwitchChain();
@@ -17,12 +20,17 @@ export default function BotaoPagamentoWeb3({ totalBRL, itens, dadosEntrega }) {
 
   const { sendTransactionAsync } = useSendTransaction();
 
-  // 1. Monitora a confirmação da transação na Blockchain
+  // 1. Monitora confirmação
   const { isLoading: confirmando, isSuccess } = useWaitForTransactionReceipt({
     hash,
   });
 
-  // 2. Busca cotação em tempo real (POL/BRL) via CoinGecko
+  // Só ativa o componente após o carregamento total no navegador
+  useEffect(() => {
+    setMontado(true);
+  }, []);
+
+  // 2. Busca cotação real
   useEffect(() => {
     async function obterPreco() {
       try {
@@ -30,26 +38,20 @@ export default function BotaoPagamentoWeb3({ totalBRL, itens, dadosEntrega }) {
         const data = await res.json();
         const preco = data['matic-network'].brl;
         setCotacao(preco);
-        
-        if (totalBRL > 0) {
-          const calculo = (totalBRL / preco).toFixed(6);
-          setValorPOL(calculo);
-        }
+        if (totalBRL > 0) setValorPOL((totalBRL / preco).toFixed(6));
       } catch (e) { 
-        console.error("Erro ao buscar cotação");
-        setCotacao(3.85); // Valor de segurança caso a API falhe
+        setCotacao(3.80);
       }
     }
-    obterPreco();
-  }, [totalBRL]);
+    if (montado) obterPreco();
+  }, [totalBRL, montado]);
 
-  // 3. Salva no Supabase apenas após a confirmação do sucesso na rede
+  // 3. Salva no Supabase
   const salvarPedidoWeb3 = async (txHash) => {
     try {
       const { error } = await supabase.from('pedidos').insert([{
         email: dadosEntrega?.email,
         cpf: dadosEntrega?.cpf,
-        endereco: dadosEntrega?.endereco,
         total_geral: totalBRL,
         itens: itens,
         metodo_pagamento: 'POL (Polygon)',
@@ -57,35 +59,27 @@ export default function BotaoPagamentoWeb3({ totalBRL, itens, dadosEntrega }) {
         tx_hash: txHash,
         wallet_address: address
       }]);
-
       if (error) throw error;
       window.location.href = "/sucesso";
     } catch (err) {
-      console.error("Erro no registro:", err);
-      alert("Pagamento processado, mas erro ao salvar pedido. Comprovante (Hash): " + txHash);
+      alert("Erro ao salvar pedido. Hash: " + txHash);
     }
   };
 
   useEffect(() => {
-    if (isSuccess && hash) {
-      salvarPedidoWeb3(hash);
-    }
+    if (isSuccess && hash) salvarPedidoWeb3(hash);
   }, [isSuccess]);
 
-  // 4. Função Principal de Pagamento
+  // 4. Lógica de Pagamento
   const realizarPagamento = async () => {
-    // Validação de dados básicos
-    if (!dadosEntrega?.email || !dadosEntrega?.endereco) {
-      return alert("Por favor, preencha os dados de entrega no formulário.");
-    }
+    if (!dadosEntrega?.email) return alert("Preencha os dados de entrega!");
 
-    // TRAVA DE REDE: Se estiver conectado mas na rede errada, tenta trocar antes de pagar
     if (chainId !== polygon.id) {
       try {
         await switchChain({ chainId: polygon.id });
-        return; // Para aqui para o usuário clicar novamente após a troca ser aprovada
+        return;
       } catch (error) {
-        return alert("Você precisa mudar para a rede Polygon para realizar o pagamento.");
+        return alert("Mude para a rede Polygon!");
       }
     }
 
@@ -95,16 +89,16 @@ export default function BotaoPagamentoWeb3({ totalBRL, itens, dadosEntrega }) {
         to: process.env.NEXT_PUBLIC_MY_WALLET,
         value: parseEther(valorPOL),
       });
-      
       setHash(tx);
     } catch (error) {
-      console.error("Erro na transação:", error);
-      alert("Transação cancelada na carteira.");
       setCarregando(false);
+      alert("Transação cancelada.");
     }
   };
 
-  // Verifica se a carteira está na rede errada
+  // --- TRAVA DE RENDERIZAÇÃO ---
+  if (!montado) return null;
+
   const redeIncorreta = isConnected && chainId !== polygon.id;
 
   return (
@@ -112,42 +106,30 @@ export default function BotaoPagamentoWeb3({ totalBRL, itens, dadosEntrega }) {
       {!isConnected ? (
         <ConnectButton.Custom>
           {({ openConnectModal }) => (
-            <button 
-              onClick={openConnectModal} 
-              className="bg-[#2D3134] text-white py-4 font-black uppercase text-[12px] w-full flex flex-col items-center hover:bg-black transition-all shadow-lg rounded-sm"
-            >
-              <i className="bi bi-wallet2 text-lg mb-1"></i>
+            <button onClick={openConnectModal} type="button" className="bg-[#2D3134] text-white py-4 font-black uppercase text-[12px] w-full flex flex-col items-center shadow-lg">
+              <i className="bi bi-wallet2 text-lg"></i>
               <span>Conectar Carteira (POL)</span>
             </button>
           )}
         </ConnectButton.Custom>
       ) : redeIncorreta ? (
-        <button 
-          onClick={() => switchChain({ chainId: polygon.id })}
-          className="bg-red-600 text-white py-4 font-black uppercase text-[12px] w-full flex flex-col items-center animate-pulse shadow-lg rounded-sm"
-        >
-          <i className="bi bi-arrow-left-right text-lg mb-1"></i>
+        <button onClick={() => switchChain({ chainId: polygon.id })} className="bg-red-600 text-white py-4 font-black uppercase text-[12px] w-full flex flex-col items-center animate-pulse shadow-lg">
+          <i className="bi bi-arrow-left-right text-lg"></i>
           <span>Mudar para Rede Polygon</span>
-          <small className="text-[9px] opacity-80 text-white">Rede atual incorreta</small>
         </button>
       ) : (
         <button 
           onClick={realizarPagamento} 
           disabled={carregando || confirmando || valorPOL === '0'}
-          className="bg-purple-600 text-white py-4 font-black uppercase text-[12px] w-full flex flex-col items-center hover:bg-purple-700 transition-all shadow-lg rounded-sm disabled:opacity-50"
+          className="bg-purple-600 text-white py-4 font-black uppercase text-[12px] w-full flex flex-col items-center shadow-lg disabled:opacity-50"
         >
-          <i className="bi bi-currency-bitcoin text-lg mb-1"></i>
+          <i className="bi bi-currency-bitcoin text-lg"></i>
           <span>
-            {confirmando ? "Confirmando na Rede..." : 
-             carregando ? "Aguardando Assinatura..." : `Pagar ${valorPOL} POL`}
+            {confirmando ? "Confirmando..." : carregando ? "Assine na Carteira..." : `Pagar ${valorPOL} POL`}
           </span>
-          <div className="flex gap-2 text-[8px] opacity-80">
-            <span>Total: R$ {totalBRL.toFixed(2)}</span>
-            <span>•</span>
-            <span>1 POL = R$ {cotacao.toFixed(2)}</span>
-          </div>
+          <small className="text-[8px] opacity-70">R$ {cotacao.toFixed(2)} / POL</small>
         </button>
       )}
     </div>
   );
-    }
+}
