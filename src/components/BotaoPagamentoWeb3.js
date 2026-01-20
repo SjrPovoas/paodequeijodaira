@@ -2,7 +2,7 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useSendTransaction, useAccount, useWaitForTransactionReceipt, useChainId, useSwitchChain } from 'wagmi';
 import { parseEther } from 'viem';
-import { polygon } from 'wagmi/chains';
+import { polygon } from 'viem/chains';
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient'; // Caminho relativo corrigido
 
