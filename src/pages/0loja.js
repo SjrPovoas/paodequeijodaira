@@ -346,8 +346,7 @@ export default function Loja() {
                 </button>
                 <BotaoPagamentoWeb3 totalBRL={totalGeral} itens={carrinho} dadosEntrega={dados} />
 
-                  Genspark Super Agente
-const add = (p) => {
+    const add = (p) => {
     const existe = carrinho.find(item => item.id === p.id);
     if (existe) {
       setCarrinho(carrinho.map(item => item.id === p.id ? { ...existe, quantidade: existe.quantidade + 1 } : item));
@@ -356,10 +355,10 @@ const add = (p) => {
     }
     setModalAberto(true);
   };
-Está adicionando o item camiseta sem informar o tamanho. Precisa de um alerta exigindo o preenchimento do tamanho quando for camiseta. Alternativas P M G GG
-Vejo que você precisa adicionar uma validação de tamanho para camisetas. Aqui está o código modificado com essa validação:
+//Está adicionando o item camiseta sem informar o tamanho. Precisa de um alerta exigindo o preenchimento do tamanho quando for camiseta. Alternativas P M G GG
+//Vejo que você precisa adicionar uma validação de tamanho para camisetas. Aqui está o código modificado com essa validação:
 
-Copyconst add = (p, tamanhoSelecionado = null) => {
+    Copyconst add = (p, tamanhoSelecionado = null) => {
     // Verificar se é uma camiseta e se o tamanho foi selecionado
     if (p.tipo === 'camiseta' && !tamanhoSelecionado) {
       alert('Por favor, selecione um tamanho: P, M, G ou GG');
