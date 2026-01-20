@@ -1,6 +1,7 @@
 import Head from 'next/head';
-import '@/styles/globals.css'; // ou o caminho do seu css
+import '../globals.css'; // Ajustado para o caminho correto que você usava
 import '@rainbow-me/rainbowkit/styles.css';
+
 import { getDefaultConfig, RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import { polygon } from 'wagmi/chains';
@@ -9,7 +10,6 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 // 1. Configuração usando a Variável de Ambiente
 const config = getDefaultConfig({
   appName: 'Pão de Queijo da Irá',
-  // Aqui o Next.js vai buscar o valor que você colocou no .env.local
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID, 
   chains: [polygon],
   ssr: true,
