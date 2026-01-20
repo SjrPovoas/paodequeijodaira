@@ -109,7 +109,7 @@ export default function Loja() {
       </Head>
 
       <div className="bg-orange-600 text-white py-2 text-center text-[10px] font-black uppercase tracking-widest sticky top-0 z-[60]">
-        Loja Lifestyle • Entrega em todo Brasil • Frete Grátis acima de R$ 500
+         • Entrega em todo Brasil • Frete Grátis acima de R$ 500,00 •
       </div>
 
       <header className="border-b border-gray-100 py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-50">
@@ -140,6 +140,11 @@ export default function Loja() {
             <button onClick={() => setMenuMobileAberto(false)} className="absolute top-6 right-6 text-3xl"><i className="bi bi-x-lg"></i></button>
             <a href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">IRÁ DIGITAL GENESIS PASS</a>
             <a href="/" className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</a>
+            <div className="flex space-x-4">
+                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
+                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+            </div>
           </nav>
         </div>
       )}
