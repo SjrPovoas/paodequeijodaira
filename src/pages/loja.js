@@ -140,7 +140,7 @@ export default function Loja() {
             <button onClick={() => setMenuMobileAberto(false)} className="absolute top-6 right-6 text-3xl"><i className="bi bi-x-lg"></i></button>
             <a href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">IRÁ DIGITAL GENESIS PASS</a>
             <a href="/" className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</a>
-            <div className="flex space-x-4 center-5">
+            <div className="flex space-x-4 text-center">
                 <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
                 <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
                 <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
