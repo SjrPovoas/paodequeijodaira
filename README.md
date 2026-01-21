@@ -75,7 +75,16 @@ Você pode fazer isso com os seguintes comandos, substituindo "Seu Nome" e "seu@
 
 Esses são apenas alguns dos comandos mais comuns do **Git** que você pode usar na linha de comando.
 ```
-npm install mercadopago
+npm install
+```
+```
+npm install @getbrevo/brevo
+```
+```
+npm install mercadopago @react-native-async-storage/async-storage
+```
+```
+npm install mercadopago @react-native-async-storage/async-storage --legacy-peer-deps
 ```
 ```
 npm install @supabase/supabase-js
@@ -84,12 +93,25 @@ npm install @supabase/supabase-js
 npm install ethers
 ```
 ```
-npm install @rainbow-me/rainbowkit wagmi 
+npm install @rainbow-me/rainbowkit wagmi viem @tanstack/react-query
 ```
 ```
-viem @tanstack/react-query
+npm install -D tailwindcss@3.4.4 postcss@latest autoprefixer@latest
 ```
-
+```
+npm cache clean --force
+```
+```
+npx next dev
+npm rebuild
+npm run dev
+```
+```
+npm install @react-native-async-storage/async-storage
+```
+```
+npm install crypto-browserify stream-browserify browserify-zlib stream-http https-browserify assert os-browserify path-browserify url
+```
 ---
 ## 2. TECNOLOGIAS USADAS
 

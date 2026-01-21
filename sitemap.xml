@@ -6,26 +6,55 @@
     <url>
         <loc>https://paodequeijodaira.vercel.app/</loc>
         <image:image>
-            <image:loc>https://paodequeijodaira.vercel.app/img/imagem-embalagem-1kg.png</image:loc>
-            <image:title>Pão de Queijo da Irá pacote com 1 kg de pão de queijo congelado</image:title>
+            <image:loc>https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg</image:loc>
+            <image:title>Logo do Pão de Queijo da Irá</image:title>
         </image:image>
-        <image:image>
-            <image:loc>https://paodequeijodaira.vercel.app/img/imagem-embalagem-20und.png</image:loc>
+                <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/imagens/hero-banner.png</image:loc>
             <image:title>Pão de Queijo da Irá pacote com 20 pães de queijo congelado</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://paodequeijodaira.vercel.app/img/logo-paodequeijodaira.jpg</image:loc>
-            <image:title>Logo do Pão de Queijo da Irá</image:title>
+            <image:loc>https://paodequeijodaira.vercel.app/imagens/imagem-embalagem-20und.png</image:loc>
+            <image:title>Pão de Queijo da Irá pacote com 20 pães de queijo congelado</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://paodequeijodaira.vercel.app/img/historia-contato.png</image:loc>
+            <image:loc>https://paodequeijodaira.vercel.app/imagens/imagem-embalagem-1kg.png</image:loc>
+            <image:title>Pão de Queijo da Irá pacote com 1 kg de pão de queijo congelado</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/imagens/historia-contato.png</image:loc>
             <image:title>Nossa História do Pão de Queijo da Irá</image:title>
         </image:image>
-        <image:image>
-            <image:loc>https://paodequeijodaira.vercel.app/img/criar-negocio.webp</image:loc>
+                <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/imagens/caneca-isca.png</image:loc>
             <image:title>Crie seu Negócio com Pão de Queijo da Irá</image:title>
         </image:image>
-        <lastmod>2025-11-10T19:00:04+00:00</lastmod> 
+        <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/imagens/criar-negocio.webp</image:loc>
+            <image:title>Crie seu Negócio com Pão de Queijo da Irá</image:title>
+        </image:image>
+        <lastmod>2026-01-21T12:00:04+00:00</lastmod> 
+        <priority>1.00</priority>
+    </url>
+    <url>
+        <loc>https://paodequeijodaira.vercel.app/loja</loc>
+        <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/imagens/camiseta1.png</image:loc>
+            <image:title>T-Shirt Logo Pão de Queijo da Irá (Masc)</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/imagens/camiseta1.png</image:loc>
+            <image:title>T-Shirt Logo Pão de Queijo da Irá (Fem)</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/imagens/avental.png</image:loc>
+            <image:title>Avental de Lona Pão de Queijo da Irá</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://paodequeijodaira.vercel.app/imagens/caneca.png</image:loc>
+            <image:title>Caneca Cerâmica Fosca do Pão de Queijo da Irá</image:title>
+        </image:image>
+        <lastmod>2026-01-21T12:00:04+00:00</lastmod> 
         <priority>1.00</priority>
     </url>
     

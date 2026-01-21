@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/sil/Documents/Reposit%C3%B3rios/paodequeijodaira/src/pages/_app.js"],"sourcesContent":["import '../globals.css'\r\n\r\nfunction MyApp({ Component, pageProps }) {\r\n  return <Component {...pageProps} />\r\n}\r\n\r\nexport default MyApp\r\n"],"names":[],"mappings":";;;;;;;AAEA,SAAS,MAAM,EAAE,SAAS,EAAE,SAAS,EAAE;IACrC,qBAAO,qKAAC;QAAW,GAAG,SAAS;;;;;;AACjC;uCAEe"}}]
-}

@@ -1,68 +1,65 @@
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import '../globals.css'; 
 import '@rainbow-me/rainbowkit/styles.css';
-import { useState, useEffect } from 'react';
 
-import { 
-  getDefaultConfig, 
-  RainbowKitProvider, 
-  lightTheme 
-} from '@rainbow-me/rainbowkit';
+import { getDefaultConfig, RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
-import { polygon } from 'viem/chains';
+import { polygon } from 'wagmi/chains';
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
-// Configuração do RainbowKit e Wagmi
+// O Project ID deve estar no seu arquivo .env.local
+const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'SUA_CHAVE_RESERVA'; 
+
+// Configuração fica FORA do componente para não reiniciar a cada render
 const config = getDefaultConfig({
   appName: 'Pão de Queijo da Irá',
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'dd9160f4f8416affdc8918afd9ae77c2', 
+  projectId: projectId,
   chains: [polygon],
   ssr: true,
 });
 
 const queryClient = new QueryClient();
 
-export default function MyApp({ Component, pageProps }) {
-  // Trava de segurança contra erro de Client-side exception (Hydration)
+function MyApp({ Component, pageProps }) {
   const [mounted, setMounted] = useState(false);
 
+  // Proteção de montagem para evitar erros de extensão de carteira
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  if (!mounted) return null;
 
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider 
-          locale="pt-BR"
           theme={lightTheme({
-            accentColor: '#ea580c',
+            accentColor: '#ea580c', // Cor de destaque (Laranja Pão de Queijo)
             accentColorForeground: 'white',
-            borderRadius: 'small',
+            borderRadius: 'medium',
           })}
         >
           <Head>
-            <title>Pão de Queijo da Irá | Loja Oficial</title>
+            <title>Loja Lifestyle e Acessórios | Pão de Queijo da Irá</title>
             <meta charSet="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-            <meta httpEquiv="x-ua-compatible" content="ie=edge" />
             <meta name="theme-color" content="#ea580c" />
             <meta name="description" content="O melhor pão de queijo artesanal direto para sua casa." />
-            <link rel="shortcut icon" href="/favicon.ico" />
             
-            {/* Meta tags para garantir funcionamento na Coinbase Wallet e MetaMask mobile */}
+            {/* Melhora a compatibilidade com navegadores de dApps (MetaMask/Coinbase) */}
             <meta name="apple-mobile-web-app-capable" content="yes" />
             <meta name="apple-mobile-web-app-status-bar-style" content="default" />
           </Head>
 
-          {/* O conteúdo só renderiza após o componente estar 'montado' no navegador */}
-          {mounted ? (
+          <div className="min-h-screen bg-gray-50 text-gray-900">
             <Component {...pageProps} />
-          ) : (
-            <div style={{ background: '#f9fafb', minHeight: '100-vh' }} />
-          )}
+          </div>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );
-            }
+}
+
+export default MyApp;
