@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { supabase } from '../lib/supabaseClient';
 import BotaoPagamentoWeb3 from '../components/BotaoPagamentoWeb3';
-import { ConnectButton } from '@rainbow-me/rainbowkit'; // Importante para o Header
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function Loja() {
   const LINK_LISTA_ESPERA = "https://43782b7b.sibforms.com/serve/MUIFAC4AxTEnI80RImF7seW5i2MRkz5EqdqtMse22-stmvG7jsOqdFhZ6mmpfwRA-2skU_c3GJF8YXD6k-K_kNE6_gFeWIFbCIxIEWpknHGH8m6tdQMhTuqNG7-e_tsEQRBC4-pjosH0TVoqcW1UonSiJnd2E378zedWIJRs_Dhj9R9v8_VCpmg9Kebo_wFD_WsvLIPqwRBVBCNh8w==";
   const VALOR_FRETE_GRATIS = 500;
 
   // ESTADOS
-  const [carrinho, setCarrinho] = useState([]);
+  const [carrinho, setCarrinho] = useState([]); // Inicializado como array vazio
   const [modalAberto, setModalAberto] = useState(false);
   const [menuMobileAberto, setMenuMobileAberto] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -20,8 +20,11 @@ export default function Loja() {
   const [frete, setFrete] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
 
-  // CÁLCULOS
-  const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+  // CÁLCULOS COM TRAVA DE SEGURANÇA (Resolve o erro TypeError: e.reduce)
+  const subtotal = Array.isArray(carrinho)
+    ? carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0)
+    : 0;
+
   const totalGeral = subtotal + frete;
 
   // 1. CONTROLE DE MONTAGEM E PERSISTÊNCIA (Local Storage)
@@ -29,7 +32,15 @@ export default function Loja() {
     setIsMounted(true);
     const salvo = localStorage.getItem('carrinho_ira');
     if (salvo) {
-      try { setCarrinho(JSON.parse(salvo)); } catch (e) { console.error("Erro no cache"); }
+      try {
+        const parsed = JSON.parse(salvo);
+        if (Array.isArray(parsed)) {
+          setCarrinho(parsed);
+        }
+      } catch (e) {
+        console.error("Erro no cache", e);
+        setCarrinho([]);
+      }
     }
   }, []);
 
@@ -66,9 +77,9 @@ export default function Loja() {
         const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
         const json = await res.json();
         if (!json.erro) {
-          setDados(d => ({ 
-            ...d, 
-            endereco: `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}` 
+          setDados(d => ({
+            ...d,
+            endereco: `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`
           }));
         }
       } catch (e) { console.error("Erro CEP"); }
@@ -81,16 +92,16 @@ export default function Loja() {
       alert('⚠️ Por favor, selecione um tamanho: P, M, G ou GG');
       return;
     }
-    
+
     // Identificar item único por ID + Tamanho
-    const existe = carrinho.find(item => 
+    const existe = carrinho.find(item =>
       item.id === p.id && (p.category === 'vestuario' ? item.tamanho === tamanhoSelecionado : true)
     );
-    
+
     if (existe) {
-      setCarrinho(carrinho.map(item => 
+      setCarrinho(carrinho.map(item =>
         item.id === p.id && (p.category === 'vestuario' ? item.tamanho === tamanhoSelecionado : true)
-          ? { ...item, quantidade: item.quantidade + 1 } 
+          ? { ...item, quantidade: item.quantidade + 1 }
           : item
       ));
     } else {
@@ -99,44 +110,67 @@ export default function Loja() {
     setModalAberto(true);
   };
 
-  // 5. CHECKOUT MERCADO PAGO
-  const iniciarCheckoutMP = async () => {
+ // 5. CHECKOUT MERCADO PAGO REVISADO
+  const iniciarCheckoutMP = async (e) => {
+    // Previne comportamento padrão caso seja chamado por um formulário
+    if (e && e.preventDefault) e.preventDefault();
+
     if (!dados.email || !dados.cpf || !dados.endereco || dados.cep.length < 8) {
       return alert("Preencha todos os dados de entrega corretamente!");
     }
-    if (carrinho.length === 0) return alert("Carrinho vazio!");
+    
+    if (!carrinho || carrinho.length === 0) {
+      return alert("Seu carrinho está vazio!");
+    }
 
     setLoading(true);
-    
-    // Salva no Supabase como pendente
+
+    // 1. Salva no Supabase (Aqui já salvamos o CPF também)
     const { error } = await supabase.from('pedidos').insert([{
-      email: dados.email, 
-      cpf: dados.cpf, 
+      email: dados.email,
+      cpf: dados.cpf,
       cep: dados.cep,
-      endereco: dados.endereco, 
+      endereco: dados.endereco,
       total_geral: totalGeral,
-      frete, 
-      itens: carrinho, 
-      metodo_pagamento: 'Mercado Pago', 
+      frete,
+      itens: carrinho,
+      metodo_pagamento: 'Mercado Pago',
       status: 'pendente'
     }]);
 
     if (!error) {
       try {
+        // 2. Chamada para a API do Mercado Pago incluindo o CPF
         const res = await fetch('/api/checkout-mp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ itens: carrinho, email: dados.email, frete })
+          body: JSON.stringify({ 
+            itens: carrinho, 
+            email: dados.email, 
+            frete,
+            cpf: dados.cpf // <-- ESSENCIAL: Enviando o CPF para desbloquear os botões
+          })
         });
+
         const data = await res.json();
+
         if (data.init_point) {
-          localStorage.removeItem('carrinho_ira'); // Limpa cache
+          // Limpa o carrinho antes de redirecionar
+          localStorage.removeItem('carrinho_ira');
           window.location.href = data.init_point;
+        } else {
+          console.error("Erro na resposta do MP:", data);
+          alert("Erro ao gerar link de pagamento. Tente novamente.");
         }
-      } catch (err) { alert("Erro ao conectar com Mercado Pago."); }
+      } catch (err) { 
+        console.error("Erro Fetch MP:", err);
+        alert("Erro ao conectar com servidor de pagamento."); 
+      }
     } else {
-      alert("Erro ao registrar pedido no banco.");
+      console.error("Erro Supabase:", error);
+      alert(`Erro ao registrar pedido: ${error.message || 'Erro de conexão com o banco'}`);
     }
+    
     setLoading(false);
   };
 
@@ -148,7 +182,6 @@ export default function Loja() {
     { id: 4, nome: 'Caneca Cerâmica Fosca do Pão de Queijo da Irá', preco: 42, img: '/imagens/caneca.png', category: 'acessorios' },
   ];
 
-  // Renderização condicional para evitar erro de hidratação
   if (!isMounted) return null;
 
   return (
@@ -160,38 +193,33 @@ export default function Loja() {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
-      {/* TOPBAR */}
       <div className="bg-orange-600 text-white py-2 text-center text-[10px] font-black uppercase tracking-widest sticky top-0 z-[60]">
-          • Entrega em todo Brasil • Frete Grátis acima de R$ 500,00 •
+        • Entrega em todo Brasil • Frete Grátis acima de R$ 500,00 •
       </div>
 
-      {/* HEADER */}
       <header className="border-b border-gray-100 py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <a href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></a>
-          
+
           <nav className="hidden md:flex space-x-4 text-[10px] font-bold uppercase tracking-widest items-center">
             <a href="#web3" className="hover:text-orange-600 transition-colors">IRÁ DIGITAL GENESIS PASS</a>
             <a href="/" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">COMPRAR PÃO DE QUEIJO</a>
-            
-            {/* BOTÃO WEB3 CUSTOMIZADO */}
+
             <div className="scale-90 origin-right">
               <ConnectButton.Custom>
                 {({ account, chain, openAccountModal, openChainModal, openConnectModal, mounted }) => {
                   const ready = mounted;
                   const connected = ready && account && chain;
-
                   return (
                     <div {...(!ready && { 'aria-hidden': true, style: { opacity: 0, pointerEvents: 'none' } })}>
                       {(() => {
                         if (!connected) {
                           return (
                             <button onClick={openConnectModal} className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-                               CONECTAR CARTEIRA <i className="bi bi-wallet2 text-xl leading-none"></i> 
+                              CONECTAR CARTEIRA <i className="bi bi-wallet2 text-xl leading-none"></i>
                             </button>
                           );
                         }
-
                         if (chain.unsupported) {
                           return (
                             <button onClick={openChainModal} className="bg-red-600 text-white px-4 py-2 rounded-full font-black uppercase text-[10px] flex items-center gap-2">
@@ -199,12 +227,8 @@ export default function Loja() {
                             </button>
                           );
                         }
-
                         return (
-                          <button
-                            onClick={openAccountModal}
-                            className="border border-black text-black px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all font-black uppercase text-[10px] flex items-center gap-2"
-                          >
+                          <button onClick={openAccountModal} className="border border-black text-black px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all font-black uppercase text-[10px] flex items-center gap-2">
                             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                             {account.displayName}
                             {account.displayBalance ? ` (${account.displayBalance})` : ''}
@@ -216,21 +240,18 @@ export default function Loja() {
                 }}
               </ConnectButton.Custom>
             </div>
-            
-            {/* BOTÃO CARRINHO */}
+
             <button onClick={() => setModalAberto(true)} className="flex items-center gap-3 bg-[#3D2B1F] text-white px-6 py-2.5 rounded-full hover:bg-orange-600 transition-colors group">
               <span className="text-[10px] font-black uppercase flex items-center gap-2">
                 CARRINHO
                 <i className="bi bi-cart3 text-[14px] leading-none transition-transform group-hover:scale-110"></i>
               </span>
-              <span className="text-xs font-bold border-l border-white/20 pl-3 leading-none">{carrinho.length}</span>
+              <span className="text-xs font-bold border-l border-white/20 pl-3 leading-none">{Array.isArray(carrinho) ? carrinho.length : 0}</span>
             </button>
           </nav>
 
-          {/* MOBILE ACTIONS */}
           <div className="flex md:hidden items-center gap-3">
             <ConnectButton label="Conectar Carteira" showBalance={false} chainStatus="none" accountStatus="avatar" />
-            
             <button onClick={() => setModalAberto(true)} className="relative p-2 flex items-center justify-center">
               <i className="bi bi-bag text-2xl"></i>
               {carrinho.length > 0 && (
@@ -246,7 +267,6 @@ export default function Loja() {
         </div>
       </header>
 
-      {/* MENU MOBILE */}
       {menuMobileAberto && (
         <div className="fixed inset-0 z-[100] md:hidden">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => setMenuMobileAberto(false)} />
@@ -256,18 +276,15 @@ export default function Loja() {
             </button>
             <a href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">IRÁ DIGITAL GENESIS PASS</a>
             <a href="/" className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</a>
-            
-            {/* REDES SOCIAIS ALINHADAS */}
             <div className="flex justify-center items-center gap-6 pt-4">
-                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 flex items-center"><i className="bi bi-instagram leading-none"></i></a>
-                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 flex items-center"><i className="bi bi-facebook leading-none"></i></a>
-                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 flex items-center"><i className="bi bi-youtube leading-none"></i></a>
-            </div>  
+              <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 flex items-center"><i className="bi bi-instagram leading-none"></i></a>
+              <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 flex items-center"><i className="bi bi-facebook leading-none"></i></a>
+              <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 flex items-center"><i className="bi bi-youtube leading-none"></i></a>
+            </div>
           </nav>
         </div>
       )}
 
-      {/* PRODUTOS */}
       <main className="max-w-6xl mx-auto py-12 px-6">
         <header className="py-20 border-b border-orange-100 mb-16">
           <h1 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-none">Lifestyle &<br />Acessórios</h1>
@@ -280,7 +297,7 @@ export default function Loja() {
               </div>
               <h3 className="font-black uppercase text-sm tracking-widest mb-1">{p.nome}</h3>
               <p className="text-orange-600 font-bold mb-6 italic">R$ {p.preco.toFixed(2)}</p>
-              
+
               {p.category === 'vestuario' ? (
                 <div className="mb-6">
                   <p className="text-[10px] font-black uppercase tracking-widest mb-3 text-gray-600">Selecione o tamanho:</p>
@@ -336,7 +353,7 @@ export default function Loja() {
           </div>
           <div className="flex justify-center md:justify-start">
             <a href={LINK_LISTA_ESPERA} target="_blank" rel="noopener noreferrer" className="mt-16 inline-block bg-orange-600 text-white px-10 py-5 text-[10px] font-black uppercase tracking-[0.4em] hover:bg-orange-500 transition-all shadow-xl">
-                Entrar na Lista de Espera
+              Entrar na Lista de Espera
             </a>
           </div>
         </div>
@@ -356,7 +373,7 @@ export default function Loja() {
             </div>
 
             <div className="flex-1 overflow-y-auto space-y-6">
-              {carrinho.map((item, index) => (
+              {Array.isArray(carrinho) && carrinho.map((item, index) => (
                 <div key={index} className="flex gap-4 border-b border-orange-100 pb-4">
                   <img src={item.img} className="w-16 h-20 object-cover rounded bg-white" />
                   <div className="flex-1">
@@ -367,9 +384,9 @@ export default function Loja() {
                   <button onClick={() => setCarrinho(carrinho.filter((_, i) => i !== index))} className="text-gray-400 hover:text-red-500"><i className="bi bi-trash3"></i></button>
                 </div>
               ))}
+              {(!carrinho || carrinho.length === 0) && <p className="text-center py-10 text-gray-400 italic text-sm uppercase font-bold tracking-widest">Carrinho Vazio</p>}
             </div>
 
-            {/* FORMULÁRIO E TOTAIS */}
             <div className="mt-auto pt-6 border-t-2 border-[#3D2B1F] space-y-4">
               <div className="text-[10px] font-black uppercase space-y-1">
                 <div className="flex justify-between opacity-50"><span>Subtotal</span><span>R$ {subtotal.toFixed(2)}</span></div>
@@ -385,14 +402,12 @@ export default function Loja() {
               <input type="email" placeholder="E-mail" value={dados.email} onChange={e => setDados({ ...dados, email: e.target.value })} className="w-full border p-2 text-xs rounded" />
 
               <div className="grid grid-cols-2 gap-2">
-                <button onClick={iniciarCheckoutMP} disabled={loading || carrinho.length === 0} 
+                <button onClick={iniciarCheckoutMP} disabled={loading || !carrinho || carrinho.length === 0}
                   className="bg-black text-white py-4 font-black uppercase text-[10px] hover:bg-orange-600 disabled:opacity-50">
                   {loading ? '...' : 'Cartão ou Pix'}
                 </button>
-                
-                {/* Botão Web3 condicional aos dados preenchidos */}
-                <div className={(!dados.email || !dados.endereco || carrinho.length === 0) ? "opacity-30 pointer-events-none" : ""}>
-                   <BotaoPagamentoWeb3 totalBRL={totalGeral} itens={carrinho} dadosEntrega={dados} />
+                <div className={(!dados.email || !dados.endereco || !carrinho || carrinho.length === 0) ? "opacity-30 pointer-events-none" : ""}>
+                  <BotaoPagamentoWeb3 totalBRL={totalGeral} itens={carrinho} dadosEntrega={dados} />
                 </div>
               </div>
             </div>
@@ -400,7 +415,6 @@ export default function Loja() {
         </div>
       )}
 
-      {/* FOOTER E ASSINATURA */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
@@ -435,7 +449,6 @@ export default function Loja() {
         </div>
       </footer>
 
-      {/* BOTÃO VOLTAR AO TOPO */}
       {showScrollTop && (
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-8 right-8 bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center animate-bounce">
           <i className="bi bi-arrow-up"></i>

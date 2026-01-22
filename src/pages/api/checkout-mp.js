@@ -1,6 +1,6 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-// 1. Configuração do Cliente com seu Token de Produção (APP_USR-...)
+// 1. Configuração do Cliente
 const client = new MercadoPagoConfig({ 
   accessToken: process.env.MP_ACCESS_TOKEN 
 });
@@ -11,26 +11,30 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { itens, email, frete } = req.body;
+    // Recebendo dados adicionais do frontend (como o CPF)
+    const { itens, email, frete, cpf } = req.body;
 
-    // 2. Garantir que o email esteja limpo para servir de referência no Webhook
+    if (!itens || !email) {
+      return res.status(400).json({ error: "Dados insuficientes para o checkout." });
+    }
+
     const emailLimpo = email.toLowerCase().trim();
 
-    // 3. Mapeamento dos itens
+    // 2. Mapeamento dos itens com preços formatados (garantindo 2 casas decimais)
     const itemsMP = itens.map(item => ({
       id: String(item.id),
       title: item.nome,
-      unit_price: Number(item.preco),
+      unit_price: parseFloat(Number(item.preco).toFixed(2)),
       quantity: Number(item.quantidade),
       currency_id: 'BRL'
     }));
 
-    // 4. Adiciona o frete como item se houver valor
+    // 3. Adiciona o frete como item
     if (frete && Number(frete) > 0) {
       itemsMP.push({
         id: 'custo-frete',
         title: 'Taxa de Entrega / Frete',
-        unit_price: Number(frete),
+        unit_price: parseFloat(Number(frete).toFixed(2)),
         quantity: 1,
         currency_id: 'BRL'
       });
@@ -38,14 +42,18 @@ export default async function handler(req, res) {
 
     const preference = new Preference(client);
 
-    // 5. Criação da Preferência
+    // 4. Criação da Preferência com Dados Completos
     const response = await preference.create({
       body: {
         items: itemsMP,
         payer: {
-          email: emailLimpo
+          email: emailLimpo,
+          identification: {
+            type: 'CPF',
+            number: cpf ? cpf.replace(/\D/g, '') : '' // Remove pontos e traços do CPF
+          }
         },
-        // ESTA LINHA É A CHAVE PARA O WEBHOOK FUNCIONAR:
+        // Referência externa para o Webhook
         external_reference: emailLimpo, 
         
         back_urls: {
@@ -55,12 +63,16 @@ export default async function handler(req, res) {
         },
         auto_return: "approved",
         
-        // URL que você confirmou que funcionou no teste do Mercado Pago
+        // Configurações de pagamento para forçar a liberação dos métodos
+        payment_methods: {
+          installments: 12, // Permite parcelamento
+        },
+
         notification_url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/webhooks/mercadopago`,
       }
     });
 
-    // 6. Retorna o link para o frontend
+    // Retorna o link para o frontend
     res.status(200).json({ init_point: response.init_point });
 
   } catch (error) {
