@@ -165,7 +165,7 @@ export default function Loja() {
           • Entrega em todo Brasil • Frete Grátis acima de R$ 500,00 •
       </div>
 
-{/* HEADER */}
+      {/* HEADER */}
       <header className="border-b border-gray-100 py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <a href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></a>

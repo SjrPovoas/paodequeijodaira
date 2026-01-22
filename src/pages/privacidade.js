@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'; // Corrigido: Importado useEffect
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
-export default function Privacidade() {
+export default function Termos() {
+  // Estado corrigido para combinar com o restante do código
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  // NOVO: Estado para controlar a visibilidade da seta
+  // Estado para controlar a visibilidade da seta de voltar ao topo
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // NOVO: Lógica para mostrar a seta após 400px de rolagem (fim do hero)
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 400) {
@@ -27,11 +28,10 @@ export default function Privacidade() {
   };
 
   return (
-    <div className="bg-white text-[#2D3134] antialiased font-['Inter'] overflow-x-hidden">
+    <div className="bg-white text-[#2D3134] antialiased font-sans overflow-x-hidden">
       <Head>
         <title>Política de Privacidade | Pão de Queijo da Irá</title>
         <meta name="robots" content="noindex" />
-        <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lobster&display=swap" rel="stylesheet" />
       </Head>
@@ -39,28 +39,41 @@ export default function Privacidade() {
       {/* HEADER */}
       <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <a href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></a>
+          <Link href="/">
+            <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
+          </Link>
 
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
-            <a href="/" className="hover:text-orange-600 transition-colors">Voltar para Home</a>
-            <a href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</a>
-            <a href="/" className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg">Ir para Home</a>
+            <Link href="/" className="hover:text-orange-600 transition-colors">Comprar Pão de Queijo da Irá</Link>
+            <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all uppercase">LOJA LIFESTYLE</Link>
+            <Link href="/" className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg uppercase">Ir para Home</Link>
           </nav>
 
-          <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 z-[110] relative">
+          {/* Botão Mobile - Z-index alto para ficar acima do menu */}
+          <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 z-[130] relative focus:outline-none">
             <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
           </button>
         </div>
 
-        {/* MENU MOBILE */}
-        <div className={`fixed inset-[5] bg-white z-[-89] transition-transform duration-500 ease-in-out lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <nav className="flex flex-col bg-white items-center pt-32 space-y-4 text-xl font-black uppercase tracking-tighter italic text-center">
-            <a href="/loja" onClick={toggleMenu} className="text-orange-600 hover:scale-110 transition-transform">
-              Loja Lifestyle
-            </a>
-            <a href="/" onClick={toggleMenu} className="bg-orange-600 text-white px-10 py-5 font-black uppercase tracking-widest text-xs not-italic shadow-xl active:scale-95 transition-all">
-              Ir para Home
-            </a>
+        {/* MENU MOBILE CORRIGIDO */}
+        <div className={`fixed inset-0 z-[120] bg-white h-screen w-screen transition-transform duration-500 ease-in-out lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <nav className="flex flex-col h-full items-center justify-center space-y-8 px-10 text-center">
+            <Link href="/loja" onClick={toggleMenu} className="text-xl font-black uppercase tracking-[0.2em] italic hover:text-orange-600">
+              LOJA LIFESTYLE
+            </Link>
+            <Link href="/" onClick={toggleMenu} className="text-xl font-black uppercase tracking-[0.2em] italic text-orange-600">
+              COMPRAR PÃO DE QUEIJO
+            </Link>
+
+            <div className="w-12 h-1 bg-gray-100"></div>
+
+            {/* REDES SOCIAIS NO MENU MOBILE */}
+            <div className="flex justify-center items-center gap-8">
+              <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
+              <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
+              <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+            </div>
           </nav>
         </div>
       </header>
@@ -142,14 +155,13 @@ export default function Privacidade() {
         </div>
       </footer>
 
-     {/* BOTÃO VOLTAR AO TOPO */}
-      <button 
+      {/* BOTÃO VOLTAR AO TOPO */}
+      <button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${
-          showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible' }`} >
+        className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'}`} >
         <i className="bi bi-arrow-up text-xl font-bold"></i>
       </button>
-          
+
     </div>
   );
 }

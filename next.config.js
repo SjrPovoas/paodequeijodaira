@@ -19,7 +19,16 @@ const nextConfig = {
       },
     });
 
-    config.resolve.fallback = { fs: false, net: false, tls: false };
+    // CONFIGURAÇÃO DE FALLBACKS (Correção para MetaMask SDK e outros módulos Node)
+    config.resolve.fallback = { 
+      ...config.resolve.fallback,
+      fs: false, 
+      net: false, 
+      tls: false,
+      // ESTA LINHA ABAIXO RESOLVE O ERRO QUE VOCÊ RECEBEU:
+      '@react-native-async-storage/async-storage': false 
+    };
+
     return config;
   },
 }

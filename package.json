@@ -1,5 +1,5 @@
 {
-  "name": "pao-de-queijo-ira",
+  "name": "pao-de-queijo-da-ira",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,30 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@rainbow-me/rainbowkit": "^2.2.10",
-    "@react-native-async-storage/async-storage": "^2.2.0",
-    "@supabase/supabase-js": "^2.43.5",
-    "@tanstack/react-query": "^5.90.19",
-    "assert": "^2.1.0",
-    "browserify-zlib": "^0.2.0",
-    "crypto-browserify": "^3.12.1",
-    "https-browserify": "^1.0.0",
-    "lucide-react": "latest",
-    "mercadopago": "^2.12.0",
+    "@emailjs/browser": "^4.4.1",
+    "@rainbow-me/rainbowkit": "^2.2.1",
+    "@supabase/supabase-js": "^2.45.0",
+    "@tanstack/react-query": "^5.59.0",
+    "lucide-react": "^0.400.0",
+    "mercadopago": "^2.1.0",
     "next": "14.2.4",
-    "os-browserify": "^0.3.0",
-    "path-browserify": "^1.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "stream-browserify": "^3.0.0",
-    "stream-http": "^3.2.0",
-    "url": "^0.11.4",
-    "viem": "^2.44.4",
-    "wagmi": "^2.19.5"
+    "resend": "^6.8.0",
+    "viem": "2.x",
+    "wagmi": "^2.12.0"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.23",
-    "postcss": "^8.5.6",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4"
   }
 }

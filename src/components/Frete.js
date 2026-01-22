@@ -23,7 +23,7 @@ export default function Frete({ onFreteCalculado }) {
         setEndereco(data);
         // Lógica simples de frete: 
         // Se for de SP (ou seu estado), frete R$ 15, senão R$ 30.
-        const valorFrete = data.uf === 'GO' ? 15.00 : 35.00; 
+        const valorFrete = data.uf === 'GO' ? 15.00 : 35.00;
         onFreteCalculado({ valor: valorFrete, ...data });
       }
     } catch (error) {
@@ -60,4 +60,4 @@ export default function Frete({ onFreteCalculado }) {
       )}
     </div>
   );
-        }
+}

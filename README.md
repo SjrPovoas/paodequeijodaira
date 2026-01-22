@@ -81,16 +81,10 @@ npm install
 npm install @getbrevo/brevo
 ```
 ```
-npm install mercadopago @react-native-async-storage/async-storage
-```
-```
-npm install mercadopago @react-native-async-storage/async-storage --legacy-peer-deps
+npm install mercadopago
 ```
 ```
 npm install @supabase/supabase-js
-```
-```
-npm install ethers
 ```
 ```
 npm install @rainbow-me/rainbowkit wagmi viem @tanstack/react-query
@@ -107,11 +101,15 @@ npm rebuild
 npm run dev
 ```
 ```
-npm install @react-native-async-storage/async-storage
-```
-```
 npm install crypto-browserify stream-browserify browserify-zlib stream-http https-browserify assert os-browserify path-browserify url
 ```
+```
+npm install @emailjs/browser
+```
+```
+npm install resend
+```
+
 ---
 ## 2. TECNOLOGIAS USADAS
 

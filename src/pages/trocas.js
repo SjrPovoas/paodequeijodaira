@@ -30,7 +30,7 @@ export default function Termos() {
     return (
         <div className="bg-white text-[#2D3134] antialiased font-sans overflow-x-hidden">
             <Head>
-                <title>Termos de Uso | Loja Lifestyle do Pão de Queijo da Irá</title>
+                <title>Trocas e Devoluções | Loja Lifestyle do Pão de Queijo da Irá</title>
                 <meta name="robots" content="noindex" />
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lobster&display=swap" rel="stylesheet" />
@@ -65,87 +65,66 @@ export default function Termos() {
                         <Link href="/" onClick={toggleMenu} className="text-xl font-black uppercase tracking-[0.2em] italic text-orange-600">
                             COMPRAR PÃO DE QUEIJO
                         </Link>
-                        
+
                         <div className="w-12 h-1 bg-gray-100"></div>
 
                         {/* REDES SOCIAIS NO MENU MOBILE */}
                         <div className="flex justify-center items-center gap-8">
-                                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
-                                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
-                                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+                            <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
+                            <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
+                            <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
                         </div>
                     </nav>
                 </div>
             </header>
 
-            {/* CONTEÚDO DOS TERMOS */}
+            {/* CONTEÚDO TROCAS E DEVOLUÇÕES */}
             <main className="py-20 px-6 max-w-4xl mx-auto">
-                <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-12 italic leading-none text-black text-center md:text-left">
-                    Termos de <span className="text-orange-600">Serviço</span>
+                <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-12 italic leading-none text-black">
+                    Trocas e <span className="text-orange-600">Devoluções</span>
                 </h1>
 
-                <div className="prose prose-orange max-w-none text-gray-600 leading-relaxed space-y-10">
-
+                <div className="prose prose-orange max-w-none text-gray-600 leading-relaxed space-y-10 font-sans">
                     <section>
-                        <h2 className="text-2xl font-black uppercase tracking-tight text-black mb-4 flex items-center gap-3">
-                            <span className="text-orange-600">01.</span> Pagamentos e Web3
-                        </h2>
-                        <p>
-                            Nossa loja aceita pagamentos via <strong>Mercado Pago</strong> (Pix e Cartão) e <strong>Criptomoedas</strong> (POL na rede Polygon).
-                            Ao optar por pagamentos em Cripto, o usuário reconhece que as transações na blockchain são irreversíveis.
-                            O Pão de Queijo da Irá não se responsabiliza por envios feitos para endereços incorretos ou através de redes não suportadas.
-                        </p>
+                        <h2 className="text-xl font-black uppercase mb-4 text-[#3D2B1F]">01. Itens Lifestyle e Acessórios</h2>
+                        <p className="text-sm mb-4 italic">Válido para: Camisetas, Canecas e Aventais.</p>
+                        <ul className="list-disc pl-5 space-y-4 text-sm">
+                            <li><strong>Arrependimento:</strong> Até 7 dias após o recebimento. O item deve estar novo e na embalagem original.</li>
+                            <li><strong>Defeitos:</strong> Garantia de 30 dias para erros de estampa ou fabricação.</li>
+                        </ul>
+                    </section>
+
+                    <section className="bg-orange-50 p-8 border-l-4 border-orange-600">
+                        <h2 className="text-xl font-black uppercase mb-4 text-[#3D2B1F]">02. Procedimento</h2>
+                        <p className="text-sm mb-4 font-bold text-[#3D2B1F]">Processo rápido via WhatsApp:</p>
+                        <ol className="list-decimal pl-5 space-y-3 text-sm">
+                            <li>Contate-nos informando o número do pedido.</li>
+                            <li>Anexe fotos do produto.</li>
+                            <li>Enviaremos as instruções de postagem em até 24h.</li>
+                        </ol>
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-black uppercase tracking-tight text-black mb-4 flex items-center gap-3">
-                            <span className="text-orange-600">02.</span> Produtos Lifestyle
-                        </h2>
-                        <p>
-                            As imagens dos produtos (camisetas e acessórios) são ilustrativas. Pequenas variações de cor e estampa podem ocorrer devido ao processo de produção artesanal e à calibração de cada monitor.
-                        </p>
-                    </section>
-
-                    <section className="bg-orange-50 p-8 rounded-3xl border-2 border-orange-100">
-                        <h3 className="text-xl font-black uppercase text-orange-600 mb-2">Envio e Logística</h3>
+                        <h2 className="text-xl font-black uppercase mb-4 text-[#3D2B1F]">03. Estorno</h2>
                         <p className="text-sm">
-                            O prazo de entrega começa a contar a partir da confirmação do pagamento. Para itens de vestuário, o prazo de produção pode levar até <strong>5 dias úteis</strong> antes da postagem oficial.
+                            <strong>Mercado Pago:</strong> Estorno direto na fatura ou conta Pix. <br />
+                            <strong>Web3 (POL):</strong> Devolução para a mesma carteira (taxas de rede não inclusas).
                         </p>
                     </section>
-
-                    <section>
-                        <h2 className="text-2xl font-black uppercase tracking-tight text-black mb-4 flex items-center gap-3">
-                            <span className="text-orange-600">03.</span> Isenção de Responsabilidade
-                        </h2>
-                        <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-                            <p className="mb-4 text-sm md:text-base">Os materiais no site da Pão de Queijo da Irá são fornecidos 'como estão'. O Pão de Queijo da Irá não oferece garantias, expressas ou implícitas, e, por este meio, isenta e nega todas as outras garantias.</p>
-                        </div>
-                    </section>
-
-                    <section className="bg-orange-50 p-8 rounded-3xl border-2 border-orange-100">
-                        <h3 className="text-xl font-black uppercase text-orange-600 mb-2">Modificações</h3>
-                        <p className="text-sm">O Pão de Queijo da Irá pode revisar estes termos a qualquer momento, sem aviso prévio. Ao usar este site, você concorda em ficar vinculado à versão atual desses termos.</p>
-
-                        <h3 className="text-xl font-black uppercase text-orange-600 mt-6 mb-2">Lei Aplicável</h3>
-                        <p className="text-sm text-black font-bold italic">Estes termos são regidos pelas leis brasileiras e você se submete à jurisdição exclusiva dos tribunais locais.</p>
-                    </section>
-
-                    <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mt-12 border-t pt-8 text-center">
-                        Última atualização: 21 de Janeiro de 2026.
-                    </p>
                 </div>
             </main>
 
             {/* FOOTER */}
-            <footer className="py-20 px-6 bg-white border-t border-gray-100">
+            <footer footer className="py-20 px-6 bg-white border-t border-gray-100" >
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                         <div className="flex flex-col items-center md:items-start">
-                            <Link href="/"><img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6 cursor-pointer" alt="Logo" /></Link>
-                            <div className="flex space-x-4">
+                            <a href="/"><img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" /></a>
+                            <div className="flex space-x-2">
                                 <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
                                 <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
                                 <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+                                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-geo-alt-fill"></i></a>
                             </div>
                         </div>
                         <div className="text-center md:text-left space-y-4">
@@ -159,17 +138,21 @@ export default function Termos() {
                             <h3 className="text-lg font-black uppercase tracking-tighter mb-2 italic">Pão de Queijo da Irá</h3>
                             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
                             <div className="mt-4 flex justify-center md:justify-end gap-4 text-[10px] font-black text-gray-400 uppercase">
-                                <Link href="/termos" className="text-orange-600">Termos de Uso</Link>
+                                <a href="/termos" className="hover:text-black">Termos de Uso</a>
                                 <span>|</span>
-                                <Link href="/privacidade" className="hover:text-black">Privacidade</Link>
+                                <a href="/privacidade" className="hover:text-black">Privacidade</a>
                             </div>
                         </div>
                     </div>
+                    <div className="pt-8 border-t border-gray-50 text-center">
+                        <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+                    </div>
                 </div>
-            </footer>
+            </footer >
 
             {/* BOTÃO VOLTAR AO TOPO */}
-            <button onClick={scrollToTop} className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'}`}>
+            < button onClick={scrollToTop}
+                className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'}`} >
                 <i className="bi bi-arrow-up text-xl font-bold"></i>
             </button>
         </div>
