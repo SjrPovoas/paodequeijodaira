@@ -2,20 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 export default function AdminTrocas() {
   const [solicitacoes, setSolicitacoes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [stats, setStats] = useState({ pendentes: 0, aprovadas: 0, total: 0 });
+  const router = useRouter();
 
   useEffect(() => {
     const verificarAcessoEBuscarDados = async () => {
-      // 1. Verifica sessão e e-mail do admin
+      // 1. Verifica sessão de forma segura
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session || session.user.email !== 'sjrpovoas@gmail.com') {
-        window.location.href = '/admin/login';
+        router.push('/admin/login');
         return;
       }
 
@@ -24,19 +26,19 @@ export default function AdminTrocas() {
     };
 
     verificarAcessoEBuscarDados();
-  }, []);
+  }, [router]);
 
   async function buscarTrocas() {
     setLoading(true);
     try {
-      // Busca trocas e faz o "join" básico com pedidos para pegar itens/valor
+      // Busca trocas e faz o "join" com a tabela de pedidos
       const { data, error } = await supabase
         .from('trocas')
         .select(`
           *,
           pedidos (
-            resumo_itens,
-            total,
+            itens,
+            total_geral,
             status
           )
         `)
@@ -46,7 +48,7 @@ export default function AdminTrocas() {
 
       if (data) {
         setSolicitacoes(data);
-        // Atualiza contadores
+        // Atualiza contadores com base no status
         const pendentes = data.filter(s => s.status === 'Pendente').length;
         const aprovadas = data.filter(s => s.status === 'Aprovada').length;
         setStats({ pendentes, aprovadas, total: data.length });
@@ -71,7 +73,7 @@ export default function AdminTrocas() {
 
       if (erroTroca) throw erroTroca;
 
-      // 2. Atualiza a tabela de pedidos para o cliente ver o status novo
+      // 2. Atualiza a tabela de pedidos para feedback do cliente
       const statusFinalPedido = novoStatus === 'Aprovada' ? 'Troca Aprovada' : 'Troca Negada';
       const { error: erroPedido } = await supabase
         .from('pedidos')
@@ -81,7 +83,7 @@ export default function AdminTrocas() {
       if (erroPedido) throw erroPedido;
 
       alert(`Sucesso: Solicitação ${novoStatus}!`);
-      await buscarTrocas(); // Recarrega a lista e stats
+      await buscarTrocas(); 
     } catch (err) {
       alert("Erro na operação: " + err.message);
     } finally {
@@ -89,29 +91,30 @@ export default function AdminTrocas() {
     }
   }
 
-async function handleLogout() {
-  const { error } = await supabase.auth.signOut();
-  if (error) {
-    alert("Erro ao sair: " + error.message);
-  } else {
-    window.location.href = '/admin/login';
+  async function handleLogout() {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      alert("Erro ao sair: " + error.message);
+    } else {
+      router.push('/admin/login');
+    }
   }
-}
 
-  if (!isAdmin) return null; // Evita "flicker" de conteúdo antes do redirecionamento
+  // Proteção: não renderiza nada se não for admin
+  if (!isAdmin) return null;
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] text-black font-sans p-4 md:p-12">
+    <div className="min-h-screen bg-[#F3F4F6] text-black font-sans p-4 md:p-12 selection:bg-orange-200">
       <Head>
         <title>Painel Admin | Trocas da Loja Lifestyle do Pão de Queijo da Irá</title>
       </Head>
 
       <div className="max-w-6xl mx-auto">
         
-        {/* HEADER */}
+        {/* HEADER BRUTALISTA */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
           <div>
-            <div className="flex gap-4 mb-2">
+            <div className="flex gap-4 mb-4">
               <Link href="/" className="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-orange-600 transition-colors">
                 ← Ver Loja
               </Link>
@@ -125,7 +128,7 @@ async function handleLogout() {
           </div>
           
           <div className="bg-black text-white p-6 border-b-8 border-orange-600 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)]">
-            <p className="text-[9px] font-black uppercase opacity-50 tracking-widest mb-1">Operador Logado</p>
+            <p className="text-[9px] font-black uppercase opacity-50 tracking-widest mb-1 text-orange-400">Operador Logado</p>
             <p className="font-black italic text-sm">sjrpovoas@gmail.com</p>
           </div>
         </div>
@@ -177,11 +180,16 @@ async function handleLogout() {
                     <h2 className="text-3xl font-black uppercase italic leading-none mb-2 break-all">
                       {item.cliente_email}
                     </h2>
-                    <p className="text-sm font-bold text-orange-600 uppercase mb-6 flex items-center gap-2">
-                      <span className="bg-orange-100 px-2 py-0.5 border border-orange-200">PEDIDO: #{item.pedido_id.slice(0, 8)}</span>
+                    
+                    <div className="text-sm font-bold text-orange-600 uppercase mb-6 flex flex-wrap items-center gap-2">
+                      <span className="bg-orange-100 px-2 py-0.5 border border-orange-200">PEDIDO: #{item.pedido_id?.slice(0, 8)}</span>
                       <span className="text-black/40">—</span>
-                      <span>{item.pedidos?.resumo_itens || 'Itens não listados'}</span>
-                    </p>
+                      <span className="text-black">
+                        {Array.isArray(item.pedidos?.itens) 
+                          ? item.pedidos.itens.map(i => `${i.quantidade}x ${i.nome}`).join(', ')
+                          : 'Ver no pedido'}
+                      </span>
+                    </div>
                     
                     <div className="bg-gray-50 p-6 border-l-[10px] border-black">
                       <div className="mb-4">
@@ -200,41 +208,42 @@ async function handleLogout() {
                     {item.status === 'Pendente' && (
                       <>
                         <button 
+                          disabled={loading}
                           onClick={() => atualizarStatus(item.id, 'Aprovada', item.pedido_id)}
-                          className="w-full bg-green-500 hover:bg-black text-white p-5 font-black uppercase text-xs tracking-widest transition-all border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px]"
+                          className="w-full bg-green-500 hover:bg-black text-white p-5 font-black uppercase text-xs tracking-widest transition-all border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] disabled:opacity-50"
                         >
                           ✓ Aprovar Solicitação
                         </button>
                         <button 
+                          disabled={loading}
                           onClick={() => atualizarStatus(item.id, 'Negada', item.pedido_id)}
-                          className="w-full bg-red-500 hover:bg-black text-white p-5 font-black uppercase text-xs tracking-widest transition-all border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px]"
+                          className="w-full bg-red-500 hover:bg-black text-white p-5 font-black uppercase text-xs tracking-widest transition-all border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] disabled:opacity-50"
                         >
                           ✕ Negar Solicitação
                         </button>
                       </>
                     )}
                     <button className="w-full bg-white hover:bg-orange-600 hover:text-white p-4 font-black uppercase text-[10px] tracking-widest transition-all border-2 border-black group">
-                      Visualizar Pedido Completo
+                      Ver Pedido Completo
                     </button>
                   </div>
                 </div>
 
-                {/* Marca d'água de fundo brutalista */}
-                <div className="absolute right-[-20px] bottom-[-20px] text-gray-50 text-9xl font-black italic pointer-events-none -z-0 select-none uppercase">
-                  {item.id.slice(0,4)}
+                {/* Marca d'água brutalista */}
+                <div className="absolute right-[-20px] bottom-[-20px] text-gray-100 text-9xl font-black italic pointer-events-none -z-0 select-none uppercase">
+                  {String(item.id).slice(0,4)}
                 </div>
               </div>
             ))
           )}
         </div>
 
-        {/* FOOTER */}
         <footer className="mt-20 pt-10 border-t-2 border-gray-200 text-center">
           <p className="text-[9px] font-black uppercase tracking-[0.6em] text-gray-300">
-            Loja Lifestyle e Acessórios do Pão de Queijo da Irá | Admin — Sistema de Controle de Qualidade v1.0
+            Design by SjrPovoaS | Admin — Controle de Qualidade v1.0
           </p>
         </footer>
       </div>
     </div>
   );
-}
+          }
