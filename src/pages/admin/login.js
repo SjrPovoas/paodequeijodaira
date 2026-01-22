@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState({ type: '', text: '' });
+  const router = useRouter();
+
+  // Se o usuário já estiver logado, manda direto para trocas ao carregar a página
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user?.email === 'sjrpovoas@gmail.com') {
+        router.push('/admin/trocas');
+      }
+    };
+    checkUser();
+  }, [router]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,11 +38,13 @@ export default function AdminLogin() {
       // 2. Validação de e-mail administrativo
       if (data.user?.email === 'sjrpovoas@gmail.com') {
         setMsg({ type: 'success', text: 'Autenticado com sucesso! Redirecionando...' });
+        
+        // Redirecionamento via Router do Next.js (mais estável que window.location)
         setTimeout(() => {
-          window.location.href = '/admin/trocas';
-        }, 1500);
+          router.push('/admin/trocas');
+        }, 1200);
       } else {
-        // Se alguém logar mas não for o e-mail permitido, desconectamos imediatamente
+        // Se o e-mail não for o permitido, desconectamos imediatamente
         await supabase.auth.signOut();
         throw new Error('Acesso Negado: Você não possui privilégios de administrador.');
       }
@@ -107,9 +122,9 @@ export default function AdminLogin() {
               className="w-full bg-black text-white py-6 font-black uppercase text-xs tracking-[0.4em] shadow-[8px_8px_0px_0px_rgba(234,88,12,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all disabled:bg-gray-300 active:scale-95 flex items-center justify-center gap-3"
             >
               {loading ? (
-                <span className="animate-pulse">Validando Credenciais...</span>
+                <span className="animate-pulse italic">Validando...</span>
               ) : (
-                <>Entrar no Painel <i className="bi bi-arrow-right"></i></>
+                <>Entrar no Painel</>
               )}
             </button>
           </form>
@@ -124,4 +139,4 @@ export default function AdminLogin() {
       </div>
     </div>
   );
-}
+          }
