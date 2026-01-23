@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { supabase } from '../lib/supabaseClient';
 import BotaoPagamentoWeb3 from '../components/BotaoPagamentoWeb3';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Link from 'next/link';
 
 export default function Loja() {
   const LINK_LISTA_ESPERA = "https://43782b7b.sibforms.com/serve/MUIFAC4AxTEnI80RImF7seW5i2MRkz5EqdqtMse22-stmvG7jsOqdFhZ6mmpfwRA-2skU_c3GJF8YXD6k-K_kNE6_gFeWIFbCIxIEWpknHGH8m6tdQMhTuqNG7-e_tsEQRBC4-pjosH0TVoqcW1UonSiJnd2E378zedWIJRs_Dhj9R9v8_VCpmg9Kebo_wFD_WsvLIPqwRBVBCNh8w==";
@@ -110,7 +111,7 @@ export default function Loja() {
     setModalAberto(true);
   };
 
- // 5. CHECKOUT MERCADO PAGO REVISADO
+  // 5. CHECKOUT MERCADO PAGO REVISADO
   const iniciarCheckoutMP = async (e) => {
     // Previne comportamento padrão caso seja chamado por um formulário
     if (e && e.preventDefault) e.preventDefault();
@@ -118,7 +119,7 @@ export default function Loja() {
     if (!dados.email || !dados.cpf || !dados.endereco || dados.cep.length < 8) {
       return alert("Preencha todos os dados de entrega corretamente!");
     }
-    
+
     if (!carrinho || carrinho.length === 0) {
       return alert("Seu carrinho está vazio!");
     }
@@ -144,9 +145,9 @@ export default function Loja() {
         const res = await fetch('/api/checkout-mp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            itens: carrinho, 
-            email: dados.email, 
+          body: JSON.stringify({
+            itens: carrinho,
+            email: dados.email,
             frete,
             cpf: dados.cpf // <-- ESSENCIAL: Enviando o CPF para desbloquear os botões
           })
@@ -162,15 +163,15 @@ export default function Loja() {
           console.error("Erro na resposta do MP:", data);
           alert("Erro ao gerar link de pagamento. Tente novamente.");
         }
-      } catch (err) { 
+      } catch (err) {
         console.error("Erro Fetch MP:", err);
-        alert("Erro ao conectar com servidor de pagamento."); 
+        alert("Erro ao conectar com servidor de pagamento.");
       }
     } else {
       console.error("Erro Supabase:", error);
       alert(`Erro ao registrar pedido: ${error.message || 'Erro de conexão com o banco'}`);
     }
-    
+
     setLoading(false);
   };
 
@@ -187,9 +188,38 @@ export default function Loja() {
   return (
     <div className="relative min-h-screen bg-white font-sans text-black overflow-x-hidden">
       <Head>
-        <title>Loja Lifestyle | Pão de Queijo da Irá</title>
-        <meta name="description" content="Loja Lifestyle Pão de Queijo da Irá. Camisetas, canecas e aventais com pagamento em Crypto ou Cartão." />
+        {/* SEO COMPLETO */}
+        <meta charSet="UTF-8" />
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="title" content="Loja Lifestyle | Pão de Queijo da Irá" />
+        <meta name="author" content="SjrPovoaS" />
+        <meta name="description" content="Loja Lifestyle e Acessórios do Pão de Queijo da Irá. Camisetas, Canecas e Aventais." />
+        <meta name="Keywords" content="Loja Lifestyle e Acessórios, loja, camiseta, avental, caneca" />
+        <meta name="skype_toolbar" content="skype_toolbar_parser_compatible" />
+        <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+        <meta name="googlebot" content="index,follow" />
+        <meta name="google-site-verification" content="rj9-yKQenuTL7WznZzLhnZhRRqalrW8B9ptmhuewFiA" />
+
+        {/* Meta Tags para WhatsApp / Facebook (Open Graph) */}
+        <meta property="og:locale" content="pt_BR" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Loja Lifestyle e Acessórios | Pão de Queijo da Irá" />
+        <meta property="og:description" content="Loja Lifestyle e Acessórios do Pão de Queijo da Irá. Camisetas, Canecas e Aventais." />
+        <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        <meta property="og:site_name" content="Loja Lifestyle e Acessórios | Pão de Queijo da Irá" />
+        <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        <meta property="og:image:secure_url" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <title>Loja Lifestyle e Acessórios | Pão de Queijo da Irá</title>
+        
+        <meta name="Keywords" content="Loja Lifestyle e Acessórios, loja, camiseta, avental, caneca" />
         <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="canonical" href="https://paodequeijodaira.vercel.app/loja" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
@@ -216,7 +246,7 @@ export default function Loja() {
                         if (!connected) {
                           return (
                             <button onClick={openConnectModal} className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-                              CONECTAR CARTEIRA <i className="bi bi-wallet2 text-xl leading-none"></i>
+                              CONECTAR CARTEIRA <i className="bi bi-wallet2 text-xl leading-none "></i>
                             </button>
                           );
                         }
@@ -246,21 +276,21 @@ export default function Loja() {
                 CARRINHO
                 <i className="bi bi-cart3 text-[14px] leading-none transition-transform group-hover:scale-110"></i>
               </span>
-              <span className="text-xs font-bold border-l border-white/20 pl-3 leading-none">{Array.isArray(carrinho) ? carrinho.length : 0}</span>
+              <span className="text-xs font-bold border-l border-white/20 pl-3">{Array.isArray(carrinho) ? carrinho.length : 0}</span>
             </button>
           </nav>
 
           <div className="flex md:hidden items-center gap-3">
             <ConnectButton label="Conectar Carteira" showBalance={false} chainStatus="none" accountStatus="avatar" />
             <button onClick={() => setModalAberto(true)} className="relative p-2 flex items-center justify-center">
-              <i className="bi bi-bag text-2xl"></i>
+              <i className="bi bi-bag text-2xl hover:text-orange-600 transition-colors"></i>
               {carrinho.length > 0 && (
                 <span className="absolute top-0 right-0 bg-orange-600 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold leading-none">
                   {carrinho.length}
                 </span>
               )}
             </button>
-            <button onClick={() => setMenuMobileAberto(true)} className="p-2 flex items-center justify-center">
+            <button onClick={() => setMenuMobileAberto(true)} className="p-2 flex items-center justify-center hover:text-orange-600 transition-colors">
               <i className="bi bi-list text-3xl leading-none"></i>
             </button>
           </div>
@@ -268,20 +298,41 @@ export default function Loja() {
       </header>
 
       {menuMobileAberto && (
-        <div className="fixed inset-0 z-[100] md:hidden">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => setMenuMobileAberto(false)} />
-          <nav className="relative w-full bg-white h-auto p-10 flex flex-col space-y-8 text-center shadow-2xl">
-            <button onClick={() => setMenuMobileAberto(false)} className="absolute top-6 right-6 text-3xl flex items-center justify-center">
-              <i className="bi bi-x-lg leading-none"></i>
-            </button>
-            <a href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">IRÁ DIGITAL GENESIS PASS</a>
-            <a href="/" className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</a>
-            <div className="flex justify-center items-center gap-6 pt-4">
-              <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 flex items-center"><i className="bi bi-instagram leading-none"></i></a>
-              <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 flex items-center"><i className="bi bi-facebook leading-none"></i></a>
-              <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 flex items-center"><i className="bi bi-youtube leading-none"></i></a>
-            </div>
-          </nav>
+        <div className="fixed inset-0 z-[120] md:hidden">
+          {/* Overlay com scroll que fecha o menu ao clicar */}
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-md overflow-y-auto" onClick={() => setMenuMobileAberto(false)}>
+            {/* Menu deslizante da direita */}
+            <nav className="relative min-h-screen w-full bg-white flex flex-col p-10 animate-slide-right"
+              onClick={(e) => e.stopPropagation()} // Impede que cliques dentro do menu o fechem
+            >
+              {/* Botão Fechar */}
+              <button onClick={() => setMenuMobileAberto(false)}
+                className="absolute top-16 right-8 text-2xl flex items-center justify-center z-10 hover:text-orange-600 transition-colors">
+                <i className="bi bi-x-lg leading-none"></i>
+              </button>
+              {/* Conteúdo do Menu - Centralizado Verticalmente */}
+              <div className="flex-1 flex flex-col justify-center space-y-8 text-center">
+                <Link href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em] hover:text-orange-600 transition-colors">IRÁ DIGITAL GENESIS PASS</Link>
+                <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
+                <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-xl font-black uppercase tracking-[0.2em] italic hover:text-orange-600 transition-colors">LOJA LIFESTYLE</Link>
+                {/* Divisor */}
+                <div className="w-12 h-1 bg-gray-100 mx-auto"></div>
+                {/* Redes Sociais */}
+                <div className="flex justify-center items-center gap-8 pt-4">
+                  <a href="https://www.instagram.com/paodequeijodaira" target="_blank" rel="noopener noreferrer" className="text-3xl hover:text-orange-600 transition-colors flex items-center">
+                    <i className="bi bi-instagram leading-none"></i></a>
+                  <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" rel="noopener noreferrer" className="text-3xl hover:text-orange-600 transition-colors flex items-center">
+                    <i className="bi bi-facebook leading-none"></i></a>
+                  <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" rel="noopener noreferrer" className="text-3xl hover:text-orange-600 transition-colors flex items-center">
+                    <i className="bi bi-youtube leading-none"></i></a>
+                </div>
+              </div>
+              {/* Rodapé do Menu */}
+              <div className="pt-8 text-center">
+                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-[0.3em]">© Pão de Queijo da Irá</p>
+              </div>
+            </nav>
+          </div>
         </div>
       )}
 
@@ -455,10 +506,13 @@ export default function Loja() {
         </button>
       )}
 
-      <style jsx global>{`
-        @keyframes slide-left { from { transform: translateX(100%); } to { transform: translateX(0); } }
-        .animate-slide-left { animation: slide-left 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-      `}</style>
+      <style jsx global>
+        {`@keyframes slide-left { from { transform: translateX(100%); } to { transform: translateX(0); } }
+          @keyframes slide-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
+          .animate-slide-left { animation: slide-left 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+          .animate-slide-right { animation: slide-right 0.4s cubic-bezier(0.16, 1, 0.3, 1); }`}
+      </style>
+
     </div>
   );
 }

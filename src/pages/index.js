@@ -6,28 +6,26 @@ export default function Home() {
   const LINK_BAIXAR_GUIA = "https://43782b7b.sibforms.com/serve/MUIFADVOaKFQT5-e79pfcuRymIn3mT3LpZ6jTYiaabJu4jshHz-B2CX67o1k7j8_Jj8t0kir0rvKsU606Nhx7P2_uNRORnZ_5B-wVs18TtNjYGtXnkqclgkUanefRoM1T1-jLskVawichbZvQ4ojESQ2bzzCVA0xEodVW76v349_vKowtR085QjMa-mytw4PTgqyI1c2awQVte9ZMw=="
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // NOVO: Estado para controlar a visibilidade da seta
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // NOVO: Lógica para mostrar a seta após 400px de rolagem (fim do hero)
+  // Trava o scroll do site quando o menu estiver aberto
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMenuOpen]);
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 400) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
-      }
+      setShowScrollTop(window.scrollY > 400);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleWhatsapp = (e) => {
@@ -70,8 +68,7 @@ export default function Home() {
         <meta property="og:image:secure_url" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />        <meta property="og:type" content="website" />
-        <meta property="fb:pages" content="359950968036532" />
+        <meta property="og:image:height" content="630" />
 
         {/* Twitter / X */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -95,7 +92,6 @@ export default function Home() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
-
         <link rel="canonical" href="https://paodequeijodaira.vercel.app" />
         <link rel="profile" href="https://gmpg.org/xfn/11" />
 
@@ -107,12 +103,11 @@ export default function Home() {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
-      {/* HEADER COM MENU HAMBÚRGUER */}
+{/* HEADER */}
       <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <a href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></a>
-
-          {/* Navegação Desktop */}
+          
           <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
             <a href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</a>
             <a href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</a>
@@ -122,25 +117,58 @@ export default function Home() {
           </nav>
 
           {/* Botão Hambúrguer Mobile */}
-          <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 z-[110] relative">
+          <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110]">
             <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
           </button>
         </div>
 
-        {/* Overlay Menu Mobile */}
-        <div className={`fixed inset-[5] bg-white z-[-89] transition-transform duration-500 ease-in-out lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <nav className="flex flex-col bg-white items-center pt-32 space-y-4 text-xl font-black uppercase tracking-tighter italic text-center text-[#2D3134]">
-            <a href="#produtos" onClick={toggleMenu} className="hover:text-orange-600 transition-colors">Produtos</a>
-            <a href="#nossa-historia" onClick={toggleMenu} className="hover:text-orange-600 transition-colors">Nossa História</a>
-            <a href="#depoimentos" onClick={toggleMenu} className="hover:text-orange-600 transition-colors">Depoimentos</a>
-            <a href="#guia-gratuito" onClick={toggleMenu} className="hover:text-orange-600 transition-colors">Guia Gratuito</a>
-            <a href="#curso" onClick={toggleMenu} className="hover:text-orange-600 transition-colors">Curso</a>
-            <a href="/loja" onClick={toggleMenu} className="text-orange-600 hover:scale-110 transition-transform">Loja Lifestyle</a>
-            <div className="pt-4">
-              <button onClick={() => { setIsModalOpen(true); toggleMenu(); }} className="bg-orange-600 text-white px-10 py-5 font-black uppercase tracking-widest text-xs not-italic shadow-xl active:scale-95 transition-all"
-              >Pedir Agora
+        {/* ESTRUTURA DO MENU MOBILE (DIREITA PARA ESQUERDA) */}
+        <div className={`fixed inset-0 z-[1000] lg:hidden transition-all duration-500 ${isMenuOpen ? 'visible' : 'invisible'}`}>
+          {/* Fundo Escuro (Overlay) */}
+          <div className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-500 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`}
+            onClick={toggleMenu}></div>
+          
+          {/* Painel do Menu Lateral */}
+          <nav className={`absolute top-0 right-0 h-screen w-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+            
+            {/* Cabeçalho do Menu com Botão X alinhado à Direita */}
+            <div className="flex justify-end px-6 py-4 border-b border-gray-100">
+              <button onClick={toggleMenu} className="text-3xl text-orange-600 p-1">
+                <i className="bi bi-x-lg"></i>
               </button>
             </div>
+
+            {/* Links de Navegação */}
+            <div className="flex flex-col p-10 px-20 space-y-[-2] overflow-y-auto bg-white">
+              <a href="#produtos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
+                Produtos <i className="bi bi-chevron-right text-orange-600/30"></i></a>
+              <a href="#nossa-historia" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
+                História <i className="bi bi-chevron-right text-orange-600/30"></i></a>
+              <a href="#depoimentos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
+                Depoimentos <i className="bi bi-chevron-right text-orange-600/30"></i></a>
+              <a href="#guia-gratuito" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
+                Guia Grátis <i className="bi bi-chevron-right text-orange-600/30"></i></a>
+              
+              {/* Item Loja Lifestyle com aumento de escala leve no toque/hover */}
+              <a href="/loja" onClick={toggleMenu} 
+                className="text-xl font-black uppercase italic tracking-tighter py-4 text-orange-600 flex items-center justify-between transition-transform duration-300 active:scale-110 hover:scale-110 origin-left">
+                Loja Lifestyle </a>
+              <button onClick={() => { setIsModalOpen(true); toggleMenu(); }}
+                className="w-full bg-orange-600 text-white text-[23px] py-4 font-black uppercase tracking-widest leading-none hover:text-gray-100 text-xs shadow-xl transition-transform duration-500 origin-left mb-4">
+                Pedir Agora
+              </button>
+            </div>
+
+            {/* Footer do Menu */}
+            <div className="flex justify-center items-center gap-8">
+              <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
+              <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
+              <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+            </div>
+              <p className="text-center text-[9px] py-10 font-bold text-gray-400 uppercase tracking-widest italic">
+               © Pão de Queijo da Irá
+              </p>
+           
           </nav>
         </div>
       </header>
@@ -383,7 +411,6 @@ export default function Home() {
         className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'
           }`} aria-label="Voltar ao topo"><i className="bi bi-arrow-up text-xl font-bold"></i>
       </button>
-
     </div>
   );
 }
