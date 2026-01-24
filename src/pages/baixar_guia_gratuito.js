@@ -14,7 +14,6 @@ export default function Obrigado() {
       <Head>
         <title>Obrigado! | Pão de Queijo da Irá</title>
         <meta name="robots" content="noindex" />
-        <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lobster&display=swap" rel="stylesheet" />
       </Head>
