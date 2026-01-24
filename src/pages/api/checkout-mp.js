@@ -1,6 +1,5 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-// 1. Configuração do Cliente
 const client = new MercadoPagoConfig({ 
   accessToken: process.env.MP_ACCESS_TOKEN 
 });
@@ -11,30 +10,28 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Recebendo dados adicionais do frontend (como o CPF)
-    const { itens, email, frete, cpf } = req.body;
+    const { itens, email, frete, cpf, pedidoId, firstName, lastName } = req.body;
 
-    if (!itens || !email) {
-      return res.status(400).json({ error: "Dados insuficientes para o checkout." });
+    if (!itens || !email || !cpf || !pedidoId) {
+      return res.status(400).json({ error: "Dados insuficientes." });
     }
 
     const emailLimpo = email.toLowerCase().trim();
+    const cpfLimpo = cpf.replace(/\D/g, '');
 
-    // 2. Mapeamento dos itens com preços formatados (garantindo 2 casas decimais)
     const itemsMP = itens.map(item => ({
       id: String(item.id),
-      title: item.nome,
-      unit_price: parseFloat(Number(item.preco).toFixed(2)),
+      title: `${item.nome}${item.tamanho ? ' (Tam: ' + item.tamanho + ')' : ''}`,
+      unit_price: Number(item.preco),
       quantity: Number(item.quantidade),
       currency_id: 'BRL'
     }));
 
-    // 3. Adiciona o frete como item
     if (frete && Number(frete) > 0) {
       itemsMP.push({
         id: 'custo-frete',
         title: 'Taxa de Entrega / Frete',
-        unit_price: parseFloat(Number(frete).toFixed(2)),
+        unit_price: Number(frete),
         quantity: 1,
         currency_id: 'BRL'
       });
@@ -42,7 +39,6 @@ export default async function handler(req, res) {
 
     const preference = new Preference(client);
 
-    // 4. Criação da Preferência com Dados Completos
     const response = await preference.create({
       body: {
         items: itemsMP,
@@ -50,36 +46,36 @@ export default async function handler(req, res) {
           email: emailLimpo,
           identification: {
             type: 'CPF',
-            number: cpf ? cpf.replace(/\D/g, '') : '' // Remove pontos e traços do CPF
-          }
+            number: cpfLimpo
+          },
+          // Nomes vindos do frontend já tratados
+          first_name: firstName || "Cliente",
+          last_name: lastName || "Ira Lifestyle"
         },
-        // Referência externa para o Webhook
-        external_reference: emailLimpo, 
-        
+        external_reference: String(pedidoId), 
         back_urls: {
           success: `${process.env.NEXT_PUBLIC_SITE_URL}/sucesso`,
           failure: `${process.env.NEXT_PUBLIC_SITE_URL}/erro`,
           pending: `${process.env.NEXT_PUBLIC_SITE_URL}/pendente`,
         },
         auto_return: "approved",
-        
-        // Configurações de pagamento para forçar a liberação dos métodos
+        // Nome que aparece na fatura do cartão (Max 16 caracteres)
+        statement_descriptor: "PAO DE QUEIJO IRA",
         payment_methods: {
-          installments: 12, // Permite parcelamento
+          installments: 12,
         },
-
+        // Importante: A URL deve ser HTTPS e pública para funcionar
         notification_url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/webhooks/mercadopago`,
       }
     });
 
-    // Retorna o link para o frontend
     res.status(200).json({ init_point: response.init_point });
 
   } catch (error) {
-    console.error("Erro ao gerar link MP:", error);
+    console.error("Erro MP:", error.cause?.description || error.message);
     res.status(500).json({ 
-      error: "Erro ao gerar link de pagamento", 
-      details: error.message 
+      error: "Erro ao gerar pagamento",
+      details: error.cause?.description || error.message 
     });
   }
 }

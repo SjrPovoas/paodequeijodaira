@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { supabase } from '../lib/supabaseClient';
@@ -11,26 +12,25 @@ export default function Loja() {
   const VALOR_FRETE_GRATIS = 500;
 
   // ESTADOS
-  const [carrinho, setCarrinho] = useState([]); // Inicializado como array vazio
+  const [carrinho, setCarrinho] = useState([]);
   const [modalAberto, setModalAberto] = useState(false);
   const [menuMobileAberto, setMenuMobileAberto] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState({});
-  const [dados, setDados] = useState({ email: '', cpf: '', cep: '', endereco: '' });
+  const [dados, setDados] = useState({ nome: '', email: '', cpf: '', cep: '', endereco: '' });
   const [frete, setFrete] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
 
-  // CÁLCULOS COM TRAVA DE SEGURANÇA (Resolve o erro TypeError: e.reduce)
+  // CÁLCULOS
   const subtotal = Array.isArray(carrinho)
     ? carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0)
     : 0;
-
   const totalGeral = subtotal + frete;
 
-  // 1. CONTROLE DE MONTAGEM E PERSISTÊNCIA (Local Storage)
+  // 1. PERFORMANCE & SEGURANÇA: CONTROLE DE MONTAGEM E PERSISTÊNCIA
   useEffect(() => {
-    setIsMounted(true);
+    // Ordem alterada: Primeiro lê o localStorage, depois monta.
     const salvo = localStorage.getItem('carrinho_ira');
     if (salvo) {
       try {
@@ -43,22 +43,24 @@ export default function Loja() {
         setCarrinho([]);
       }
     }
+    setIsMounted(true);
   }, []);
 
   useEffect(() => {
+    // A verificação if (isMounted) garante que o storage não seja zerado na hidratação
     if (isMounted) {
       localStorage.setItem('carrinho_ira', JSON.stringify(carrinho));
     }
   }, [carrinho, isMounted]);
 
-  // 2. MONITORAR SCROLL PARA BOTÃO VOLTAR AO TOPO
+  // 2. MONITORAR SCROLL
   useEffect(() => {
     const handleScroll = () => setShowScrollTop(window.scrollY > 400);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 3. LÓGICA DE FRETE E VIA CEP
+  // 3. FRETE E VIA CEP
   useEffect(() => {
     if (subtotal === 0 || subtotal >= VALOR_FRETE_GRATIS) {
       setFrete(0);
@@ -87,18 +89,15 @@ export default function Loja() {
     }
   };
 
-  // 4. FUNÇÃO ADICIONAR AO CARRINHO COM TAMANHO
+  // 4. ADICIONAR AO CARRINHO
   const add = (p, tamanhoSelecionado = null) => {
     if (p.category === 'vestuario' && !tamanhoSelecionado) {
       alert('⚠️ Por favor, selecione um tamanho: P, M, G ou GG');
       return;
     }
-
-    // Identificar item único por ID + Tamanho
     const existe = carrinho.find(item =>
       item.id === p.id && (p.category === 'vestuario' ? item.tamanho === tamanhoSelecionado : true)
     );
-
     if (existe) {
       setCarrinho(carrinho.map(item =>
         item.id === p.id && (p.category === 'vestuario' ? item.tamanho === tamanhoSelecionado : true)
@@ -111,71 +110,83 @@ export default function Loja() {
     setModalAberto(true);
   };
 
-  // 5. CHECKOUT MERCADO PAGO REVISADO
+// 5. CHECKOUT MERCADO PAGO
   const iniciarCheckoutMP = async (e) => {
-    // Previne comportamento padrão caso seja chamado por um formulário
     if (e && e.preventDefault) e.preventDefault();
 
-    if (!dados.email || !dados.cpf || !dados.endereco || dados.cep.length < 8) {
-      return alert("Preencha todos os dados de entrega corretamente!");
-    }
+    const cpfLimpo = dados.cpf.replace(/\D/g, '');
 
-    if (!carrinho || carrinho.length === 0) {
-      return alert("Seu carrinho está vazio!");
+    // Validações robustas
+    if (!dados.nome || dados.nome.trim().split(' ').length < 2) {
+      return alert("Por favor, preencha seu Nome Completo (Nome e Sobrenome).");
     }
+    if (!dados.email || cpfLimpo.length !== 11 || !dados.endereco) {
+      return alert("Por favor, preencha E-mail, CPF (11 dígitos) e Endereço corretamente.");
+    }
+    if (carrinho.length === 0) return alert("Carrinho vazio!");
 
     setLoading(true);
 
-    // 1. Salva no Supabase (Aqui já salvamos o CPF também)
-    const { error } = await supabase.from('pedidos').insert([{
-      email: dados.email,
-      cpf: dados.cpf,
-      cep: dados.cep,
-      endereco: dados.endereco,
-      total_geral: totalGeral,
-      frete,
-      itens: carrinho,
-      metodo_pagamento: 'Mercado Pago',
-      status: 'pendente'
-    }]);
+    // Tratamento de nome para o Mercado Pago (Evita botão cinza)
+    const partesNome = dados.nome.trim().split(' ');
+    const firstName = partesNome[0];
+    const lastName = partesNome.slice(1).join(' ') || "da Silva";
 
-    if (!error) {
-      try {
-        // 2. Chamada para a API do Mercado Pago incluindo o CPF
-        const res = await fetch('/api/checkout-mp', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            itens: carrinho,
-            email: dados.email,
-            frete,
-            cpf: dados.cpf // <-- ESSENCIAL: Enviando o CPF para desbloquear os botões
-          })
-        });
+    try {
+      // 1. SALVAR NO SUPABASE
+      const { data: pedidoSupabase, error: erroSupa } = await supabase
+        .from('pedidos')
+        .insert([{
+          nome_cliente: dados.nome, 
+          email: dados.email.toLowerCase().trim(),
+          cpf: cpfLimpo,
+          cep: dados.cep,
+          endereco: dados.endereco,
+          total_geral: totalGeral,
+          frete: frete,
+          itens: carrinho,
+          metodo_pagamento: 'Mercado Pago',
+          status: 'pendente'
+        }])
+        .select()
+        .single();
 
-        const data = await res.json();
+      if (erroSupa) throw new Error(`Erro ao salvar pedido: ${erroSupa.message}`);
 
-        if (data.init_point) {
-          // Limpa o carrinho antes de redirecionar
-          localStorage.removeItem('carrinho_ira');
-          window.location.href = data.init_point;
-        } else {
-          console.error("Erro na resposta do MP:", data);
-          alert("Erro ao gerar link de pagamento. Tente novamente.");
-        }
-      } catch (err) {
-        console.error("Erro Fetch MP:", err);
-        alert("Erro ao conectar com servidor de pagamento.");
+      // 2. CHAMAR API DO MERCADO PAGO
+      const res = await fetch('/api/checkout-mp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          itens: carrinho,
+          email: dados.email,
+          frete: frete,
+          cpf: cpfLimpo,
+          pedidoId: pedidoSupabase.id,
+          firstName: firstName, 
+          lastName: lastName
+        })
+      });
+
+      const data = await res.json();
+
+      if (data.init_point) {
+        // 3. SUCESSO: Redireciona e limpa local
+        localStorage.removeItem('carrinho_ira');
+        window.location.href = data.init_point;
+      } else {
+        throw new Error(data.error || "Erro ao gerar link de pagamento.");
       }
-    } else {
-      console.error("Erro Supabase:", error);
-      alert(`Erro ao registrar pedido: ${error.message || 'Erro de conexão com o banco'}`);
-    }
 
-    setLoading(false);
+    } catch (err) {
+      console.error("Erro no Processo:", err);
+      alert(err.message || "Erro ao processar pedido. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // 6. LISTA DE PRODUTOS
+  // 6. PRODUTOS
   const produtos = [
     { id: 1, nome: 'T-Shirt Logo Pão de Queijo da Irá (Masc)', preco: 110, img: '/imagens/camiseta1.png', category: 'vestuario' },
     { id: 2, nome: 'T-Shirt Logo Pão de Queijo da Irá (Fem)', preco: 110, img: '/imagens/camiseta2.png', category: 'vestuario' },
@@ -216,21 +227,24 @@ export default function Loja() {
         <meta property="og:image:height" content="630" />
 
         <title>Loja Lifestyle e Acessórios | Pão de Queijo da Irá</title>
-        
+
         <meta name="Keywords" content="Loja Lifestyle e Acessórios, loja, camiseta, avental, caneca" />
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="canonical" href="https://paodequeijodaira.vercel.app/loja" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
-      <div className="bg-orange-600 text-white py-2 text-center text-[10px] font-black uppercase tracking-widest sticky top-0 z-[60]">
+      {/* BARRA DE ANÚNCIO TOPO */}
+      <div className="bg-orange-600 text-white py-2 text-center text-[10px] font-black uppercase tracking-widest sticky top-0 z-[110]">
         • Entrega em todo Brasil • Frete Grátis acima de R$ 500,00 •
       </div>
 
-      <header className="border-b border-gray-100 py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-50">
+      {/* HEADER PRINCIPAL */}
+      <header className="border-b border-gray-100 py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
+          {/* LOGO */}
           <a href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></a>
-
+          {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex space-x-4 text-[10px] font-bold uppercase tracking-widest items-center">
             <a href="#web3" className="hover:text-orange-600 transition-colors">IRÁ DIGITAL GENESIS PASS</a>
             <a href="/" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">COMPRAR PÃO DE QUEIJO</a>
@@ -242,29 +256,16 @@ export default function Loja() {
                   const connected = ready && account && chain;
                   return (
                     <div {...(!ready && { 'aria-hidden': true, style: { opacity: 0, pointerEvents: 'none' } })}>
-                      {(() => {
-                        if (!connected) {
-                          return (
-                            <button onClick={openConnectModal} className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-                              CONECTAR CARTEIRA <i className="bi bi-wallet2 text-xl leading-none "></i>
-                            </button>
-                          );
-                        }
-                        if (chain.unsupported) {
-                          return (
-                            <button onClick={openChainModal} className="bg-red-600 text-white px-4 py-2 rounded-full font-black uppercase text-[10px] flex items-center gap-2">
-                              REDE INCORRETA <i className="bi bi-exclamation-triangle-fill"></i>
-                            </button>
-                          );
-                        }
-                        return (
-                          <button onClick={openAccountModal} className="border border-black text-black px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all font-black uppercase text-[10px] flex items-center gap-2">
-                            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                            {account.displayName}
-                            {account.displayBalance ? ` (${account.displayBalance})` : ''}
-                          </button>
-                        );
-                      })()}
+                      {!connected ? (
+                        <button onClick={openConnectModal} className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
+                          CONECTAR CARTEIRA <i className="bi bi-wallet2 text-xl"></i>
+                        </button>
+                      ) : (
+                        <button onClick={openAccountModal} className="border border-black px-4 py-2 rounded-full font-black uppercase text-[10px] flex items-center gap-2">
+                          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                          {account.displayName}
+                        </button>
+                      )}
                     </div>
                   );
                 }}
@@ -272,70 +273,65 @@ export default function Loja() {
             </div>
 
             <button onClick={() => setModalAberto(true)} className="flex items-center gap-3 bg-[#3D2B1F] text-white px-6 py-2.5 rounded-full hover:bg-orange-600 transition-colors group">
-              <span className="text-[10px] font-black uppercase flex items-center gap-2">
-                CARRINHO
-                <i className="bi bi-cart3 text-[14px] leading-none transition-transform group-hover:scale-110"></i>
-              </span>
-              <span className="text-xs font-bold border-l border-white/20 pl-3">{Array.isArray(carrinho) ? carrinho.length : 0}</span>
+              <span className="text-[10px] font-black uppercase flex items-center gap-2">CARRINHO <i className="bi bi-cart3 text-[14px]"></i></span>
+              <span className="text-xs font-bold border-l border-white/20 pl-3">{carrinho.length}</span>
             </button>
           </nav>
-
-          <div className="flex md:hidden items-center gap-3">
-            <ConnectButton label="Conectar Carteira" showBalance={false} chainStatus="none" accountStatus="avatar" />
-            <button onClick={() => setModalAberto(true)} className="relative p-2 flex items-center justify-center">
-              <i className="bi bi-bag text-2xl hover:text-orange-600 transition-colors"></i>
-              {carrinho.length > 0 && (
-                <span className="absolute top-0 right-0 bg-orange-600 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold leading-none">
-                  {carrinho.length}
-                </span>
-              )}
+          {/* NAVEGAÇÃO MOBILE (Com legendas para melhor UX) */}
+          <div className="flex md:hidden items-center gap-4">
+            {/* CARTEIRA MOBILE CUSTOMIZADA */}
+            <ConnectButton.Custom>
+              {({ account, chain, openAccountModal, openChainModal, openConnectModal, mounted }) => {
+                const connected = mounted && account && chain;
+                return (
+                  <button onClick={!connected ? openConnectModal : chain.unsupported ? openChainModal : openAccountModal} className="flex flex-col items-center">
+                    <i className={`bi ${!connected ? 'bi-wallet2' : 'bi-person-check-fill text-green-600'} text-xl`}></i>
+                    <span className="text-[8px] font-black uppercase mt-1">Carteira</span>
+                  </button>
+                );
+              }}
+            </ConnectButton.Custom>
+            {/* CARRINHO MOBILE */}
+            <button onClick={() => setModalAberto(true)} className="flex flex-col items-center relative">
+              <i className="bi bi-bag text-xl"></i>
+              {carrinho.length > 0 && <span className="absolute -top-1 -right-1 bg-orange-600 text-white text-[8px] w-3.5 h-3.5 rounded-full flex items-center justify-center font-bold">{carrinho.length}</span>}
+              <span className="text-[8px] font-black uppercase mt-1">Carrinho</span>
             </button>
-            <button onClick={() => setMenuMobileAberto(true)} className="p-2 flex items-center justify-center hover:text-orange-600 transition-colors">
-              <i className="bi bi-list text-3xl leading-none"></i>
+            {/* MENU HAMBÚRGUER */}
+            <button onClick={() => setMenuMobileAberto(true)} className="flex flex-col items-center text-orange-600">
+              <i className="bi bi-list text-2xl"></i>
+              <span className="text-[8px] font-black uppercase mt-0.5">Menu</span>
             </button>
           </div>
+        </div>
+
+        {/* ESTRUTURA MENU MOBILE */}
+        <div className={`fixed inset-0 z-[1000] bg-white md:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
+          <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`} onClick={() => setMenuMobileAberto(false)}></div>
+          <nav className={`absolute top-0 right-0 w-[100%] h-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
+            {/* BOTÃO FECHAR ALINHADO À DIREITA */}
+            <div className="flex justify-end p-6">
+              <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600 p-2"><i className="bi bi-x-lg"></i></button>
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-center space-y-10 text-center">
+              <Link href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">IRÁ DIGITAL GENESIS PASS</Link>
+              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
+              <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600">LOJA LIFESTYLE</Link>
+              {/* REDES SOCIAIS ALINHADAS */}
+              <div className="flex justify-center items-center gap-6 pt-4">
+                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
+                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+              </div>
+            </div>
+            <div className="p-10 text-center border-t border-gray-50">
+              <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">© Pão de Queijo da Irá</p>
+            </div>
+          </nav>
         </div>
       </header>
 
-      {menuMobileAberto && (
-        <div className="fixed inset-0 z-[120] md:hidden">
-          {/* Overlay com scroll que fecha o menu ao clicar */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-md overflow-y-auto" onClick={() => setMenuMobileAberto(false)}>
-            {/* Menu deslizante da direita */}
-            <nav className="relative min-h-screen w-full bg-white flex flex-col p-10 animate-slide-right"
-              onClick={(e) => e.stopPropagation()} // Impede que cliques dentro do menu o fechem
-            >
-              {/* Botão Fechar */}
-              <button onClick={() => setMenuMobileAberto(false)}
-                className="absolute top-16 right-8 text-2xl flex items-center justify-center z-10 hover:text-orange-600 transition-colors">
-                <i className="bi bi-x-lg leading-none"></i>
-              </button>
-              {/* Conteúdo do Menu - Centralizado Verticalmente */}
-              <div className="flex-1 flex flex-col justify-center space-y-8 text-center">
-                <Link href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em] hover:text-orange-600 transition-colors">IRÁ DIGITAL GENESIS PASS</Link>
-                <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
-                <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-xl font-black uppercase tracking-[0.2em] italic hover:text-orange-600 transition-colors">LOJA LIFESTYLE</Link>
-                {/* Divisor */}
-                <div className="w-12 h-1 bg-gray-100 mx-auto"></div>
-                {/* Redes Sociais */}
-                <div className="flex justify-center items-center gap-8 pt-4">
-                  <a href="https://www.instagram.com/paodequeijodaira" target="_blank" rel="noopener noreferrer" className="text-3xl hover:text-orange-600 transition-colors flex items-center">
-                    <i className="bi bi-instagram leading-none"></i></a>
-                  <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" rel="noopener noreferrer" className="text-3xl hover:text-orange-600 transition-colors flex items-center">
-                    <i className="bi bi-facebook leading-none"></i></a>
-                  <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" rel="noopener noreferrer" className="text-3xl hover:text-orange-600 transition-colors flex items-center">
-                    <i className="bi bi-youtube leading-none"></i></a>
-                </div>
-              </div>
-              {/* Rodapé do Menu */}
-              <div className="pt-8 text-center">
-                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-[0.3em]">© Pão de Queijo da Irá</p>
-              </div>
-            </nav>
-          </div>
-        </div>
-      )}
-
+      {/* SEÇÃO PRODUTOS */}
       <main className="max-w-6xl mx-auto py-12 px-6">
         <header className="py-20 border-b border-orange-100 mb-16">
           <h1 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-none">Lifestyle &<br />Acessórios</h1>
@@ -348,7 +344,6 @@ export default function Loja() {
               </div>
               <h3 className="font-black uppercase text-sm tracking-widest mb-1">{p.nome}</h3>
               <p className="text-orange-600 font-bold mb-6 italic">R$ {p.preco.toFixed(2)}</p>
-
               {p.category === 'vestuario' ? (
                 <div className="mb-6">
                   <p className="text-[10px] font-black uppercase tracking-widest mb-3 text-gray-600">Selecione o tamanho:</p>
@@ -371,7 +366,7 @@ export default function Loja() {
         </div>
       </main>
 
-      {/* WEB3 SECTION */}
+      {/* SEÇÃO WEB3 */}
       <section id="web3" className="py-24 px-6 md:px-12 bg-[#2D3134] text-white relative overflow-hidden">
         <div className="max-w-4xl relative z-10 mx-auto md:mx-0">
           <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-4 italic">
@@ -415,49 +410,49 @@ export default function Loja() {
 
       {/* MODAL CARRINHO */}
       {modalAberto && (
-        <div className="fixed inset-0 z-[100] flex justify-end">
+        <div className="fixed inset-0 z-[200] flex justify-end">
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setModalAberto(false)} />
           <div className="relative w-full max-w-md bg-[#FFFDF5] h-full shadow-2xl flex flex-col p-6 animate-slide-left">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-black uppercase italic tracking-tighter">Seu Carrinho</h2>
+              <h2 className="text-2xl font-black uppercase italic tracking-tighter">Seu Carrinho <i className="bi bi-cart3"></i></h2>
               <button onClick={() => setModalAberto(false)} className="text-[10px] font-black border-b-2 border-black">FECHAR</button>
             </div>
-
             <div className="flex-1 overflow-y-auto space-y-6">
-              {Array.isArray(carrinho) && carrinho.map((item, index) => (
+              {carrinho.map((item, index) => (
                 <div key={index} className="flex gap-4 border-b border-orange-100 pb-4">
-                  <img src={item.img} className="w-16 h-20 object-cover rounded bg-white" />
+                  <img src={item.img} className="w-16 h-20 object-cover rounded bg-white" alt="" />
                   <div className="flex-1">
                     <h4 className="text-[10px] font-black uppercase">{item.nome}</h4>
                     {item.tamanho && <p className="text-[9px] text-orange-600">Tamanho: {item.tamanho}</p>}
-                    <p className="text-[10px] font-black mt-1">QTD: {item.quantidade} | R$ {(item.preco * item.quantidade).toFixed(2)}</p>
+                    <p className="text-[10px] font-black">QTD: {item.quantidade} | R$ {(item.preco * item.quantidade).toFixed(2)}</p>
                   </div>
                   <button onClick={() => setCarrinho(carrinho.filter((_, i) => i !== index))} className="text-gray-400 hover:text-red-500"><i className="bi bi-trash3"></i></button>
                 </div>
               ))}
-              {(!carrinho || carrinho.length === 0) && <p className="text-center py-10 text-gray-400 italic text-sm uppercase font-bold tracking-widest">Carrinho Vazio</p>}
+              {(!carrinho || carrinho.length === 0) && (
+                /* MELHORIA VISUAL: ÍCONE DE CARRINHO VAZIO */
+                <div className="flex flex-col items-center justify-center py-2 text-gray-300">
+                  <i className="bi bi-cart-x text-6xl mb-4"></i>
+                  <p className="text-sm font-bold uppercase">Carrinho Vazio</p>
+                </div>
+              )}
             </div>
-
-            <div className="mt-auto pt-6 border-t-2 border-[#3D2B1F] space-y-4">
-              <div className="text-[10px] font-black uppercase space-y-1">
+            <div className="mt-auto pt-6 border-t-2 border-[#3D2B1F] space-y-2">
+              <div className="text-[10px] font-black uppercase">
                 <div className="flex justify-between opacity-50"><span>Subtotal</span><span>R$ {subtotal.toFixed(2)}</span></div>
                 <div className="flex justify-between text-orange-600"><span>Frete</span><span>{subtotal >= VALOR_FRETE_GRATIS ? "GRÁTIS" : `R$ ${frete.toFixed(2)}`}</span></div>
                 <div className="flex justify-between text-2xl pt-2 italic"><span>Total</span><span>R$ {totalGeral.toFixed(2)}</span></div>
               </div>
-
+              <input type="text" placeholder="Nome Completo" value={dados.nome} onChange={e => setDados({ ...dados, nome: e.target.value })} className="w-full border p-0,8 text-[8px] bg-gray-50 text-xs mb-2" />
               <div className="grid grid-cols-2 gap-2">
-                <input type="text" placeholder="CEP" maxLength="8" value={dados.cep} onChange={e => handleCEP(e.target.value)} className="border p-2 text-xs rounded" />
-                <input type="text" placeholder="CPF" value={dados.cpf} onChange={e => setDados({ ...dados, cpf: e.target.value })} className="border p-2 text-xs rounded" />
+                <input type="text" placeholder="CPF" value={dados.cpf} onChange={e => setDados({ ...dados, cpf: e.target.value })} className="w-full border p-0,8 text-[6px] bg-gray-50 text-xs" />
+                <input type="text" placeholder="CEP" maxLength="8" value={dados.cep} onChange={e => handleCEP(e.target.value)} className="w-full border p-0,8 text-[6px] bg-gray-50 text-xs" />
               </div>
-              <input type="text" placeholder="Endereço Completo" value={dados.endereco} readOnly className="w-full border p-2 text-[10px] bg-gray-50 outline-none" />
-              <input type="email" placeholder="E-mail" value={dados.email} onChange={e => setDados({ ...dados, email: e.target.value })} className="w-full border p-2 text-xs rounded" />
-
+              <input type="text" placeholder="Endereço" value={dados.endereco} readOnly className="w-full border p-0,8 text-[6px] bg-gray-50 text-xs" />
+              <input type="email" placeholder="E-mail" value={dados.email} onChange={e => setDados({ ...dados, email: e.target.value })} className="w-full border p-0,8 text-[6px] bg-gray-50 text-xs mb-2" />
               <div className="grid grid-cols-2 gap-2">
-                <button onClick={iniciarCheckoutMP} disabled={loading || !carrinho || carrinho.length === 0}
-                  className="bg-black text-white py-4 font-black uppercase text-[10px] hover:bg-orange-600 disabled:opacity-50">
-                  {loading ? '...' : 'Cartão ou Pix'}
-                </button>
-                <div className={(!dados.email || !dados.endereco || !carrinho || carrinho.length === 0) ? "opacity-30 pointer-events-none" : ""}>
+                <button onClick={iniciarCheckoutMP} disabled={loading || !carrinho.length} className="bg-black text-white py-2 font-black uppercase text-[10px] hover:bg-orange-600 disabled:opacity-50">CARTÃO OU PIX</button>
+                <div className={(!dados.email || !dados.endereco || !carrinho.length) ? "opacity-30 pointer-events-none" : ""}>
                   <BotaoPagamentoWeb3 totalBRL={totalGeral} itens={carrinho} dadosEntrega={dados} />
                 </div>
               </div>
@@ -466,6 +461,7 @@ export default function Loja() {
         </div>
       )}
 
+      {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
@@ -494,6 +490,7 @@ export default function Loja() {
                 <a href="/privacidade" className="hover:text-black">Privacidade</a></p>
             </div>
           </div>
+          {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
             <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
           </div>
