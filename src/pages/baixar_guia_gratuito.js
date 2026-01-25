@@ -151,27 +151,21 @@ export default function BaixarGuiaGratuito() {
               </div>
             </div>
 
-            {/* Coluna 4: Institucional */}
-            <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
-              <h3 className="text-lg font-black uppercase mb-2 text-black italic tracking-tighter">Pão de Queijo da Irá</h3>
-              <div className="mt-2 flex items-center justify-center md:justify-end gap-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group">
-                  Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
-                </Link>
-                <span className="text-gray-200">|</span>
-                <Link href="/privacidade" className="hover:text-black flex items-center gap-1 transition-colors group">
-                  Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
-                </Link>
-              </div>
-              <p className="text-[10px] pt-4 font-bold text-gray-300 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
-            </div>
-          </div>
-
-          <div className="pt-8 border-t border-gray-50 text-center">
-            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
-          </div>
-        </div>
+ {/* Coluna 4: Institucional */}
+ <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
+  <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
+  <h3 className="text-lg font-black uppercase mb-2 text-black italic tracking-tighter">Pão de Queijo da Irá</h3>
+  <div className="mt-2 flex flex-wrap items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+   <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group whitespace-nowrap">
+      Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
+    </Link>
+     |<span className="text-gray-200">|</span>
+    <Link href="/privacidade" className="hover:text-black flex items-center gap-1 transition-colors group whitespace-nowrap">
+      Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
+    </Link>
+  </div>
+  <p className="text-[10px] pt-4 font-bold text-gray-300 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
+  </div>
       </footer>
 
       {/* Botão Voltar ao Topo */}
