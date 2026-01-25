@@ -147,9 +147,9 @@ export default function BaixarGuiaGratuito() {
                 <p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p>
               </div>
               <div className="flex items-start justify-center md:justify-start gap-3 pt-2">
-                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600">
+                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-center justify-center md:justify-start gap-3 group">
                   <i className="bi bi-geo-alt text-orange-600 text-lg"></i>        
-                <p className="text-sm text-gray-600 leading-relaxed">Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
                 </a>
               </div>
             </div>
