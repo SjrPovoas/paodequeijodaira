@@ -54,7 +54,7 @@ export default function BaixarGuiaGratuito() {
         {/* MENU MOBILE - Overlay e Painel Lateral */}
         <div className={`fixed inset-0 z-[120] lg:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
           <div className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`} onClick={toggleMenu}></div>
-          <nav className={`absolute top-0 right-0 w-[85%] h-full bg-white transition-transform duration-500 ease-in-out flex flex-col items-center justify-center space-y-8 px-10 text-center ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
+          <nav className={`absolute top-0 right-0 w-[100%] h-screen bg-white transition-transform duration-500 ease-in-out flex flex-col items-center justify-center space-y-8 px-10 text-center ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
             <Link href="/loja" onClick={toggleMenu} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600 pb-1">
               LOJA LIFESTYLE
             </Link>
@@ -169,11 +169,9 @@ export default function BaixarGuiaGratuito() {
                 <Link href="/privacidade" className="hover:text-black flex items-center gap-1 transition-colors group">
                   Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
                 </Link>
-              </div>
-              
+              </div> 
               <p className="text-[9px] pt-2 font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">© 2026 - Todos os direitos reservados.</p>
             </div>
-
           </div>
 
           <div className="pt-8 border-t border-gray-50 text-center">
