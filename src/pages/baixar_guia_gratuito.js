@@ -1,9 +1,30 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Obrigado() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Estado para controlar a visibilidade da seta de voltar ao topo
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // LINK DO PDF (/guias/guia-harmonizacao-paodequeijodaira.pdf)
   const LINK_PDF_GUIA = "https://drive.google.com/file/d/1i7Du9UmYkx9UWbztc7U5HgRfqVn1RRkF/view?usp=drive_link";
@@ -19,28 +40,43 @@ export default function Obrigado() {
       </Head>
 
       {/* HEADER */}
-      <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-50">
+      <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <a href="https://paodequeijodaira.vercel.app/">
-            <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" />
-          </a>
-          
-          <nav className="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest items-center">
-            <a href="/" className="hover:text-orange-600 transition-colors">Ir para Home</a>
-            <a href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all uppercase">Loja Lifestyle</a>
+          <Link href="/">
+            <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
+            <Link href="/" className="hover:text-orange-600 transition-colors">Comprar Pão de Queijo da Irá</Link>
+            <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all uppercase">LOJA LIFESTYLE</Link>
+            <Link href="/" className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg uppercase">Ir para Home</Link>
           </nav>
 
-          <button onClick={toggleMenu} className="md:hidden text-3xl text-orange-600 z-[60] relative">
+          {/* Botão Mobile - Z-index alto para ficar acima do menu */}
+          <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 z-[130] relative focus:outline-none">
             <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
           </button>
         </div>
 
-        {/* MENU MOBILE */}
-        <div className={`fixed inset-[5] bg-white z-[-89] flex flex-col items-center justify-center space-y-8 transition-transform duration-500 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <nav className="flex flex-col bg-white items-center space-y-6 text-xl font-black uppercase tracking-tighter italic">
-            <a href="/" onClick={toggleMenu}>Home</a>
-            <a href="/loja" onClick={toggleMenu} className="text-orange-600">Loja Lifestyle</a>
-            <a href="/" onClick={toggleMenu} className="bg-orange-600 text-white px-10 py-5 font-black uppercase tracking-widest text-xs not-italic">Ir para Home</a>
+        {/* MENU MOBILE CORRIGIDO */}
+        <div className={`fixed inset-0 z-[120] bg-white h-screen w-screen transition-transform duration-500 ease-in-out lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <nav className="flex flex-col h-full items-center justify-center space-y-8 px-10 text-center">
+            <Link href="/loja" onClick={toggleMenu} className="text-xl font-black uppercase tracking-[0.2em] italic hover:text-orange-600">
+              LOJA LIFESTYLE
+            </Link>
+            <Link href="/" onClick={toggleMenu} className="text-xl font-black uppercase tracking-[0.2em] italic text-orange-600">
+              COMPRAR PÃO DE QUEIJO
+            </Link>
+
+            <div className="w-12 h-1 bg-gray-100"></div>
+
+            {/* REDES SOCIAIS NO MENU MOBILE */}
+            <div className="flex justify-center items-center gap-8">
+              <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
+              <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
+              <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+            </div>
           </nav>
         </div>
       </header>
@@ -80,7 +116,7 @@ export default function Obrigado() {
         </div>
       </main>
 
-      {/* FOOTER E ASSINATURA */}
+     {/* FOOTER E ASSINATURA */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
@@ -114,6 +150,14 @@ export default function Obrigado() {
           </div>
         </div>
       </footer>
+
+      {/* BOTÃO VOLTAR AO TOPO */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'}`} >
+        <i className="bi bi-arrow-up text-xl font-bold"></i>
+      </button>
+
     </div>
   );
 }
