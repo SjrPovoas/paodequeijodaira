@@ -159,7 +159,7 @@ export default function BaixarGuiaGratuito() {
    <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group whitespace-nowrap">
       Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
     </Link>
-     |<span className="text-gray-200">|</span>
+    <span className="text-gray-200">|</span>
     <Link href="/privacidade" className="hover:text-black flex items-center gap-1 transition-colors group whitespace-nowrap">
       Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
     </Link>
