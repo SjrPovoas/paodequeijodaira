@@ -4,13 +4,13 @@ import Link from 'next/link';
 
 export default function BaixarGuiaGratuito() {
   // ESTADOS DE INTERFACE
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [menuMobileAberto, setMenuMobileAberto] = useState(false); // Corrigido para consistência
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => setMenuMobileAberto(!menuMobileAberto);
 
   // CONSTANTES DE CONFIGURAÇÃO
-  const WHATSAPP_NUMBER = "5561982777196"; // Erro anterior: Variável não estava declarada nesta página
+  const WHATSAPP_NUMBER = "5561982777196"; 
   const LINK_PDF_GUIA = "https://drive.google.com/file/d/1i7Du9UmYkx9UWbztc7U5HgRfqVn1RRkF/view?usp=drive_link";
 
   // Lógica de monitoramento de scroll
@@ -42,18 +42,19 @@ export default function BaixarGuiaGratuito() {
           <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
             <Link href="/" className="hover:text-orange-600 transition-colors">Comprar Pão de Queijo</Link>
             <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all uppercase">LOJA LIFESTYLE</Link>
-            <Link href="/" className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg">Ir para Home</Link>
+            <Link href="/" className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg rounded-lg">Ir para Home</Link>
           </nav>
 
           {/* Botão Mobile */}
           <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 z-[130] relative focus:outline-none">
-            <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
+            <i className={menuMobileAberto ? "bi bi-x-lg" : "bi bi-list"}></i>
           </button>
         </div>
 
-        {/* MENU MOBILE */}
-        <div className={`fixed inset-0 z-[120] bg-white h-screen w-screen transition-transform duration-500 ease-in-out lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <nav className="flex flex-col h-full items-center justify-center space-y-8 px-10 text-center">
+        {/* MENU MOBILE - Overlay e Painel Lateral */}
+        <div className={`fixed inset-0 z-[120] lg:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
+          <div className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`} onClick={toggleMenu}></div>
+          <nav className={`absolute top-0 right-0 w-[85%] h-full bg-white transition-transform duration-500 ease-in-out flex flex-col items-center justify-center space-y-8 px-10 text-center ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
             <Link href="/loja" onClick={toggleMenu} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600 pb-1">
               LOJA LIFESTYLE
             </Link>
@@ -102,17 +103,17 @@ export default function BaixarGuiaGratuito() {
         </div>
       </main>
 
-      {/* FOOTER */}
+      {/* FOOTER - Corrigido fechamento de tags e alinhamento */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
 
             {/* Coluna 1: Branding */}
             <div className="flex flex-col items-center md:items-start space-y-4">
               <Link href="/">
                 <img src="/logo-paodequeijodaira.jpg" className="h-20 cursor-pointer" alt="Logo" />
               </Link>
-              <div className="flex gap-2">
+              <div className="flex gap-4">
                 <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
                 <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
                 <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
@@ -151,21 +152,28 @@ export default function BaixarGuiaGratuito() {
               </div>
             </div>
 
- {/* Coluna 4: Institucional */}
- <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
-  <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
-  <h3 className="text-lg font-black uppercase mb-2 text-black italic tracking-tighter">Pão de Queijo da Irá</h3>
-  <div className="mt-2 flex flex-wrap items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-   <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group whitespace-nowrap">
-      Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
-    </Link>
-    <span className="text-gray-200">|</span>
-    <Link href="/privacidade" className="hover:text-black flex items-center gap-1 transition-colors group whitespace-nowrap">
-      Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
-    </Link>
-  </div>
-  <p className="text-[10px] pt-4 font-bold text-gray-300 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
-  </div>
+            {/* Coluna 4: Institucional - Linha Única corrigida */}
+            <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
+              <h3 className="text-lg font-black uppercase mb-2 text-black italic tracking-tighter">Pão de Queijo da Irá</h3>
+              <div className="mt-2 flex flex-row items-center justify-center md:justify-end gap-3 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <Link href="/termos" className="hover:text-black flex items-center gap-1.5 transition-colors group">
+                  Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
+                </Link>
+                <span className="text-gray-200">|</span>
+                <Link href="/privacidade" className="hover:text-black flex items-center gap-1.5 transition-colors group">
+                  Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
+                </Link>
+              </div>
+              <p className="text-[10px] pt-4 font-bold text-gray-300 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
+            </div>
+
+          </div>
+
+          <div className="pt-8 border-t border-gray-50 text-center">
+            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+          </div>
+        </div>
       </footer>
 
       {/* Botão Voltar ao Topo */}
