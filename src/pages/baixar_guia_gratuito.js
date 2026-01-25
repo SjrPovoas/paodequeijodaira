@@ -148,9 +148,9 @@ export default function BaixarGuiaGratuito() {
               </div>
               <div className="flex items-start justify-center md:justify-start gap-3 pt-2">
                 <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600">
-                  <i className="bi bi-geo-alt text-orange-600 text-lg"></i>
-                </a>
+                  <i className="bi bi-geo-alt text-orange-600 text-lg"></i>        
                 <p className="text-sm text-gray-600 leading-relaxed">Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
+                </a>
               </div>
             </div>
 
