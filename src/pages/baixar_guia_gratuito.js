@@ -159,7 +159,7 @@ export default function BaixarGuiaGratuito() {
             {/* Coluna 4: Institucional */}
             <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
-              <h3 className="text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>
+              <h3 className="text-[14px] text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>
               
               <div className="flex flex-row items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">
                 <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group">
@@ -171,7 +171,7 @@ export default function BaixarGuiaGratuito() {
                 </Link>
               </div>
               
-              <p className="text-[10px] pt-3 font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">© 2026 - Todos os direitos reservados.</p>
+              <p className="text-[9px] pt-2 font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">© 2026 - Todos os direitos reservados.</p>
             </div>
 
           </div>
