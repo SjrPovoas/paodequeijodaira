@@ -123,11 +123,11 @@ export default function BaixarGuiaGratuito() {
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Ajuda & Suporte</h4>
               <div className="space-y-4">
-                <Link href="/pedidos" className="flex items-center justify-center md:justify-start gap-3 group">
+                <Link href="/pedidos" className="flex items-center justify-center md:justify-start gap-2 group">
                   <i className="bi bi-box-seam text-orange-600 text-lg"></i>
                   <p className="text-xs font-bold uppercase tracking-widest group-hover:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
                 </Link>
-                <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-3 group">
+                <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-2 group">
                   <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
                   <p className="text-xs font-bold uppercase tracking-widest group-hover:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p>
                 </Link>
@@ -141,11 +141,11 @@ export default function BaixarGuiaGratuito() {
             {/* Coluna 3: Localização */}
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento</h4>
-              <div className="flex items-start justify-center md:justify-start gap-3">
+              <div className="flex items-start justify-center md:justify-start gap-2">
                 <i className="bi bi-clock text-orange-600 text-lg"></i>
                 <p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p>
               </div>
-              <div className="flex items-start justify-center md:justify-start gap-3 pt-2">
+              <div className="flex items-start justify-center md:justify-start gap-2 pt-2">
                 <i className="bi bi-geo-alt text-orange-600 text-lg"></i>
                 <p className="text-sm text-gray-600 leading-relaxed">Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
               </div>
