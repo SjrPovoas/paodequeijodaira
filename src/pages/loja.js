@@ -207,7 +207,7 @@ export default function Loja() {
         <meta name="format-detection" content="telephone=no" />
         <meta name="title" content="Loja Lifestyle | Pão de Queijo da Irá" />
         <meta name="author" content="SjrPovoaS" />
-        <meta name="description" content="Loja Lifestyle e Acessórios do Pão de Queijo da Irá. Camisetas, Canecas e Aventais." />
+        <meta name="description" content="Vendemos Camisetas, Canecas e Aventais do Pão de Queijo da Irá." />
         <meta name="Keywords" content="Loja Lifestyle e Acessórios, loja, camiseta, avental, caneca" />
         <meta name="skype_toolbar" content="skype_toolbar_parser_compatible" />
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
@@ -218,8 +218,7 @@ export default function Loja() {
         <meta property="og:locale" content="pt_BR" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Loja Lifestyle e Acessórios | Pão de Queijo da Irá" />
-        <meta property="og:description" content="Loja Lifestyle e Acessórios do Pão de Queijo da Irá. Camisetas, Canecas e Aventais." />
-        <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        <meta property="og:description" content="Vendemos Camisetas, Canecas e Aventais do Pão de Queijo da Irá." />
         <meta property="og:site_name" content="Loja Lifestyle e Acessórios | Pão de Queijo da Irá" />
         <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
         <meta property="og:image:secure_url" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
@@ -229,7 +228,6 @@ export default function Loja() {
 
         <title>Loja Lifestyle e Acessórios | Pão de Queijo da Irá</title>
 
-        <meta name="Keywords" content="Loja Lifestyle e Acessórios, loja, camiseta, avental, caneca" />
         <link rel="canonical" href="https://paodequeijodaira.vercel.app/loja" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
@@ -480,20 +478,19 @@ export default function Loja() {
       {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:justify-between mb-16">
 
             {/* COLUNA 1: LOGO E REDES SOCIAIS */}
-            <div className="flex flex-col items-center md:items-start space-y-[-2]">
-              <a href="/">
-                <img src="/logo-paodequeijodaira.jpg" className="h-20" alt="Logo" />
-              </a>
-              <div className="space-y-4">
-                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600 text-center md:text-left"></h4>
-                <div className="flex gap-6 justify-center md:justify-start space-x-2">
-                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
-                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
-                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
-              </div>
+            <div className="flex flex-col items-center md:items-start space-y-4">
+              {/* LOGO */}
+              <Link href="/">
+                <img src="/logo-paodequeijodaira.jpg" className="h-20 cursor-pointer" alt="Logo" />
+              </Link>
+              {/* REDES SOCIAIS */}
+              <div className="flex gap-4">
+                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></a>
+                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></a>
               </div>
             </div>
 
@@ -501,17 +498,17 @@ export default function Loja() {
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Ajuda & Suporte</h4>
               <div className="space-y-4">
-                <Link href="/pedidos" className="flex items-start justify-center md:justify-start gap-3 group">
+                <Link href="/pedidos" className="flex items-center justify-center md:justify-start gap-2 group">
                   <i className="bi bi-box-seam text-orange-600 text-lg"></i>
-                  <p className="text-sm tracking-widest group-hover:text-orange-600 transition-colors leading-tight pt-2">Rastrear Pedido</p>
+                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
                 </Link>
-                <Link href="/suporte" className="flex items-start justify-center md:justify-start gap-3 group">
+                <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-2 group">
                   <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
-                  <p className="text-sm tracking-widest group-hover:text-orange-600 transition-colors leading-tight pt-2">Trocas e Devoluções</p>
+                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p>
                 </Link>
-                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center justify-center md:justify-start gap-3 group">
                   <i className="bi bi-whatsapp text-orange-600 text-lg"></i>
-                  <p className="text-sm tracking-widest group-hover:text-orange-600 transition-colors leading-tight pt-2">Fale Conosco</p>
+                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Fale Conosco</p>
                 </a>
               </div>
             </div>
@@ -523,26 +520,30 @@ export default function Loja() {
                 <i className="bi bi-clock text-orange-600 text-lg"></i>
                 <p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p>
               </div>
-              <div className="flex items-start justify-center md:justify-start gap-3 pt-2">
-                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600">
-                  <i className="bi bi-geo-alt text-orange-600 text-lg"></i>
+              <div className="pt-2">
+                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
+                  <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>        
+                  <p className="text-sm text-gray-600 leading-relaxed text-left">
+                    Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />
+                    Recreio Mossoró - Cidade Ocidental-GO</p>
                 </a>
-                <p className="text-sm text-gray-600 leading-relaxed">Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
               </div>
             </div>
 
             {/* COLUNA 4: INSTITUCIONAL & DIREITOS */}
             <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
-              <div className="text-center md:text-right">
-                <h3 className="text-lg font-black uppercase mb-2">Pão de Queijo da Irá</h3>
-                <p className="mt-2 space-x-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                  <a href="/termos" className="hover:text-black">Termos de Uso</a><i className="bi bi-file-text text-gray-400 group-hover:text-orange-600 transition-colors"></i>
-                  <span>|</span>
-                  <a href="/privacidade" className="hover:text-black">Privacidade</a>
-                  <i className="bi bi-shield-check text-gray-400 group-hover:text-orange-600 transition-colors"></i></p>
-                  <p className="text-[10px] py-2 font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
-              </div>
+              <h3 className="text-[14px] text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>    
+              <div className="flex flex-row items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">
+                <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group">
+                  Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
+                </Link>
+                <span className="text-gray-200">|</span>
+                <Link href="/privacidade" className="hover:text-black flex items-center gap-1 transition-colors group">
+                  Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
+                </Link>
+              </div> 
+              <p className="text-[9px] pt-2 font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">© 2026 - Todos os direitos reservados.</p>
             </div>
           </div>
 
@@ -552,7 +553,6 @@ export default function Loja() {
           </div>
         </div>
       </footer>
-
 
       {/* BOTÃO VOLTAR AO TOPO */}
       {showScrollTop && (
