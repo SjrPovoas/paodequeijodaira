@@ -116,17 +116,18 @@ export default function BaixarGuiaGratuito() {
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            {/* COLUNA 1: LOGO E REDES SOCIAIS */}            
             <div className="flex flex-col items-center md:items-start space-y-4">
               <Link href="/">
                 <img src="/logo-paodequeijodaira.jpg" className="h-20 cursor-pointer" alt="Logo" />
               </Link>
-              <div className="flex gap-6 justify-center md:justify-start">
+              <div className="flex gap-4 justify-center md:justify-start">
                 <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl text-gray-800 hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></a>
                 <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl text-gray-800 hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></a>
                 <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl text-gray-800 hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></a>
               </div>
             </div>
-
+           {/* COLUNA 2: AJUDA & SUPORTE */}
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Ajuda & Suporte</h4>
               <div className="space-y-4">
@@ -144,7 +145,7 @@ export default function BaixarGuiaGratuito() {
                 </a>
               </div>
             </div>
-
+            {/* COLUNA 3: FUNCIONAMENTO & LOCALIZAÇÃO */}
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
               <div className="flex items-start justify-center md:justify-start gap-3">
@@ -156,27 +157,32 @@ export default function BaixarGuiaGratuito() {
                 <p className="text-sm text-gray-600 leading-relaxed">Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
               </div>
             </div>
-
+           {/* COLUNA 4: INSTITUCIONAL & DIREITOS */}
             <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
               <div className="text-center md:text-right">
-                <h3 className="text-lg font-black uppercase italic mb-2">Pão de Queijo da Irá</h3>
+                <h3 className="text-lg font-black uppercase mb-2">Pão de Queijo da Irá</h3>
                 <div className="mt-2 flex items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                  a href="/termos" className="hover:text-black">Termos de Uso</a>
+                  <a href="/privacidade" className="hover:text-black">Privacidade</a>
+                  <i className="bi bi-shield-check text-gray-400 group-hover:text-orange-600 transition-colors"></i>
                   <Link href="/termos" className="hover:text-black transition-colors">Termos de Uso</Link>
+                  <i className="bi bi-file-text text-gray-400 group-hover:text-orange-600 transition-colors"></i>
                   <span>|</span>
                   <Link href="/privacidade" className="hover:text-black transition-colors">Privacidade</Link>
+                  <i className="bi bi-shield-check text-gray-400 group-hover:text-orange-600 transition-colors"></i>
                 </div>
                 <p className="text-[10px] py-4 font-bold text-gray-300 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
               </div>
             </div>
           </div>
-
+          {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
             <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
           </div>
         </div>
       </footer>
-
+      {/* BOTÃO VOLTAR AO TOPO */}
       <button onClick={scrollToTop} 
         className={`fixed bottom-8 right-8 z-[130] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-500 hover:bg-black hover:scale-110 ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'}`}
       >
