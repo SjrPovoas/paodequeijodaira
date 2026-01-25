@@ -102,17 +102,17 @@ export default function BaixarGuiaGratuito() {
         </div>
       </main>
 
-      {/* FOOTER: Removida a duplicação e corrigida a sintaxe */}
+      {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
 
             {/* Coluna 1: Branding */}
             <div className="flex flex-col items-center md:items-start space-y-4">
               <Link href="/">
                 <img src="/logo-paodequeijodaira.jpg" className="h-20 cursor-pointer" alt="Logo" />
               </Link>
-              <div className="flex gap-6">
+              <div className="flex gap-4">
                 <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
                 <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
                 <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
@@ -183,4 +183,4 @@ export default function BaixarGuiaGratuito() {
       </button>
     </div>
   );
-          }
+}
