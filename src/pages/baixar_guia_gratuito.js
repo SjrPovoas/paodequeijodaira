@@ -126,15 +126,15 @@ export default function BaixarGuiaGratuito() {
               <div className="space-y-4">
                 <Link href="/pedidos" className="flex items-center justify-center md:justify-start gap-2 group">
                   <i className="bi bi-box-seam text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold uppercase tracking-widest group-hover:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
+                  <p className="text-xs tracking-widest group-hover:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
                 </Link>
                 <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-2 group">
                   <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold uppercase tracking-widest group-hover:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p>
+                  <p className="text-xs tracking-widest group-hover:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p>
                 </Link>
                 <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center justify-center md:justify-start gap-3 group">
                   <i className="bi bi-whatsapp text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold uppercase tracking-widest group-hover:text-orange-600 transition-colors pt-1">Fale Conosco</p>
+                  <p className="text-xs tracking-widest group-hover:text-orange-600 transition-colors pt-1">Fale Conosco</p>
                 </a>
               </div>
             </div>
@@ -155,7 +155,7 @@ export default function BaixarGuiaGratuito() {
             {/* Coluna 4: Institucional - Linha Única corrigida */}
             <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
-              <h3 className="text-lg font-black uppercase mb-2 text-black italic tracking-tighter">Pão de Queijo da Irá</h3>
+              <h3 className="text-lg font-black uppercase mb-2">Pão de Queijo da Irá</h3>
               <div className="mt-2 flex flex-row items-center justify-center md:justify-end gap-3 text-[10px] font-bold uppercase tracking-widest text-gray-400">
                 <Link href="/termos" className="hover:text-black flex items-center gap-1.5 transition-colors group">
                   Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
