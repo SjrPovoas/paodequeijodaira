@@ -105,7 +105,7 @@ export default function BaixarGuiaGratuito() {
       {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-16">
 
             {/* Coluna 1: Branding */}
             <div className="flex flex-col items-center md:items-start space-y-4">
@@ -155,7 +155,7 @@ export default function BaixarGuiaGratuito() {
             <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
               <h3 className="text-lg font-black uppercase mb-2 text-black italic tracking-tighter">Pão de Queijo da Irá</h3>
-              <div className="mt-2 flex items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+              <div className="mt-2 flex items-center justify-center md:justify-end gap-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">
                 <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group">
                   Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
                 </Link>
