@@ -111,6 +111,60 @@ export default function BaixarGuiaGratuito() { // Corrigido: Nome de componente 
         </div>
       </main>
 
+      {/* FOOTER */}
+      <footer className="py-20 px-6 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+
+            {/* COLUNA 1: LOGO E REDES SOCIAIS */}
+            <div className="flex flex-col items-center md:items-start space-y-[-2]">
+              <a href="/">
+                <img src="/logo-paodequeijodaira.jpg" className="h-20" alt="Logo" />
+              </a>
+              <div className="space-y-4">
+                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600 text-center md:text-left"></h4>
+                <div className="flex gap-6 justify-center md:justify-start space-x-2">
+                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
+                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+              </div>
+              </div>
+            </div>
+
+            {/* COLUNA 2: AJUDA & SUPORTE */}
+            <div className="text-center md:text-left space-y-4">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Ajuda & Suporte</h4>
+              <div className="space-y-4">
+                <Link href="/pedidos" className="flex items-start justify-center md:justify-start gap-3 group">
+                  <i className="bi bi-box-seam text-orange-600 text-lg"></i>
+                  <p className="text-sm tracking-widest group-hover:text-orange-600 transition-colors leading-tight pt-2">Rastrear Pedido</p>
+                </Link>
+                <Link href="/suporte" className="flex items-start justify-center md:justify-start gap-3 group">
+                  <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
+                  <p className="text-sm tracking-widest group-hover:text-orange-600 transition-colors leading-tight pt-2">Trocas e Devoluções</p>
+                </Link>
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
+                  <i className="bi bi-whatsapp text-orange-600 text-lg"></i>
+                  <p className="text-sm tracking-widest group-hover:text-orange-600 transition-colors leading-tight pt-2">Fale Conosco</p>
+                </a>
+              </div>
+            </div>
+
+            {/* COLUNA 3: FUNCIONAMENTO & LOCALIZAÇÃO */}
+            <div className="text-center md:text-left space-y-4">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
+              <div className="flex items-start justify-center md:justify-start gap-3">
+                <i className="bi bi-clock text-orange-600 text-lg"></i>
+                <p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p>
+              </div>
+              <div className="flex items-start justify-center md:justify-start gap-3 pt-2">
+                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600">
+                  <i className="bi bi-geo-alt text-orange-600 text-lg"></i>
+                </a>
+                <p className="text-sm text-gray-600 leading-relaxed">Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
+              </div>
+            </div>
+
 {/* COLUNA 4: INSTITUCIONAL & DIREITOS */}
 <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
   <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
@@ -138,6 +192,13 @@ export default function BaixarGuiaGratuito() { // Corrigido: Nome de componente 
     </p>
   </div>
 </div>
+
+          {/* ASSINATURA */}
+          <div className="pt-8 border-t border-gray-50 text-center">
+            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+          </div>
+        </div>
+     </footer>
 
       {/* BOTÃO VOLTAR AO TOPO: Com lógica de transição suave */}
       <button
