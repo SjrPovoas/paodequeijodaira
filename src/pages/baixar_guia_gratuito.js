@@ -103,10 +103,9 @@ export default function BaixarGuiaGratuito() {
         </div>
       </main>
 
-     {/* FOOTER - Ajustado para espaçamento uniforme e linha única na Coluna 4 */}
+     {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
-          {/* Grid com justify-between para distribuir o espaço igualmente entre colunas no Desktop */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:justify-between mb-16">
 
             {/* Coluna 1: Branding */}
@@ -157,10 +156,10 @@ export default function BaixarGuiaGratuito() {
               </div>
             </div>
 
-            {/* Coluna 4: Institucional - Texto reduzido e sem quebra (whitespace-nowrap) */}
+            {/* Coluna 4: Institucional */}
             <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
-              <h3 className="text-base font-black uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>
+              <h3 className="text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>
               
               <div className="flex flex-row items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">
                 <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group">
@@ -172,7 +171,7 @@ export default function BaixarGuiaGratuito() {
                 </Link>
               </div>
               
-              <p className="text-[10px] pt-4 font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">© 2026 - Todos os direitos reservados.</p>
+              <p className="text-[10px] pt-3 font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">© 2026 - Todos os direitos reservados.</p>
             </div>
 
           </div>
@@ -184,10 +183,7 @@ export default function BaixarGuiaGratuito() {
       </footer>
 
       {/* Botão Voltar ao Topo */}
-      <button
-        onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 z-[130] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-500 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
-      >
+      <button onClick={scrollToTop} className={`fixed bottom-8 right-8 z-[130] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-500 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
         <i className="bi bi-arrow-up text-xl"></i>
       </button>
     </div>
