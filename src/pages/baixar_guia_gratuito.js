@@ -139,21 +139,26 @@ export default function BaixarGuiaGratuito() {
               </div>
             </div>
 
-            {/* COLUNA 3: FUNCIONAMENTO & LOCALIZAÇÃO */}
-            <div className="text-center md:text-left space-y-4">
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
-              <div className="flex items-start justify-center md:justify-start gap-3">
-                <i className="bi bi-clock text-orange-600 text-lg"></i>
-                <p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p>
-              </div>
-              <div className="flex items-start justify-center md:justify-start gap-3 pt-2">
-                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-center justify-center md:justify-start gap-3 group">
-                  <i className="bi bi-geo-alt text-orange-600 text-lg"></i>        
-                  <p className="text-sm text-gray-600 leading-relaxed">Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
-                </a>
-              </div>
-            </div>
+{/* COLUNA 3: FUNCIONAMENTO & LOCALIZAÇÃO */}
+<div className="text-center md:text-left space-y-4">
+  <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
+  
+  {/* Horário */}
+  <div className="flex items-start justify-center md:justify-start gap-3">
+    <i className="bi bi-clock text-orange-600 text-lg"></i>
+    <p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p>
+  </div>
 
+  {/* Localização - Corrigido para Topo Vertical (items-start) */}
+  <div className="pt-2">
+    <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
+      <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>        
+      <p className="text-sm text-gray-600 leading-relaxed text-left">
+        Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />
+        Recreio Mossoró - Cidade Ocidental-GO</p>
+    </a>
+  </div>
+ </div>
             {/* Coluna 4: Institucional - Linha Única corrigida */}
             <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
