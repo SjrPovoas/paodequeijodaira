@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
-export default function Obrigado() {
+export default function baixar_guia_grqtuito {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
