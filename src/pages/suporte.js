@@ -234,7 +234,60 @@ export default function Suporte() {
                 </section>
             </main>
 
-            {/* 5. FOOTER PERSONALIZADO */}
+{/* SEÇÃO DE CREDIBILIDADE E TECNOLOGIA - Pré-Rodapé */}
+<section className="bg-white border-t border-gray-50 py-16">
+    <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+            
+            {/* 1. SEGURANÇA GOOGLE */}
+            <div className="flex flex-col items-center text-center space-y-3 group">
+                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-green-50">
+                    <i className="bi bi-google text-gray-400 group-hover:text-green-600 text-xl"></i>
+                </div>
+                <div>
+                    <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Google Safe Browsing</h5>
+                    <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Ambiente monitorado e livre de malwares</p>
+                </div>
+            </div>
+
+            {/* 2. CRIPTOGRAFIA SSL */}
+            <div className="flex flex-col items-center text-center space-y-3 group">
+                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-blue-50">
+                    <i className="bi bi-shield-lock text-gray-400 group-hover:text-blue-600 text-xl"></i>
+                </div>
+                <div>
+                    <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Conexão Criptografada</h5>
+                    <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Dados protegidos via certificado SSL 256-bits</p>
+                </div>
+            </div>
+
+            {/* 3. BLOCKCHAIN VERIFIED */}
+            <div className="flex flex-col items-center text-center space-y-3 group">
+                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-orange-50">
+                    <i className="bi bi-currency-bitcoin text-gray-400 group-hover:text-orange-600 text-xl"></i>
+                </div>
+                <div>
+                    <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Blockchain Verified</h5>
+                    <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Transações Web3 nativas e auditáveis em rede</p>
+                </div>
+            </div>
+
+            {/* 4. QUALIDADE ARTESANAL */}
+            <div className="flex flex-col items-center text-center space-y-3 group">
+                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-red-50">
+                    <i className="bi bi-award text-gray-400 group-hover:text-red-600 text-xl"></i>
+                </div>
+                <div>
+                    <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Curadoria Lifestyle</h5>
+                    <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Produtos exclusivos com tiragem limitada</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+            {/* 5. FOOTER */}
             <footer className="py-20 px-6 bg-white border-t border-gray-100 mt-auto">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:justify-between mb-16">
