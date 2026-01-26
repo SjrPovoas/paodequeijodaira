@@ -79,11 +79,10 @@ export default function Termos() {
             </header>
 
             {/* CONTEÚDO TROCAS E DEVOLUÇÕES */}
-            <main className="py-20 px-6 max-w-4xl mx-auto">
-                <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-12 italic leading-none text-black">
-                    Trocas e <span className="text-orange-600">Devoluções</span>
-                </h1>
-
+            <main className="flex-grow py-20 px-6 max-w-4xl mx-auto w-full">
+            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 italic leading-none text-black">
+               Trocas e <span className="text-orange-600">Devoluções</span>
+            </h1>
                 <div className="prose prose-orange max-w-none text-gray-600 leading-relaxed space-y-10 font-sans">
                     <section>
                         <h2 className="text-xl font-black uppercase mb-4 text-[#3D2B1F]">01. Itens Lifestyle e Acessórios</h2>
