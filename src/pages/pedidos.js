@@ -74,27 +74,60 @@ export default function Pedidos() {
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
             </Head>
 
-            {/* 1. BARRA DE ANÚNCIO */}
+            {/* 1. BARRA DE ANÚNCIO TOPO */}
             <div className="bg-orange-600 text-white py-2 text-center text-[10px] font-black uppercase tracking-widest sticky top-0 z-[120]">
                 • Entrega em todo Brasil • Frete Grátis acima de R$ 500,00 •
             </div>
 
-            {/* 2. HEADER */}
+            {/* 2. HEADER FIXO */}
             <header className="py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-[110] border-b border-gray-100 shadow-sm">
                 <div className="max-w-7xl mx-auto flex justify-between items-center">
                     <Link href="/">
                         <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
                     </Link>
 
+                    {/* Navegação Desktop */}
                     <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
-                        <Link href="/pedidos" className="text-orange-600 flex items-center gap-2">RASTREAR <i className="bi bi-box-seam text-lg"></i></Link>
-                        <Link href="/suporte" className="hover:text-orange-600 flex items-center gap-2">SUPORTE <i className="bi bi-arrow-left-right text-lg"></i></Link>
-                        <Link href="/loja" className="bg-orange-600 text-white px-6 py-3 font-black rounded-full hover:bg-black transition-all">LOJA LIFESTYLE</Link>
+                        <Link href="/pedidos" className="hover:text-orange-600 transition-colors flex items-center gap-2">
+                            RASTREAR PEDIDO <i className="bi bi-box-seam text-lg"></i>
+                        </Link>
+                        <Link href="/suporte" className="hover:text-orange-600 transition-colors flex items-center gap-2">
+                            TROCAS & DEVOLUÇÕES <i className="bi bi-arrow-left-right text-lg"></i>
+                        </Link>
+                        <Link href="/loja" className="bg-orange-600 text-white px-6 py-3 font-black rounded-full hover:bg-black transition-all">
+                            LOJA LIFESTYLE
+                        </Link>
                     </nav>
 
+                    {/* Menu Mobile Button */}
                     <div className="flex md:hidden items-center">
-                        <button onClick={() => setMenuMobileAberto(true)} className="text-orange-600 p-2"><i className="bi bi-list text-3xl"></i></button>
+                        <button onClick={() => setMenuMobileAberto(true)} className="text-orange-600 p-2">
+                            <i className="bi bi-list text-3xl"></i>
+                        </button>
                     </div>
+                </div>
+
+                {/* ESTRUTURA MENU MOBILE */}
+                <div className={`fixed inset-0 z-[1000] transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
+                    <div className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`}
+                        onClick={() => setMenuMobileAberto(false)}></div>
+                    <nav className={`absolute top-0 right-0 w-[100%] h-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
+                        <div className="flex justify-end p-6">
+                            <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600">
+                                <i className="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-10">
+                            <Link href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">IRÁ DIGITAL GENESIS PASS</Link>
+                            <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
+                            <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600 pb-1">LOJA LIFESTYLE</Link>
+                            <div className="w-full h-px bg-gray-100 my-4"></div>
+                            <div className="flex flex-col space-y-6">
+                                <Link href="/pedidos" className="text-[11px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3"><i className="bi bi-box-seam text-xl"></i> Rastrear Pedido</Link>
+                                <Link href="/suporte" className="text-[11px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3"><i className="bi bi-arrow-left-right text-xl"></i> Trocas & Devoluções</Link>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
             </header>
 
