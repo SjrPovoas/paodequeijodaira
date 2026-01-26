@@ -246,7 +246,7 @@ export default function Loja() {
           {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex space-x-4 text-[10px] font-bold uppercase tracking-widest items-center">
             <a href="#web3" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2"><span className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">IRÁ DIGITAL GENESIS PASS<i className="bi bi-gem text-[18px]"></i></span></a>
-            <a href="/pedidos" className="text-[10px] font-black uppercase flex items-center gap-2"><span className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">MEUS PEDIDOS<i className="bi bi-box-seam text-[18px]"></i></span></a>
+            <a href="/pedidos" className="text-[10px] font-black uppercase flex items-center gap-2"><span className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">RASTREAR PEDIDO<i className="bi bi-box-seam text-[18px]"></i></span></a>
             <div className="scale-90 origin-right">
               <ConnectButton.Custom>
                 {({ account, chain, openAccountModal, openChainModal, openConnectModal, mounted }) => {
@@ -279,7 +279,7 @@ export default function Loja() {
           {/* NAVEGAÇÃO MOBILE */}
           <div className="flex md:hidden items-center gap-4">
             <a href="/pedidos" className="flex flex-col items-center relative"><i className="bi bi-box-seam text-2xl"></i>
-              <span className="text-[8px] font-black uppercase mt-0.4">Meus Pedidos</span>
+              <span className="text-[8px] font-black uppercase mt-0.4">Rastrear Pedido</span>
             </a>
 
             <ConnectButton.Custom>
