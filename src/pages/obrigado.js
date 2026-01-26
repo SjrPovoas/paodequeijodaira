@@ -6,7 +6,8 @@ export default function Termos() {
   // Estado corrigido para combinar com o restante do código
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
+  // CONSTANTES DE CONFIGURAÇÃO
+  const WHATSAPP_NUMBER = "5561982777196"; 
   // Estado para controlar a visibilidade da seta de voltar ao topo
   const [showScrollTop, setShowScrollTop] = useState(false);
 
