@@ -261,21 +261,22 @@ export default function Suporte() {
                 </div>
             </div>
 
-            {/* 3. BLOCKCHAIN VERIFIED */}
+            {/* 3. POLYGON (POL) BLOCKCHAIN VERIFIED */}
             <div className="flex flex-col items-center text-center space-y-3 group">
-                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-orange-50">
-                    <i className="bi bi-currency-bitcoin text-gray-400 group-hover:text-orange-600 text-xl"></i>
+                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-purple-50">
+                    {/* Hexágono sólido representando o novo ecossistema Polygon */}
+                    <i className="bi bi-hexagon-fill text-gray-400 group-hover:text-[#8247E5] text-xl"></i>
                 </div>
                 <div>
-                    <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Blockchain Verified</h5>
-                    <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Transações Web3 nativas e auditáveis em rede</p>
+                    <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Polygon Ecosystem</h5>
+                    <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Pagamentos e ativos nativos em rede (POL)</p>
                 </div>
             </div>
 
-            {/* 4. QUALIDADE ARTESANAL */}
+            {/* 4. QUALIDADE LIFESTYLE */}
             <div className="flex flex-col items-center text-center space-y-3 group">
-                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-red-50">
-                    <i className="bi bi-award text-gray-400 group-hover:text-red-600 text-xl"></i>
+                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-orange-50">
+                    <i className="bi bi-award text-gray-400 group-hover:text-orange-600 text-xl"></i>
                 </div>
                 <div>
                     <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Curadoria Lifestyle</h5>
