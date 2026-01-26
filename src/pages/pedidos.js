@@ -142,7 +142,7 @@ export default function Pedidos() {
 
                 <div className="flex justify-center gap-3 mb-10">
                     <button onClick={() => setAbaAtiva('tradicional')} className={`px-5 py-2.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${abaAtiva === 'tradicional' ? 'bg-black text-white shadow-lg' : 'bg-gray-100 text-gray-400'}`}>E-mail & ID do Pedido</button>
-                    <button onClick={() => setAbaAtiva('web3')} className={`px-5 py-2.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${abaAtiva === 'web3' ? 'bg-[#8247E5] text-white shadow-lg' : 'bg-gray-100 text-gray-400'}`}>Hash da Compra (Web3)</button>
+                    <button onClick={() => setAbaAtiva('web3')} className={`px-5 py-2.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${abaAtiva === 'web3' ? 'bg-[#8247E5] text-white shadow-lg' : 'bg-gray-100 text-gray-400'}`}>Hash do Pagamento</button>
                 </div>
 
                 {!pedidoEncontrado ? (
