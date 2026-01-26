@@ -141,8 +141,8 @@ export default function Pedidos() {
                 </div>
 
                 <div className="flex justify-center gap-3 mb-10">
-                    <button onClick={() => setAbaAtiva('tradicional')} className={`px-5 py-2.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${abaAtiva === 'tradicional' ? 'bg-black text-white shadow-lg' : 'bg-gray-100 text-gray-400'}`}>E-mail & ID</button>
-                    <button onClick={() => setAbaAtiva('web3')} className={`px-5 py-2.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${abaAtiva === 'web3' ? 'bg-[#8247E5] text-white shadow-lg' : 'bg-gray-100 text-gray-400'}`}>Hash Web3 (POL)</button>
+                    <button onClick={() => setAbaAtiva('tradicional')} className={`px-5 py-2.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${abaAtiva === 'tradicional' ? 'bg-black text-white shadow-lg' : 'bg-gray-100 text-gray-400'}`}>E-mail & ID do Pedido</button>
+                    <button onClick={() => setAbaAtiva('web3')} className={`px-5 py-2.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${abaAtiva === 'web3' ? 'bg-[#8247E5] text-white shadow-lg' : 'bg-gray-100 text-gray-400'}`}>Hash da Compra (Web3)</button>
                 </div>
 
                 {!pedidoEncontrado ? (
@@ -151,18 +151,18 @@ export default function Pedidos() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase tracking-widest text-gray-400">E-mail da Compra</label>
-                                    <input required type="email" className="w-full border-b-2 border-gray-100 focus:border-orange-600 outline-none py-2 text-sm"
+                                    <input required type="email" placeholder="E-mail utilizado na compra" className="w-full border-b-2 border-gray-100 focus:border-orange-600 outline-none py-2 text-sm"
                                         value={busca.email} onChange={e => setBusca({...busca, email: e.target.value})} />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase tracking-widest text-gray-400">ID do Pedido</label>
-                                    <input required type="text" className="w-full border-b-2 border-gray-100 focus:border-orange-600 outline-none py-2 text-sm"
+                                    <input required type="text" placeholder="ID do Pedido" className="w-full border-b-2 border-gray-100 focus:border-orange-600 outline-none py-2 text-sm"
                                         value={busca.id} onChange={e => setBusca({...busca, id: e.target.value})} />
                                 </div>
                             </div>
                         ) : (
                             <div className="space-y-2">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-gray-400">Transaction Hash (POL Network)</label>
+                                <label className="text-[10px] font-black uppercase tracking-widest text-gray-400">Transaction Hash (POLYGON Network)</label>
                                 <input required type="text" placeholder="0x..." className="w-full border-b-2 border-gray-100 focus:border-[#8247E5] outline-none py-2 text-sm font-mono"
                                     value={busca.hash} onChange={e => setBusca({...busca, hash: e.target.value})} />
                             </div>
