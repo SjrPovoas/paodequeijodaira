@@ -49,7 +49,7 @@ export default function Suporte() {
     return (
         <div className="min-h-screen bg-[#FFFDF5] font-sans text-black overflow-x-hidden">
             <Head>
-                <title>Suporte: Trocas & Devoluções | Loja Lifestyle e Acessórios do Pão de Queijo da Irá</title>
+                <title>Suporte: Trocas & Devoluções | Loja Lifestyle e Acessórios | Pão de Queijo da Irá</title>
                 <link rel="canonical" href="https://paodequeijodaira.vercel.app/suporte" />
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
             </Head>
@@ -70,7 +70,7 @@ export default function Suporte() {
                     {/* NAVEGAÇÃO DESKTOP */}
                     <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
                         <Link href="/pedidos" className="hover:text-orange-600 transition-colors flex items-center gap-2">
-                            MEUS PEDIDOS <i className="bi bi-box-seam text-lg"></i>
+                            RASTREAR PEDIDO <i className="bi bi-box-seam text-lg"></i>
                         </Link>
                         <Link href="/suporte" className="hover:text-orange-600 transition-colors flex items-center gap-2">
                             TROCAS & DEVOLUÇÕES <i className="bi bi-arrow-left-right text-lg"></i>
@@ -134,10 +134,11 @@ export default function Suporte() {
                 </div>
             </header>
 
-            <main className="max-w-2xl mx-auto py-16 px-6">
+            {/*<main className="max-w-2xl mx-auto py-16 px-6">*/}
+            <main className="flex-grow py-20 px-6 max-w-4xl mx-auto w-full">
                 <div className="text-center mb-12">
-                    <h1 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter mb-4">
-                        Trocas &<br />Devoluções
+                    <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 italic leading-none text-black">
+                       TROCAS E <span className="text-orange-600">DEVOLUÇÕES</span>
                     </h1>
                     <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-600">
                         Preencha os dados abaixo para iniciar o processo
