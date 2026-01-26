@@ -201,6 +201,22 @@ export default function Suporte() {
                 )}
             </main>
 
+       {/* FAQ RÁPIDO */}
+        <div className="mt-20 border-t border-gray-100 pt-12 grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div>
+            <h4 className="font-black uppercase text-[10px] tracking-widest text-orange-600 mb-3">Política de Trocas</h4>
+            <p className="text-xs text-gray-500 leading-relaxed">
+              Você tem até 7 dias após o recebimento para solicitar a troca ou devolução de itens Lifestyle. O produto deve estar com etiqueta e sem sinais de uso.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-black uppercase text-[10px] tracking-widest text-orange-600 mb-3">Dúvidas?</h4>
+            <p className="text-xs text-gray-500 leading-relaxed">
+              Caso prefira um atendimento humano imediato, clique no ícone do WhatsApp no rodapé da página.
+            </p>
+          </div>
+        </div>
+
     {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
