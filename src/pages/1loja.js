@@ -611,6 +611,7 @@ export default function Loja() {
         </button>
       )}
 
+      {/* ESTILOS GLOBAIS */}
       <style jsx global>
         {`@keyframes slide-left { from { transform: translateX(100%); } to { transform: translateX(0); } }
           @keyframes slide-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
@@ -618,6 +619,6 @@ export default function Loja() {
           .animate-slide-right { animation: slide-right 0.4s cubic-bezier(0.16, 1, 0.3, 1); }`}
       </style>
 
-    </div>
-  );
+    </div> // Fecha a <div className="min-h-screen...">
+  ); // Fecha o return (
 }
