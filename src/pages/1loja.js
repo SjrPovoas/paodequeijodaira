@@ -68,23 +68,35 @@ export default function Loja() {
   const processarPedidoFinal = async () => {
     const cpfLimpo = dados.cpf.replace(/\D/g, '');
     
-    // Validação de Dados Conforme o Método
-    if (!dados.nome || !dados.email || !dados.cep) return alert("Preencha os campos obrigatórios.");
-    if (metodoSelecionado === 'mp' && cpfLimpo.length !== 11) return alert("CPF Inválido.");
-    if (carrinho.length === 0) return alert("Carrinho vazio.");
+    // 1. Validações Iniciais
+    if (!dados.nome || !dados.email || !dados.cep) {
+      alert("Preencha Nome, E-mail e CEP para continuar.");
+      return null;
+    }
+    
+    if (metodoSelecionado === 'mp' && cpfLimpo.length !== 11) {
+      alert("CPF Inválido. O Mercado Pago exige os 11 dígitos para processar o pagamento.");
+      return null;
+    }
+    
+    if (carrinho.length === 0) {
+      alert("Seu carrinho está vazio.");
+      return null;
+    }
 
     setLoading(true);
 
     try {
-      // 1. Criar objeto do pedido para o Supabase
+      // 2. Criar objeto do pedido para o Supabase
       const dadosPedido = {
         cliente_nome: dados.nome,
         cliente_email: dados.email.toLowerCase().trim(),
-        cliente_cpf: metodoSelecionado === 'mp' ? cpfLimpo : 'WEB3_CLIENT',
+        // Para Cripto, usamos um identificador genérico se o CPF não for preenchido
+        cliente_cpf: metodoSelecionado === 'mp' ? cpfLimpo : (cpfLimpo || 'WEB3_CLIENT'),
         cliente_cep: dados.cep,
         endereco_entrega: `${dados.endereco} | Complemento: ${dados.complemento || 'N/A'}`,
         valor_total: totalGeral,
-        itens: carrinho, // Deve ser coluna JSONB no Supabase
+        itens: carrinho, 
         status: 'Aguardando Pagamento',
         metodo: metodoSelecionado === 'mp' ? 'Mercado Pago' : 'Web3 Cripto'
       };
@@ -92,31 +104,48 @@ export default function Loja() {
       const { data: pedido, error: errSupa } = await supabase
         .from('pedidos')
         .insert([dadosPedido])
-        .select().single();
+        .select()
+        .single();
 
-      if (errSupa) throw new Error("Erro no Banco: " + errSupa.message);
+      if (errSupa) throw new Error("Erro ao salvar no banco: " + errSupa.message);
 
-      // 2. Se for Mercado Pago, gera o link
+      // 3. Integração com Mercado Pago
       if (metodoSelecionado === 'mp') {
         const res = await fetch('/api/checkout-mp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ itens: carrinho, frete, pedidoId: pedido.id, email: dados.email })
+          body: JSON.stringify({ 
+            itens: carrinho, 
+            frete, 
+            pedidoId: pedido.id, 
+            email: dados.email.trim(),
+            nome: dados.nome, // Enviando nome para o split de first/last name na API
+            cpf: cpfLimpo     // Enviando CPF limpo para a API
+          })
         });
-        const { init_point } = await res.json();
-        if (init_point) window.location.href = init_point;
+
+        const data = await res.json();
+
+        if (data.init_point) {
+          window.location.href = data.init_point;
+        } else {
+          throw new Error(data.error || "Erro ao gerar link do Mercado Pago");
+        }
       } 
       
-      return pedido.id; // Retorna para o BotaoPagamentoWeb3 usar se necessário
+      // 4. Retorno para Fluxo Web3
+      // Se for Cripto, o componente BotaoPagamentoWeb3 recebe este ID e prossegue com a transação na blockchain
+      return pedido.id;
 
     } catch (err) {
-      alert(err.message);
+      console.error("Erro no Processamento:", err);
+      alert("Falha no checkout: " + err.message);
       return null;
     } finally {
       setLoading(false);
     }
   };
-
+  
   const add = (p, tam = null) => {
     if (p.category === 'vestuario' && !tam) return alert('Selecione um tamanho.');
     setCarrinho(prev => {
