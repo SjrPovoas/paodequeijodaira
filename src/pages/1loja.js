@@ -430,8 +430,7 @@ export default function Loja() {
       </main>
 
       {/* 4. SEÇÃO WEB3 (Genesis Pass) */}
-      <section id="web3" className="bg-[#1A1A1A] text-white py-32 px-6 overflow-hidden relative">
-       <section id="web3" className="py-24 px-6 md:px-12 bg-[#2D3134] text-white relative overflow-hidden">
+      <section id="web3" className="py-24 px-6 md:px-12 bg-[#2D3134] text-white relative overflow-hidden">
         <div className="max-w-4xl relative z-10 mx-auto md:mx-0">
           <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-4 italic">
             IRÁ Digital <br /> <span className="outline-text" style={{ WebkitTextStroke: '1px white', color: 'transparent', WebkitTextFillColor: 'transparent' }}>Genesis Pass</span>
