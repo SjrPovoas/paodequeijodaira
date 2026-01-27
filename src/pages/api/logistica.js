@@ -1,7 +1,5 @@
-/**
- * API de Logística - Integração Melhor Envio
- * Trata o cálculo (POST) e a geração de etiquetas (PUT)
- */
+import { supabase } from '../../lib/supabaseClient';
+
 export default async function handler(req, res) {
   const headers = {
     'Accept': 'application/json',
@@ -10,10 +8,9 @@ export default async function handler(req, res) {
     'User-Agent': 'PaoDeQueijoDaIra (sjrpovoas@gmail.com)'
   };
 
-  // --- LÓGICA DE CÁLCULO DE FRETE (POST) ---
+  // --- 1. CÁLCULO DE FRETE (POST) ---
   if (req.method === 'POST') {
     const { cep_destino, produtos } = req.body;
-
     try {
       const response = await fetch(`${process.env.MELHORENVIO_URL}/api/v2/me/shipment/calculate`, {
         method: 'POST',
@@ -24,42 +21,64 @@ export default async function handler(req, res) {
           products: produtos.map(p => ({
             id: p.id,
             width: 20, height: 10, length: 20, weight: 0.5,
-            insurance_value: p.preco || 50, // Seguro baseado no preço ou valor mínimo
+            insurance_value: p.preco || 50,
             quantity: 1
           }))
         })
       });
-
       const data = await response.json();
-      
-      // Filtra transportadoras que retornaram erro e ordena por preço
-      const opcoesValidas = Array.isArray(data) 
-        ? data.filter(opt => !opt.error).sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-        : [];
-      
+      const opcoesValidas = Array.isArray(data) ? data.filter(opt => !opt.error) : [];
       return res.status(200).json(opcoesValidas);
     } catch (error) {
-      console.error("Erro Melhor Envio Calc:", error);
       return res.status(500).json({ error: "Erro ao calcular frete" });
     }
   }
 
-  // --- LÓGICA DE COMPRA DE ETIQUETA (PUT) ---
+  // --- 2. GERAÇÃO DE ETIQUETA (PUT) ---
   if (req.method === 'PUT') {
     const { service_id, pedido_id } = req.body;
 
     try {
-      // 1. Adiciona ao carrinho do Melhor Envio
-      // Nota: Em uma implementação real, você enviaria os dados completos do remetente/destinatário aqui
+      // BUSCA DADOS REAIS DO PEDIDO NO SUPABASE 
+      const { data: pedido, error: dbError } = await supabase
+        .from('pedidos')
+        .select('*')
+        .eq('id', pedido_id)
+        .single();
+
+      if (dbError || !pedido) throw new Error("Pedido não encontrado");
+
+      // ENVIA PARA O CARRINHO DO MELHOR ENVIO
       const cartResponse = await fetch(`${process.env.MELHORENVIO_URL}/api/v2/me/cart`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify({
           service: service_id,
-          agency: 1, // Exigido para algumas transportadoras
-          from: { name: "Pão de Queijo da Irá", postal_code: "72940000" },
-          to: { name: "Cliente Irá Digital", postal_code: "01001000" }, // Exemplo, deve vir do seu banco
-          products: [{ name: "Acessório Lifestyle", quantity: 1, unit_value: 50 }],
+          agency: 1, 
+          from: {
+            name: "Pão de Queijo da Irá",
+            email: "contato@paodequeijodaira.com",
+            document: "SUO_CNPJ_OU_CPF",
+            company_document: "SEU_CNPJ",
+            address: "Rua Exemplo",
+            number: "123",
+            district: "Centro",
+            city: "Cidade Ocidental",
+            state_abbr: "GO",
+            postal_code: "72940000"
+          },
+          to: {
+            name: pedido.cliente_nome,
+            email: pedido.cliente_email,
+            document: pedido.cliente_cpf, // Necessário para etiquetas brasileiras 
+            address: pedido.cliente_endereco,
+            number: pedido.cliente_numero,
+            district: pedido.cliente_bairro,
+            city: pedido.cliente_cidade,
+            state_abbr: pedido.cliente_uf,
+            postal_code: pedido.cliente_cep
+          },
+          products: [{ name: "Lifestyle Kit", quantity: 1, unit_value: pedido.total_brl }],
           volumes: [{ height: 10, width: 20, length: 20, weight: 0.5 }]
         })
       });
@@ -67,25 +86,26 @@ export default async function handler(req, res) {
       const cartData = await cartResponse.json();
 
       if (cartData.id) {
-        // 2. Efetua o checkout do carrinho (pagamento com saldo do Melhor Envio)
-        const checkoutResponse = await fetch(`${process.env.MELHORENVIO_URL}/api/v2/me/shipment/checkout`, {
+        // EFETUA O PAGAMENTO (CHECKOUT) DA ETIQUETA
+        await fetch(`${process.env.MELHORENVIO_URL}/api/v2/me/shipment/checkout`, {
           method: 'POST',
           headers: headers,
           body: JSON.stringify({ orders: [cartData.id] })
         });
 
-        if (checkoutResponse.ok) {
-          return res.status(200).json({ success: true, message: "Etiqueta comprada!" });
-        }
-      }
+        // ATUALIZA O STATUS NO SUPABASE 
+        await supabase
+          .from('pedidos')
+          .update({ status: 'Etiqueta Gerada', etiqueta_id: cartData.id })
+          .eq('id', pedido_id);
 
-      throw new Error("Falha ao processar checkout da etiqueta");
+        return res.status(200).json({ success: true });
+      }
+      throw new Error("Falha no carrinho");
     } catch (error) {
-      console.error("Erro Melhor Envio Compra:", error);
-      return res.status(500).json({ error: "Erro ao gerar etiqueta" });
+      return res.status(500).json({ error: error.message });
     }
   }
 
-  // Caso receba GET ou outros métodos
-  return res.status(405).json({ message: 'Método não permitido' });
+  return res.status(405).send('Method not allowed');
 }
