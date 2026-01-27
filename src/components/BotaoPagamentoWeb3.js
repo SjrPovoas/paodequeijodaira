@@ -4,110 +4,126 @@ import { useState, useEffect } from 'react';
 import { useAccount, useSendTransaction, useWaitForTransactionReceipt, useChainId, useSwitchChain } from 'wagmi';
 import { parseEther } from 'viem';
 import { supabase } from '../lib/supabaseClient';
+import { converterRealParaPOL } from '../lib/priceService';
 
-export default function BotaoPagamentoWeb3({ total, carrinho, dadosCliente, onBeforeClick }) {
+/**
+ * @param {number} total - Valor total em BRL
+ * @param {object} dadosCliente - Objeto com nome, email, cep, etc.
+ * @param {function} onBeforeClick - Função que registra o pedido no Supabase e retorna o ID
+ */
+export default function BotaoPagamentoWeb3({ total, dadosCliente, onBeforeClick }) {
   const { isConnected, address } = useAccount();
   const chainId = useChainId();
   const { switchChain } = useSwitchChain();
   const [loading, setLoading] = useState(false);
-  const [pedidoIdAtivo, setPedidoIdAtivo] = useState(null);
 
-  // Configurações da Rede (Exemplo: Polygon Mainnet id: 137)
+  // Configurações da Rede Polygon Mainnet
   const REDE_CORRETA_ID = 137; 
-  // Endereço que vai receber o dinheiro (SUA CARTEIRA)
-  const CARTEIRA_DESTINO = "0xSEU_ENDERECO_AQUI"; 
+  const CARTEIRA_DESTINO = "0x9523160C1cAf82358B9a6af332E47d6F5fDb02ac"; 
 
-  // Hook para enviar a transação
   const { sendTransactionAsync } = useSendTransaction();
 
-  // Função principal disparada pelo clique
   const handlePagamentoCripto = async () => {
-    if (!isConnected) return alert("Por favor, conecte sua carteira primeiro.");
+    // 1. Validações de conexão
+    if (!isConnected) {
+      alert("Por favor, conecte sua carteira primeiro.");
+      return;
+    }
     
-    // 1. Verifica se está na rede correta
     if (chainId !== REDE_CORRETA_ID) {
       alert("Por favor, altere sua rede para Polygon.");
-      switchChain({ chainId: REDE_CORRETA_ID });
+      if (switchChain) switchChain({ chainId: REDE_CORRETA_ID });
       return;
     }
 
     setLoading(true);
 
     try {
-      // 2. Chama a função que criamos na Loja.js para salvar o pedido no Supabase
-      // Ela retorna o ID do pedido criado
-      const idDoPedido = await onBeforeClick();
-      if (!idDoPedido) throw new Error("Falha ao registrar pedido no banco.");
-      setPedidoIdAtivo(idDoPedido);
+      // 2. Registrar o pedido no Supabase antes de cobrar
+      // Esta função vem da Loja.js e já valida os campos
+      const pedidoId = await onBeforeClick();
+      
+      if (!pedidoId) {
+        setLoading(false);
+        return; 
+      }
 
-      // 3. Conversão de valor (Exemplo simplificado: 1 BRL = 1 Token da Rede ou integração com Oráculo)
-      // Nota: Para produção, você precisaria de um conversor de preço real.
-      // Aqui estamos enviando o valor 'total' diretamente em POL (antigo MATIC).
-      const valorEmWei = parseEther(total.toString());
+      // 3. Converter BRL para POL usando seu PriceService
+      const quantidadePOL = await converterRealParaPOL(total);
 
-      // 4. Dispara a transação na Blockchain
+      if (!quantidadePOL) {
+        throw new Error("Erro ao obter cotação. Verifique sua conexão.");
+      }
+
+      // 4. Executar a transação na Blockchain
       const txHash = await sendTransactionAsync({
         to: CARTEIRA_DESTINO,
-        value: valorEmWei,
+        value: parseEther(quantidadePOL),
       });
 
-      console.log("Transação enviada! Hash:", txHash);
-
-      // 5. Aguarda a confirmação (Mineração)
-      // Aqui você pode mostrar um loader de "Aguardando confirmação na rede..."
-      alert("Pagamento enviado! Aguardando confirmação da rede...");
-
-      // 6. Atualiza o Supabase assim que a transação for confirmada
-      // Nota: Em um app real, você usaria o hook useWaitForTransactionReceipt para automatizar isso
+      // 5. Atualizar o pedido para "Pago" no Supabase com o Hash da transação
       const { error: errUpdate } = await supabase
         .from('pedidos')
         .update({ 
           status: 'Pago', 
           hash_transacao: txHash,
-          pago_em: new Date().toISOString()
+          pago_em: new Date().toISOString(),
+          metodo_pagamento: 'Web3 Cripto (POL)',
+          wallet_address: address // Salva a carteira que pagou para auditoria
         })
-        .eq('id', idDoPedido);
+        .eq('id', pedidoId);
 
-      if (errUpdate) throw errUpdate;
+      if (errUpdate) {
+        console.error("Erro ao atualizar banco:", errUpdate.message);
+        // O pagamento foi feito, mas o banco falhou. Logamos o erro.
+      }
 
-      alert("🎉 Pagamento confirmado e pedido finalizado!");
-      window.location.href = "/sucesso"; // Redireciona
+      alert(`🎉 Sucesso! Pagamento de ${quantidadePOL} POL enviado.`);
+      
+      // 6. Redirecionar para página de sucesso
+      window.location.href = `/sucesso?id=${pedidoId}&tx=${txHash}`;
 
     } catch (err) {
       console.error("Erro no fluxo Web3:", err);
-      alert("Erro no pagamento: " + (err.shortMessage || err.message));
+      // Tratamento amigável de erro (Rejeição do usuário ou erro de rede)
+      const msg = err.shortMessage || err.message || "Erro desconhecido";
+      if (msg.includes("User rejected")) {
+        alert("Transação cancelada pelo usuário.");
+      } else {
+        alert("Falha no pagamento: " + msg);
+      }
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="w-full">
-      {!isConnected ? (
-        <p className="text-[10px] font-black text-center text-orange-600 uppercase mb-2">
-          Conecte sua carteira para pagar com Cripto
-        </p>
-      ) : (
-        <button
-          onClick={handlePagamentoCripto}
-          disabled={loading}
-          className={`w-full py-5 font-black uppercase text-xs tracking-widest transition-all rounded-xl flex items-center justify-center gap-3 ${
-            loading ? 'bg-gray-200 text-gray-500' : 'bg-orange-600 text-white hover:bg-black'
-          }`}
-        >
-          {loading ? (
-            <>
-              <span className="w-4 h-4 border-2 border-t-transparent border-gray-500 rounded-full animate-spin"></span>
-              Processando na Rede...
-            </>
-          ) : (
-            <>
-              Pagar R$ {total.toFixed(2)} com POL (Polygon)
-              <i className="bi bi-shield-check text-lg"></i>
-            </>
-          )}
-        </button>
-      )}
+    <div className="w-full group">
+      <button
+        onClick={handlePagamentoCripto}
+        disabled={loading}
+        className={`w-full py-5 font-black uppercase text-xs tracking-[0.2em] rounded-2xl transition-all flex items-center justify-center gap-3 shadow-lg ${
+          loading 
+            ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+            : 'bg-black text-white hover:bg-orange-600 active:scale-95'
+        }`}
+      >
+        {loading ? (
+          <>
+            <div className="w-4 h-4 border-2 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+            Processando Blockchain...
+          </>
+        ) : (
+          <>
+            <i className="bi bi-currency-bitcoin text-lg text-orange-500"></i>
+            Pagar com Cripto (POL)
+          </>
+        )}
+      </button>
+      
+      <p className="text-[8px] text-center mt-3 font-bold text-gray-400 uppercase tracking-tighter">
+        Pagamento processado via rede Polygon (POL)
+      </p>
     </div>
   );
-}
+}         
