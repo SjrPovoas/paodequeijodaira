@@ -121,10 +121,157 @@ export default function Loja() {
     if (cpfLimpo.length !== 11) return alert("CPF Inválido.");
     if (carrinho.length === 0) return alert("Seu carrinho está vazio.");
 
+"use client";
+
+import React, { useState, useEffect, useMemo } from 'react'; // Adicionado useMemo para performance
+import Head from 'next/head';
+import { supabase } from '../lib/supabaseClient';
+import BotaoPagamentoWeb3 from '../components/BotaoPagamentoWeb3';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Link from 'next/link';
+
+export default function Loja() {
+  const LINK_LISTA_ESPERA = "https://43782b7b.sibforms.com/serve/MUIFAC4AxTEnI80RImF7seW5i2MRkz5EqdqtMse22-stmvG7jsOqdFhZ6mmpfwRA-2skU_c3GJF8YXD6k-K_kNE6_gFeWIFbCIxIEWpknHGH8m6tdQMhTuqNG7-e_tsEQRBC4-pjosH0TVoqcW1UonSiJnd2E378zedWIJRs_Dhj9R9v8_VCpmg9Kebo_wFD_WsvLIPqwRBVBCNh8w==";
+  const VALOR_FRETE_GRATIS = 500;
+  const WHATSAPP_NUMBER = "5561982777196";
+
+  // --- ESTADOS DE INTERFACE E DADOS ---
+  const [carrinho, setCarrinho] = useState([]);
+  const [modalAberto, setModalAberto] = useState(false);
+  const [menuMobileAberto, setMenuMobileAberto] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [dados, setDados] = useState({ nome: '', email: '', cpf: '', cep: '', endereco: '' });
+  const [frete, setFrete] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // --- CÁLCULOS (Otimizados com useMemo para evitar re-cálculos desnecessários) ---
+  const subtotal = useMemo(() => {
+    return Array.isArray(carrinho)
+      ? carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0)
+      : 0;
+  }, [carrinho]);
+
+  const totalGeral = subtotal + frete;
+
+  // --- 1. PERSISTÊNCIA E HIDRATAÇÃO ---
+  useEffect(() => {
+    setIsMounted(true); // Garante que o código saiba que está no cliente
+    const salvo = localStorage.getItem('carrinho_ira');
+    if (salvo) {
+      try {
+        const parsed = JSON.parse(salvo);
+        if (Array.isArray(parsed)) setCarrinho(parsed);
+      } catch (e) {
+        console.error("Erro ao recuperar cache do carrinho", e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isMounted) {
+      localStorage.setItem('carrinho_ira', JSON.stringify(carrinho));
+    }
+  }, [carrinho, isMounted]);
+
+  // --- 2. MONITORAR SCROLL ---
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 400);
+    window.addEventListener('scroll', handleScroll, { passive: true }); // passive para melhor performance
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // --- 3. LÓGICA DE FRETE ---
+  useEffect(() => {
+    if (subtotal === 0 || subtotal >= VALOR_FRETE_GRATIS) {
+      setFrete(0);
+      return;
+    }
+    // Verifica apenas se o CEP tem o tamanho correto antes de calcular
+    const cepLimpo = dados.cep.replace(/\D/g, '');
+    if (cepLimpo.length === 8) {
+      const regiao = cepLimpo.substring(0, 2);
+      // Região 70-73 (DF e Entorno)
+      setFrete(["70", "71", "72", "73"].includes(regiao) ? 25 : 50);
+    }
+  }, [subtotal, dados.cep]);
+
+  const handleCEP = async (v) => {
+    const cep = v.replace(/\D/g, '').substring(0, 8);
+    setDados(prev => ({ ...prev, cep }));
+    
+    if (cep.length === 8) {
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const json = await res.json();
+        if (!json.erro) {
+          setDados(prev => ({
+            ...prev,
+            endereco: `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`
+          }));
+        }
+      } catch (e) { 
+        console.error("Erro ao buscar CEP na API ViaCEP"); 
+      }
+    }
+  };
+
+  // --- 4. GESTÃO DO CARRINHO ---
+  const add = (p, tamanhoSelecionado = null) => {
+    if (p.category === 'vestuario' && !tamanhoSelecionado) {
+      alert('⚠️ Por favor, selecione um tamanho (P, M, G ou GG)');
+      return;
+    }
+
+    setCarrinho(prevCarrinho => {
+      const existe = prevCarrinho.find(item =>
+        item.id === p.id && (p.category === 'vestuario' ? item.tamanho === tamanhoSelecionado : true)
+      );
+
+      if (existe) {
+        return prevCarrinho.map(item =>
+          item.id === p.id && (p.category === 'vestuario' ? item.tamanho === tamanhoSelecionado : true)
+            ? { ...item, quantidade: item.quantidade + 1 }
+            : item
+        );
+      }
+      return [...prevCarrinho, { ...p, tamanho: tamanhoSelecionado, quantidade: 1 }];
+    });
+    
+    setModalAberto(true);
+  };
+
+  const remover = (index) => {
+    setCarrinho(prev => {
+      const novo = [...prev];
+      novo.splice(index, 1);
+      return novo;
+    });
+  };
+
+  // --- 5. CHECKOUT TRADICIONAL (MERCADO PAGO) ---
+  const iniciarCheckoutMP = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const cpfLimpo = dados.cpf.replace(/\D/g, '');
+
+    // Validações básicas
+    if (!dados.nome || dados.nome.trim().split(' ').length < 2) {
+      alert("Por favor, insira seu nome completo.");
+      return;
+    }
+    if (cpfLimpo.length !== 11) {
+      alert("CPF Inválido. Insira os 11 dígitos.");
+      return;
+    }
+    if (carrinho.length === 0) {
+      alert("Seu carrinho está vazio.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      // Registrar no Supabase primeiro
+      // Registrar no Supabase
       const { data: pedido, error: errSupa } = await supabase
         .from('pedidos')
         .insert([{
@@ -140,20 +287,29 @@ export default function Loja() {
         }])
         .select().single();
 
-      if (errSupa) throw errSupa;
+      if (errSupa) throw new Error("Erro ao salvar pedido: " + errSupa.message);
 
       // Gerar preferência no Mercado Pago
       const res = await fetch('/api/checkout-mp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ itens: carrinho, frete, pedidoId: pedido.id, email: dados.email })
+        body: JSON.stringify({ 
+          itens: carrinho, 
+          frete, 
+          pedidoId: pedido.id, 
+          email: dados.email.trim() 
+        })
       });
 
       const { init_point } = await res.json();
-      if (init_point) window.location.href = init_point;
+      if (init_point) {
+        window.location.href = init_point;
+      } else {
+        throw new Error("Não foi possível gerar o link de pagamento.");
+      }
 
     } catch (err) {
-      alert("Erro ao processar checkout: " + err.message);
+      alert("Erro no checkout: " + err.message);
     } finally {
       setLoading(false);
     }
