@@ -10,14 +10,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { itens, email, frete, cpf, pedidoId, firstName, lastName } = req.body;
+    // 1. Removida a exigência estrita de CPF aqui, pois validaremos abaixo
+    const { itens, email, frete, cpf, pedidoId, nome } = req.body;
 
-    if (!itens || !email || !cpf || !pedidoId) {
-      return res.status(400).json({ error: "Dados insuficientes." });
+    if (!itens || !email || !pedidoId) {
+      return res.status(400).json({ error: "Dados insuficientes (Itens, Email ou PedidoID faltando)." });
     }
 
     const emailLimpo = email.toLowerCase().trim();
-    const cpfLimpo = cpf.replace(/\D/g, '');
+    // Tratamento para o CPF não quebrar se vier vazio
+    const cpfLimpo = cpf ? cpf.replace(/\D/g, '') : '';
 
     const itemsMP = itens.map(item => ({
       id: String(item.id),
@@ -39,43 +41,52 @@ export default async function handler(req, res) {
 
     const preference = new Preference(client);
 
-    const response = await preference.create({
+    // 2. Separar Nome e Sobrenome para o MP (Exigência da API deles)
+    const nomePartes = nome ? nome.trim().split(' ') : ["Cliente", "Irá"];
+    const firstName = nomePartes[0];
+    const lastName = nomePartes.length > 1 ? nomePartes.slice(1).join(' ') : 'Lifestyle';
+
+    const preferenceData = {
       body: {
         items: itemsMP,
         payer: {
           email: emailLimpo,
-          identification: {
-            type: 'CPF',
-            number: cpfLimpo
-          },
-          // Nomes vindos do frontend já tratados
-          first_name: firstName || "Cliente",
-          last_name: lastName || "Ira Lifestyle"
+          first_name: firstName,
+          last_name: lastName,
         },
         external_reference: String(pedidoId), 
         back_urls: {
           success: `${process.env.NEXT_PUBLIC_SITE_URL}/sucesso`,
-          failure: `${process.env.NEXT_PUBLIC_SITE_URL}/erro`,
+          failure: `${process.env.NEXT_PUBLIC_SITE_URL}/loja`,
           pending: `${process.env.NEXT_PUBLIC_SITE_URL}/pendente`,
         },
         auto_return: "approved",
-        // Nome que aparece na fatura do cartão (Max 16 caracteres)
         statement_descriptor: "PAO DE QUEIJO IRA",
         payment_methods: {
           installments: 12,
         },
-        // Importante: A URL deve ser HTTPS e pública para funcionar
-        notification_url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/webhooks/mercadopago`,
+        // Opcional: só descomente se o webhook estiver pronto e em HTTPS
+        // notification_url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/webhooks/mercadopago`,
       }
-    });
+    };
 
-    res.status(200).json({ init_point: response.init_point });
+    // 3. Só adiciona CPF se ele existir (Evita erro em pagamentos que não pedem CPF)
+    if (cpfLimpo) {
+      preferenceData.body.payer.identification = {
+        type: 'CPF',
+        number: cpfLimpo
+      };
+    }
+
+    const response = await preference.create(preferenceData);
+
+    return res.status(200).json({ init_point: response.init_point });
 
   } catch (error) {
-    console.error("Erro MP:", error.cause?.description || error.message);
-    res.status(500).json({ 
+    console.error("Erro detalhado MP:", error);
+    return res.status(500).json({ 
       error: "Erro ao gerar pagamento",
-      details: error.cause?.description || error.message 
+      details: error.message 
     });
   }
 }
