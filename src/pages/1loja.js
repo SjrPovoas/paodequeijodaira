@@ -22,7 +22,15 @@ export default function Loja() {
   // Controle de Navegação do Checkout
   const [etapaCheckout, setEtapaCheckout] = useState('sacola'); // 'sacola' | 'metodo' | 'dados'
   const [metodoSelecionado, setMetodoSelecionado] = useState(null); // 'mp' | 'cripto'
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
+  // E este useEffect para controlar a visibilidade do botão ao rolar a página:
+  useEffect(() => {
+  const handleScroll = () => setShowScrollTop(window.scrollY > 400);
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
   // Dados do Formulário
   const [dados, setDados] = useState({ nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '' });
   const [frete, setFrete] = useState(0);
@@ -197,6 +205,14 @@ export default function Loja() {
       setLoading(false);
     }
   };
+
+    // 4. PRODUTOS
+  const produtos = [
+    { id: 1, nome: 'T-Shirt Logo Pão de Queijo da Irá (Masc)', preco: 110, img: '/imagens/camiseta1.png', category: 'vestuario' },
+    { id: 2, nome: 'T-Shirt Logo Pão de Queijo da Irá (Fem)', preco: 110, img: '/imagens/camiseta2.png', category: 'vestuario' },
+    { id: 3, nome: 'Avental de Lona Pão de Queijo da Irá', preco: 85, img: '/imagens/avental.png', category: 'acessorios' },
+    { id: 4, nome: 'Caneca Cerâmica Fosca do Pão de Queijo da Irá', preco: 42, img: '/imagens/caneca.png', category: 'acessorios' },
+  ];
 
   // Se o componente ainda não montou no cliente, não renderiza nada (evita erro de hidratação)
   if (!isMounted) return null;
