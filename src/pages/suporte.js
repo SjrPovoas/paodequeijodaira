@@ -98,9 +98,11 @@ export default function Suporte() {
               <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600"><i className="bi bi-x-lg"></i></button>
             </div>
             <div className="flex-1 flex flex-col justify-center items-center space-y-8">
-              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase">Home</Link>
+              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase">COMPRAR PÃO DE QUEIJO</Link>
               <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase">Loja Lifestyle</Link>
-              <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase text-orange-600">Rastrear Pedido</Link>
+              <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
+                TROCAS & DEVOLUÇÕES<i className="bi bi-box-seam text-[18px]"></i>
+              </Link>
             </div>
           </nav>
         </div>
