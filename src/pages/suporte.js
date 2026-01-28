@@ -68,18 +68,49 @@ export default function Suporte() {
                 <meta name="description" content="Acompanhe o status da sua entrega na Loja Lifestyle e Acessórios. Rastreio tradicional ou via Blockchain Polygon (POL)." />
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
             </Head>
-    
-      {/* HEADER PRINCIPAL */}
+    <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <Link href="/">
+            <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
+          </Link>
+
+          <button onClick={() => setMenuMobileAberto(true)} className="md:hidden text-orange-600">
+            <i className="bi bi-list text-3xl"></i>
+          </button>
+
+          <nav className="hidden md:flex items-center gap-8">
+            <Link href="/loja" className="text-[10px] font-black uppercase tracking-widest hover:text-orange-600">Loja Lifestyle</Link>
+            <Link href="/pedidos" className="text-[10px] font-black uppercase tracking-widest hover:text-orange-600">Rastrear Pedido</Link>
+          </nav>
+        </div>
+
+        {/* MENU MOBILE - ESTRUTURA CORRIGIDA */}
+        <div className={`fixed inset-0 z-[1000] md:hidden ${menuMobileAberto ? 'visible' : 'invisible'}`}>
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMenuMobileAberto(false)}></div>
+          <nav className={`absolute top-0 right-0 w-[80%] h-screen bg-white transition-transform duration-500 ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'} flex flex-col`}>
+            <div className="flex justify-end p-6">
+              <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600"><i className="bi bi-x-lg"></i></button>
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-center space-y-8">
+              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase">Home</Link>
+              <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase">Loja Lifestyle</Link>
+              <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase text-orange-600">Rastrear Pedido</Link>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      {/* HEADER PRINCIPAL 
       <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          {/* LOGO */}
+          {/* LOGO *
           <Link href="/">
             <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
           </Link>
           
           <button onClick={() => setMenuMobileAberto(true)} className="md:hidden text-orange-600">
             <i className="bi bi-list text-3xl"></i>
-          </button>
+          </button> */}
 
 {/* <nav className="hidden md:flex items-center gap-8">
             <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
@@ -90,9 +121,9 @@ export default function Suporte() {
             </Link>
             <Link href="/loja" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">Loja Lifestyle</Link>
           </nav>
-        </div>/*}
+        </div>
 
-          {/* NAVEGAÇÃO DESKTOP */}
+          {/* NAVEGAÇÃO DESKTOP 
           <nav className="hidden md:flex items-center gap-8">
             <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
               RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i>
@@ -104,7 +135,7 @@ export default function Suporte() {
           </nav>
          </div>
 
-        {/* ESTRUTURA MENU MOBILE OVERLAY */}
+        ESTRUTURA MENU MOBILE OVERLAY 
         <div className={`fixed inset-0 z-[1000] md:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
           <div 
             className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`} 
@@ -130,7 +161,7 @@ export default function Suporte() {
             </div>
           </nav>
         </div>
-      </header>
+      </header>/*}
 
            {/* 3. CONTEÚDO PRINCIPAL (FORMULÁRIO) */}
             <main className="flex-grow py-20 px-6 max-w-4xl mx-auto w-full">
