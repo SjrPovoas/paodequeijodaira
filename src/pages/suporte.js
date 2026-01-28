@@ -76,12 +76,13 @@ export default function Suporte() {
           <Link href="/">
             <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
           </Link>
-
-          {/* BOTÃO MENU MOBILE */}
-          <button onClick={() => setMenuMobileAberto(true)} className="md:hidden text-orange-600 flex flex-col items-center">
-            <i className="bi bi-list text-3xl"></i>
-            <span className="text-[8px] font-black uppercase">Menu</span>
-          </button>
+    
+          {/* NAVEGAÇÃO MOBILE */}
+          <div className="flex md:hidden items-center gap-4">
+            <Link href="/pedidos" className="flex flex-col items-center relative">
+              <i className="bi bi-box-seam text-2xl"></i>
+              <span className="text-[8px] font-black uppercase mt-0.4">Rastrear</span>
+            </Link>
 
           {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex items-center gap-8">
@@ -91,9 +92,15 @@ export default function Suporte() {
             <Link href="/suporte" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
               TROCAS & DEVOLUÇÕES<i className="bi bi-box-seam text-[18px]"></i>
             </Link>
-            <Link href="/loja" className="text-[10px] font-black uppercase tracking-widest hover:text-orange-600 transition-colors">Loja Lifestyle</Link>
+            <Link href="/loja" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">Loja Lifestyle</Link>
           </nav>
         </div>
+
+        {/* BOTÃO MENU MOBILE */}
+          <button onClick={() => setMenuMobileAberto(true)} className="md:hidden text-orange-600 flex flex-col items-center">
+            <i className="bi bi-list text-3xl"></i>
+            <span className="text-[8px] font-black uppercase">Menu</span>
+          </button>
 
         {/* ESTRUTURA MENU MOBILE OVERLAY */}
         <div className={`fixed inset-0 z-[1000] md:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
@@ -110,11 +117,13 @@ export default function Suporte() {
             </div>
 
             <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-10">
-              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase">Home</Link>
-              <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600 pb-1">LOJA LIFESTYLE</Link>
-              <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[11px] font-black uppercase tracking-[0.2em] text-orange-600 flex flex-col items-center gap-2">
-                <i className="bi bi-box-seam text-2xl"></i>
-                <span>RASTREAR PEDIDO</span>
+              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase">COMPRAR PÃO DE QUEIJO</Link>
+              <Link href="/loja" onClick={() => setMenuMobileAberto(falclassName="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600 pb-1">LOJA LIFESTYLE</Link>
+              <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
+                RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i>
+              </Link>
+              <Link href="/suporte" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
+                TROCAS & DEVOLUÇÕES<i className="bi bi-box-seam text-[18px]"></i>
               </Link>
             </div>
           </nav>
