@@ -69,7 +69,7 @@ export default function Suporte() {
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
             </Head>
 
-{/* HEADER PRINCIPAL */}
+      {/* HEADER PRINCIPAL */}
       <header className="border-b border-gray-100 py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* LOGO */}
@@ -86,7 +86,7 @@ export default function Suporte() {
               TROCAS & DEVOLUÇÕES <i className="bi bi-arrow-left-right text-lg"></i>
             </Link>
             <Link href="/loja" className="bg-orange-600 text-white px-6 py-3 font-black rounded-full hover:bg-black transition-all">
-              LOJA LIFESTYLE
+              LOJA LIFESTYLE & ACESSÓRIOS 
             </Link>
           </nav>
 
@@ -137,6 +137,7 @@ export default function Suporte() {
             <div className="p-10 text-center border-t border-gray-50">
               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">© Pão de Queijo da Irá</p>
             </div>
+           </div>
           </nav>
         </div>
       </header>
