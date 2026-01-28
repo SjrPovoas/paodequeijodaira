@@ -70,63 +70,48 @@ export default function Suporte() {
             </Head>
 
       {/* HEADER PRINCIPAL */}
-      <header className="border-b border-gray-100 py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-[100]">
+      <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* LOGO */}
           <Link href="/">
             <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
           </Link>
 
-          {/* NAVEGAÇÃO DESKTOP */}
-          <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
-            <Link href="/pedidos" className="hover:text-orange-600 transition-colors flex items-center gap-2">
-              RASTREAR PEDIDO <i className="bi bi-box-seam text-lg"></i>
-            </Link>
-            <Link href="/suporte" className="text-orange-600 flex items-center gap-2">
-              TROCAS & DEVOLUÇÕES <i className="bi bi-arrow-left-right text-lg"></i>
-            </Link>
-            <Link href="/loja" className="bg-orange-600 text-white px-6 py-3 font-black rounded-full hover:bg-black transition-all">
-              LOJA LIFESTYLE & ACESSÓRIOS 
-            </Link>
-          </nav>
+          {/* BOTÃO MENU MOBILE */}
+          <button onClick={() => setMenuMobileAberto(true)} className="md:hidden text-orange-600 flex flex-col items-center">
+            <i className="bi bi-list text-3xl"></i>
+            <span className="text-[8px] font-black uppercase">Menu</span>
+          </button>
 
-          {/* BOTÃO MENU MOBILE (BOTÃO HAMBÚRGUER) */}
-          <div className="flex md:hidden items-center">
-            <button onClick={() => setMenuMobileAberto(true)} className="text-orange-600 p-2">
-              <i className="bi bi-list text-3xl"></i>
-            </button>
-          </div>
+          {/* NAVEGAÇÃO DESKTOP */}
+          <nav className="hidden md:flex items-center gap-8">
+            <Link href="/loja" className="text-[10px] font-black uppercase tracking-widest hover:text-orange-600 transition-colors">Loja Lifestyle</Link>
+            <Link href="/pedidos" className="text-[10px] font-black uppercase tracking-widest hover:text-orange-600 transition-colors">Rastrear Pedido</Link>
+          </nav>
         </div>
 
-        {/* MENU MOBILE ESTRUTURA (OVERLAY) */}
-        <div className={`fixed inset-0 z-[1000] transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
+        {/* ESTRUTURA MENU MOBILE OVERLAY */}
+        <div className={`fixed inset-0 z-[1000] md:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
           {/* Backdrop Escuro */}
           <div 
-            className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`} 
             onClick={() => setMenuMobileAberto(false)}
           ></div>
           
-          {/* Painel Lateral do Menu */}
-          <nav className={`absolute top-0 right-0 w-full h-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
+          {/* Painel Branco Lateral */}
+          <nav className={`absolute top-0 right-0 w-[80%] h-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
             <div className="flex justify-end p-6">
-              <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600">
+              <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600 p-2">
                 <i className="bi bi-x-lg"></i>
               </button>
             </div>
+
             <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-10">
-              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">
-                COMPRAR PÃO DE QUEIJO
-              </Link>
-              <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600 pb-1">
-                LOJA LIFESTYLE & ACESSÓRIOS 
-              </Link>
-              <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="flex flex-col items-center gap-1 text-orange-600">
+              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">Home</Link>
+              <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600 pb-1">LOJA LIFESTYLE</Link>
+              <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[11px] font-black uppercase tracking-[0.2em] text-orange-600 flex flex-col items-center gap-2">
                 <i className="bi bi-box-seam text-2xl"></i>
-                <span className="text-[10px] font-black uppercase tracking-widest">RASTREAR PEDIDO</span>
-              </Link>
-              <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="flex flex-col items-center gap-1 text-orange-600">
-                <i className="bi bi-arrow-left-right text-2xl"></i>
-                <span className="text-[10px] font-black uppercase tracking-widest">TROCAS & DEVOLUÇÕES</span>
+                <span>RASTREAR PEDIDO</span>
               </Link>
             </div>
 
@@ -134,7 +119,7 @@ export default function Suporte() {
               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">© Pão de Queijo da Irá</p>
             </div>
           </nav>
-        
+        </div>
       </header>
 
             {/* 3. CONTEÚDO PRINCIPAL (FORMULÁRIO) */}
