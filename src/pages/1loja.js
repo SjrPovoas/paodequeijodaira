@@ -257,7 +257,7 @@ export default function Loja() {
         • Entrega em todo Brasil • Frete Grátis acima de R$ 500,00 •
       </div>
 
-{/* HEADER PRINCIPAL */}
+     {/* HEADER PRINCIPAL */}
       <header className="border-b border-gray-100 py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* LOGO */}
@@ -410,9 +410,9 @@ export default function Loja() {
       <main className="max-w-7xl mx-auto py-20 px-6 flex-grow">
         <div className="mb-20">
             <h1 className="text-6xl md:text-9xl font-black uppercase italic tracking-tighter leading-none">
-              LIFESTYLE <br /><span className="text-orange-600">& EQUIP</span>
+              LIFESTYLE <br /><span className="text-orange-600">& ACESSÓRIOS</span>
             </h1>
-            <p className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-400 mt-4">Curadoria exclusiva Pão de Queijo da Irá</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-400 mt-2">Produtos exclusivos e oficiais da marca do Pão de Queijo da Irá</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-20">
@@ -460,10 +460,6 @@ export default function Loja() {
                 <h4 className="font-black uppercase text-sm tracking-widest mb-2 text-orange-500">Golden Discount</h4>
                 <p className="text-gray-300 text-xs leading-relaxed">10% de desconto fixo em todos os itens da loja.</p>
               </div>
-              <div>
-                <h4 className="font-black uppercase text-sm tracking-widest mb-2 text-orange-500">Early Access</h4>
-                <p className="text-gray-300 text-xs leading-relaxed">Acesso a novas fornadas 24h antes do público geral.</p>
-              </div>
             </div>
             <div className="space-y-8">
               <div>
@@ -487,7 +483,51 @@ export default function Loja() {
         </div>
       </section>
 
-     {/* 5. MODAL DE CHECKOUT */}
+            {/* 5. SEÇÃO DE CREDIBILIDADE (Fiel ao original) */}
+            <section className="bg-white border-t border-gray-50 py-16">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+                        <div className="flex flex-col items-center text-center space-y-3 group">
+                            <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-green-50 transition-all">
+                                <i className="bi bi-google text-gray-400 group-hover:text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Google Safe Browsing</h5>
+                                <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Ambiente monitorado e livre de malwares</p>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center text-center space-y-3 group">
+                            <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-blue-50 transition-all">
+                                <i className="bi bi-shield-lock text-gray-400 group-hover:text-blue-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Conexão Criptografada</h5>
+                                <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Dados protegidos via SSL 256-bits</p>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center text-center space-y-3 group">
+                            <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-purple-50 transition-all">
+                                <i className="bi bi-hexagon-fill text-gray-400 group-hover:text-[#8247E5] text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Polygon Ecosystem</h5>
+                                <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Pagamentos nativos em rede (POL)</p>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center text-center space-y-3 group">
+                            <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-orange-50 transition-all">
+                                <i className="bi bi-award text-gray-400 group-hover:text-orange-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Curadoria Lifestyle</h5>
+                                <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Produtos exclusivos de tiragem limitada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+     {/* 6. MODAL DE CHECKOUT */}
       {modalAberto && (
         <div className="fixed inset-0 z-[200] flex justify-end">
           {/* Backdrop (Fecha ao clicar fora) */}
@@ -596,7 +636,7 @@ export default function Loja() {
                     <p className="font-black uppercase text-sm tracking-tight">Pagar com Cripto</p>
                     <p className="text-[10px] font-bold text-gray-400 mt-1">REDE POLYGON (POL)</p>
                   </div>
-                  <i className="bi bi-currency-bitcoin text-2xl text-orange-500 group-hover:scale-125 transition-transform"></i>
+                  <i className="bi bi-hexagon text-2xl text-purple-500 group-hover:scale-125 transition-transform"></i>
                 </button>
 
                 <button onClick={() => setEtapaCheckout('sacola')} className="w-full py-4 text-[10px] font-black uppercase text-gray-300 hover:text-black transition-colors">Voltar para a Sacola</button>
@@ -625,11 +665,7 @@ export default function Loja() {
                         value={dados.cpf} onChange={e => setDados({...dados, cpf: e.target.value})}
                       />
                     )}
-                    <input 
-                      type="text" placeholder="COMPLEMENTO / NÚMERO"
-                      className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all"
-                      value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})}
-                    />
+                    <input type="text" placeholder="COMPLEMENTO / NÚMERO" className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all" value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})}/>
                   </div>
                 </div>
 
@@ -643,19 +679,11 @@ export default function Loja() {
                   </div>
 
                   {metodoSelecionado === 'mp' ? (
-                    <button 
-                      onClick={processarPedidoFinal} 
-                      disabled={loading}
-                      className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3"
-                    >
+                    <button onClick={processarPedidoFinal} disabled={loading} className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3">
                       {loading ? <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span> : 'Finalizar e Pagar'}
                     </button>
                   ) : (
-                    <BotaoPagamentoWeb3 
-                      total={totalGeral} 
-                      dadosCliente={dados} 
-                      onBeforeClick={processarPedidoFinal} 
-                    />
+                    <BotaoPagamentoWeb3 total={totalGeral} dadosCliente={dados} onBeforeClick={processarPedidoFinal}/>
                   )}
                   <button onClick={() => setEtapaCheckout('metodo')} className="w-full py-4 text-[10px] font-black uppercase text-gray-300 hover:text-black transition-colors">Trocar Método de Pagamento</button>
                 </div>
@@ -665,7 +693,7 @@ export default function Loja() {
         </div>
       )}
 
-      {/* 6. FOOTER */}
+      {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:justify-between mb-16">
@@ -678,9 +706,9 @@ export default function Loja() {
               </Link>
               {/* REDES SOCIAIS */}
               <div className="flex gap-4">
-                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></a>
-                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></a>
-                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></a>
+                <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></Link>
+                <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></Link>
+                <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></Link>
               </div>
             </div>
 
@@ -696,10 +724,10 @@ export default function Loja() {
                   <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
                   <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p>
                 </Link>
-                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center justify-center md:justify-start gap-3 group">
+                <Link href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center justify-center md:justify-start gap-3 group">
                   <i className="bi bi-whatsapp text-orange-600 text-lg"></i>
                   <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Fale Conosco</p>
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -711,12 +739,12 @@ export default function Loja() {
                 <p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p>
               </div>
               <div className="pt-2">
-                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
+                <Link href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
                   <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>        
                   <p className="text-sm text-gray-600 leading-relaxed text-left">
                     Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />
                     Recreio Mossoró - Cidade Ocidental-GO</p>
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -739,7 +767,7 @@ export default function Loja() {
 
           {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
-            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+            <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link>
           </div>
         </div>
       </footer>
