@@ -96,12 +96,6 @@ export default function Suporte() {
           </nav>
         </div>
 
-        {/* BOTÃO MENU MOBILE */}
-          <button onClick={() => setMenuMobileAberto(true)} className="md:hidden text-orange-600 flex flex-col items-center">
-            <i className="bi bi-list text-3xl"></i>
-            <span className="text-[8px] font-black uppercase">Menu</span>
-          </button>
-
         {/* ESTRUTURA MENU MOBILE OVERLAY */}
         <div className={`fixed inset-0 z-[1000] md:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
           <div 
