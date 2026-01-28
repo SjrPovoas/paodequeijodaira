@@ -15,7 +15,7 @@ export default function BotaoPagamentoWeb3({ total, carrinho, dadosCliente, onBe
   // Configurações da Rede (Exemplo: Polygon Mainnet id: 137)
   const REDE_CORRETA_ID = 137; 
   // Endereço que vai receber o dinheiro (SUA CARTEIRA)
-  const CARTEIRA_DESTINO = "0xSEU_ENDERECO_AQUI"; 
+  const CARTEIRA_DESTINO = "0x9523160C1cAf82358B9a6af332E47d6F5fDb02ac"; 
 
   // Hook para enviar a transação
   const { sendTransactionAsync } = useSendTransaction();
