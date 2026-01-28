@@ -97,13 +97,22 @@ export default function Suporte() {
             <div className="flex justify-end p-6">
               <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600"><i className="bi bi-x-lg"></i></button>
             </div>
-            <div className="flex-1 flex flex-col justify-center items-center space-y-8">
-              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase">COMPRAR PÃO DE QUEIJO</Link>
-              <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase">Loja Lifestyle</Link>
-              <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-                TROCAS & DEVOLUÇÕES<i className="bi bi-box-seam text-[18px]"></i>
-              </Link>
-            </div>
+              {/* NOVOS LINKS DE RASTREIO E SUPORTE */}
+              <div className="pt-4 flex flex-col space-y-4">
+                <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
+                  <i className="bi bi-box-seam text-lg"></i> Rastrear Pedido
+                </Link>
+                <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
+                  <i className="bi bi-arrow-left-right text-lg"></i> Trocas & Devoluções
+                </Link>
+              </div>
+
+              {/* REDES SOCIAIS */}
+              <div className="flex justify-center items-center gap-6 pt-6">
+                <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></Link>
+                <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></Link>
+                <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
+              </div>
           </nav>
         </div>
       </header>
