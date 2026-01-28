@@ -625,7 +625,7 @@ export default function Loja() {
                     <p className="font-black uppercase text-sm tracking-tight">Cartão ou PIX</p>
                     <p className="text-[10px] font-bold text-gray-400 mt-1">PROCESSADO POR MERCADO PAGO</p>
                   </div>
-                  <i className="bi bi-lightning-charge-fill text-2xl text-orange-500 group-hover:scale-125 transition-transform"></i>
+                  <i className="bi bi-lightning-charge-fill text-2xl text-gray-400 group-hover:scale-125 transition-transform"></i>
                 </button>
 
                 <button 
@@ -636,7 +636,7 @@ export default function Loja() {
                     <p className="font-black uppercase text-sm tracking-tight">Pagar com Cripto</p>
                     <p className="text-[10px] font-bold text-gray-400 mt-1">REDE POLYGON (POL)</p>
                   </div>
-                  <i className="bi bi-hexagon text-2xl text-purple-500 group-hover:scale-125 transition-transform"></i>
+                  <i className="bi bi-hexagon-fill text-2xl text-gray-400 group-hover:scale-125 transition-transform"></i>
                 </button>
 
                 <button onClick={() => setEtapaCheckout('sacola')} className="w-full py-4 text-[10px] font-black uppercase text-gray-300 hover:text-black transition-colors">Voltar para a Sacola</button>
