@@ -81,7 +81,7 @@ export default function Suporte() {
             <i className="bi bi-list text-3xl"></i>
           </button>
 
-          <nav className="hidden md:flex items-center gap-8">
+{/* <nav className="hidden md:flex items-center gap-8">
             <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
               RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i>
             </Link>
@@ -90,7 +90,7 @@ export default function Suporte() {
             </Link>
             <Link href="/loja" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">Loja Lifestyle</Link>
           </nav>
-        </div>
+        </div>/*}
 
           {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex items-center gap-8">
