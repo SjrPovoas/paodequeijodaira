@@ -120,35 +120,60 @@ export default function Termos() {
         </div>
       </main>
 
-      {/* FOOTER E ASSINATURA */}
+      {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-            <div className="flex flex-col items-center md:items-start">
-              <a href="/"><img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" /></a>
-              <div className="flex space-x-2">
-                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
-                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
-                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
-                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-geo-alt-fill"></i></a>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:justify-between mb-16">
+
+            {/* COLUNA 1: LOGO E REDES SOCIAIS */}
+            <div className="flex flex-col items-center md:items-start space-y-4">
+              {/* LOGO */}
+              <Link href="/">
+                <img src="/logo-paodequeijodaira.jpg" className="h-20 cursor-pointer" alt="Logo" />
+              </Link>
+              {/* REDES SOCIAIS */}
+              <div className="flex gap-4">
+                <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></Link>
+                <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></Link>
+                <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></Link>
               </div>
             </div>
+
+            {/* COLUNA 2: FUNCIONAMENTO & LOCALIZAÇÃO */}
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                <strong>Horário:</strong> Seg a Sáb das 08:00 às 18:00.<br />Dom das 08:00 às 12:00.</p>
-              <p className="text-sm text-gray-600">
-                <strong>Endereço:</strong> Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
+              <div className="flex items-start justify-center md:justify-start gap-3">
+                <i className="bi bi-clock text-orange-600 text-lg"></i>
+                <p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p>
+              </div>
+              <div className="pt-2">
+                <Link href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
+                  <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>        
+                  <p className="text-sm text-gray-600 leading-relaxed text-left">
+                    Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />
+                    Recreio Mossoró - Cidade Ocidental-GO</p>
+                </Link>
+              </div>
             </div>
-            <div className="text-center md:text-right">
-              <h3 className="text-lg font-black uppercase mb-2">Pão de Queijo da Irá</h3>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
-              <p className="mt-2 space-x-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                <a href="/termos" className="hover:text-black">Termos de Uso</a>
-                <span>|</span>
-                <a href="#" className="text-orange-600">Privacidade</a></p>
+
+            {/* COLUNA 3: INSTITUCIONAL & DIREITOS */}
+            <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
+              <h3 className="text-[14px] text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>    
+              <div className="flex flex-row items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">
+                <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group">
+                  Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
+                </Link>
+                <span className="text-gray-200">|</span>
+                <Link href="/privacidade" className="text-orange-500 flex items-center gap-1 transition-colors group">
+                  Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
+                </Link>
+              </div> 
+              <p className="text-[9px] pt-2 font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">© 2026 - Todos os direitos reservados.</p>
             </div>
           </div>
+
+          {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
             <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
           </div>
@@ -156,11 +181,18 @@ export default function Termos() {
       </footer>
 
       {/* BOTÃO VOLTAR AO TOPO */}
-      <button
-        onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'}`} >
-        <i className="bi bi-arrow-up text-xl font-bold"></i>
-      </button>
+      {showScrollTop && (
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 animate-bounce">
+          <i className="bi bi-arrow-up"></i>
+        </button>
+      )}
+
+      <style jsx global>
+        {`@keyframes slide-left { from { transform: translateX(100%); } to { transform: translateX(0); } }
+          @keyframes slide-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
+          .animate-slide-left { animation: slide-left 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+          .animate-slide-right { animation: slide-right 0.4s cubic-bezier(0.16, 1, 0.3, 1); }`}
+      </style>
 
     </div>
   );
