@@ -102,6 +102,7 @@ export default function Suporte() {
             </Link>
             <Link href="/loja" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">Loja Lifestyle</Link>
           </nav>
+         </div>
 
         {/* ESTRUTURA MENU MOBILE OVERLAY */}
         <div className={`fixed inset-0 z-[1000] md:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
