@@ -78,11 +78,17 @@ export default function Suporte() {
             <i className="bi bi-list text-3xl"></i>
           </button>
 
+          {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/loja" className="text-[10px] font-black uppercase tracking-widest hover:text-orange-600">Loja Lifestyle</Link>
-            <Link href="/pedidos" className="text-[10px] font-black uppercase tracking-widest hover:text-orange-600">Rastrear Pedido</Link>
+            <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
+              RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i>
+            </Link>
+            <Link href="/suporte" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
+              TROCAS & DEVOLUÇÕES<i className="bi bi-box-seam text-[18px]"></i>
+            </Link>
+            <Link href="/loja" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">Loja Lifestyle</Link>
           </nav>
-        </div>
+         </div>
 
         {/* MENU MOBILE - ESTRUTURA CORRIGIDA */}
         <div className={`fixed inset-0 z-[1000] md:hidden ${menuMobileAberto ? 'visible' : 'invisible'}`}>
