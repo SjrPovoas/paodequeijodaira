@@ -696,7 +696,7 @@ export default function Loja() {
       {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:justify-between mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:justify-between mb-16">
 
             {/* COLUNA 1: LOGO E REDES SOCIAIS */}
             <div className="flex flex-col items-center md:items-start space-y-4">
@@ -712,26 +712,7 @@ export default function Loja() {
               </div>
             </div>
 
-            {/* COLUNA 2: AJUDA & SUPORTE */}
-            <div className="text-center md:text-left space-y-4">
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Ajuda & Suporte</h4>
-              <div className="space-y-4">
-                <Link href="/pedidos" className="flex items-center justify-center md:justify-start gap-2 group">
-                  <i className="bi bi-box-seam text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
-                </Link>
-                <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-2 group">
-                  <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p>
-                </Link>
-                <Link href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center justify-center md:justify-start gap-3 group">
-                  <i className="bi bi-whatsapp text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Fale Conosco</p>
-                </Link>
-              </div>
-            </div>
-
-            {/* COLUNA 3: FUNCIONAMENTO & LOCALIZAÇÃO */}
+            {/* COLUNA 2: FUNCIONAMENTO & LOCALIZAÇÃO */}
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
               <div className="flex items-start justify-center md:justify-start gap-3">
@@ -748,7 +729,7 @@ export default function Loja() {
               </div>
             </div>
 
-            {/* COLUNA 4: INSTITUCIONAL & DIREITOS */}
+            {/* COLUNA 3: INSTITUCIONAL & DIREITOS */}
             <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
               <h3 className="text-[14px] text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>    
@@ -767,7 +748,7 @@ export default function Loja() {
 
           {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
-            <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link>
+            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
           </div>
         </div>
       </footer>
@@ -779,7 +760,6 @@ export default function Loja() {
         </button>
       )}
 
-      {/* ESTILOS GLOBAIS */}
       <style jsx global>
         {`@keyframes slide-left { from { transform: translateX(100%); } to { transform: translateX(0); } }
           @keyframes slide-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
@@ -787,6 +767,6 @@ export default function Loja() {
           .animate-slide-right { animation: slide-right 0.4s cubic-bezier(0.16, 1, 0.3, 1); }`}
       </style>
 
-    </div> // Fecha a <div className="min-h-screen...">
-  ); // Fecha o return (
+    </div>
+  );
 }
