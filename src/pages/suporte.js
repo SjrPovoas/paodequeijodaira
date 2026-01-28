@@ -74,13 +74,13 @@ export default function Suporte() {
                 • Entrega em todo Brasil • Frete Grátis acima de R$ 500,00 •
             </div>
 
-            {/* 2. HEADER FIXO */}
+            {/* 2. HEADER FIXO (Fiel ao original) */}
             <header className="py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-[110] border-b border-gray-100 shadow-sm">
                 <div className="max-w-7xl mx-auto flex justify-between items-center">
                     <Link href="/">
                         <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
                     </Link>
-                    {/* NAVEGAÇÃO DESKTOP */}
+
                     <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
                         <Link href="/pedidos" className="hover:text-orange-600 transition-colors flex items-center gap-2">
                             RASTREAR PEDIDO <i className="bi bi-box-seam text-lg"></i>
@@ -100,43 +100,32 @@ export default function Suporte() {
                     </div>
                 </div>
 
-        {/* ESTRUTURA MENU MOBILE OVERLAY */}
-        <div className={`fixed inset-0 z-[1000] bg-white md:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
-          <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`} onClick={() => setMenuMobileAberto(false)}></div>
-          <nav className={`absolute top-0 right-0 w-[100%] h-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
-            <div className="flex justify-end p-6">
-              <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600 p-2"><i className="bi bi-x-lg"></i></button>
-            </div>
-
-            <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-6">
-              <Link href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">IRÁ DIGITAL GENESIS PASS</Link>
-              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
-              <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600">LOJA LIFESTYLE</Link>
-
-              {/* NOVOS LINKS DE RASTREIO E SUPORTE */}
-              <div className="pt-4 flex flex-col space-y-4">
-                <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-box-seam text-lg"></i> Rastrear Pedido
-                </Link>
-                <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-arrow-left-right text-lg"></i> Trocas & Devoluções
-                </Link>
-              </div>
-
-              {/* REDES SOCIAIS */}
-              <div className="flex justify-center items-center gap-6 pt-6">
-                <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></Link>
-                <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></Link>
-                <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
-              </div>
-            </div>
-
-            <div className="p-10 text-center border-t border-gray-50">
-              <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">© Pão de Queijo da Irá</p>
-            </div>
+                {/* MENU MOBILE ESTRUTURA */}
+                <div className={`fixed inset-0 z-[1000] transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
+                    <div className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`}
+                        onClick={() => setMenuMobileAberto(false)}></div>
+                    <nav className={`absolute top-0 right-0 w-[100%] h-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
+                        <div className="flex justify-end p-6">
+                            <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600">
+                                <i className="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-10">
+                            <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">HOME</Link>
+                            <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600 pb-1">LOJA LIFESTYLE</Link>
+                            <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[11px] font-black uppercase tracking-[0.2em] text-orange-600">
+                               <i className="bi bi-box-seam text-2xl"></i>
+                               <span className="text-[8px] font-black uppercase mt-0.4">RASTREAR PEDIDO</span>
+                            </Link>
+                            <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="text-[11px] font-black uppercase tracking-[0.2em] text-orange-600">
+                               <i className="bi bi-arrow-left-right text-lg"></i>
+                               <span className="text-[8px] font-black uppercase mt-0.4">TROCAS & DEVOLUÇÕES</span>
+                            </Link>
+                        </div>
                     </nav>
                 </div>
             </header>
+
 
             {/* 3. CONTEÚDO PRINCIPAL (FORMULÁRIO) */}
             <main className="flex-grow py-20 px-6 max-w-4xl mx-auto w-full">
