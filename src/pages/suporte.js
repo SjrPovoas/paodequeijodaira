@@ -62,26 +62,21 @@ export default function Suporte() {
     };
 
     return (
-        <div className="min-h-screen bg-[#FFFDF5] font-sans text-black overflow-x-hidden flex flex-col">
+      <div className="min-h-screen bg-white font-sans text-black overflow-x-hidden flex flex-col">
             <Head>
                 <title>Rastrear Pedido | Loja Lifestyle e Acessórios | Pão de Queijo da Irá</title>
                 <meta name="description" content="Acompanhe o status da sua entrega na Loja Lifestyle e Acessórios. Rastreio tradicional ou via Blockchain Polygon (POL)." />
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
             </Head>
 
-            {/* 1. BARRA DE ANÚNCIO TOPO */}
-            <div className="bg-orange-600 text-white py-2 text-center text-[10px] font-black uppercase tracking-widest sticky top-0 z-[120]">
-                • Entrega em todo Brasil • Frete Grátis acima de R$ 500,00 •
-            </div>
-
-            {/* 2. HEADER FIXO (Fiel ao original) */}
-            <header className="py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-[110] border-b border-gray-100 shadow-sm">
-                <div className="max-w-7xl mx-auto flex justify-between items-center">
-                    <Link href="/">
-                        <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
-                    </Link>
-
-                    <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
+     {/* HEADER PRINCIPAL */}
+      <header className="border-b border-gray-100 py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-[100]">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          {/* LOGO */}
+          <Link href="/">
+            <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
+          </Link>
+                   <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
                         <Link href="/pedidos" className="hover:text-orange-600 transition-colors flex items-center gap-2">
                             RASTREAR PEDIDO <i className="bi bi-box-seam text-lg"></i>
                         </Link>
@@ -90,7 +85,7 @@ export default function Suporte() {
                         </Link>
                         <Link href="/loja" className="bg-orange-600 text-white px-6 py-3 font-black rounded-full hover:bg-black transition-all">
                             LOJA LIFESTYLE
-                        </Link>
+                       </Link>
                     </nav>
 
                     <div className="flex md:hidden items-center">
@@ -111,7 +106,7 @@ export default function Suporte() {
                             </button>
                         </div>
                         <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-10">
-                            <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">HOME</Link>
+                            <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">COMPRAR PÃO DE QUEIJO</Link
                             <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600 pb-1">LOJA LIFESTYLE</Link>
                             <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[11px] font-black uppercase tracking-[0.2em] text-orange-600">
                                <i className="bi bi-box-seam text-2xl"></i>
@@ -124,6 +119,7 @@ export default function Suporte() {
                         </div>
                     </nav>
                 </div>
+               </div>               
             </header>
 
 
