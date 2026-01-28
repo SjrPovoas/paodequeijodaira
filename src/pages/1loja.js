@@ -8,7 +8,9 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
 
 export default function Loja() {
+  const LINK_LISTA_ESPERA = "https://43782b7b.sibforms.com/serve/MUIFAC4AxTEnI80RImF7seW5i2MRkz5EqdqtMse22-stmvG7jsOqdFhZ6mmpfwRA-2skU_c3GJF8YXD6k-K_kNE6_gFeWIFbCIxIEWpknHGH8m6tdQMhTuqNG7-e_tsEQRBC4-pjosH0TVoqcW1UonSiJnd2E378zedWIJRs_Dhj9R9v8_VCpmg9Kebo_wFD_WsvLIPqwRBVBCNh8w==";
   const VALOR_FRETE_GRATIS = 500;
+  const WHATSAPP_NUMBER = "5561982777196";
 
   // --- 1. ESTADOS DE INTERFACE E DADOS ---
   const [carrinho, setCarrinho] = useState([]);
@@ -22,14 +24,7 @@ export default function Loja() {
   const [metodoSelecionado, setMetodoSelecionado] = useState(null); // 'mp' | 'cripto'
 
   // Dados do Formulário
-  const [dados, setDados] = useState({ 
-    nome: '', 
-    email: '', 
-    cpf: '', 
-    cep: '', 
-    endereco: '', 
-    complemento: '' 
-  });
+  const [dados, setDados] = useState({ nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '' });
   const [frete, setFrete] = useState(0);
 
   // --- 2. CÁLCULOS OTIMIZADOS (useMemo) ---
@@ -206,7 +201,6 @@ export default function Loja() {
   // Se o componente ainda não montou no cliente, não renderiza nada (evita erro de hidratação)
   if (!isMounted) return null;
 
-  // --- INÍCIO DA RENDERIZAÇÃO ---
   return (
     <div className="min-h-screen bg-white font-sans text-black overflow-x-hidden flex flex-col">
      <Head>
