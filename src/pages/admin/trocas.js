@@ -130,6 +130,37 @@ export default function AdminTrocas() {
                 )}
             </main>
 
+            {/* MENU FLUTUANTE DE NAVEGAÇÃO ADMIN */}
+            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex items-center bg-black border-4 border-orange-600 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-1">
+                <button 
+                    onClick={() => router.push('/admin/vendas')}
+                    className={`px-4 py-3 flex flex-col items-center gap-1 transition-all ${router.pathname.includes('vendas') ? 'bg-orange-600 text-white' : 'text-gray-400 hover:text-white'}`}
+                >
+                    <i className="bi bi-cart-check-fill text-lg"></i>
+                    <span className="text-[8px] font-black uppercase tracking-tighter">Vendas</span>
+                </button>
+
+                <div className="w-[2px] h-8 bg-orange-600/30 mx-1"></div>
+
+                <button 
+                    onClick={() => router.push('/admin/trocas')}
+                    className={`px-4 py-3 flex flex-col items-center gap-1 transition-all ${router.pathname.includes('trocas') ? 'bg-orange-600 text-white' : 'text-gray-400 hover:text-white'}`}
+                >
+                    <i className="bi bi-arrow-left-right text-lg"></i>
+                    <span className="text-[8px] font-black uppercase tracking-tighter">Trocas</span>
+                </button>
+
+                <div className="w-[2px] h-8 bg-orange-600/30 mx-1"></div>
+
+                <button 
+                    onClick={handleSair}
+                    className="px-4 py-3 flex flex-col items-center gap-1 text-red-500 hover:bg-red-500 hover:text-white transition-all"
+                >
+                    <i className="bi bi-power text-lg"></i>
+                    <span className="text-[8px] font-black uppercase tracking-tighter">Sair</span>
+                </button>
+            </div>
+
             <footer className="p-8 text-center text-[9px] font-black uppercase tracking-[0.5em] text-gray-400">
                 Admin System v2.0 // Pão de Queijo da Irá Lifestyle
             </footer>
