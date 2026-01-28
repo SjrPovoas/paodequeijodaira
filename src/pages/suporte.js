@@ -85,15 +85,13 @@ export default function Suporte() {
 
           {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/loja" className="text-[10px] font-black uppercase tracking-widest hover:text-orange-600 transition-colors">Loja Lifestyle</Link>
-            <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="text-[11px] font-black uppercase tracking-[0.2em] text-orange-600 flex flex-col items-center gap-2">
-                <i className="bi bi-arrow-left-right text-2xl"></i>
-                <span>TROCAS & DEVOLUÇÕES</span>
+            <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
+              RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i>
             </Link>
-            <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[11px] font-black uppercase tracking-[0.2em] text-orange-600 flex flex-col items-center gap-2">
-                <i className="bi bi-box-seam text-2xl"></i>
-                <span>RASTREAR PEDIDO</span>
-              </Link>
+            <Link href="/suporte" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
+              TROCAS & DEVOLUÇÕES<i className="bi bi-box-seam text-[18px]"></i>
+            </Link>
+            <Link href="/loja" className="text-[10px] font-black uppercase tracking-widest hover:text-orange-600 transition-colors">Loja Lifestyle</Link>
           </nav>
         </div>
 
