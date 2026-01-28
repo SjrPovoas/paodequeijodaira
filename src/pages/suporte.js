@@ -113,21 +113,17 @@ export default function Suporte() {
                 <i className="bi bi-x-lg"></i>
               </button>
             </div>
-
             <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-10">
               <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">
                 COMPRAR PÃO DE QUEIJO
               </Link>
-              
               <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600 pb-1">
                 LOJA LIFESTYLE & ACESSÓRIOS 
               </Link>
-              
               <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="flex flex-col items-center gap-1 text-orange-600">
                 <i className="bi bi-box-seam text-2xl"></i>
                 <span className="text-[10px] font-black uppercase tracking-widest">RASTREAR PEDIDO</span>
               </Link>
-
               <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="flex flex-col items-center gap-1 text-orange-600">
                 <i className="bi bi-arrow-left-right text-2xl"></i>
                 <span className="text-[10px] font-black uppercase tracking-widest">TROCAS & DEVOLUÇÕES</span>
@@ -137,9 +133,8 @@ export default function Suporte() {
             <div className="p-10 text-center border-t border-gray-50">
               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">© Pão de Queijo da Irá</p>
             </div>
-           </div>
           </nav>
-        </div>
+        
       </header>
 
             {/* 3. CONTEÚDO PRINCIPAL (FORMULÁRIO) */}
