@@ -91,8 +91,7 @@ export default function Suporte() {
          </div>
 
         {/* MENU MOBILE - ESTRUTURA CORRIGIDA */}
-        <div className={`fixed inset-0 z-[1000] md:hidden ${menuMobileAberto ? 'visible' : 'invisible'}`}>
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMenuMobileAberto(false)}></div>
+        
         <div className={`fixed inset-0 z-[1000] bg-white md:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
           <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`} onClick={() => setMenuMobileAberto(false)}></div>
           <nav className={`absolute top-0 right-0 w-[100%] h-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
