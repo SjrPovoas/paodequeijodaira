@@ -65,9 +65,9 @@ export default function Home() {
         <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
         <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
         <meta property="og:site_name" content="Pão de Queijo da Irá" />
-        <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+       {/* <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" /> */}
         <meta property="og:image:secure_url" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
-        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:type" content="image/jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
@@ -81,14 +81,10 @@ export default function Home() {
         <meta name="twitter:url" content="https://x.com/PaodQueijodaIra" />
 
         <title>Pão de Queijo da Irá | O melhor pão de queijo congelado e caseiro da Cidade Ocidental</title>
-        <meta name="author" content="SjrPovoaS" />
-        <meta name="description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
-        <meta name="Keywords" content="pao de queijo, pão de queijo, pão de queijo em Cidade Ocidental, pão de queijo congelado Cidade Ocidental, pão de queijo caseiro, Pão de Queijo da Irá, melhor lanche em cidade ocidental" />
 
         {/* Fontes e Estilos Externos */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
         <link rel="canonical" href="https://paodequeijodaira.vercel.app" />
         <link rel="profile" href="https://gmpg.org/xfn/11" />
 
@@ -144,7 +140,6 @@ export default function Home() {
                 <i className="bi bi-x-lg"></i>
               </button>
             </div>
-
             {/* Links de Navegação */}
             <div className="flex flex-col p-10 px-20 space-y-[-2] overflow-y-auto bg-white">
               <Link href="#produtos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
@@ -405,8 +400,7 @@ export default function Home() {
                 <Link href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
                   <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>        
                   <p className="text-sm text-gray-600 leading-relaxed text-left">
-                    Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />
-                    Recreio Mossoró - Cidade Ocidental-GO</p>
+                    Quadra 4 Lote 26 Condomínio Flores do Cerrado II. Recreio Mossoró - Cidade Ocidental-GO</p>
                 </Link>
               </div>
             </div>
