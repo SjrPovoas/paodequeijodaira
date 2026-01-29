@@ -67,28 +67,23 @@ export default function Pedidos() {
             <div className="bg-orange-600 text-white py-2 text-center text-[10px] font-black uppercase tracking-widest sticky top-0 z-[120]">
                 • Entrega em todo Brasil • Frete Grátis acima de R$ 500,00 •
             </div>
-
+    
+    {/* HEADER */}
     <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <Link href="/">
-            <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
-          </Link>
-
+       <div className="max-w-7xl mx-auto flex justify-between items-center">
+         {/* LOGO */}
+         <Link href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" /></Link>
           <button onClick={() => setMenuMobileAberto(true)} className="md:hidden text-orange-600">
             <i className="bi bi-list text-3xl"></i>
           </button>
 
           {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-              RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i>
-            </Link>
-            <Link href="/suporte" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-              TROCAS & DEVOLUÇÕES<i className="bi bi-box-seam text-[18px]"></i>
-            </Link>
-            <Link href="/loja" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">Loja Lifestyle</Link>
+            <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i></Link>
+            <Link href="/suporte" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">TROCAS & DEVOLUÇÕES <i className="bi bi-arrow-left-right text-[18px]"></i></Link>
+            <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
           </nav>
-         </div>
+       </div>
 
         {/* MENU MOBILE - ESTRUTURA CORRIGIDA */}
         
@@ -98,22 +93,21 @@ export default function Pedidos() {
             <div className="flex justify-end p-6">
               <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600 p-2"><i className="bi bi-x-lg"></i></button>
             </div>
-
             <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-6">
-              <Link href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">IRÁ DIGITAL GENESIS PASS</Link>
-              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
+              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-2x1 font-black uppercase tracking-[0.4em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
               <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600">LOJA LIFESTYLE</Link>
-
               {/* NOVOS LINKS DE RASTREIO E SUPORTE */}
               <div className="pt-4 flex flex-col space-y-4">
+                <Link href="/loja#web3" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
+                  <i className="bi bi-gem text-lg"></i>Lançamento
+                </Link>
                 <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-box-seam text-lg"></i> Rastrear Pedido
+                  <i className="bi bi-box-seam text-lg"></i>Rastrear Pedido
                 </Link>
                 <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-arrow-left-right text-lg"></i> Trocas & Devoluções
+                  <i className="bi bi-arrow-left-right text-lg"></i>Trocas & Devoluções
                 </Link>
-              </div>
-
+                </div>
               {/* REDES SOCIAIS */}
               <div className="flex justify-center items-center gap-6 pt-6">
                 <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></Link>
@@ -121,7 +115,6 @@ export default function Pedidos() {
                 <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
               </div>
             </div>
-
             <div className="p-10 text-center border-t border-gray-50">
               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">© Pão de Queijo da Irá</p>
             </div>
@@ -276,7 +269,7 @@ export default function Pedidos() {
 
         </div>
     </div>
-</section>
+  </section>
 
       {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
@@ -301,9 +294,9 @@ export default function Pedidos() {
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Ajuda & Suporte</h4>
               <div className="space-y-4">
-                <Link href="/pedidos" className="flex items-center justify-center md:justify-start gap-2 group">
+                <Link href="/pedidos" className="text-orange-500 flex items-center justify-center md:justify-start gap-2 group">
                   <i className="bi bi-box-seam text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
+                  <p className="text-xs font-bold tracking-widest group:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
                 </Link>
                 <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-2 group">
                   <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
@@ -327,8 +320,7 @@ export default function Pedidos() {
                 <Link href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
                   <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>        
                   <p className="text-sm text-gray-600 leading-relaxed text-left">
-                    Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />
-                    Recreio Mossoró - Cidade Ocidental-GO</p>
+                    Quadra 4 Lote 26 Condomínio Flores do Cerrado II. Recreio Mossoró - Cidade Ocidental-GO</p>
                 </Link>
               </div>
             </div>
