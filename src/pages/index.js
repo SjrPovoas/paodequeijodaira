@@ -60,16 +60,17 @@ export default function Home() {
         {/* Meta Tags para WhatsApp / Facebook (Open Graph) */}
         <meta property="og:locale" content="pt_BR" />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Pão de Queijo da Irá" />
         <meta property="og:url" content="https://www.facebook.com/paodeuqiejodaira.iraleide" />
+        <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        <meta name="og:image:width" content="1200">
+        <meta name="og:image:height" content="630"> 
         <meta property="og:title" content="Pão de Queijo da Irá" />
         <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
-        <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
-        <meta property="og:site_name" content="Pão de Queijo da Irá" />
-       {/* <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" /> */}
+
+       {/* <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
         <meta property="og:image:secure_url" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
-        <meta property="og:image:type" content="image/jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/jpg" /> */}
 
         {/* Twitter / X */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -101,6 +102,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* LOGO */}
           <Link href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></Link>
+          {/* Botão Hambúrguer Mobile */}
+          <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110]">
+            <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
+          </button>
           {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
             <Link href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</Link>
@@ -118,11 +123,6 @@ export default function Home() {
             <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
             <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
           </nav>
-
-          {/* Botão Hambúrguer Mobile */}
-          <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110]">
-            <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
-          </button>
         </div>
 
         {/* ESTRUTURA DO MENU MOBILE (DIREITA PARA ESQUERDA) */}
