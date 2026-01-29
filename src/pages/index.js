@@ -63,8 +63,8 @@ export default function Home() {
         <meta property="og:site_name" content="Pão de Queijo da Irá" />
         <meta property="og:url" content="https://www.facebook.com/paodeuqiejodaira.iraleide" />
         <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
-        <meta name="og:image:width" content="1200">
-        <meta name="og:image:height" content="630"> 
+        <meta name="og:image:width" content="1200" />
+        <meta name="og:image:height" content="630" /> 
         <meta property="og:title" content="Pão de Queijo da Irá" />
         <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
 
@@ -102,7 +102,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* LOGO */}
           <Link href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></Link>
-
+            {/* Botão Hambúrguer Mobile */}
+            <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110]">
+              <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
+            </button>
           {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
             <Link href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</Link>
@@ -123,10 +126,7 @@ export default function Home() {
             <Link href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</Link>
             <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
             <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
-            {/* Botão Hambúrguer Mobile */}
-            <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110]">
-              <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
-            </button>
+
           </nav>
         </div>
 
@@ -159,7 +159,7 @@ export default function Home() {
               {/* Item Loja Lifestyle com aumento de escala leve no toque/hover */}
               <Link href="/loja" onClick={toggleMenu} 
                 className="text-xl font-black uppercase italic tracking-tighter py-4 text-orange-600 flex items-center justify-between transition-transform duration-300 active:scale-110 hover:scale-110 origin-left">
-                Loja Lifestyle </Link>
+                Loja Lifstyle </Link>
               <button onClick={() => { setIsModalOpen(true); toggleMenu(); }}
                 className="w-full bg-orange-600 text-white text-[23px] py-4 font-black uppercase tracking-widest leading-none hover:text-gray-100 text-xs shadow-xl transition-transform duration-500 origin-left mb-4">
                 Pedir Agora
