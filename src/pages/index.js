@@ -102,9 +102,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* LOGO */}
           <Link href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" /></Link>
-          <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110] focus:outline-none">
-            <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
-          </button>
 
           {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
