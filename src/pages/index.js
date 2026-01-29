@@ -28,7 +28,7 @@ export default function Home() {
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
+  
   const handleWhatsapp = (e) => {
     e.preventDefault();
     const nome = document.getElementById('nome').value;
@@ -97,14 +97,14 @@ export default function Home() {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
-     {/* HEADER */}
+      {/* HEADER */}
       <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* LOGO */}
           <Link href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" /></Link>
 
-          {/* NAVEGAÇÃO DESKTOP */}
-          <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
+          {/* NAVEGAÇÃO DESKTOP: Visível apenas em telas Grandes (lg) */}
+          <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
             <Link href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</Link>
             <Link href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</Link>
             <Link href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</Link>
@@ -112,66 +112,42 @@ export default function Home() {
             <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>                      
           </nav>   
 
-          {/* BOTÃO HAMBÚRGUER: visível apenas no mobile (lg:hidden) */}
+          {/* BOTÃO HAMBÚRGUER: Visível apenas abaixo de telas Grandes (lg) */}
           <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110] focus:outline-none">
             <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
           </button>
-
-         {/* NAVEGAÇÃO MOBILE      
-          <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
-            <Link href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</Link>
-            <Link href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</Link>
-            <Link href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</Link>
-            <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
-            <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
-          </nav>*/}
         </div>
 
-        {/* ESTRUTURA DO MENU MOBILE (DIREITA PARA ESQUERDA) */}
+        {/* ESTRUTURA DO MENU MOBILE */}
         <div className={`fixed inset-0 z-[1000] lg:hidden transition-all duration-500 ${isMenuOpen ? 'visible' : 'invisible'}`}>
           {/* Fundo Escuro (Overlay) */}
-          <div className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-500 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`}
-            onClick={toggleMenu}></div>
-          
+          <div className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-500 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`}onClick={toggleMenu}></div>  
           {/* Painel do Menu Lateral */}
-          <nav className={`absolute top-0 right-0 h-screen w-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-            
-            {/* Cabeçalho do Menu com Botão X alinhado à Direita */}
+          <nav className={`absolute top-0 right-0 h-screen w-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>  
+            {/* Cabeçalho do Menu Mobile */}
             <div className="flex justify-end px-6 py-4 border-b border-gray-100">
               <button onClick={toggleMenu} className="text-3xl text-orange-600 p-1">
                 <i className="bi bi-x-lg"></i>
               </button>
             </div>
-            {/* Links de Navegação */}
-            <div className="flex flex-col p-10 px-20 space-y-[-2] overflow-y-auto bg-white">
-              <Link href="#produtos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
-                Produtos <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
-              <Link href="#nossa-historia" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
-                História <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
-              <Link href="#depoimentos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
-                Depoimentos <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
-              <Link href="#guia-gratuito" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
-                Guia Grátis <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
-              
-              {/* Item Loja Lifestyle com aumento de escala leve no toque/hover */}
-              <Link href="/loja" onClick={toggleMenu} 
-                className="text-xl font-black uppercase italic tracking-tighter py-4 text-orange-600 flex items-center justify-between transition-transform duration-300 active:scale-110 hover:scale-110 origin-left">
-                Loja Lifstyle </Link>
-              <button onClick={() => { setIsModalOpen(true); toggleMenu(); }}
-                className="w-full bg-orange-600 text-white text-[23px] py-4 font-black uppercase tracking-widest leading-none hover:text-gray-100 text-xs shadow-xl transition-transform duration-500 origin-left mb-4">
-                Pedir Agora
-              </button>
+            {/* Links de Navegação Mobile */}
+            <div className="flex flex-col p-10 px-20 space-y-4 overflow-y-auto bg-white flex-grow">
+              <Link href="#produtos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">Produtos <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
+              <Link href="#nossa-historia" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">História <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
+              <Link href="#depoimentos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">Depoimentos <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
+              <Link href="#guia-gratuito" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">Guia Grátis <i className="bi bi-chevron-right text-orange-600/30"></i></Link> 
+              <Link href="/loja" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter py-4 text-orange-600 flex items-center justify-between transition-transform duration-300 active:scale-110 hover:scale-110 origin-left">Loja Lifestyle</Link> 
+              <button onClick={() => { setIsModalOpen(true); toggleMenu(); }} className="w-full bg-orange-600 text-white py-6 font-black uppercase tracking-widest leading-none shadow-xl transition-transform duration-500 origin-left text-sm">Pedir Agora</button>
             </div>
-
-            {/* Footer do Menu */}
-            <div className="flex justify-center items-center gap-8">
-              <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-instagram"></i></Link>
-              <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-facebook"></i></Link>
-              <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
-            </div>
-              <p className="text-center text-[9px] py-10 font-bold text-gray-400 uppercase tracking-widest italic">
-               © Pão de Queijo da Irá
-              </p>           
+            {/* Footer do Menu Mobile */}
+            <div className="p-10 border-t border-gray-50">
+              <div className="flex justify-center items-center gap-8 mb-6">
+                <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-instagram"></i></Link>
+                <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-facebook"></i></Link>
+                <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
+              </div>
+              <p className="text-center text-[9px] font-bold text-gray-400 uppercase tracking-widest italic">© Pão de Queijo da Irá</p>
+            </div>           
           </nav>
         </div>
       </header>
