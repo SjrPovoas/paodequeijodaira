@@ -102,18 +102,23 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* LOGO */}
           <Link href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" /></Link>
-            {/* Botão Hambúrguer Mobile */}
-            <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110]">
-              <i className={isModalOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
-            </button>
+
           {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
             <Link href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</Link>
             <Link href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</Link>
             <Link href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</Link>
             <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
-            <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
-          </nav>          
+            <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>           
+
+{/*<button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110]">
+              <i className={isModalOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
+            </button>*/}           
+          </nav>   
+           {/* Botão Hambúrguer Mobile */}
+            <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110] focus:outline-none">
+               <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
+            </button>
 
          {/* NAVEGAÇÃO MOBILE */}     
           <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
@@ -134,7 +139,8 @@ export default function Home() {
           {/* Painel do Menu Lateral */}
           <nav className={`absolute top-0 right-0 h-screen w-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             
-            {/* Cabeçalho do Menu com Botão X alinhado à Direita */}
+            {/* Cabeçalho do Men
+            u com Botão X alinhado à Direita */}
             <div className="flex justify-end px-6 py-4 border-b border-gray-100">
               <button onClick={toggleMenu} className="text-3xl text-orange-600 p-1">
                 <i className="bi bi-x-lg"></i>
