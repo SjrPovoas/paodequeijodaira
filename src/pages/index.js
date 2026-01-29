@@ -103,8 +103,18 @@ export default function Home() {
      {/* HEADER */}
       <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
+          {/* LOGO */}
           <Link href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></Link>
-          
+          {/* NAVEGAÇÃO DESKTOP */}
+          <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
+            <Link href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</Link>
+            <Link href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</Link>
+            <Link href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</Link>
+            <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
+            <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
+          </nav>
+
+         {/* NAVEGAÇÃO MOBILE */}     
           <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
             <Link href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</Link>
             <Link href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</Link>
