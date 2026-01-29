@@ -123,11 +123,13 @@ export default function Home() {
             <Link href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</Link>
             <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
             <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
-            <button onClick={() => setIsModalOpen(true)} className="flex flex-col items-center text-orange-600">
+          </nav>
+            {/* Botão Hambúrguer Mobile */}
+            <button onClick={() => setIsModalOpen(true)} className="lg:hidden flex flex-col items-center text-orange-600">
                 <i className="bi bi-list text-2xl"></i>
               <span className="text-[8px] font-black uppercase mt-0.5">Menu</span>
             </button>
-          </nav>
+          
         </div>
 
         {/* ESTRUTURA DO MENU MOBILE (DIREITA PARA ESQUERDA) */}
