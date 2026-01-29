@@ -80,13 +80,9 @@ export default function Suporte() {
 
           {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-              RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i>
-            </Link>
-            <Link href="/suporte" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-              TROCAS & DEVOLUÇÕES<i className="bi bi-box-seam text-[18px]"></i>
-            </Link>
-            <Link href="/loja" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">Loja Lifestyle</Link>
+            <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i></Link>
+            <Link href="/suporte" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">TROCAS & DEVOLUÇÕES <i className="bi bi-box-seam text-[18px]"></i></Link>
+            <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
           </nav>
          </div>
 
@@ -128,56 +124,6 @@ export default function Suporte() {
           </nav>
         </div>
       </header>
-
-      {/* HEADER PRINCIPAL 
-    <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <Link href="/">
-            <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
-          </Link>
-
-          <button onClick={() => setMenuMobileAberto(true)} className="md:hidden text-orange-600">
-            <i className="bi bi-list text-3xl"></i>
-          </button>
-
-          {/* NAVEGAÇÃO DESKTOP *
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-              RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i>
-            </Link>
-            <Link href="/suporte" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-              TROCAS & DEVOLUÇÕES<i className="bi bi-box-seam text-[18px]"></i>
-            </Link>
-            <Link href="/loja" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">Loja Lifestyle</Link>
-          </nav>
-         </div>
-
-        {/* MENU MOBILE - ESTRUTURA CORRIGIDA *
-        <div className={`fixed inset-0 z-[1000] md:hidden ${menuMobileAberto ? 'visible' : 'invisible'}`}>
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMenuMobileAberto(false)}></div>
-          <nav className={`absolute top-0 right-0 w-[80%] h-screen bg-white transition-transform duration-500 ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'} flex flex-col`}>
-            <div className="flex justify-end p-6">
-              <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600"><i className="bi bi-x-lg"></i></button>
-            </div>
-              {/* NOVOS LINKS DE RASTREIO E SUPORTE *
-              <div className="pt-4 flex flex-col space-y-4">
-                <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-box-seam text-lg"></i> Rastrear Pedido
-                </Link>
-                <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-arrow-left-right text-lg"></i> Trocas & Devoluções
-                </Link>
-              </div>
-
-              {/* REDES SOCIAIS *
-              <div className="flex justify-center items-center gap-6 pt-6">
-                <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></Link>
-                <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></Link>
-                <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
-              </div>
-          </nav>
-        </div>
-      </header>/*}
 
            {/* 3. CONTEÚDO PRINCIPAL (FORMULÁRIO) */}
             <main className="flex-grow py-20 px-6 max-w-4xl mx-auto w-full">
@@ -368,9 +314,9 @@ export default function Suporte() {
                   <i className="bi bi-box-seam text-orange-600 text-lg"></i>
                   <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
                 </Link>
-                <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-2 group">
+                <Link href="/suporte" className="text-orange-500 flex items-center justify-center md:justify-start gap-2 group">
                   <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p>
+                  <p className="text-xs font-bold tracking-widest group:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p>
                 </Link>
                 <Link href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center justify-center md:justify-start gap-3 group">
                   <i className="bi bi-whatsapp text-orange-600 text-lg"></i>
@@ -390,8 +336,7 @@ export default function Suporte() {
                 <Link href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
                   <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>        
                   <p className="text-sm text-gray-600 leading-relaxed text-left">
-                    Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />
-                    Recreio Mossoró - Cidade Ocidental-GO</p>
+                    Quadra 4 Lote 26 Condomínio Flores do Cerrado II. Recreio Mossoró - Cidade Ocidental-GO</p>
                 </Link>
               </div>
             </div>
