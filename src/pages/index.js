@@ -111,23 +111,20 @@ export default function Home() {
             <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
             <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>                      
           </nav>   
-           {/* Botão Hambúrguer Mobile *
-            <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110] focus:outline-none">
-               <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
-            </button> */}
+
           {/* BOTÃO HAMBÚRGUER: visível apenas no mobile (lg:hidden) */}
-          <button onClick={toggleMenu} className="flex lg:hidden text-3xl text-orange-600 relative z-[110]">
+          <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110] focus:outline-none">
             <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
           </button>
 
-         {/* NAVEGAÇÃO MOBILE */}     
+         {/* NAVEGAÇÃO MOBILE      
           <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
             <Link href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</Link>
             <Link href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</Link>
             <Link href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</Link>
             <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
             <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
-          </nav>
+          </nav>*/}
         </div>
 
         {/* ESTRUTURA DO MENU MOBILE (DIREITA PARA ESQUERDA) */}
