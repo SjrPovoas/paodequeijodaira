@@ -261,19 +261,10 @@ export default function Loja() {
       <header className="border-b border-gray-100 py-4 px-6 sticky top-[28px] bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* LOGO */}
-          <Link href="/">
-            <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" />
-          </Link>
-
+          <Link href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" /></Link>
           {/* NAVEGAÇÃO DESKTOP */}
           <nav className="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
-            <Link href="#web3" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-              IRÁ DIGITAL GENESIS PASS <i className="bi bi-gem text-[18px]"></i>
-            </Link>
-            <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">
-              RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i>
-            </Link>
-
+            <Link href="/loja#web3" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">LANÇAMENTO <i className="bi bi-gem text-[18px]"></i></Link>
             {/* BOTÃO WEB3 DESKTOP */}
             <div className="scale-90 origin-right">
               <ConnectButton.Custom>
@@ -310,14 +301,12 @@ export default function Loja() {
               <span className="text-xs font-bold border-l border-white/20 pl-3">{carrinho.length}</span>
             </button>
           </nav>
-
           {/* NAVEGAÇÃO MOBILE */}
           <div className="flex md:hidden items-center gap-4">
-            <Link href="#web3" className="flex flex-col items-center relative">
+            <Link href="/loja#web3" className="flex flex-col items-center relative">
               <i className="bi bi-gem text-2xl"></i>
               <span className="text-[8px] font-black uppercase mt-0.4">Lançamento</span>
             </Link>
-
             {/* BOTÃO WEB3 MOBILE */}
             <ConnectButton.Custom>
               {({ account, chain, openAccountModal, openChainModal, openConnectModal, mounted }) => {
@@ -367,7 +356,6 @@ export default function Loja() {
             </button>
           </div>
         </div>
-
         {/* ESTRUTURA MENU MOBILE OVERLAY */}
         <div className={`fixed inset-0 z-[1000] bg-white md:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
           <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`} onClick={() => setMenuMobileAberto(false)}></div>
@@ -375,24 +363,21 @@ export default function Loja() {
             <div className="flex justify-end p-6">
               <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600 p-2"><i className="bi bi-x-lg"></i></button>
             </div>
-
             <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-6">
               <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-2x1 font-black uppercase tracking-[0.4em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
               <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600">LOJA LIFESTYLE</Link>
-
               {/* NOVOS LINKS DE RASTREIO E SUPORTE */}
               <div className="pt-4 flex flex-col space-y-4">
-                <Link href="/index#web3" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-gem text-lg"></i> Irá Digital GRNESIS PASS
+                <Link href="/loja#web3" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
+                  <i className="bi bi-gem text-lg"></i>Lançamento
                 </Link>
                 <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-box-seam text-lg"></i> Rastrear Pedido
+                  <i className="bi bi-box-seam text-lg"></i>Rastrear Pedido
                 </Link>
                 <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-arrow-left-right text-lg"></i> Trocas & Devoluções
+                  <i className="bi bi-arrow-left-right text-lg"></i>Trocas & Devoluções
                 </Link>
-              </div>
-
+                </div>
               {/* REDES SOCIAIS */}
               <div className="flex justify-center items-center gap-6 pt-6">
                 <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></Link>
@@ -400,7 +385,6 @@ export default function Loja() {
                 <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
               </div>
             </div>
-
             <div className="p-10 text-center border-t border-gray-50">
               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">© Pão de Queijo da Irá</p>
             </div>
@@ -415,8 +399,7 @@ export default function Loja() {
               LIFESTYLE <br /><span className="text-orange-600">& ACESSÓRIOS</span>
             </h1>
             <p className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-400 mt-2">Produtos exclusivos e oficiais da marca do Pão de Queijo da Irá</p>
-        </div>
-        
+        </div>        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-20">
           {produtos.map(p => (
             <div key={p.id} className="group">
@@ -429,8 +412,7 @@ export default function Loja() {
                   <h3 className="font-black uppercase text-xl italic mb-1">{p.nome}</h3>
                   <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{p.category}</p>
                 </div>
-              </div>
-              
+              </div>              
               <div className="mt-6">
                 {p.category === 'vestuario' ? (
                   <div className="flex gap-2">
