@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   const WHATSAPP_NUMBER = "5561982777196";
@@ -84,9 +85,6 @@ export default function Home() {
         <meta name="description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
         <meta name="Keywords" content="pao de queijo, pão de queijo, pão de queijo em Cidade Ocidental, pão de queijo congelado Cidade Ocidental, pão de queijo caseiro, Pão de Queijo da Irá, melhor lanche em cidade ocidental" />
 
-        {/* SCRIPTS EXTERNOS */}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
-
         {/* Fontes e Estilos Externos */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
@@ -102,16 +100,16 @@ export default function Home() {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
-{/* HEADER */}
+     {/* HEADER */}
       <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <a href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></a>
+          <Link href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto" /></Link>
           
           <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
-            <a href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</a>
-            <a href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</a>
-            <a href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</a>
-            <a href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</a>
+            <Link href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</Link>
+            <Link href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</Link>
+            <Link href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</Link>
+            <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
             <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
           </nav>
 
@@ -139,19 +137,19 @@ export default function Home() {
 
             {/* Links de Navegação */}
             <div className="flex flex-col p-10 px-20 space-y-[-2] overflow-y-auto bg-white">
-              <a href="#produtos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
-                Produtos <i className="bi bi-chevron-right text-orange-600/30"></i></a>
-              <a href="#nossa-historia" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
-                História <i className="bi bi-chevron-right text-orange-600/30"></i></a>
-              <a href="#depoimentos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
-                Depoimentos <i className="bi bi-chevron-right text-orange-600/30"></i></a>
-              <a href="#guia-gratuito" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
-                Guia Grátis <i className="bi bi-chevron-right text-orange-600/30"></i></a>
+              <Link href="#produtos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
+                Produtos <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
+              <Link href="#nossa-historia" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
+                História <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
+              <Link href="#depoimentos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
+                Depoimentos <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
+              <Link href="#guia-gratuito" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">
+                Guia Grátis <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
               
               {/* Item Loja Lifestyle com aumento de escala leve no toque/hover */}
-              <a href="/loja" onClick={toggleMenu} 
+              <Link href="/loja" onClick={toggleMenu} 
                 className="text-xl font-black uppercase italic tracking-tighter py-4 text-orange-600 flex items-center justify-between transition-transform duration-300 active:scale-110 hover:scale-110 origin-left">
-                Loja Lifestyle </a>
+                Loja Lifestyle </Link>
               <button onClick={() => { setIsModalOpen(true); toggleMenu(); }}
                 className="w-full bg-orange-600 text-white text-[23px] py-4 font-black uppercase tracking-widest leading-none hover:text-gray-100 text-xs shadow-xl transition-transform duration-500 origin-left mb-4">
                 Pedir Agora
@@ -160,14 +158,13 @@ export default function Home() {
 
             {/* Footer do Menu */}
             <div className="flex justify-center items-center gap-8">
-              <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
-              <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
-              <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
+              <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-instagram"></i></Link>
+              <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-facebook"></i></Link>
+              <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
             </div>
               <p className="text-center text-[9px] py-10 font-bold text-gray-400 uppercase tracking-widest italic">
                © Pão de Queijo da Irá
-              </p>
-           
+              </p>           
           </nav>
         </div>
       </header>
@@ -219,7 +216,7 @@ export default function Home() {
               <p>Eu sou a Iraleide, e o <strong>Pão de Queijo da Irá</strong> nasceu de um desejo simples: compartilhar a melhor receita de pão de queijo da minha família.</p>
               <p>Hoje, esse mesmo carinho é transformado em cada pãozinho que você leva para casa, <strong>congelado e fresquinho</strong>. Com a nossa praticidade, você tem um lanche delicioso e caseiro a minutos de distância.</p>
             </div>
-            <a href="https://g.page/r/Ca9UJok_gMntEBI/review" target="_blank" className="inline-block mt-8 border-b-2 border-orange-600 pb-1 font-bold text-sm uppercase tracking-widest text-orange-600">⭐ Confira nossas avaliações no Google</a>
+            <Link href="https://g.page/r/Ca9UJok_gMntEBI/review" target="_blank" className="inline-block mt-8 border-b-2 border-orange-600 pb-1 font-bold text-sm uppercase tracking-widest text-orange-600">⭐ Confira nossas avaliações no Google</Link>
           </div>
           <div className="order-1 md:order-2">
             <img src="/imagens/historia-contato.png" alt="Iraleide" className="w-full rounded-2xl shadow-2xl" />
@@ -277,9 +274,9 @@ export default function Home() {
             </p>
 
             {/* BAIXAR GUIA GRATUITO */}
-            <a href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
+            <Link href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
               Baixar meu Guia Gratuito agora!
-            </a>
+            </Link>
 
             <p className="text-[9px] text-gray-500 uppercase tracking-widest text-center mt-4">
               Prometemos não enviar spam. Você pode sair da lista a qualquer momento.</p>
@@ -314,9 +311,9 @@ export default function Home() {
             se tornar um mestre na arte de fazer e vender pão de queijo.</p>
 
           {/* CURSO NA HOME */}
-          <a href="/curso" target="_blank"
+          <Link href="/curso" target="_blank"
             className="inline-block bg-black text-white px-12 py-6 font-black uppercase tracking-widest text-sm hover:bg-white hover:text-orange-600 transition-all shadow-2xl"
-          >EU QUERO A RECEITA SECRETA!</a>
+          >EU QUERO A RECEITA SECRETA!</Link>
         </div>
       </section>
 
@@ -370,46 +367,76 @@ export default function Home() {
         </div>
       )}
 
-      {/* FOOTER E ASSINATURA */}
+      {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-            <div className="flex flex-col items-center md:items-start">
-              <a href="/"><img src="/logo-paodequeijodaira.jpg" className="h-20 mb-6" alt="Logo" /></a>
-              <div className="flex space-x-2">
-                <a href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></a>
-                <a href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></a>
-                <a href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></a>
-                <a href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-geo-alt-fill"></i></a>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:justify-between mb-16">
+            {/* COLUNA 1: LOGO E REDES SOCIAIS */}
+            <div className="flex flex-col items-center md:items-start space-y-4">
+              {/* LOGO */}
+              <Link href="/">
+                <img src="/logo-paodequeijodaira.jpg" className="h-20 cursor-pointer" alt="Logo" />
+              </Link>
+              {/* REDES SOCIAIS */}
+              <div className="flex gap-4">
+                <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></Link>
+                <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></Link>
+                <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></Link>
               </div>
             </div>
+            {/* COLUNA 2: FUNCIONAMENTO & LOCALIZAÇÃO */}
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                <strong>Horário:</strong> Seg a Sáb das 08:00 às 18:00.<br />Dom das 08:00 às 12:00.</p>
-              <p className="text-sm text-gray-600">
-                <strong>Endereço:</strong> Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p>
+              <div className="flex items-start justify-center md:justify-start gap-3">
+                <i className="bi bi-clock text-orange-600 text-lg"></i>
+                <p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p>
+              </div>
+              <div className="pt-2">
+                <Link href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
+                  <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>        
+                  <p className="text-sm text-gray-600 leading-relaxed text-left">
+                    Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />
+                    Recreio Mossoró - Cidade Ocidental-GO</p>
+                </Link>
+              </div>
             </div>
-            <div className="text-center md:text-right">
-              <h3 className="text-lg font-black uppercase mb-2">Pão de Queijo da Irá</h3>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">© 2026 - Todos os direitos reservados.</p>
-              <p className="mt-2 space-x-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                <a href="/termos" className="hover:text-black">Termos de Uso</a>
-                <span>|</span>
-                <a href="/privacidade" className="hover:text-black">Privacidade</a></p>
+            {/* COLUNA 3: INSTITUCIONAL & DIREITOS */}
+            <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
+              <h3 className="text-[14px] text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>    
+              <div className="flex flex-row items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">
+                <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group">
+                  Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
+                </Link>
+                <span className="text-gray-200">|</span>
+                <Link href="/privacidade" className="hover:text-black flex items-center gap-1 transition-colors group">
+                  Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
+                </Link>
+              </div> 
+              <p className="text-[9px] pt-2 font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">© 2026 - Todos os direitos reservados.</p>
             </div>
           </div>
+          {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
-            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+            <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link>
           </div>
         </div>
       </footer>
 
       {/* BOTÃO VOLTAR AO TOPO */}
-      <button onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'
-          }`} aria-label="Voltar ao topo"><i className="bi bi-arrow-up text-xl font-bold"></i>
-      </button>
+      {showScrollTop && (
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 animate-bounce">
+          <i className="bi bi-arrow-up"></i>
+        </button>
+      )}
+
+      <style jsx global>
+        {`@keyframes slide-left { from { transform: translateX(100%); } to { transform: translateX(0); } }
+          @keyframes slide-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
+          .animate-slide-left { animation: slide-left 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+          .animate-slide-right { animation: slide-right 0.4s cubic-bezier(0.16, 1, 0.3, 1); }`}
+      </style>
+
     </div>
   );
 }
