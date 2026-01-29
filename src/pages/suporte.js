@@ -98,22 +98,21 @@ export default function Suporte() {
             <div className="flex justify-end p-6">
               <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600 p-2"><i className="bi bi-x-lg"></i></button>
             </div>
-
             <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-6">
-              <Link href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">IRÁ DIGITAL GENESIS PASS</Link>
-              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
+              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-2x1 font-black uppercase tracking-[0.4em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
               <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600">LOJA LIFESTYLE</Link>
-
               {/* NOVOS LINKS DE RASTREIO E SUPORTE */}
               <div className="pt-4 flex flex-col space-y-4">
+                <Link href="/loja#web3" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
+                  <i className="bi bi-gem text-lg"></i>Lançamento
+                </Link>
                 <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-box-seam text-lg"></i> Rastrear Pedido
+                  <i className="bi bi-box-seam text-lg"></i>Rastrear Pedido
                 </Link>
                 <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-arrow-left-right text-lg"></i> Trocas & Devoluções
+                  <i className="bi bi-arrow-left-right text-lg"></i>Trocas & Devoluções
                 </Link>
-              </div>
-
+                </div>
               {/* REDES SOCIAIS */}
               <div className="flex justify-center items-center gap-6 pt-6">
                 <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></Link>
@@ -121,7 +120,6 @@ export default function Suporte() {
                 <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
               </div>
             </div>
-
             <div className="p-10 text-center border-t border-gray-50">
               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">© Pão de Queijo da Irá</p>
             </div>
@@ -364,7 +362,7 @@ export default function Suporte() {
 
           {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
-            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+            <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link>
           </div>
         </div>
       </footer>
