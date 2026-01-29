@@ -117,18 +117,17 @@ export default function Home() {
             </button>*/}
 
          {/* NAVEGAÇÃO MOBILE */}     
-          <div className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
+          <nav className="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest items-center">
             <Link href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</Link>
             <Link href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</Link>
             <Link href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</Link>
             <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
             <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
-          
-              <button onClick={() => setMenuMobileAberto(true)} className="flex flex-col items-center text-orange-600">
+            <button onClick={() => setIsModalOpen(true)} className="flex flex-col items-center text-orange-600">
                 <i className="bi bi-list text-2xl"></i>
               <span className="text-[8px] font-black uppercase mt-0.5">Menu</span>
             </button>
-          </div>
+          </nav>
         </div>
 
         {/* ESTRUTURA DO MENU MOBILE (DIREITA PARA ESQUERDA) */}
@@ -140,8 +139,7 @@ export default function Home() {
           {/* Painel do Menu Lateral */}
           <nav className={`absolute top-0 right-0 h-screen w-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             
-            {/* Cabeçalho do Men
-            u com Botão X alinhado à Direita */}
+            {/* Cabeçalho do Menu com Botão X alinhado à Direita */}
             <div className="flex justify-end px-6 py-4 border-b border-gray-100">
               <button onClick={toggleMenu} className="text-3xl text-orange-600 p-1">
                 <i className="bi bi-x-lg"></i>
