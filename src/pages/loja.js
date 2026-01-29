@@ -240,7 +240,7 @@ export default function Loja() {
         <meta property="og:title" content="Loja Lifestyle e Acessórios | Pão de Queijo da Irá" />
         <meta property="og:description" content="Vendemos Camisetas, Canecas e Aventais do Pão de Queijo da Irá." />
         <meta property="og:site_name" content="Loja Lifestyle e Acessórios | Pão de Queijo da Irá" />
-        <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        {/*<meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />*/}
         <meta property="og:image:secure_url" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
@@ -313,9 +313,9 @@ export default function Loja() {
 
           {/* NAVEGAÇÃO MOBILE */}
           <div className="flex md:hidden items-center gap-4">
-            <Link href="/pedidos" className="flex flex-col items-center relative">
-              <i className="bi bi-box-seam text-2xl"></i>
-              <span className="text-[8px] font-black uppercase mt-0.4">Rastrear</span>
+            <Link href="#web3" className="flex flex-col items-center relative">
+              <i className="bi bi-gem text-2xl"></i>
+              <span className="text-[8px] font-black uppercase mt-0.4">Lançamento</span>
             </Link>
 
             {/* BOTÃO WEB3 MOBILE */}
@@ -352,7 +352,7 @@ export default function Loja() {
             </ConnectButton.Custom>
 
             <button onClick={() => setModalAberto(true)} className="flex flex-col items-center relative">
-              <i className="bi bi-bag text-xl"></i>
+              <i className="bi bi-cart3 text-xl"></i>
               {carrinho.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-orange-600 text-white text-[8px] w-3.5 h-3.5 rounded-full flex items-center justify-center font-bold">
                   {carrinho.length}
@@ -377,12 +377,14 @@ export default function Loja() {
             </div>
 
             <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-6">
-              <Link href="#web3" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em]">IRÁ DIGITAL GENESIS PASS</Link>
-              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
+              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-2x1 font-black uppercase tracking-[0.4em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
               <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600">LOJA LIFESTYLE</Link>
 
               {/* NOVOS LINKS DE RASTREIO E SUPORTE */}
               <div className="pt-4 flex flex-col space-y-4">
+                <Link href="/index#web3" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
+                  <i className="bi bi-gem text-lg"></i> Irá Digital GRNESIS PASS
+                </Link>
                 <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
                   <i className="bi bi-box-seam text-lg"></i> Rastrear Pedido
                 </Link>
@@ -473,9 +475,9 @@ export default function Loja() {
             </div>
           </div>
           <div className="flex justify-center md:justify-start">
-            <a href={LINK_LISTA_ESPERA} target="_blank" rel="noopener noreferrer" className="mt-16 inline-block bg-orange-600 text-white px-10 py-5 text-[10px] font-black uppercase tracking-[0.4em] hover:bg-orange-500 transition-all shadow-xl">
+            <Link href={LINK_LISTA_ESPERA} target="_blank" rel="noopener noreferrer" className="mt-16 inline-block bg-orange-600 text-white px-10 py-5 text-[10px] font-black uppercase tracking-[0.4em] hover:bg-orange-500 transition-all shadow-xl">
               Entrar na Lista de Espera
-            </a>
+            </Link>
           </div>
         </div>
         <div className="absolute top-1/2 right-[-5%] translate-y-[-50%] text-[25vw] font-black opacity-[0.05] select-none text-orange-500 pointer-events-none whitespace-nowrap hidden md:block">
@@ -696,7 +698,7 @@ export default function Loja() {
       {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:justify-between mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:justify-between mb-16">
 
             {/* COLUNA 1: LOGO E REDES SOCIAIS */}
             <div className="flex flex-col items-center md:items-start space-y-4">
@@ -712,7 +714,26 @@ export default function Loja() {
               </div>
             </div>
 
-            {/* COLUNA 2: FUNCIONAMENTO & LOCALIZAÇÃO */}
+            {/* COLUNA 2: AJUDA & SUPORTE */}
+            <div className="text-center md:text-left space-y-4">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Ajuda & Suporte</h4>
+              <div className="space-y-4">
+                <Link href="/pedidos" className="flex items-center justify-center md:justify-start gap-2 group">
+                  <i className="bi bi-box-seam text-orange-600 text-lg"></i>
+                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
+                </Link>
+                <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-2 group">
+                  <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
+                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p>
+                </Link>
+                <Link href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center justify-center md:justify-start gap-3 group">
+                  <i className="bi bi-whatsapp text-orange-600 text-lg"></i>
+                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Fale Conosco</p>
+                </Link>
+              </div>
+            </div>
+
+            {/* COLUNA 3: FUNCIONAMENTO & LOCALIZAÇÃO */}
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
               <div className="flex items-start justify-center md:justify-start gap-3">
@@ -729,7 +750,7 @@ export default function Loja() {
               </div>
             </div>
 
-            {/* COLUNA 3: INSTITUCIONAL & DIREITOS */}
+            {/* COLUNA 4: INSTITUCIONAL & DIREITOS */}
             <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
               <h3 className="text-[14px] text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>    
@@ -748,7 +769,7 @@ export default function Loja() {
 
           {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
-            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+            <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link>
           </div>
         </div>
       </footer>
