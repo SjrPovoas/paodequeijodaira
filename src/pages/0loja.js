@@ -797,15 +797,15 @@ const processarPedidoFinal = async () => {
       </button>
     </div>
 </div>
-          )} {/* <--- CONFIRA SE ESTA CHAVE E PARÊNTESE ESTÃO AQUI */}
+)} {/* <--- ESTA CHAVE FECHA O: {etapaCheckout === 'dados' && ( */}
 
-          </div> {/* Fecha o Painel Lateral */}
-        </div> {/* Fecha o Backdrop/Overlay */}
-      )} {/* Fecha o {modalAberto && (...)} */}
+          </div> {/* Fecha o Painel Lateral (Branco) */}
+        </div> {/* Fecha o Backdrop (Preto/Blur) */}
+      )} {/* <--- ESTA CHAVE FECHA O: {modalAberto && ( */}
 
-    </div> // Fecha a Div Principal do componente (Ex: <div className="min-h-screen...">)
-  ); // Fecha o return
-} // Fecha a função do componente
+    </div> // FECHA A DIV PRINCIPAL DO RETURN
+  ); // FECHA O RETURN
+}; // FECHA A CONST/FUNCTION DO COMPONENTE
 
       {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
