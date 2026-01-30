@@ -674,34 +674,47 @@ const processarPedidoFinal = async () => {
 {/* ETAPA 3: DADOS DE ENVIO E FINALIZAÇÃO */}
 {etapaCheckout === 'dados' && (
   <div className="flex-grow flex flex-col">
+    {/* Área de Inputs com Rolagem interna para não quebrar o layout no mobile */}
     <div className="space-y-4 mb-6 overflow-y-auto pr-2 max-h-[55vh]">
-      {/* CAMPOS DE DADOS PESSOAIS */}
+      
+      {/* Campos Pessoais */}
       <div className="grid grid-cols-1 gap-4">
         <input 
-          type="text" placeholder="NOME COMPLETO"
+          type="text" 
+          placeholder="NOME COMPLETO"
           className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all"
-          value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})}
+          value={dados.nome} 
+          onChange={e => setDados({...dados, nome: e.target.value})}
         />
         <input 
-          type="email" placeholder="SEU MELHOR E-MAIL"
+          type="email" 
+          placeholder="SEU MELHOR E-MAIL"
           className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all"
-          value={dados.email} onChange={e => setDados({...dados, email: e.target.value})}
+          value={dados.email} 
+          onChange={e => setDados({...dados, email: e.target.value})}
         />
+        
+        {/* CPF só aparece se o método for Mercado Pago */}
         {metodoSelecionado === 'mp' && (
           <input 
-            type="text" placeholder="CPF (PARA NOTA FISCAL)"
+            type="text" 
+            placeholder="CPF (PARA NOTA FISCAL)"
             className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all"
-            value={dados.cpf} onChange={e => setDados({...dados, cpf: e.target.value})}
+            value={dados.cpf} 
+            onChange={e => setDados({...dados, cpf: e.target.value})}
           />
         )}
+        
         <input 
-          type="text" placeholder="COMPLEMENTO / NÚMERO" 
+          type="text" 
+          placeholder="COMPLEMENTO / NÚMERO" 
           className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all" 
-          value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})}
+          value={dados.complemento} 
+          onChange={e => setDados({...dados, complemento: e.target.value})}
         />
       </div>
 
-      {/* BLOCO WEB3 INTEGRADO */}
+      {/* BLOCO WEB3 - RECOMPENSA DIGITAL */}
       <div className="mt-4 border-[3px] border-black p-5 bg-orange-50 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
         <div className="flex items-center gap-2 mb-2">
           <i className="bi bi-cpu-fill text-orange-600"></i>
@@ -724,8 +737,11 @@ const processarPedidoFinal = async () => {
           }`}
         />
         
+        {/* Validação Visual de erro na carteira */}
         {dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain) && (
-          <p className="text-[8px] font-black text-red-500 mt-1 uppercase italic animate-pulse">Endereço Inválido!</p>
+          <p className="text-[8px] font-black text-red-500 mt-1 uppercase italic animate-pulse">
+            Endereço Inválido! Verifique o código '0x'.
+          </p>
         )}
 
         <div className="mt-4">
@@ -736,25 +752,41 @@ const processarPedidoFinal = async () => {
       </div>
     </div>
 
-    {/* RESUMO E BOTÃO FINAL */}
+    {/* RESUMO DE VALORES E BOTÕES FINAIS */}
     <div className="mt-auto pt-6 border-t border-dashed border-gray-200">
       <div className="flex justify-between items-center mb-6">
         <div>
           <p className="text-[10px] font-black text-gray-400 uppercase italic">Total do Pedido</p>
-          <p className="text-3xl font-black italic tracking-tighter">R$ {totalGeral.toFixed(2)}</p>
+          <p className="text-3xl font-black italic tracking-tighter">
+            R$ {totalGeral.toFixed(2)}
+          </p>
         </div>
+        {frete === 0 && (
+          <span className="bg-green-100 text-green-600 text-[9px] font-black px-3 py-1 rounded-full uppercase">
+            Frete Grátis
+          </span>
+        )}
       </div>
 
+      {/* Condicional de Botão baseado no Método de Pagamento */}
       {metodoSelecionado === 'mp' ? (
         <button 
           onClick={processarPedidoFinal} 
           disabled={loading || !dados.nome || !dados.email} 
           className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-30"
         >
-          {loading ? <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span> : 'Finalizar e Pagar'}
+          {loading ? (
+            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+          ) : (
+            'Finalizar e Pagar'
+          )}
         </button>
       ) : (
-        <BotaoPagamentoWeb3 total={totalGeral} dadosCliente={dados} onBeforeClick={processarPedidoFinal}/>
+        <BotaoPagamentoWeb3 
+          total={totalGeral} 
+          dadosCliente={dados} 
+          onBeforeClick={processarPedidoFinal}
+        />
       )}
       
       <button 
@@ -763,15 +795,9 @@ const processarPedidoFinal = async () => {
       >
         Trocar Método de Pagamento
       </button>
-     </div>
-    )}
-
-        </div> {/* Fecha Painel Lateral */}
-      </div>   {/* Fecha Overlay/Backdrop */}
-    )}         {/* Fecha ModalAberto */}
-  </div>       {/* Fecha Div Principal do Componente */}
-);
-}
+    </div>
+  </div>
+)}
 
       {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
