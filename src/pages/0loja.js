@@ -671,141 +671,91 @@ const processarPedidoFinal = async () => {
               </div>
             )}
 
-{/* ETAPA 3: DADOS DE ENVIO E FINALIZAÇÃO */}
-{etapaCheckout === 'dados' && (
-  <div className="flex-grow flex flex-col">
-    {/* Área de Inputs com Rolagem interna para não quebrar o layout no mobile */}
-    <div className="space-y-4 mb-6 overflow-y-auto pr-2 max-h-[55vh]">
-      
-      {/* Campos Pessoais */}
-      <div className="grid grid-cols-1 gap-4">
-        <input 
-          type="text" 
-          placeholder="NOME COMPLETO"
-          className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all"
-          value={dados.nome} 
-          onChange={e => setDados({...dados, nome: e.target.value})}
-        />
-        <input 
-          type="email" 
-          placeholder="SEU MELHOR E-MAIL"
-          className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all"
-          value={dados.email} 
-          onChange={e => setDados({...dados, email: e.target.value})}
-        />
-        
-        {/* CPF só aparece se o método for Mercado Pago */}
-        {metodoSelecionado === 'mp' && (
-          <input 
-            type="text" 
-            placeholder="CPF (PARA NOTA FISCAL)"
-            className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all"
-            value={dados.cpf} 
-            onChange={e => setDados({...dados, cpf: e.target.value})}
-          />
-        )}
-        
-        <input 
-          type="text" 
-          placeholder="COMPLEMENTO / NÚMERO" 
-          className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all" 
-          value={dados.complemento} 
-          onChange={e => setDados({...dados, complemento: e.target.value})}
-        />
-      </div>
+            {/* ETAPA 3: DADOS DE ENVIO E FINALIZAÇÃO */}
+            {etapaCheckout === 'dados' && (
+              <div className="flex-grow flex flex-col">
+                <div className="space-y-4 mb-6 overflow-y-auto pr-2 max-h-[55vh]">
+                  <div className="grid grid-cols-1 gap-4">
+                    <input 
+                      type="text" placeholder="NOME COMPLETO"
+                      className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all"
+                      value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})}
+                    />
+                    <input 
+                      type="email" placeholder="SEU MELHOR E-MAIL"
+                      className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all"
+                      value={dados.email} onChange={e => setDados({...dados, email: e.target.value})}
+                    />
+                    {metodoSelecionado === 'mp' && (
+                      <input 
+                        type="text" placeholder="CPF (PARA NOTA FISCAL)"
+                        className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all"
+                        value={dados.cpf} onChange={e => setDados({...dados, cpf: e.target.value})}
+                      />
+                    )}
+                    <input 
+                      type="text" placeholder="COMPLEMENTO / NÚMERO" 
+                      className="w-full bg-gray-50 rounded-xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-black transition-all" 
+                      value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})}
+                    />
+                  </div>
 
-      {/* BLOCO WEB3 - RECOMPENSA DIGITAL */}
-      <div className="mt-4 border-[3px] border-black p-5 bg-orange-50 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-        <div className="flex items-center gap-2 mb-2">
-          <i className="bi bi-cpu-fill text-orange-600"></i>
-          <h3 className="font-black uppercase italic tracking-tighter text-sm">RECOMPENSA DIGITAL</h3>
+                  <div className="mt-4 border-[3px] border-black p-5 bg-orange-50 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+                    <div className="flex items-center gap-2 mb-2">
+                      <i className="bi bi-cpu-fill text-orange-600"></i>
+                      <h3 className="font-black uppercase italic tracking-tighter text-sm">RECOMPENSA DIGITAL</h3>
+                    </div>
+                    <p className="text-[9px] font-bold text-gray-600 uppercase leading-tight mb-4 italic">
+                      Ganhe 5% de desconto vitalício e acesso à nova plataforma.
+                    </p>
+                    <input 
+                      type="text"
+                      placeholder="ENDEREÇO DA CARTEIRA (0x...)"
+                      value={dados.carteira_blockchain}
+                      onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})}
+                      className={`w-full border-2 p-3 font-mono text-[10px] outline-none transition-all uppercase ${
+                        dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain)
+                        ? 'border-red-500 bg-red-50 text-red-600'
+                        : 'border-black bg-white focus:ring-2 focus:ring-orange-500'
+                      }`}
+                    />
+                    {dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain) && (
+                      <p className="text-[8px] font-black text-red-500 mt-1 uppercase italic animate-pulse">Endereço Inválido!</p>
+                    )}
+                    <div className="mt-4">
+                      <a href="/faq-web3" target="_blank" className="text-[8px] font-black uppercase underline hover:text-orange-600 italic">
+                        <i className="bi bi-question-circle"></i> O que é isso? Tira-Dúvidas
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-auto pt-6 border-t border-dashed border-gray-200">
+                  <div className="flex justify-between items-center mb-6">
+                    <div>
+                      <p className="text-[10px] font-black text-gray-400 uppercase italic">Total do Pedido</p>
+                      <p className="text-3xl font-black italic tracking-tighter">R$ {totalGeral.toFixed(2)}</p>
+                    </div>
+                  </div>
+
+                  {metodoSelecionado === 'mp' ? (
+                    <button 
+                      onClick={processarPedidoFinal} 
+                      disabled={loading || !dados.nome || !dados.email} 
+                      className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-30"
+                    >
+                      {loading ? <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span> : 'Finalizar e Pagar'}
+                    </button>
+                  ) : (
+                    <BotaoPagamentoWeb3 total={totalGeral} dadosCliente={dados} onBeforeClick={processarPedidoFinal}/>
+                  )}
+                  <button onClick={() => setEtapaCheckout('metodo')} className="w-full py-4 text-[10px] font-black uppercase text-gray-300 hover:text-black transition-colors">Trocar Método de Pagamento</button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-
-        <p className="text-[9px] font-bold text-gray-600 uppercase leading-tight mb-4 italic">
-          Ganhe 5% de desconto vitalício e acesso à nova plataforma.
-        </p>
-
-        <input 
-          type="text"
-          placeholder="ENDEREÇO DA CARTEIRA (0x...)"
-          value={dados.carteira_blockchain}
-          onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})}
-          className={`w-full border-2 p-3 font-mono text-[10px] outline-none transition-all uppercase ${
-            dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain)
-            ? 'border-red-500 bg-red-50 text-red-600'
-            : 'border-black bg-white focus:ring-2 focus:ring-orange-500'
-          }`}
-        />
-        
-        {/* Validação Visual de erro na carteira */}
-        {dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain) && (
-          <p className="text-[8px] font-black text-red-500 mt-1 uppercase italic animate-pulse">
-            Endereço Inválido! Verifique o código '0x'.
-          </p>
-        )}
-
-        <div className="mt-4">
-          <a href="/faq-web3" target="_blank" className="text-[8px] font-black uppercase underline hover:text-orange-600 italic">
-            <i className="bi bi-question-circle"></i> O que é isso? Tira-Dúvidas
-          </a>
-        </div>
-      </div>
-    </div>
-
-    {/* RESUMO DE VALORES E BOTÕES FINAIS */}
-    <div className="mt-auto pt-6 border-t border-dashed border-gray-200">
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <p className="text-[10px] font-black text-gray-400 uppercase italic">Total do Pedido</p>
-          <p className="text-3xl font-black italic tracking-tighter">
-            R$ {totalGeral.toFixed(2)}
-          </p>
-        </div>
-        {frete === 0 && (
-          <span className="bg-green-100 text-green-600 text-[9px] font-black px-3 py-1 rounded-full uppercase">
-            Frete Grátis
-          </span>
-        )}
-      </div>
-
-      {/* Condicional de Botão baseado no Método de Pagamento */}
-      {metodoSelecionado === 'mp' ? (
-        <button 
-          onClick={processarPedidoFinal} 
-          disabled={loading || !dados.nome || !dados.email} 
-          className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-30"
-        >
-          {loading ? (
-            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-          ) : (
-            'Finalizar e Pagar'
-          )}
-        </button>
-      ) : (
-        <BotaoPagamentoWeb3 
-          total={totalGeral} 
-          dadosCliente={dados} 
-          onBeforeClick={processarPedidoFinal}
-        />
       )}
-      
-      <button 
-        onClick={() => setEtapaCheckout('metodo')} 
-        className="w-full py-4 text-[10px] font-black uppercase text-gray-300 hover:text-black transition-colors"
-      >
-        Trocar Método de Pagamento
-      </button>
-    </div>
-</div>
-)} {/* <--- ESTA CHAVE FECHA O: {etapaCheckout === 'dados' && ( */}
-
-          </div> {/* Fecha o Painel Lateral (Branco) */}
-        </div> {/* Fecha o Backdrop (Preto/Blur) */}
-      )} {/* <--- ESTA CHAVE FECHA O: {modalAberto && ( */}
-
-    </div> // FECHA A DIV PRINCIPAL DO RETURN
-  ); // FECHA O RETURN
-}; // FECHA A CONST/FUNCTION DO COMPONENTE
 
       {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
