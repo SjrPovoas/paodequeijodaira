@@ -796,8 +796,16 @@ const processarPedidoFinal = async () => {
         Trocar Método de Pagamento
       </button>
     </div>
-  </div>
-)}
+</div>
+          )} {/* <--- CONFIRA SE ESTA CHAVE E PARÊNTESE ESTÃO AQUI */}
+
+          </div> {/* Fecha o Painel Lateral */}
+        </div> {/* Fecha o Backdrop/Overlay */}
+      )} {/* Fecha o {modalAberto && (...)} */}
+
+    </div> // Fecha a Div Principal do componente (Ex: <div className="min-h-screen...">)
+  ); // Fecha o return
+} // Fecha a função do componente
 
       {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
