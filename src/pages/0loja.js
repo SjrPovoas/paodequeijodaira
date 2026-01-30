@@ -763,19 +763,17 @@ const processarPedidoFinal = async () => {
       >
         Trocar Método de Pagamento
       </button>
-    </div>
-            </div>
-          )} {/* <--- FECHA O CONDICIONAL DA ETAPA 3 */}
-        </div>
-      </div>
-    )} {/* <--- FECHA O CONDICIONAL DO MODAL ABERTO */}
-    
-    {/* Outros componentes da página aqui (Ex: Footer) */}
-    </div>
-  );
-} // <--- FECHA A FUNÇÃO PRINCIPAL DA LOJA
+     </div>
+    )}
 
-{/* 7. FOOTER */}
+        </div> {/* Fecha Painel Lateral */}
+      </div>   {/* Fecha Overlay/Backdrop */}
+    )}         {/* Fecha ModalAberto */}
+  </div>       {/* Fecha Div Principal do Componente */}
+);
+}
+
+      {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:justify-between mb-16">
