@@ -32,7 +32,7 @@ export default function Loja() {
   }, []);
   
   // Dados do Formulário
-  const [dados, setDados] = useState({ nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '' });
+  const [dados, setDados] = useState({ nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '', carteira_blockchain: ''});
   const [frete, setFrete] = useState(0);
 
   // --- 2. CÁLCULOS OTIMIZADOS (useMemo) ---
