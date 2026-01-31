@@ -9,10 +9,10 @@ import Link from 'next/link';
 
 {/* // --- DEFINIÇÃO DO CATÁLOGO DE PRODUTOS --- */}
 export const produtos = [
-  { id: 0, nome: "Camiseta Lifestyle Masculina", preco: 129.90, img: "/produtos/camiseta-m.jpg", category: "vestuario" },
-  { id: 1, nome: "Camiseta Lifestyle Feminina", preco: 129.90, img: "/produtos/camiseta-f.jpg", category: "vestuario" },
-  { id: 2, nome: "Caneca Lifestyle", preco: 59.90, img: "/produtos/caneca.jpg", category: "acessorios" },
-  { id: 3, nome: "Avental Lifestyle", preco: 89.90, img: "/produtos/avental.jpg", category: "acessorios" }
+    { id: 1, nome: 'T-Shirt Logo Pão de Queijo da Irá (Masc)', preco: 110, img: '/nfts/camiseta1.png', category: 'vestuario' },
+    { id: 2, nome: 'T-Shirt Logo Pão de Queijo da Irá (Fem)', preco: 110, img: '/nfts/camiseta2.png', category: 'vestuario' },
+    { id: 3, nome: 'Avental de Lona Pão de Queijo da Irá', preco: 85, img: '/nfts/avental.png', category: 'acessorios' },
+    { id: 4, nome: 'Caneca Cerâmica Fosca do Pão de Queijo da Irá', preco: 42, img: '/nfts/caneca.png', category: 'acessorios' },
 ];
 
 export default function Loja() {
