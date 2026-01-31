@@ -762,20 +762,21 @@ export default function Loja() {
         </div>
       </footer>
 
-      {/* BOTÃO VOLTAR AO TOPO */}
+      {/* 5. BOTÃO VOLTAR AO TOPO */}
       {showScrollTop && (
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 right-8 z-[150] w-12 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-orange-600 transition-all shadow-2xl">
-          <i className="bi bi-arrow-up"></i>
+          className="fixed bottom-8 left-8 z-[100] bg-white border-4 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all" >
+          <i className="bi bi-arrow-up text-xl"></i>
         </button>
+      )}
 
-      <style jsx global>{`
+      {/* 6. ESTILOS GLOBAIS (CORREÇÃO DO ERRO JSX) */}
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes slideIn {
           from { transform: translateX(100%); }
           to { transform: translateX(0); } }
         .animate-in { animation: slideIn 0.3s ease-out forwards; }
-      `}</style>
-   {/* FECHA A DIV PRINCIPAL DO RETURN */}
+      `}} />
     </div>  
    {/* FECHA O PARENTESE DO RETURN */}
    );
