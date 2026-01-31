@@ -567,31 +567,39 @@ export default function Loja() {
             {etapaCheckout === 'dados' && (
               <div className="flex-grow flex flex-col h-full">
                 <div className="flex-grow space-y-4 overflow-y-auto pr-2 custom-scrollbar max-h-[60vh]">
+                  
                   <div className="space-y-3">
                     <input 
                       type="text" placeholder="NOME COMPLETO"
                       className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm"
-                      value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})}
+                      value={dados?.nome || ''} 
+                      onChange={e => setDados({...dados, nome: e.target.value})}
                     />
                     <input 
                       type="email" placeholder="SEU MELHOR E-MAIL"
                       className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm"
-                      value={dados.email} onChange={e => setDados({...dados, email: e.target.value})}
+                      value={dados?.email || ''} 
+                      onChange={e => setDados({...dados, email: e.target.value})}
                     />
+                    
                     {metodoSelecionado === 'mp' && (
                       <input 
                         type="text" placeholder="CPF (PARA NOTA FISCAL)"
                         className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm"
-                        value={dados.cpf} onChange={e => setDados({...dados, cpf: e.target.value})}
+                        value={dados?.cpf || ''} 
+                        onChange={e => setDados({...dados, cpf: e.target.value})}
                       />
                     )}
+
                     <input 
                       type="text" placeholder="COMPLEMENTO / NÚMERO"
                       className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm"
-                      value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})}
+                      value={dados?.complemento || ''} 
+                      onChange={e => setDados({...dados, complemento: e.target.value})}
                     />
                   </div>
 
+                  {/* BOX DA RECOMPENSA NFT */}
                   <div className="bg-gradient-to-br from-orange-50 to-orange-100/30 rounded-[32px] p-6 border border-orange-100 mt-2">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="bg-white p-2.5 rounded-2xl shadow-sm text-orange-600">
@@ -602,48 +610,56 @@ export default function Loja() {
                         <p className="text-[10px] font-bold text-orange-600/70 uppercase italic leading-none">Desconto vitalício ativado</p>
                       </div>
                     </div>
+
                     <input 
                       type="text"
                       placeholder="CARTEIRA POLYGON (0x...)"
-                      value={dados.carteira_blockchain}
+                      value={dados?.carteira_blockchain || ''}
                       onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})}
                       className={`w-full p-4 rounded-2xl font-mono text-[10px] outline-none transition-all shadow-inner ${
-                        dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain)
+                        dados?.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain)
                         ? 'bg-red-50 text-red-600 ring-2 ring-red-100'
                         : 'bg-white focus:ring-2 focus:ring-orange-500 text-gray-700'
                       }`}
                     />
-                    {dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain) && (
-                      <p className="text-[9px] font-bold text-red-500 mt-2 ml-2 uppercase animate-pulse italic">Carteira Inválida!</p>
-                    )}
+                    
+                    <div className="mt-4 flex justify-between items-center px-1">
+                      <Link href="/faq-web3" target="_blank" className="text-[10px] font-black text-gray-400 uppercase underline underline-offset-4 hover:text-orange-600 transition-colors">
+                        Saiba Mais
+                      </Link>
+                      <i className="bi bi-shield-lock-fill text-orange-200 text-lg"></i>
+                    </div>
                   </div>
                 </div>
 
                 <div className="mt-6 pt-6 border-t border-gray-50">
-                  <div className="flex justify-between items-center mb-6 px-1">
+                  <div className="flex justify-between items-center mb-6">
                     <div>
-                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total a Pagar</p>
-                      <p className="text-4xl font-black text-gray-900 tracking-tighter">R$ {(totalGeral || 0).toFixed(2)}</p>
+                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total</p>
+                      <p className="text-3xl font-black text-gray-900 italic">R$ {(totalGeral || 0).toFixed(2)}</p>
                     </div>
                   </div>
+
+                  {/* BOTÃO COM LÓGICA DE CARREGAMENTO */}
                   <button 
-                    onClick={processarPedidoFinal} 
-                    disabled={loading || !dados.nome}
-                    className="w-full bg-black text-white py-6 rounded-[24px] font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 shadow-2xl shadow-orange-500/10 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-30"
+                    onClick={processarPedidoFinal}
+                    disabled={loading || !dados?.nome || !dados?.email}
+                    className="w-full bg-black text-white py-6 rounded-[24px] font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all disabled:opacity-30"
                   >
-                    {loading ? 'Enviando...' : 'Confirmar e Finalizar'}
+                    {loading ? 'Processando...' : 'Finalizar Pedido'}
                   </button>
+                  
                   <button 
-                    onClick={() => setEtapaCheckout('metodo')} 
-                    className="w-full py-4 text-[10px] font-black uppercase text-gray-300 hover:text-gray-600 transition-colors tracking-widest mt-2"
+                    onClick={() => setEtapaCheckout('metodo')}
+                    className="w-full py-4 text-[10px] font-black uppercase text-gray-300 hover:text-gray-500 transition-all mt-2"
                   >
-                    Alterar Forma de Pagamento
+                    Voltar ao Pagamento
                   </button>
                 </div>
               </div>
             )}
-          </div>
-        </div>
+          </div> {/* Fim do Painel Lateral */}
+        </div> /* Fim do Backdrop */
       )}
 
       {/* 7. FOOTER */}
