@@ -143,49 +143,56 @@ export default function Loja() {
   };
 
   // --- 7. INTEGRAÇÃO SUPABASE (PROCESSAMENTO FINAL) ---
+// --- 7. INTEGRAÇÃO SUPABASE (PROCESSAMENTO FINAL CORRIGIDO) ---
   const processarPedidoFinal = async () => {
-    // Validação de campos obrigatórios
+    // 1. Validação de campos obrigatórios (Fiel aos nomes do estado 'dados')
     if (!dados.nome || !dados.email || !dados.cep) {
       alert("⚠️ Preencha Nome, E-mail e CEP para continuar.");
       return;
     }
 
-    // Validação de formato da carteira se preenchida
-    if (dados.carteira_blockchain && !validarCarteira(dados.carteira_blockchain)) {
-      alert("⚠️ O endereço da carteira Polygon parece incorreto.");
-      return;
+    // 2. Validação de carteira (Regex para rede Polygon/Ethereum)
+    if (dados.carteira_blockchain) {
+      const regexCripto = /^0x[a-fA-F0-9]{40}$/;
+      if (!regexCripto.test(dados.carteira_blockchain)) {
+        alert("⚠️ O endereço da carteira Polygon parece incorreto.");
+        return;
+      }
     }
 
     setLoading(true);
     try {
-      // Referencia o primeiro item para metadados de NFT (opcional)
-      const idReferenciaNFT = carrinho.length > 0 ? carrinho[0].id : 0;
-
+      // 3. Inserção no Supabase (Nomes das colunas batendo com o SQL Editor)
       const { error } = await supabase.from('pedidos').insert([{
-        cliente_nome: dados.nome,
-        email: dados.email,
-        cpf: dados.cpf,
-        cep: dados.cep,
-        endereco: dados.endereco,
-        complemento: dados.complemento,
-        carteira_blockchain: dados.carteira_blockchain,
-        nft_item_id: idReferenciaNFT,
-        valor_total: totalGeral,
-        itens: JSON.stringify(carrinho),
-        status: 'Pendente',
-        metodo_pagamento: metodoSelecionado
+        nome: dados.nome,                // Coluna: nome
+        email: dados.email,              // Coluna: email
+        cpf: dados.cpf || null,          // Coluna: cpf
+        cep: dados.cep,                  // Coluna: cep
+        complemento: dados.complemento,  // Coluna: complemento
+        carteira_blockchain: dados.carteira_blockchain || null,
+        total_geral: totalGeral,         // Coluna: total_geral
+        itens: carrinho,                 // Passa a array direta (coluna jsonb)
+        metodo_pagamento: metodoSelecionado, // 'mp' ou 'cripto'
+        status_pagamento: 'pendente',    // Status inicial
+        status_pedido: 'recebido'        // Status logístico
       }]);
 
       if (error) throw error;
 
-      // Sucesso: Redirecionamento ou Mensagem
-      alert("🚀 Pedido registrado com sucesso! Processando pagamento...");
+      // 4. Lógica de Redirecionamento após sucesso
+      alert("🚀 Pedido registrado! Você será redirecionado para o pagamento.");
       
-      // Aqui entraria a chamada de API do Mercado Pago ou Cripto
-      
+      // Simulação de fluxo de pagamento
+      if (metodoSelecionado === 'mp') {
+        // Exemplo: window.location.href = response_do_mercado_pago.init_point;
+        console.log("Iniciando checkout Mercado Pago...");
+      } else {
+        // Exemplo: router.push('/pagamento-cripto');
+        console.log("Iniciando checkout Blockchain...");
+        
     } catch (err) {
       console.error("Erro Supabase:", err);
-      alert("Erro ao salvar pedido: " + err.message);
+      alert("❌ Erro ao salvar pedido: " + (err.message || "Falha na conexão"));
     } finally {
       setLoading(false);
     }
