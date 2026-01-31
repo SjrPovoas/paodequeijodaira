@@ -92,23 +92,28 @@ export default function Loja() {
         const json = await res.json();
         
         if (!json.erro) {
-          // Formata endereço automaticamente
           const endFormatado = `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`;
+          
+          // ATUALIZA ENDEREÇO
           setDados(prev => ({ ...prev, endereco: endFormatado }));
           
-          // Lógica de Frete por Região (Exemplo: DF e Nacional)
+          // LÓGICA DE FRETE
           const regiao = cep.substring(0, 2);
-          const valorFrete = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
+          const valorFreteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
           
-          // Aplica Frete Grátis se atingir o valor estipulado
-          setFrete(subtotal >= VALOR_FRETE_GRATIS ? 0 : valorFrete);
+          // Verifica frete grátis (VALOR_FRETE_GRATIS deve estar definido no topo)
+          const valorFinalFrete = subtotal >= (typeof VALOR_FRETE_GRATIS !== 'undefined' ? VALOR_FRETE_GRATIS : 200) ? 0 : valorFreteBase;
+          
+          setFrete(valorFinalFrete);
+        } else {
+          alert("CEP não encontrado.");
         }
       } catch (e) { 
         console.error("Erro ao buscar CEP:", e); 
       }
     }
   };
-
+    
   // --- 5. GESTÃO DO CARRINHO ---
   const add = (p, tam = null) => {
     // Validação obrigatória para itens de vestuário
@@ -143,7 +148,6 @@ export default function Loja() {
   };
 
   // --- 7. INTEGRAÇÃO SUPABASE (PROCESSAMENTO FINAL) ---
-// --- 7. INTEGRAÇÃO SUPABASE (PROCESSAMENTO FINAL CORRIGIDO) ---
   const processarPedidoFinal = async () => {
     // 1. Validação de campos obrigatórios
     if (!dados.nome || !dados.email || !dados.cep) {
@@ -162,18 +166,18 @@ export default function Loja() {
 
     setLoading(true);
     try {
-      // 3. Inserção no Supabase
       const { error } = await supabase.from('pedidos').insert([{
         nome: dados.nome,
         email: dados.email,
         cpf: dados.cpf || null,
         cep: dados.cep,
+        endereco: dados.endereco,
         complemento: dados.complemento,
         carteira_blockchain: dados.carteira_blockchain || null,
         total_geral: totalGeral,
         itens: carrinho,
-        metodo_pagamento: metodoSelecionado,
-        status_pagamento: 'pendente',
+        metodo_pagamento: metodoSelecionado === 'mp' ? 'Mercado Pago' : 'Web3 Cripto',
+        status_pagamento: 'Aguardando Pagamento',
         status_pedido: 'recebido'
       }]);
 
@@ -501,12 +505,16 @@ export default function Loja() {
         </div>
       </section>
 
-      {/* 6. MODAL DE CHECKOUT PREMIUM SOFT */}
+{/* 6. MODAL DE CHECKOUT PREMIUM SOFT - EDITADO E CORRIGIDO */}
       {modalAberto && (
         <div className="fixed inset-0 z-[200] flex justify-end">
+          {/* Backdrop com desfoque */}
           <div className="absolute inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-500" onClick={() => setModalAberto(false)}></div>
+          
+          {/* Container do Modal */}
           <div className="relative w-full max-w-md bg-white h-[96vh] my-[2vh] mr-[1vw] rounded-[40px] shadow-2xl p-8 overflow-hidden flex flex-col animate-in slide-in-from-right duration-500 ease-out">
             
+            {/* Cabeçalho Dinâmico */}
             <div className="flex justify-between items-center mb-8">
               <div>
                 <h2 className="text-2xl font-black text-gray-900 tracking-tight">
@@ -521,6 +529,7 @@ export default function Loja() {
               </button>
             </div>
 
+            {/* ETAPA 1: SACOLA */}
             {etapaCheckout === 'sacola' && (
               <div className="flex-grow flex flex-col">
                 <div className="flex-grow space-y-5 overflow-y-auto pr-2 custom-scrollbar">
@@ -551,17 +560,54 @@ export default function Loja() {
                     ))
                   )}
                 </div>
+
+                {/* Seção de Frete na Sacola */}
                 <div className="mt-6 p-6 bg-gray-50 rounded-[32px]">
                   <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block ml-1">Simular Frete</label>
-                  <div className="relative">
-                    <input type="text" placeholder="00000-000" maxLength={9} className="w-full bg-white border-none rounded-2xl p-4 font-bold text-sm shadow-sm focus:ring-2 focus:ring-orange-500 outline-none transition-all" value={dados.cep} onChange={e => handleCEP(e.target.value)} />
+                  <div className="relative mb-3">
+                    <input 
+                      type="text" 
+                      placeholder="00000-000" 
+                      maxLength={9} 
+                      className="w-full bg-white border-none rounded-2xl p-4 font-bold text-sm shadow-sm focus:ring-2 focus:ring-orange-500 outline-none transition-all" 
+                      value={dados.cep} 
+                      onChange={e => handleCEP(e.target.value)} 
+                    />
                     <i className="bi bi-geo-alt absolute right-4 top-4 text-gray-300"></i>
                   </div>
-                  <button disabled={carrinho.length === 0 || !dados.cep} onClick={() => setEtapaCheckout('metodo')} className="w-full bg-black text-white py-5 rounded-[22px] font-black uppercase text-xs tracking-widest mt-6 hover:bg-orange-600 disabled:opacity-20 transition-all shadow-xl shadow-black/5">Confirmar Itens</button>
+
+                  {/* Visualização do Endereço Descoberto */}
+                  {dados.endereco && (
+                    <div className="mb-4 p-4 bg-orange-100/50 rounded-2xl border border-orange-200 animate-in fade-in slide-in-from-top-2 duration-300">
+                      <p className="text-[10px] font-black text-orange-800 uppercase mb-1">Entregar em:</p>
+                      <p className="text-[11px] font-bold text-orange-900 leading-tight">{dados.endereco}</p>
+                    </div>
+                  )}
+
+                  {/* Resumo Financeiro */}
+                  <div className="space-y-2 mb-4 px-1">
+                    <div className="flex justify-between text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                      <span>Subtotal</span>
+                      <span>R$ {subtotal.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between text-[11px] font-bold text-orange-600 uppercase tracking-wider">
+                      <span>Frete</span>
+                      <span>{frete === 0 ? 'GRÁTIS' : `R$ ${frete.toFixed(2)}`}</span>
+                    </div>
+                  </div>
+
+                  <button 
+                    disabled={carrinho.length === 0 || !dados.cep || !dados.endereco} 
+                    onClick={() => setEtapaCheckout('metodo')} 
+                    className="w-full bg-black text-white py-5 rounded-[22px] font-black uppercase text-xs tracking-widest hover:bg-orange-600 disabled:opacity-20 transition-all shadow-xl shadow-black/5"
+                  >
+                    Confirmar Itens
+                  </button>
                 </div>
               </div>
             )}
 
+            {/* ETAPA 2: MÉTODO DE PAGAMENTO */}
             {etapaCheckout === 'metodo' && (
               <div className="flex-grow flex flex-col justify-center space-y-4">
                 <button onClick={() => { setMetodoSelecionado('mp'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 hover:bg-orange-50/30 transition-all group flex justify-between items-center">
@@ -576,23 +622,57 @@ export default function Loja() {
               </div>
             )}
 
+            {/* ETAPA 3: DADOS FINAIS */}
             {etapaCheckout === 'dados' && (
               <div className="flex-grow flex flex-col h-full">
                 <div className="flex-grow space-y-4 overflow-y-auto pr-2 custom-scrollbar max-h-[60vh]">
+                  {/* Informações de Entrega (Resumo) */}
+                  <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                    <p className="text-[9px] font-black text-gray-400 uppercase mb-1">Entrega em:</p>
+                    <p className="text-[10px] font-bold text-gray-600 leading-tight">{dados.endereco} - CEP: {dados.cep}</p>
+                  </div>
+
                   <div className="space-y-3">
                     <input type="text" placeholder="NOME COMPLETO" className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm" value={dados?.nome || ''} onChange={e => setDados({...dados, nome: e.target.value})} />
                     <input type="email" placeholder="SEU MELHOR E-MAIL" className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm" value={dados?.email || ''} onChange={e => setDados({...dados, email: e.target.value})} />
                     {metodoSelecionado === 'mp' && (<input type="text" placeholder="CPF (PARA NOTA FISCAL)" className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm" value={dados?.cpf || ''} onChange={e => setDados({...dados, cpf: e.target.value})} />)}
-                    <input type="text" placeholder="COMPLEMENTO / NÚMERO" className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm" value={dados?.complemento || ''} onChange={e => setDados({...dados, complemento: e.target.value})} />
+                    <input type="text" placeholder="NÚMERO E COMPLEMENTO" className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm" value={dados?.complemento || ''} onChange={e => setDados({...dados, complemento: e.target.value})} />
                   </div>
+
+                  {/* Seção Web3/NFT */}
                   <div className="bg-gradient-to-br from-orange-50 to-orange-100/30 rounded-[32px] p-6 border border-orange-100 mt-2">
-                    <div className="flex items-center gap-3 mb-4"><div className="bg-white p-2.5 rounded-2xl shadow-sm text-orange-600"><i className="bi bi-cpu-fill text-xl"></i></div><div><h3 className="font-black uppercase text-[12px] tracking-tight text-gray-900">NFT Genesis Reward</h3><p className="text-[10px] font-bold text-orange-600/70 uppercase italic leading-none">Desconto vitalício ativado</p></div></div>
-                    <input type="text" placeholder="CARTEIRA POLYGON (0x...)" value={dados?.carteira_blockchain || ''} onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})} className={`w-full p-4 rounded-2xl font-mono text-[10px] outline-none transition-all shadow-inner ${dados?.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain) ? 'bg-red-50 text-red-600 ring-2 ring-red-100' : 'bg-white focus:ring-2 focus:ring-orange-500 text-gray-700'}`} />
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="bg-white p-2.5 rounded-2xl shadow-sm text-orange-600"><i className="bi bi-cpu-fill text-xl"></i></div>
+                      <div>
+                        <h3 className="font-black uppercase text-[12px] tracking-tight text-gray-900">NFT Genesis Reward</h3>
+                        <p className="text-[10px] font-bold text-orange-600/70 uppercase italic leading-none">Vincule sua carteira</p>
+                      </div>
+                    </div>
+                    <input 
+                      type="text" 
+                      placeholder="CARTEIRA POLYGON (0x...)" 
+                      value={dados?.carteira_blockchain || ''} 
+                      onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})} 
+                      className={`w-full p-4 rounded-2xl font-mono text-[10px] outline-none transition-all shadow-inner ${dados?.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain) ? 'bg-red-50 text-red-600 ring-2 ring-red-100' : 'bg-white focus:ring-2 focus:ring-orange-500 text-gray-700'}`} 
+                    />
                   </div>
                 </div>
+
+                {/* Rodapé do Checkout com Valor Final */}
                 <div className="mt-6 pt-6 border-t border-gray-50">
-                  <div className="flex justify-between items-center mb-6"><div><p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total</p><p className="text-3xl font-black text-gray-900 italic">R$ {(totalGeral || 0).toFixed(2)}</p></div></div>
-                  <button onClick={processarPedidoFinal} disabled={loading || !dados?.nome || !dados?.email} className="w-full bg-black text-white py-6 rounded-[24px] font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all disabled:opacity-30">{loading ? 'Processando...' : 'Finalizar Pedido'}</button>
+                  <div className="flex justify-between items-center mb-6">
+                    <div>
+                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total com Frete</p>
+                      <p className="text-3xl font-black text-gray-900 italic">R$ {(totalGeral || 0).toFixed(2)}</p>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={processarPedidoFinal} 
+                    disabled={loading || !dados?.nome || !dados?.email || !dados?.endereco} 
+                    className="w-full bg-black text-white py-6 rounded-[24px] font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all disabled:opacity-30"
+                  >
+                    {loading ? 'Processando...' : 'Finalizar Pedido'}
+                  </button>
                   <button onClick={() => setEtapaCheckout('metodo')} className="w-full py-4 text-[10px] font-black uppercase text-gray-300 hover:text-gray-500 transition-all mt-2">Voltar ao Pagamento</button>
                 </div>
               </div>
