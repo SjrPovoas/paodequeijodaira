@@ -770,15 +770,13 @@ export default function Loja() {
         </button>
       )}
 
-      {/* 6. ESTILOS GLOBAIS (CORREÇÃO DO ERRO JSX) */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes slideIn {
-          from { transform: translateX(100%); }
-          to { transform: translateX(0); } }
-        .animate-in { animation: slideIn 0.3s ease-out forwards; }
-      `}} />
-    </div>  
-   {/* FECHA O PARENTESE DO RETURN */}
-   );
-{/* FECHA A FUNÇÃO LOJA */}
+        <style jsx global>{`
+          @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+          }
+          .animate-in { animation: slideIn 0.3s ease-out forwards; }
+        `}</style>
+      </div>
+    );
 }
