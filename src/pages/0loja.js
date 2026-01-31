@@ -127,84 +127,61 @@ export default function Loja() {
   };
 
   // --- 6. FUNÇÃO CENTRALIZADA DE REGISTRO DE PEDIDO ---
-  const processarPedidoFinal = async () => {
-    const cpfLimpo = dados.cpf.replace(/\D/g, '');
+//  const processarPedidoFinal = async () => {
+//    const cpfLimpo = dados.cpf.replace(/\D/g, '');
     
     // Validações de Segurança
-    if (!dados.nome || !dados.email || !dados.cep) {
-      alert("Por favor, preencha Nome, E-mail e CEP para a entrega.");
-      return null;
-    }
+//    if (!dados.nome || !dados.email || !dados.cep) {
+//      alert("Por favor, preencha Nome, E-mail e CEP para a entrega.");
+//      return null;    }
     
-    if (metodoSelecionado === 'mp' && cpfLimpo.length !== 11) {
-      alert("O CPF é obrigatório para pagamentos via Mercado Pago.");
-      return null;
-    }
+//    if (metodoSelecionado === 'mp' && cpfLimpo.length !== 11) {
+//      alert("O CPF é obrigatório para pagamentos via Mercado Pago.");
+//      return null;    }
     
-    if (carrinho.length === 0) {
-      alert("Seu carrinho está vazio.");
-      return null;
-    }
+ //   if (carrinho.length === 0) {
+//      alert("Seu carrinho está vazio.");
+//      return null;    }
 
-    setLoading(true);
+//    setLoading(true);
 
-    try {
+//    try {
       // 1. Criar objeto do pedido para o Supabase
-      const dadosPedido = {
-        cliente_nome: dados.nome,
-        cliente_email: dados.email.toLowerCase().trim(),
+ //     const dadosPedido = {
+  //      cliente_nome: dados.noome        cliente_email: dados.email.toLowerCase().trim(),
         // Placeholder se for Web3 sem CPF
-        cliente_cpf: metodoSelecionado === 'mp' ? cpfLimpo : (cpfLimpo || 'WEB3_CLIENT'),
-        cliente_cep: dados.cep,
-        endereco_entrega: `${dados.endereco} | Complemento: ${dados.complemento || 'N/A'}`,
-        valor_total: totalGeral,
-        itens: carrinho, // Coluna JSONB no banco
-        status: 'Aguardando Pagamento',
-        metodo: metodoSelecionado === 'mp' ? 'Mercado Pago' : 'Web3 Cripto'
-      };
+//        cliente_cpf: metodoSelecionado === 'mp' ? cpfLimpo : (cpfLimpo || 'WEB3_CLIENT'),
+//        cliente_cep: dados.cep,
+//       endereco_entrega: `${dados.endereco} | Complemento: ${dados.complemento || 'N/A'}`,
+//        valor_total: totalGeral,
+//        itens: carrinho, // Coluna JSONB no banco
+//        status: 'Aguardando Pagamento',
+//        metodo: metodoSelecionado === 'mp' ? 'Mercado Pago' : 'Web3 Cripto'    };
 
-      const { data: pedido, error: errSupa } = await supabase
-        .from('pedidos')
-        .insert([dadosPedido])
-        .select()
-        .single();
+//      const { data: pedido, error: errSupa } = await supabase
+//        .from('pedidos')
+ //       .insert([dadosPedido])
+//        .select()
+//        .single();
 
-      if (errSupa) throw new Error("Erro ao registrar no banco de dados: " + errSupa.message);
+//      if (errSupa) throw new Error("Erro ao registrar no banco de dados: " + errSupa.message);
 
       // 2. Se for Mercado Pago, envia para a API do Backend
-      if (metodoSelecionado === 'mp') {
-        const res = await fetch('/api/checkout-mp', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            itens: carrinho, 
-            frete, 
-            pedidoId: pedido.id, 
-            email: dados.email.trim(),
-            nome: dados.nome,
-            cpf: cpfLimpo
-          })
-        });
+//      if (metodoSelecionado === 'mp') {
+//        const res = await fetch('/api/checkout-mp', {
+//          method: 'POST',
+//          headers: { 'Content-Type': 'application/json' },
+//          body: JSON.stringify({   itens: carrinho,  frete,  pedidoId: pedido.id,  email: dados.email.trim(), nome: dados.nome, cpf: cpfLimpo          })        });
 
-        const data = await res.json();
-        if (data.init_point) {
-          window.location.href = data.init_point;
-        } else {
-          throw new Error(data.error || "Erro ao gerar link de pagamento.");
-        }
-      } 
+//        const data = await res.json();
+//        if (data.init_point) {          window.location.href = data.init_point;
+//        } else {          throw new Error(data.error || "Erro ao gerar link de pagamento.");        }      } 
       
       // 3. Retorna o ID para o BotaoPagamentoWeb3 processar a transação
-      return pedido.id;
-
-    } catch (err) {
-      console.error("Erro no Processamento:", err);
-      alert(err.message);
-      return null;
-    } finally {
-      setLoading(false);
-    }
-  };
+//      return pedido.id;    } catch (err) {
+//      console.error("Erro no Processamento:", err);
+//      alert(err.message);    return null;
+//    } finally {      setLoading(false);    }  };
 
     // 4. PRODUTOS
   const produtos = [
