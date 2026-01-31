@@ -716,7 +716,7 @@ export default function Loja() {
         </div>
       )}
 
-      {/* BOTÃO VOLTAR AO TOPO */}
+      {/* BOTÃO VOLTAR AO TOPO *
       {showScrollTop && (
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -726,11 +726,107 @@ export default function Loja() {
         </button>
       )}
 
-      {/* FOOTER SIMPLES */}
+      {/* FOOTER SIMPLES *
       <footer className="py-20 px-6 border-t border-gray-100 text-center">
         <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 mx-auto mb-8 opacity-20 grayscale" />
         <p className="text-[9px] font-black uppercase tracking-[0.5em] text-gray-300">© 2024 Pão de Queijo da Irá Lifestyle</p>
       </footer>
+    </div>
+  );
+} */}
+
+      {/* FOOTER */}
+      <footer className="py-20 px-6 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:justify-between mb-16">
+
+            {/* COLUNA 1: LOGO E REDES SOCIAIS */}
+            <div className="flex flex-col items-center md:items-start space-y-4">
+              {/* LOGO */}
+              <Link href="/">
+                <img src="/logo-paodequeijodaira.jpg" className="h-20 cursor-pointer" alt="Logo" />
+              </Link>
+              {/* REDES SOCIAIS */}
+              <div className="flex gap-4">
+                <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></Link>
+                <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></Link>
+                <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></Link>
+              </div>
+            </div>
+
+            {/* COLUNA 2: AJUDA & SUPORTE */}
+            <div className="text-center md:text-left space-y-4">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Ajuda & Suporte</h4>
+              <div className="space-y-4">
+                <Link href="/pedidos" className="text-orange-500 flex items-center justify-center md:justify-start gap-2 group">
+                  <i className="bi bi-box-seam text-orange-600 text-lg"></i>
+                  <p className="text-xs font-bold tracking-widest group:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
+                </Link>
+                <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-2 group">
+                  <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
+                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p>
+                </Link>
+                <Link href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center justify-center md:justify-start gap-3 group">
+                  <i className="bi bi-whatsapp text-orange-600 text-lg"></i>
+                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Fale Conosco</p>
+                </Link>
+              </div>
+            </div>
+
+            {/* COLUNA 3: FUNCIONAMENTO & LOCALIZAÇÃO */}
+            <div className="text-center md:text-left space-y-4">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
+              <div className="flex items-start justify-center md:justify-start gap-3">
+                <i className="bi bi-clock text-orange-600 text-lg"></i>
+                <p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p>
+              </div>
+              <div className="pt-2">
+                <Link href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
+                  <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>        
+                  <p className="text-sm text-gray-600 leading-relaxed text-left">
+                    Quadra 4 Lote 26 Condomínio Flores do Cerrado II. Recreio Mossoró - Cidade Ocidental-GO</p>
+                </Link>
+              </div>
+            </div>
+
+            {/* COLUNA 4: INSTITUCIONAL & DIREITOS */}
+            <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
+              <h3 className="text-[14px] text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>    
+              <div className="flex flex-row items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">
+                <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group">
+                  Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
+                </Link>
+                <span className="text-gray-200">|</span>
+                <Link href="/privacidade" className="hover:text-black flex items-center gap-1 transition-colors group">
+                  Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
+                </Link>
+              </div> 
+              <p className="text-[9px] pt-2 font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">© 2026 - Todos os direitos reservados.</p>
+            </div>
+          </div>
+
+          {/* ASSINATURA */}
+          <div className="pt-8 border-t border-gray-50 text-center">
+            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+          </div>
+        </div>
+      </footer>
+
+      {/* BOTÃO VOLTAR AO TOPO */}
+      {showScrollTop && (
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 animate-bounce">
+          <i className="bi bi-arrow-up"></i>
+        </button>
+      )}
+
+      <style jsx global>
+        {`@keyframes slide-left { from { transform: translateX(100%); } to { transform: translateX(0); } }
+          @keyframes slide-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
+          .animate-slide-left { animation: slide-left 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+          .animate-slide-right { animation: slide-right 0.4s cubic-bezier(0.16, 1, 0.3, 1); }`}
+      </style>
+
     </div>
   );
 }
