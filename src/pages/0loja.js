@@ -759,25 +759,22 @@ export default function Loja() {
 
           {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
-            <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link>
-          </div>
-        </div>
-      </footer>
+            <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link> 
+          )}  {/* Fim da Etapa Dados */}
+          </div> {/* Fim do Painel Lateral */}
+        </div> {/* Fim do Backdrop */}
+      )} {/* Fim do Modal Aberto */}
 
-      {/* BOTÃO VOLTAR AO TOPO */}
-      {showScrollTop && (
-        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 animate-bounce">
-          <i className="bi bi-arrow-up"></i>
-        </button>
-      )}
+      <style jsx global>{`
+        @keyframes slide-right {
+          from { transform: translateX(100%); }
+          to { transform: translateX(0); }
+        }
+        .animate-in {
+          animation: slide-right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+      `}</style>
 
-      <style jsx global>
-        {`@keyframes slide-left { from { transform: translateX(100%); } to { transform: translateX(0); } }
-          @keyframes slide-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
-          .animate-slide-left { animation: slide-left 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-          .animate-slide-right { animation: slide-right 0.4s cubic-bezier(0.16, 1, 0.3, 1); }`}
-      </style>
-
-    </div>
+    </div> // FIM DA DIV PRINCIPAL
   );
-}   
+} // FIM DA FUNÇÃO LOJA
