@@ -165,7 +165,7 @@ export default function Loja() {
   };
 
   // --- 7. INTEGRAÇÃO SUPABASE (PROCESSAMENTO FINAL) ---
-  const processarPedidoFinal = async () => {
+const processarPedidoFinal = async () => {
     if (!dados.nome || !dados.email || !dados.cep || !dados.endereco) {
       alert("⚠️ Preencha todos os campos de entrega antes de finalizar.");
       return;
@@ -199,9 +199,9 @@ export default function Loja() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-          items: carrinho,
-          email: dados.email,
-          total: totalGeral
+            items: carrinho,
+            email: dados.email,
+            total: totalGeral
           }),
         });
 
@@ -227,7 +227,6 @@ export default function Loja() {
       setLoading(false);
     }
   };
-
   // Proteção de Hidratação para evitar Tela Branca no Next.js
   if (!isMounted) return null;
 
