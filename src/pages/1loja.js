@@ -83,25 +83,31 @@ export default function Loja() {
 
 // --- 4. CÁLCULO DE CEP E FRETE ---
   const handleCEP = async (v) => {
-    // Remove caracteres não numéricos e limita a 8 dígitos
-    const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
-    setDados(prev => ({ ...prev, cep: cepLimpo }));
-    
-    if (cepLimpo.length === 8) {
-      try {
-        const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
-        const json = await res.json();
+  const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
+  setDados(prev => ({ ...prev, cep: cepLimpo }));
+  
+  if (cepLimpo.length === 8) {
+    try {
+      const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+      
+      // VERIFICAÇÃO DE SEGURANÇA: Se a resposta não for OK, nem tenta o .json()
+      if (!res.ok) throw new Error("Erro na rede");
+
+      const json = await res.json();
+      
+      if (json && !json.erro) {
+        const endFormatado = `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`;
+        setDados(prev => ({ ...prev, endereco: endFormatado }));
         
-        if (!json.erro) {
-          // 1. Monta o endereço
-          const endFormatado = `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`;
-          
-          // 2. Atualiza o estado de DADOS (Importante para liberar o botão)
-          setDados(prev => ({ 
-            ...prev, 
-            endereco: endFormatado,
-            cep: cepLimpo 
-          }));
+        const regiao = cepLimpo.substring(0, 2);
+        const freteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
+        setFrete(subtotal >= 500 ? 0 : freteBase);
+      }
+    } catch (e) { 
+      console.error("CEP inválido ou sem resposta:", e);
+    }
+  }
+};       }));
           
           // 3. Lógica de Frete por Região
           const regiao = cepLimpo.substring(0, 2);
