@@ -760,10 +760,8 @@ export default function Loja() {
           {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
             <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link> 
-          )}  {/* Fim da Etapa Dados */}
           </div> {/* Fim do Painel Lateral */}
         </div> {/* Fim do Backdrop */}
-      )} {/* Fim do Modal Aberto */}
 
       <style jsx global>{`
         @keyframes slide-right {
@@ -773,7 +771,7 @@ export default function Loja() {
         .animate-in {
           animation: slide-right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-      `}</style>
+       </style>
 
     </div> // FIM DA DIV PRINCIPAL
   );
