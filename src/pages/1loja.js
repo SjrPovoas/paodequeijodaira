@@ -83,44 +83,32 @@ export default function Loja() {
 
 // --- 4. CÁLCULO DE CEP E FRETE ---
 const handleCEP = async (v) => {
-    const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
-    setDados(prev => ({ ...prev, cep: cepLimpo }));
+    const cep = v.replace(/\D/g, '').substring(0, 8);
+    setDados(prev => ({ ...prev, cep }));
     
-    if (cepLimpo.length === 8) {
+    if (cep.length === 8) {
       try {
-        const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
         const json = await res.json();
-        
         if (!json.erro) {
-          const endFormatado = `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`;
-          
-          setDados(prev => ({ 
-            ...prev, 
-            endereco: endFormatado,
-            cep: cepLimpo 
+          setDados(prev => ({
+            ...prev,
+            endereco: `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`
           }));
           
-          const regiao = cepLimpo.substring(0, 2);
-          const freteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
+          // Lógica de Frete baseada nos dois primeiros dígitos
+          const regiao = cep.substring(0, 2);
+          const valorFrete = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
           
-          if (subtotal >= 500) {
-            setFrete(0);
-          } else {
-            setFrete(freteBase);
-          }
-        } else { // Este é o else que estava causando o erro
-          alert("❌ CEP não encontrado. Verifique os números.");
-          setDados(prev => ({ ...prev, endereco: '' }));
-          setFrete(0);
+          // Se subtotal > frete grátis, zera o frete
+          setFrete(subtotal >= VALOR_FRETE_GRATIS ? 0 : valorFrete);
         }
       } catch (e) { 
-        console.error("Erro na busca do CEP:", e);
+        console.error("Erro ao buscar CEP"); 
       }
-    } else if (cepLimpo.length < 8) {
-      setDados(prev => ({ ...prev, endereco: '' }));
-      setFrete(0);
     }
   };
+
           // 3. Lógica de Frete por Região
           const regiao = cepLimpo.substring(0, 2);
           const freteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
