@@ -152,15 +152,15 @@ export default function Loja() {
       // 1. Criar objeto do pedido para o Supabase
       const dadosPedido = {
         cliente_nome: dados.nome,
-        cliente_email: dados.email.toLowerCase().trim(),
+        email: dados.email.toLowerCase().trim(),
         // Placeholder se for Web3 sem CPF
-        cliente_cpf: metodoSelecionado === 'mp' ? cpfLimpo : (cpfLimpo || 'WEB3_CLIENT'),
-        cliente_cep: dados.cep,
-        endereco_entrega: `${dados.endereco} | Complemento: ${dados.complemento || 'N/A'}`,
-        valor_total: totalGeral,
+        cpf: metodoSelecionado === 'mp' ? cpfLimpo : (cpfLimpo || 'WEB3_CLIENT'),
+        cep: dados.cep,
+        endereco: `${dados.endereco} | Complemento: ${dados.complemento || 'N/A'}`,
+        total_geral: totalGeral,
         itens: carrinho, // Coluna JSONB no banco
-        status: 'Aguardando Pagamento',
-        metodo: metodoSelecionado === 'mp' ? 'Mercado Pago' : 'Web3 Cripto'
+        status_pagamento: 'Aguardando Pagamento',
+        metodo_pagamento: metodoSelecionado === 'mp' ? 'Mercado Pago' : 'Web3 Cripto'
       };
 
       const { data: pedido, error: errSupa } = await supabase
@@ -715,25 +715,6 @@ export default function Loja() {
           </div>
         </div>
       )}
-
-      {/* BOTÃO VOLTAR AO TOPO *
-      {showScrollTop && (
-        <button 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 right-8 z-[150] w-12 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-orange-600 transition-all shadow-2xl"
-        >
-          <i className="bi bi-arrow-up"></i>
-        </button>
-      )}
-
-      {/* FOOTER SIMPLES *
-      <footer className="py-20 px-6 border-t border-gray-100 text-center">
-        <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 mx-auto mb-8 opacity-20 grayscale" />
-        <p className="text-[9px] font-black uppercase tracking-[0.5em] text-gray-300">© 2024 Pão de Queijo da Irá Lifestyle</p>
-      </footer>
-    </div>
-  );
-} */}
 
       {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
