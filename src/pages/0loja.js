@@ -763,16 +763,11 @@ export default function Loja() {
           </div> {/* Fim do Painel Lateral */}
         </div> {/* Fim do Backdrop */}
 
-      <style jsx global>{`
+       <style jsx global>{`
         @keyframes slide-right {
           from { transform: translateX(100%); }
-          to { transform: translateX(0); }
-        }
-        .animate-in {
-          animation: slide-right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-       </style>
-
-    </div> // FIM DA DIV PRINCIPAL
-  );
-} // FIM DA FUNÇÃO LOJA
+          to { transform: translateX(0); }`}       
+         {/* Aqui termina o conteúdo do modal e do checkout */}
+    </div>
+  ); // Fecha o return
+} // FECHA A FUNÇÃO EXPORT DEFAULT FUNCTION LOJA
