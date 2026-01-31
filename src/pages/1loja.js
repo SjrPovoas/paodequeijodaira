@@ -83,37 +83,54 @@ export default function Loja() {
 
 // --- 4. CÁLCULO DE CEP E FRETE ---
   const handleCEP = async (v) => {
-    const cep = v.replace(/\D/g, '').substring(0, 8);
-    setDados(prev => ({ ...prev, cep }));
+    // Remove caracteres não numéricos e limita a 8 dígitos
+    const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
+    setDados(prev => ({ ...prev, cep: cepLimpo }));
     
-    if (cep.length === 8) {
+    if (cepLimpo.length === 8) {
       try {
-        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
         const json = await res.json();
         
         if (!json.erro) {
+          // 1. Monta o endereço
           const endFormatado = `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`;
           
-          // ATUALIZA ENDEREÇO
-          setDados(prev => ({ ...prev, endereco: endFormatado }));
+          // 2. Atualiza o estado de DADOS (Importante para liberar o botão)
+          setDados(prev => ({ 
+            ...prev, 
+            endereco: endFormatado,
+            cep: cepLimpo 
+          }));
           
-          // LÓGICA DE FRETE
-          const regiao = cep.substring(0, 2);
-          const valorFreteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
+          // 3. Lógica de Frete por Região
+          const regiao = cepLimpo.substring(0, 2);
+          const freteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
           
-          // Verifica frete grátis (VALOR_FRETE_GRATIS deve estar definido no topo)
-          const valorFinalFrete = subtotal >= (typeof VALOR_FRETE_GRATIS !== 'undefined' ? VALOR_FRETE_GRATIS : 200) ? 0 : valorFreteBase;
-          
-          setFrete(valorFinalFrete);
+          // 4. Cálculo de Frete Grátis (Comparação rigorosa com 500)
+          // Usamos o subtotal atual. Se for >= 500, frete é 0.
+          if (subtotal >= VALOR_FRETE_GRATIS) {
+            setFrete(0);
+          } else {
+            setFrete(freteBase);
+          }
+
         } else {
-          alert("CEP não encontrado.");
+          alert("❌ CEP não encontrado. Verifique os números.");
+          setDados(prev => ({ ...prev, endereco: '' })); // Limpa para travar o botão
+          setFrete(0);
         }
       } catch (e) { 
-        console.error("Erro ao buscar CEP:", e); 
+        console.error("Erro na busca do CEP:", e);
+        alert("Erro ao consultar CEP. Tente novamente.");
       }
+    } else {
+      // Se apagar o CEP, limpa o endereço e o frete
+      setDados(prev => ({ ...prev, endereco: '' }));
+      setFrete(0);
     }
   };
-    
+      
   // --- 5. GESTÃO DO CARRINHO ---
   const add = (p, tam = null) => {
     // Validação obrigatória para itens de vestuário
