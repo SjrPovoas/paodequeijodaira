@@ -630,58 +630,113 @@ export default function Loja() {
               </div>
             )}
 
-            {/* ETAPA 3: DADOS E WEB3 (FINALIZAÇÃO) */}
-            {etapaCheckout === 'dados' && (
-              <div className="flex-grow flex flex-col">
-                <div className="space-y-4 mb-6 overflow-y-auto pr-2 max-h-[55vh]">
-                  <div className="grid grid-cols-1 gap-3">
-                    <input type="text" placeholder="NOME COMPLETO" className="w-full bg-gray-50 border-2 border-black p-4 text-xs font-bold outline-none" value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})} />
-                    <input type="email" placeholder="E-MAIL" className="w-full bg-gray-50 border-2 border-black p-4 text-xs font-bold outline-none" value={dados.email} onChange={e => setDados({...dados, email: e.target.value})} />
-                    <input type="text" placeholder="NÚMERO / COMPLEMENTO" className="w-full bg-gray-50 border-2 border-black p-4 text-xs font-bold outline-none" value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})} />
-                  </div>
+   {/* ETAPA 3: DADOS FINAIS E CARTEIRA WEB3 */}
+   {etapaCheckout === 'dados' && (
+    <div className="flex-grow flex flex-col h-full">
+     <div className="flex-grow space-y-4 overflow-y-auto pr-2 max-h-[60vh] custom-scrollbar">
+       
+      {/* CAMPOS DE DADOS COM ESTILO ARREDONDADO */}
+      <div className="space-y-3">
+        <input 
+          type="text" placeholder="NOME COMPLETO"
+          className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm"
+          value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})}
+        />
+        <input 
+          type="email" placeholder="SEU MELHOR E-MAIL"
+          className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm"
+          value={dados.email} onChange={e => setDados({...dados, email: e.target.value})}
+        />
+        
+        {metodoSelecionado === 'mp' && (
+          <input 
+            type="text" placeholder="CPF (PARA NOTA FISCAL)"
+            className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm"
+            value={dados.cpf} onChange={e => setDados({...dados, cpf: e.target.value})}
+          />
+        )}
 
-                  {/* BOX WEB3 */}
-                  <div className="mt-4 border-4 border-black p-5 bg-orange-50 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-                    <h3 className="font-black uppercase italic text-sm mb-2">RECOMPENSA DIGITAL</h3>
-                    <p className="text-[9px] font-bold text-gray-600 uppercase mb-3 leading-tight italic">Insira sua carteira para ganhar 5% de desconto vitalício.</p>
-                    <input 
-                      type="text" placeholder="CARTEIRA (0x...)" 
-                      value={dados.carteira_blockchain} 
-                      onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})}
-                      className={`w-full border-2 p-3 font-mono text-[10px] outline-none uppercase ${
-                        dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain)
-                        ? 'border-red-500 bg-red-50' : 'border-black bg-white'
-                      }`}
-                    />
-                    {dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain) && (
-                      <p className="text-[8px] font-black text-red-500 mt-1 uppercase italic animate-pulse">Endereço Inválido!</p>
-                    )}
-                    <Link href="/faq-web3" target="_blank" className="text-[8px] font-black uppercase underline mt-4 block">O que é isso? Tira-Dúvidas</Link>
-                  </div>
-                </div>
+        <input 
+          type="text" placeholder="COMPLEMENTO / NÚMERO"
+          className="w-full bg-gray-50 border-none rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all shadow-sm"
+          value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})}
+        />
+      </div>
 
-                <div className="mt-auto pt-6 border-t-4 border-black">
-                  <div className="flex justify-between items-center mb-6">
-                    <div>
-                      <p className="text-[10px] font-black text-gray-400 uppercase">Total</p>
-                      <p className="text-3xl font-black italic tracking-tighter">R$ {totalGeral.toFixed(2)}</p>
-                    </div>
-                  </div>
-                  <button 
-                    onClick={processarPedidoFinal} 
-                    disabled={loading || !dados.nome}
-                    className="w-full bg-black text-white py-6 font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 disabled:opacity-30"
-                  >
-                    {loading ? 'Processando...' : 'Finalizar Pedido'}
-                  </button>
-                  <button onClick={() => setEtapaCheckout('metodo')} className="w-full py-4 text-[10px] font-black uppercase text-gray-400">Trocar Pagamento</button>
-                </div>
-              </div>
-            )}
-              
+      {/* BOX DA RECOMPENSA DIGITAL (NFT) - ESTILO SOFT CARD */}
+      <div className="bg-orange-50/50 rounded-3xl p-6 border border-orange-100 mt-2">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="bg-orange-100 p-2 rounded-xl text-orange-600">
+            <i className="bi bi-cpu-fill text-lg"></i>
+          </div>
+          <div>
+            <h3 className="font-black uppercase text-[11px] tracking-tight">Ganhe seu NFT Genesis</h3>
+            <p className="text-[9px] font-medium text-gray-500 uppercase italic leading-none">5% de desconto vitalício</p>
           </div>
         </div>
-      )}
+
+        <input 
+          type="text"
+          placeholder="ENDEREÇO DA CARTEIRA (0x...)"
+          value={dados.carteira_blockchain}
+          onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})}
+          className={`w-full p-4 rounded-xl font-mono text-[10px] outline-none transition-all shadow-inner ${
+            dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain)
+            ? 'bg-red-50 text-red-600 ring-2 ring-red-200'
+            : 'bg-white focus:ring-2 focus:ring-orange-500 text-gray-700'
+          }`}
+        />
+        
+        {dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain) && (
+          <p className="text-[8px] font-bold text-red-500 mt-2 ml-1 uppercase animate-pulse italic">
+            <i className="bi bi-exclamation-circle-fill"></i> Endereço Inválido!
+          </p>
+        )}
+
+        <div className="mt-4 flex justify-between items-center px-1">
+          <Link href="/faq-web3" target="_blank" className="text-[9px] font-black text-orange-600 uppercase underline decoration-2 underline-offset-4 hover:opacity-70 transition-opacity">
+            Como funciona?
+          </Link>
+          <i className="bi bi-shield-check text-orange-300 text-lg"></i>
+        </div>
+      </div>
+    </div>
+
+    {/* RESUMO DE VALORES E BOTÕES FINAIS */}
+    <div className="mt-6 pt-6 border-t border-gray-100">
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total do Pedido</p>
+          <p className="text-3xl font-black text-black tracking-tighter">R$ {totalGeral.toFixed(2)}</p>
+        </div>
+        <div className="bg-green-50 text-green-600 p-2 rounded-xl flex items-center gap-1">
+           <i className="bi bi-check-circle-fill text-[10px]"></i>
+           <span className="text-[9px] font-black uppercase">Seguro</span>
+        </div>
+      </div>
+
+      <button 
+        onClick={processarPedidoFinal} 
+        disabled={loading || !dados.nome}
+        className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 shadow-xl shadow-black/10 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-30 disabled:hover:scale-100"
+      >
+        {loading ? (
+          <div className="flex items-center justify-center gap-2">
+            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+            <span>Processando...</span>
+          </div>
+        ) : 'Finalizar Pedido'}
+      </button>
+
+      <button 
+        onClick={() => setEtapaCheckout('metodo')} 
+        className="w-full py-4 text-[10px] font-black uppercase text-gray-400 hover:text-black transition-colors tracking-widest"
+      >
+        <i className="bi bi-arrow-left-short text-lg align-middle"></i> Trocar Pagamento
+      </button>
+     </div>
+    </div>
+  )}
 
       {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
@@ -762,14 +817,11 @@ export default function Loja() {
         </div>
       </footer>
 
-      {/* 5. BOTÃO VOLTAR AO TOPO */}
-      {showScrollTop && (
-        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 left-8 z-[100] bg-white border-4 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all" >
-          <i className="bi bi-arrow-up text-xl"></i>
-        </button>
-      )}
-
+      {/* Botão Voltar ao Topo */}
+      <button onClick={scrollToTop} className={`fixed bottom-8 right-8 z-[130] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-500 hover:bg-black hover:scale-110 active:scale-90 ${showScrollTop ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+        <i className="bi bi-arrow-up text-xl"></i>
+      </button>
+          
         <style jsx global>{`
           @keyframes slideIn {
             from { transform: translateX(100%); }
