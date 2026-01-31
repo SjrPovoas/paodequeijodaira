@@ -166,23 +166,14 @@ export default function Loja() {
 
   // --- 7. INTEGRAÇÃO SUPABASE (PROCESSAMENTO FINAL) ---
   const processarPedidoFinal = async () => {
-    // 1. Validação de campos obrigatórios
-    if (!dados.nome || !dados.email || !dados.cep) {
-      alert("⚠️ Preencha Nome, E-mail e CEP para continuar.");
+    if (!dados.nome || !dados.email || !dados.cep || !dados.endereco) {
+      alert("⚠️ Preencha todos os campos de entrega antes de finalizar.");
       return;
-    }
-
-    // 2. Validação de carteira
-    if (dados.carteira_blockchain) {
-      const regexCripto = /^0x[a-fA-F0-9]{40}$/;
-      if (!regexCripto.test(dados.carteira_blockchain)) {
-        alert("⚠️ O endereço da carteira Polygon parece incorreto.");
-        return;
-      }
     }
 
     setLoading(true);
     try {
+      // 1. Salva no Supabase primeiro
       const { error } = await supabase.from('pedidos').insert([{
         nome: dados.nome,
         email: dados.email,
@@ -193,25 +184,45 @@ export default function Loja() {
         carteira_blockchain: dados.carteira_blockchain || null,
         total_geral: totalGeral,
         itens: carrinho,
-        metodo_pagamento: metodoSelecionado === 'mp' ? 'Mercado Pago' : 'Web3 Cripto',
-        status_pagamento: 'Aguardando Pagamento',
-        status_pedido: 'recebido'
+        metodo_pagamento: metodoSelecionado,
+        status_pagamento: 'pendente'
       }]);
 
       if (error) throw error;
 
-      // 4. Lógica de Redirecionamento
-      alert("🚀 Pedido registrado! Você será redirecionado para o pagamento.");
-      
+      // 2. Lógica de Redirecionamento Real
       if (metodoSelecionado === 'mp') {
-        console.log("Iniciando checkout Mercado Pago...");
+        alert("🚀 Pedido salvo! Redirecionando para o Mercado Pago...");
+        
+        // Chamada para sua API que gera o link de pagamento
+        const response = await fetch('/api/checkout_mercadopago', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+          items: carrinho,
+          email: dados.email,
+          total: totalGeral
+          }),
+        });
+
+        const data = await response.json();
+
+        if (data.init_point) {
+          // REDIRECIONAMENTO REAL: Envia o usuário para o site do Mercado Pago
+          window.location.href = data.init_point;
+        } else {
+          throw new Error("Falha ao gerar link de pagamento.");
+        }
+
       } else {
-        console.log("Iniciando checkout Blockchain...");
-      } // <--- ESTA CHAVE ESTAVA FALTANDO AQUI!
+        // Fluxo para Cripto (Redirecionar para página interna de pagamento)
+        alert("Encaminhando para pagamento via Blockchain...");
+        router.push('/pagamento-cripto'); // Certifique-se de ter essa rota
+      }
 
     } catch (err) {
-      console.error("Erro Supabase:", err);
-      alert("❌ Erro ao salvar pedido: " + (err.message || "Falha na conexão"));
+      console.error("Erro no checkout:", err);
+      alert("❌ Erro: " + err.message);
     } finally {
       setLoading(false);
     }
