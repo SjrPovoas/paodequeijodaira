@@ -7,7 +7,7 @@ import BotaoPagamentoWeb3 from '../components/BotaoPagamentoWeb3';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
 
-// --- DEFINIÇÃO DO CATÁLOGO DE PRODUTOS ---
+{/* // --- DEFINIÇÃO DO CATÁLOGO DE PRODUTOS --- */}
 export const produtos = [
   { id: 0, nome: "Camiseta Lifestyle Masculina", preco: 129.90, img: "/produtos/camiseta-m.jpg", category: "vestuario" },
   { id: 1, nome: "Camiseta Lifestyle Feminina", preco: 129.90, img: "/produtos/camiseta-f.jpg", category: "vestuario" },
@@ -136,23 +136,23 @@ export default function Loja() {
     setCarrinho(prev => prev.filter((_, i) => i !== idx));
   };
 
-  // --- 6. VALIDAÇÃO DE CARTEIRA WEB3 ---
-  // Verifica se o endereço segue o padrão EVM (0x + 40 caracteres hexadecimais)
+  {/* // --- 6. VALIDAÇÃO DE CARTEIRA WEB3 ---
+  // Verifica se o endereço segue o padrão EVM (0x + 40 caracteres hexadecimais) */}
   const validarCarteira = (address) => {
     if (!address) return true; // Permite prosseguir se o cliente optar por não ganhar o NFT
     const regex = /^0x[a-fA-F0-9]{40}$/;
     return regex.test(address);
   };
 
-  // --- 7. PROCESSAMENTO FINAL DO PEDIDO (SUPABASE) ---
+  {/* // --- 7. PROCESSAMENTO FINAL DO PEDIDO (SUPABASE) --- */}
   const processarPedidoFinal = async () => {
-    // Validações de segurança antes de enviar ao banco
+    {/* // Validações de segurança antes de enviar ao banco */}
     if (!dados.nome || !dados.email || !dados.cep) {
       alert("⚠️ Preencha os dados de entrega obrigatórios para continuar.");
       return;
     }
 
-    // Validação da carteira em tempo real antes do processamento
+    {/* // Validação da carteira em tempo real antes do processamento */}
     if (dados.carteira_blockchain && !validarCarteira(dados.carteira_blockchain)) {
       alert("⚠️ O endereço da carteira digital está incorreto. Ele deve começar com '0x'. Verifique ou deixe em branco.");
       return;
@@ -161,10 +161,10 @@ export default function Loja() {
     setLoading(true);
     
     try {
-      // Identifica o ID do primeiro produto para registro de metadados do NFT
+      {/* // Identifica o ID do primeiro produto para registro de metadados do NFT */}
       const idReferenciaNFT = carrinho.length > 0 ? carrinho[0].id : 0;
 
-      // Inserção fiel na tabela 'pedidos' do Supabase
+      {/* // Inserção fiel na tabela 'pedidos' do Supabase */}
       const { data, error } = await supabase
         .from('pedidos')
         .insert([
@@ -187,13 +187,13 @@ export default function Loja() {
 
       if (error) throw error;
 
-      // Se o método for Mercado Pago (mp), aqui você dispararia a lógica de checkout
+      {/* // Se o método for Mercado Pago (mp), aqui você dispararia a lógica de checkout */}
       if (metodoSelecionado === 'mp') {
         console.log("Iniciando fluxo Mercado Pago...");
-        // Redirecionamento ou abertura de SDK viria aqui
+      {/* // Redirecionamento ou abertura de SDK viria aqui */}
       }
 
-      // Se chegou aqui, o pedido foi salvo com sucesso
+      {/* // Se chegou aqui, o pedido foi salvo com sucesso */}
       console.log("Pedido salvo com sucesso no Supabase:", data);
       
     } catch (err) {
@@ -204,7 +204,7 @@ export default function Loja() {
     }
   };
 
-  // --- 8. FUNÇÕES AUXILIARES DE INTERFACE ---
+  {/* // --- 8. FUNÇÕES AUXILIARES DE INTERFACE --- */}
   const abrirWhatsApp = () => {
     const mensagem = `Olá! Gostaria de informações sobre meu pedido na Loja Irá Lifestyle.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensagem)}`, '_blank');
@@ -215,11 +215,11 @@ export default function Loja() {
     setEtapaCheckout('sacola'); // Sempre reseta para a sacola ao fechar
   };
 
-  // --- 9. RENDERIZAÇÃO DE SEGURANÇA (HIDRATAÇÃO) ---
-  // Se não estiver montado, não renderiza nada para evitar erro de servidor vs cliente
+  {/* --- 9. RENDERIZAÇÃO DE SEGURANÇA (HIDRATAÇÃO) ---
+  // Se não estiver montado, não renderiza nada para evitar erro de servidor vs cliente */}
   if (!isMounted) return null;
 
-  // --- INÍCIO DO JSX (O código do return que une tudo segue abaixo) ---
+  {/* // --- INÍCIO DO JSX (O código do return que une tudo segue abaixo) --- */}
   return (
     <div className="min-h-screen bg-white font-sans text-black overflow-x-hidden flex flex-col">
      <Head>
@@ -761,23 +761,29 @@ export default function Loja() {
           <div className="pt-8 border-t border-gray-50 text-center">
             <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link> 
           </div> 
-              </div> // Fim da div flex-grow da Etapa Dados
+          </div>
+          {/* Fim da div flex-grow da Etapa Dados */}
             )} 
-          </div> {/* Fecha o Painel Lateral (Branco) */}
-        </div> {/* Fecha o Backdrop (Preto/Blur) */}
+          </div> 
+          {/* Fecha o Painel Lateral (Branco) */}
+        </div> 
+          {/* Fecha o Backdrop (Preto/Blur) */}
       )} 
 
-      {/* CSS de Animação - Estilo JSX Global */}
+      {/* BOTÃO VOLTAR AO TOPO */}
+      {showScrollTop && (
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-8 right-8 z-[150] w-12 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-orange-600 transition-all shadow-2xl">
+          <i className="bi bi-arrow-up"></i>
+        </button>
+
       <style jsx global>{`
         @keyframes slideIn {
           from { transform: translateX(100%); }
-          to { transform: translateX(0); }
-        }
-        .animate-in {
-          animation: slideIn 0.3s ease-out forwards;
-        }
+          to { transform: translateX(0); } }
+        .animate-in { animation: slideIn 0.3s ease-out forwards; }
       `}</style>
-
-    </div> // FECHA A DIV PRINCIPAL DO RETURN
-  ); // FECHA O PARENTESE DO RETURN
-} // FECHA A FUNÇÃO LOJA
+   {/* FECHA A DIV PRINCIPAL DO RETURN */}
+    </div>  
+  ); {/* FECHA O PARENTESE DO RETURN */}
+} {/* FECHA A FUNÇÃO LOJA */}
