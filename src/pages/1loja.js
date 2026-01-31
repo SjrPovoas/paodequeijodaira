@@ -82,7 +82,7 @@ export default function Loja() {
   }, []);
 
 // --- 4. CÁLCULO DE CEP E FRETE ---
-    const handleCEP = async (v) => {
+const handleCEP = async (v) => {
     const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
     setDados(prev => ({ ...prev, cep: cepLimpo }));
     
@@ -91,38 +91,36 @@ export default function Loja() {
         const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
         const json = await res.json();
         
-        if (json && !json.erro) {
+        if (!json.erro) {
           const endFormatado = `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`;
           
           setDados(prev => ({ 
             ...prev, 
-            endereco: endFormatado 
+            endereco: endFormatado,
+            cep: cepLimpo 
           }));
           
           const regiao = cepLimpo.substring(0, 2);
           const freteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
           
-          // Cálculo do frete grátis (Acima de 500)
           if (subtotal >= 500) {
             setFrete(0);
           } else {
             setFrete(freteBase);
           }
-        } else {
-          alert("❌ CEP não encontrado.");
+        } else { // Este é o else que estava causando o erro
+          alert("❌ CEP não encontrado. Verifique os números.");
           setDados(prev => ({ ...prev, endereco: '' }));
           setFrete(0);
         }
       } catch (e) { 
-        console.error("Erro ao buscar CEP:", e);
+        console.error("Erro na busca do CEP:", e);
       }
-    } else {
-      // Se o CEP for menor que 8 dígitos, reseta o endereço e frete
+    } else if (cepLimpo.length < 8) {
       setDados(prev => ({ ...prev, endereco: '' }));
       setFrete(0);
     }
   };
-          
           // 3. Lógica de Frete por Região
           const regiao = cepLimpo.substring(0, 2);
           const freteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
