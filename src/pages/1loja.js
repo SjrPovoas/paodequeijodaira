@@ -145,13 +145,13 @@ export default function Loja() {
   // --- 7. INTEGRAÇÃO SUPABASE (PROCESSAMENTO FINAL) ---
 // --- 7. INTEGRAÇÃO SUPABASE (PROCESSAMENTO FINAL CORRIGIDO) ---
   const processarPedidoFinal = async () => {
-    // 1. Validação de campos obrigatórios (Fiel aos nomes do estado 'dados')
+    // 1. Validação de campos obrigatórios
     if (!dados.nome || !dados.email || !dados.cep) {
       alert("⚠️ Preencha Nome, E-mail e CEP para continuar.");
       return;
     }
 
-    // 2. Validação de carteira (Regex para rede Polygon/Ethereum)
+    // 2. Validação de carteira
     if (dados.carteira_blockchain) {
       const regexCripto = /^0x[a-fA-F0-9]{40}$/;
       if (!regexCripto.test(dados.carteira_blockchain)) {
@@ -162,34 +162,32 @@ export default function Loja() {
 
     setLoading(true);
     try {
-      // 3. Inserção no Supabase (Nomes das colunas batendo com o SQL Editor)
+      // 3. Inserção no Supabase
       const { error } = await supabase.from('pedidos').insert([{
-        nome: dados.nome,                // Coluna: nome
-        email: dados.email,              // Coluna: email
-        cpf: dados.cpf || null,          // Coluna: cpf
-        cep: dados.cep,                  // Coluna: cep
-        complemento: dados.complemento,  // Coluna: complemento
+        nome: dados.nome,
+        email: dados.email,
+        cpf: dados.cpf || null,
+        cep: dados.cep,
+        complemento: dados.complemento,
         carteira_blockchain: dados.carteira_blockchain || null,
-        total_geral: totalGeral,         // Coluna: total_geral
-        itens: carrinho,                 // Passa a array direta (coluna jsonb)
-        metodo_pagamento: metodoSelecionado, // 'mp' ou 'cripto'
-        status_pagamento: 'pendente',    // Status inicial
-        status_pedido: 'recebido'        // Status logístico
+        total_geral: totalGeral,
+        itens: carrinho,
+        metodo_pagamento: metodoSelecionado,
+        status_pagamento: 'pendente',
+        status_pedido: 'recebido'
       }]);
 
       if (error) throw error;
 
-      // 4. Lógica de Redirecionamento após sucesso
+      // 4. Lógica de Redirecionamento
       alert("🚀 Pedido registrado! Você será redirecionado para o pagamento.");
       
-      // Simulação de fluxo de pagamento
       if (metodoSelecionado === 'mp') {
-        // Exemplo: window.location.href = response_do_mercado_pago.init_point;
         console.log("Iniciando checkout Mercado Pago...");
       } else {
-        // Exemplo: router.push('/pagamento-cripto');
         console.log("Iniciando checkout Blockchain...");
-        
+      } // <--- ESTA CHAVE ESTAVA FALTANDO AQUI!
+
     } catch (err) {
       console.error("Erro Supabase:", err);
       alert("❌ Erro ao salvar pedido: " + (err.message || "Falha na conexão"));
