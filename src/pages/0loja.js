@@ -762,13 +762,12 @@ export default function Loja() {
             <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link> 
           </div> 
           </div>
-          {/* Fim da div flex-grow da Etapa Dados */}
-            )} 
-          </div> 
-          {/* Fecha o Painel Lateral (Branco) */}
-        </div> 
-          {/* Fecha o Backdrop (Preto/Blur) */}
-      )} 
+          {/* ASSINATURA */}
+          <div className="pt-8 border-t border-gray-50 text-center">
+            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+          </div>
+        </div>
+      </footer>
 
       {/* BOTÃO VOLTAR AO TOPO */}
       {showScrollTop && (
@@ -785,5 +784,7 @@ export default function Loja() {
       `}</style>
    {/* FECHA A DIV PRINCIPAL DO RETURN */}
     </div>  
-  ); {/* FECHA O PARENTESE DO RETURN */}
-} {/* FECHA A FUNÇÃO LOJA */}
+   {/* FECHA O PARENTESE DO RETURN */}
+   );
+{/* FECHA A FUNÇÃO LOJA */}
+}
