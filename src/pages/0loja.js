@@ -656,7 +656,7 @@ export default function Loja() {
                     {dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain) && (
                       <p className="text-[8px] font-black text-red-500 mt-1 uppercase italic animate-pulse">Endereço Inválido!</p>
                     )}
-                    <a href="/faq-web3" target="_blank" className="text-[8px] font-black uppercase underline mt-4 block">O que é isso? Tira-Dúvidas</a>
+                    <Link href="/faq-web3" target="_blank" className="text-[8px] font-black uppercase underline mt-4 block">O que é isso? Tira-Dúvidas</Link>
                   </div>
                 </div>
 
@@ -678,12 +678,10 @@ export default function Loja() {
                 </div>
               </div>
             )}
+              
           </div>
         </div>
       )}
-    </div>
-  );
-}
 
       {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
@@ -759,12 +757,7 @@ export default function Loja() {
 
           {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
-            <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link> 
-          </div> 
-          </div>
-          {/* ASSINATURA */}
-          <div className="pt-8 border-t border-gray-50 text-center">
-            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+            <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link>
           </div>
         </div>
       </footer>
