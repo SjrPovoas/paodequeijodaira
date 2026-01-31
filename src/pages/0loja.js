@@ -128,98 +128,155 @@ export default function Loja() {
       return [...prev, { ...p, tamanho: tam, quantidade: 1 }];
     });
     
+"use client";
+
+import React, { useState, useEffect, useMemo } from 'react';
+import Head from 'next/head';
+import { supabase } from '../lib/supabaseClient';
+import BotaoPagamentoWeb3 from '../components/BotaoPagamentoWeb3';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Link from 'next/link';
+
+// --- DEFINIÇÃO DO CATÁLOGO DE PRODUTOS ---
+export const produtos = [
+    { id: 1, nome: 'T-Shirt Logo Pão de Queijo da Irá (Masc)', preco: 110, img: '/nfts/camiseta1.png', category: 'vestuario' },
+    { id: 2, nome: 'T-Shirt Logo Pão de Queijo da Irá (Fem)', preco: 110, img: '/nfts/camiseta2.png', category: 'vestuario' },
+    { id: 3, nome: 'Avental de Lona Pão de Queijo da Irá', preco: 85, img: '/nfts/avental.png', category: 'acessorios' },
+    { id: 4, nome: 'Caneca Cerâmica Fosca do Pão de Queijo da Irá', preco: 42, img: '/nfts/caneca.png', category: 'acessorios' },
+];
+
+export default function Loja() {
+  // --- CONFIGURAÇÕES E CONSTANTES ---
+  const LINK_LISTA_ESPERA = "https://43782b7b.sibforms.com/serve/MUIFAC4AxTEnI80RImF7seW5i2MRkz5EqdqtMse22-stmvG7jsOqdFhZ6mmpfwRA-2skU_c3GJF8YXD6k-K_kNE6_gFeWIFbCIxIEWpknHGH8m6tdQMhTuqNG7-e_tsEQRBC4-pjosH0TVoqcW1UonSiJnd2E378zedWIJRs_Dhj9R9v8_VCpmg9Kebo_wFD_WsvLIPqwRBVBCNh8w==";
+  const VALOR_FRETE_GRATIS = 500;
+  const WHATSAPP_NUMBER = "5561982777196";
+
+  // --- 1. ESTADOS DE INTERFACE E DADOS ---
+  const [carrinho, setCarrinho] = useState([]);
+  const [modalAberto, setModalAberto] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  
+  const [etapaCheckout, setEtapaCheckout] = useState('sacola'); 
+  const [metodoSelecionado, setMetodoSelecionado] = useState(null); 
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 400);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  const [dados, setDados] = useState({ 
+    nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '', carteira_blockchain: ''
+  });
+  
+  const [frete, setFrete] = useState(0);
+
+  // --- 2. CÁLCULOS ---
+  const subtotal = useMemo(() => {
+    if (!Array.isArray(carrinho)) return 0;
+    return carrinho.reduce((acc, item) => acc + (Number(item?.preco) * Number(item?.quantidade || 1)), 0);
+  }, [carrinho]);
+
+  const totalGeral = subtotal + frete;
+
+  // --- 3. PERSISTÊNCIA ---
+  useEffect(() => {
+    setIsMounted(true);
+    const salvo = localStorage.getItem('carrinho_ira');
+    if (salvo) {
+      try {
+        const parsed = JSON.parse(salvo);
+        if (Array.isArray(parsed)) setCarrinho(parsed);
+      } catch (e) { console.error(e); }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isMounted) localStorage.setItem('carrinho_ira', JSON.stringify(carrinho));
+  }, [carrinho, isMounted]);
+
+  // --- 4. CEP ---
+  const handleCEP = async (v) => {
+    const cep = v.replace(/\D/g, '').substring(0, 8);
+    setDados(prev => ({ ...prev, cep }));
+    if (cep.length === 8) {
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const json = await res.json();
+        if (!json.erro) {
+          setDados(prev => ({ ...prev, endereco: `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}` }));
+          const regiao = cep.substring(0, 2);
+          const valorFrete = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
+          setFrete(subtotal >= VALOR_FRETE_GRATIS ? 0 : valorFrete);
+        }
+      } catch (e) { console.error(e); }
+    }
+  };
+
+  // --- 5. GESTÃO CARRINHO ---
+  const add = (p, tam = null) => {
+    if (p.category === 'vestuario' && !tam) {
+      alert('⚠️ Selecione um tamanho');
+      return;
+    }
+    setCarrinho(prev => {
+      const existe = prev.find(i => i.id === p.id && i.tamanho === tam);
+      if (existe) return prev.map(i => i.id === p.id && i.tamanho === tam ? { ...i, quantidade: i.quantidade + 1 } : i);
+      return [...prev, { ...p, tamanho: tam, quantidade: 1 }];
+    });
     setEtapaCheckout('sacola');
     setModalAberto(true);
   };
 
-  const remover = (idx) => {
-    setCarrinho(prev => prev.filter((_, i) => i !== idx));
-  };
+  const remover = (idx) => setCarrinho(prev => prev.filter((_, i) => i !== idx));
 
-  {/* // --- 6. VALIDAÇÃO DE CARTEIRA WEB3 ---
-  // Verifica se o endereço segue o padrão EVM (0x + 40 caracteres hexadecimais) */}
+  // --- 6. VALIDAÇÃO ---
   const validarCarteira = (address) => {
-    if (!address) return true; // Permite prosseguir se o cliente optar por não ganhar o NFT
-    const regex = /^0x[a-fA-F0-9]{40}$/;
-    return regex.test(address);
+    if (!address) return true;
+    return /^0x[a-fA-F0-9]{40}$/.test(address);
   };
 
-  {/* // --- 7. PROCESSAMENTO FINAL DO PEDIDO (SUPABASE) --- */}
+  // --- 7. SUPABASE ---
   const processarPedidoFinal = async () => {
-    {/* // Validações de segurança antes de enviar ao banco */}
     if (!dados.nome || !dados.email || !dados.cep) {
-      alert("⚠️ Preencha os dados de entrega obrigatórios para continuar.");
+      alert("⚠️ Preencha os campos obrigatórios.");
       return;
     }
-
-    {/* // Validação da carteira em tempo real antes do processamento */}
     if (dados.carteira_blockchain && !validarCarteira(dados.carteira_blockchain)) {
-      alert("⚠️ O endereço da carteira digital está incorreto. Ele deve começar com '0x'. Verifique ou deixe em branco.");
+      alert("⚠️ Carteira inválida.");
       return;
     }
 
     setLoading(true);
-    
     try {
-      {/* // Identifica o ID do primeiro produto para registro de metadados do NFT */}
       const idReferenciaNFT = carrinho.length > 0 ? carrinho[0].id : 0;
-
-      {/* // Inserção fiel na tabela 'pedidos' do Supabase */}
-      const { data, error } = await supabase
-        .from('pedidos')
-        .insert([
-          {
-            cliente_nome: dados.nome,
-            email: dados.email,
-            cpf: dados.cpf,
-            cep: dados.cep,
-            endereco: dados.endereco,
-            complemento: dados.complemento,
-            carteira_blockchain: dados.carteira_blockchain,
-            nft_item_id: idReferenciaNFT, // Importante para o seu sistema de minting
-            valor_total: totalGeral,
-            itens: JSON.stringify(carrinho), // Salva o carrinho completo como JSON
-            status: 'Pendente',
-            metodo_pagamento: metodoSelecionado,
-            origem: 'Loja Lifestyle'
-          }
-        ]);
-
+      const { error } = await supabase.from('pedidos').insert([{
+        cliente_nome: dados.nome,
+        email: dados.email,
+        cpf: dados.cpf,
+        cep: dados.cep,
+        endereco: dados.endereco,
+        complemento: dados.complemento,
+        carteira_blockchain: dados.carteira_blockchain,
+        nft_item_id: idReferenciaNFT,
+        valor_total: totalGeral,
+        itens: JSON.stringify(carrinho),
+        status: 'Pendente',
+        metodo_pagamento: metodoSelecionado
+      }]);
       if (error) throw error;
-
-      {/* // Se o método for Mercado Pago (mp), aqui você dispararia a lógica de checkout */}
-      if (metodoSelecionado === 'mp') {
-        console.log("Iniciando fluxo Mercado Pago...");
-      {/* // Redirecionamento ou abertura de SDK viria aqui */}
-      }
-
-      {/* // Se chegou aqui, o pedido foi salvo com sucesso */}
-      console.log("Pedido salvo com sucesso no Supabase:", data);
-      
+      alert("Pedido salvo!");
     } catch (err) {
-      console.error("Erro ao salvar pedido:", err);
-      alert("❌ Ocorreu um erro ao processar seu pedido. Tente novamente.");
+      alert("Erro: " + err.message);
     } finally {
       setLoading(false);
     }
   };
 
-  {/* // --- 8. FUNÇÕES AUXILIARES DE INTERFACE --- */}
-  const abrirWhatsApp = () => {
-    const mensagem = `Olá! Gostaria de informações sobre meu pedido na Loja Irá Lifestyle.`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensagem)}`, '_blank');
-  };
-
-  const fecharModal = () => {
-    setModalAberto(false);
-    setEtapaCheckout('sacola'); // Sempre reseta para a sacola ao fechar
-  };
-
-  {/* --- 9. RENDERIZAÇÃO DE SEGURANÇA (HIDRATAÇÃO) ---
-  // Se não estiver montado, não renderiza nada para evitar erro de servidor vs cliente */}
   if (!isMounted) return null;
 
-  {/* // --- INÍCIO DO JSX (O código do return que une tudo segue abaixo) --- */}
   return (
     <div className="min-h-screen bg-white font-sans text-black overflow-x-hidden flex flex-col">
      <Head>
