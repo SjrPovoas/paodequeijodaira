@@ -82,32 +82,43 @@ export default function Loja() {
   }, []);
 
 // --- 4. CÁLCULO DE CEP E FRETE ---
-  const handleCEP = async (v) => {
-  const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
-  setDados(prev => ({ ...prev, cep: cepLimpo }));
-  
-  if (cepLimpo.length === 8) {
-    try {
-      const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
-      
-      // VERIFICAÇÃO DE SEGURANÇA: Se a resposta não for OK, nem tenta o .json()
-      if (!res.ok) throw new Error("Erro na rede");
-
-      const json = await res.json();
-      
-      if (json && !json.erro) {
-        const endFormatado = `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`;
-        setDados(prev => ({ ...prev, endereco: endFormatado }));
+const handleCEP = async (v) => {
+    const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
+    setDados(prev => ({ ...prev, cep: cepLimpo }));
+    
+    if (cepLimpo.length === 8) {
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+        if (!res.ok) throw new Error("Erro na rede");
         
-        const regiao = cepLimpo.substring(0, 2);
-        const freteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
-        setFrete(subtotal >= 500 ? 0 : freteBase);
+        const json = await res.json();
+        
+        if (json && !json.erro) {
+          const endFormatado = `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`;
+          
+          // Atualiza o endereço
+          setDados(prev => ({ ...prev, endereco: endFormatado }));
+          
+          // Lógica de Frete
+          const regiao = cepLimpo.substring(0, 2);
+          const freteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
+          
+          // Aplica Frete Grátis (VALOR_FRETE_GRATIS deve ser 500)
+          setFrete(subtotal >= 500 ? 0 : freteBase);
+        } else {
+          alert("CEP não encontrado.");
+          setDados(prev => ({ ...prev, endereco: '' }));
+          setFrete(0);
+        }
+      } catch (e) { 
+        console.error("Erro ao buscar CEP:", e);
       }
-    } catch (e) { 
-      console.error("CEP inválido ou sem resposta:", e);
+    } else {
+      // Se o usuário apagar o CEP, reseta o endereço e frete
+      setDados(prev => ({ ...prev, endereco: '' }));
+      setFrete(0);
     }
-  }
-};       }));
+  };
           
           // 3. Lógica de Frete por Região
           const regiao = cepLimpo.substring(0, 2);
