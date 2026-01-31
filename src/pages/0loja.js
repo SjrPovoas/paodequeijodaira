@@ -760,14 +760,24 @@ export default function Loja() {
           {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
             <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link> 
-          </div> {/* Fim do Painel Lateral */}
-        </div> {/* Fim do Backdrop */}
+          </div> 
+              </div> // Fim da div flex-grow da Etapa Dados
+            )} 
+          </div> {/* Fecha o Painel Lateral (Branco) */}
+        </div> {/* Fecha o Backdrop (Preto/Blur) */}
+      )} 
 
-       <style jsx global>{`
-        @keyframes slide-right {
+      {/* CSS de Animação - Estilo JSX Global */}
+      <style jsx global>{`
+        @keyframes slideIn {
           from { transform: translateX(100%); }
-          to { transform: translateX(0); }`}       
-         {/* Aqui termina o conteúdo do modal e do checkout */}
-    </div>
-  ); // Fecha o return
-} // FECHA A FUNÇÃO EXPORT DEFAULT FUNCTION LOJA
+          to { transform: translateX(0); }
+        }
+        .animate-in {
+          animation: slideIn 0.3s ease-out forwards;
+        }
+      `}</style>
+
+    </div> // FECHA A DIV PRINCIPAL DO RETURN
+  ); // FECHA O PARENTESE DO RETURN
+} // FECHA A FUNÇÃO LOJA
