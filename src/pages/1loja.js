@@ -33,7 +33,7 @@ export default function Loja() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   // Estado unificado para dados do cliente
   const [dados, setDados] = useState({ 
-    nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '', carteira_blockchain: '',nft_item_id: '' });  
+    nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '', carteira_blockchain: '' });  
   const [frete, setFrete] = useState(0);
 
   // --- 2. CÁLCULOS OTIMIZADOS ---
@@ -120,11 +120,6 @@ export default function Loja() {
   };
 
   const remover = (idx) => setCarrinho(prev => prev.filter((_, i) => i !== idx));
- 
-  // --- 6. VALIDAÇÃO ---
-//  const validarCarteira = (address) => {
-//    if (!address) return true;
-//    return /^0x[a-fA-F0-9]{40}$/.test(address);  };
     
   // --- 7. INTEGRAÇÃO SUPABASE E MERCADO PAGO ---
 const processarPedidoFinal = async () => {
