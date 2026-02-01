@@ -717,12 +717,18 @@ const processarPedidoFinal = async () => {
         <i className="bi bi-arrow-up text-xl"></i>
       </button>
 
-      <style jsx global>{`
-        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
-        .animate-in { animation: slideIn 0.3s ease-out forwards; }
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #eee; border-radius: 10px; }
+<style jsx>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #e2e8f0;
+          border-radius: 10px;
+        }
       `}</style>
     </div>
-  );
-}
+  ); // Fecha o return
+} // Fecha a função principal 'export default function Loja'
