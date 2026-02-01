@@ -122,15 +122,17 @@ export default function Loja() {
   const remover = (idx) => setCarrinho(prev => prev.filter((_, i) => i !== idx));
 
   // --- 6. INTEGRAÇÃO SUPABASE E MERCADO PAGO ---
-  const processarPedidoFinal = async () => {
-    if (!dados.nome || !dados.email || !dados.cep || !dados.endereco) {
-      alert("⚠️ Preencha todos os campos de entrega antes de finalizar.");
+const processarPedidoFinal = async () => {
+    // Validação de campos obrigatórios
+    if (!dados.nome || !dados.email || !dados.endereco) {
+      alert("⚠️ Por favor, preencha todos os dados de entrega e contato.");
       return;
     }
 
     setLoading(true);
+
     try {
-      // 1. Salva no Supabase e pega o ID retornado
+      // 1. SALVA O PEDIDO NO SUPABASE
       const { data: pedidoSalvo, error: errorSupabase } = await supabase
         .from('pedidos')
         .insert([{
@@ -150,8 +152,12 @@ export default function Loja() {
 
       if (errorSupabase) throw errorSupabase;
 
-      // 2. Redirecionamento
+      // Pegamos o ID gerado pelo banco de dados
+      const novoPedidoId = pedidoSalvo[0].id;
+
+      // 2. REDIRECIONAMENTO OU MUDANÇA DE ETAPA
       if (metodoSelecionado === 'mp') {
+        // FLUXO MERCADO PAGO
         const response = await fetch('/api/checkout-mp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -161,7 +167,7 @@ export default function Loja() {
             nome: dados.nome,
             frete: frete,
             cpf: dados.cpf,
-            pedidoId: pedidoSalvo[0].id
+            pedidoId: novoPedidoId
           }),
         });
 
@@ -169,25 +175,19 @@ export default function Loja() {
         if (resData.init_point) {
           window.location.href = resData.init_point;
         } else {
-          throw new Error("Link do Mercado Pago não gerado.");
+          throw new Error("Não foi possível gerar o link do Mercado Pago.");
         }
-        
-//      } else {
-//        alert("Encaminhando para pagamento via Blockchain..."); }
-        // router.push('/pagamento-cripto');
-      
-    } else if (metodoSelecionado === 'cripto') {
-        // Opção A: Redirecionar para uma página dedicada
-        // router.push(`/pagamento-cripto?pedidoId=${pedidoSalvo[0].id}`);
-        
-        // Opção B: Mostrar mensagem e disparar a lógica de contrato (se estiver na mesma página)
-        alert("🚀 Pedido registrado! Agora, conecte sua carteira para pagar com POL (Polygon).");
-        setEtapaCheckout('pagamento_blockchain'); // Criaremos esta etapa no modal
+
+      } else {
+        // FLUXO CRIPTO: Atualiza o estado com o ID e muda a tela do modal
+        setDados(prev => ({ ...prev, pedidoId: novoPedidoId }));
+        setEtapaCheckout('pagamento_blockchain');
+        alert("🚀 Pedido registrado! Prossiga com o pagamento em POL.");
       }
 
     } catch (err) {
       console.error("Erro no checkout:", err);
-      alert("❌ Erro: " + err.message);
+      alert("❌ Erro ao processar pedido: " + err.message);
     } finally {
       setLoading(false);
     }
@@ -498,12 +498,14 @@ export default function Loja() {
         </div>
       </section>
 
-      {/* 6. MODAL DE CHECKOUT PREMIUM SOFT - REVISADO */}
+      {/* 6. MODAL DE CHECKOUT PREMIUM SOFT - REVISADO E INTEGRADO */}
       {modalAberto && (
         <div className="fixed inset-0 z-[200] flex justify-end">
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-500" onClick={() => setModalAberto(false)}></div>          
+          {/* Backdrop com desfoque */}
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-500" onClick={() => setModalAberto(false)}></div>        
+          {/* Container do Modal */}
           <div className="relative w-full max-w-md bg-white h-[96vh] my-[2vh] mr-[1vw] rounded-[40px] shadow-2xl p-8 overflow-hidden flex flex-col animate-in slide-in-from-right duration-500 ease-out">          
-            {/* Cabeçalho */}
+            {/* Cabeçalho Dinâmico */}
             <div className="flex justify-between items-center mb-8">
               <div>
                 <h2 className="text-2xl font-black text-gray-900 tracking-tight">
@@ -520,116 +522,130 @@ export default function Loja() {
             </div>
 
             {/* ETAPA 1: CARRINHO */}
-            {etapaCheckout === 'carrinho' && ({/* 6. MODAL DE CHECKOUT PREMIUM SOFT - CORRIGIDO FINAL */}
-        {modalAberto && (
-         <div className="fixed inset-0 z-[200] flex justify-end">
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-500" onClick={() => setModalAberto(false)}></div>
-          
-          <div className="relative w-full max-w-md bg-white h-[96vh] my-[2vh] mr-[1vw] rounded-[40px] shadow-2xl p-8 overflow-hidden flex flex-col animate-in slide-in-from-right duration-500 ease-out">
-            
-            {/* Cabeçalho */}
-            <div className="flex justify-between items-center mb-8">
-              <div>
-                <h2 className="text-2xl font-black text-gray-900 tracking-tight">
-                  {etapaCheckout === 'sacola' && 'Seu Carrinho'}
-                  {etapaCheckout === 'metodo' && 'Pagamento'}
-                  {etapaCheckout === 'dados' && 'Finalização'}
-                  {etapaCheckout === 'pagamento_blockchain' && 'Web3 Checkout'}
-                </h2>
-                <div className="h-1 w-8 bg-orange-500 rounded-full mt-1"></div>
-              </div>
-              <button onClick={() => setModalAberto(false)} className="w-12 h-12 rounded-2xl bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-all group">
-                <i className="bi bi-x-lg text-gray-400 group-hover:text-black transition-colors"></i>
-              </button>
-            </div>
-
-            {/* CONTEÚDO DINÂMICO POR ETAPA */}
-            <div className="flex-grow flex flex-col overflow-hidden">
-              
-              {/* ETAPA 1: CARRINHO / SACOLA */}
-              {etapaCheckout === 'sacola' && (
-                <div className="flex flex-col h-full">
-                  <div className="flex-grow space-y-5 overflow-y-auto pr-2 custom-scrollbar">
-                    {carrinho.length === 0 ? (
-                      <div className="text-center py-24">
+            {etapaCheckout === 'carrinho' && (
+              <div className="flex-grow flex flex-col h-full overflow-hidden">
+                <div className="flex-grow space-y-5 overflow-y-auto pr-2 custom-scrollbar">
+                  {carrinho.length === 0 ? (
+                    <div className="text-center py-24">
+                      <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i className="bi bi-cart-x text-3xl text-gray-200"></i>
-                        <p className="font-bold text-gray-400 text-[10px] uppercase mt-4">Vazio</p>
                       </div>
-                    ) : (
-                      carrinho.map((item, i) => (
-                        <div key={i} className="flex gap-4 p-3 rounded-3xl hover:bg-gray-50">
-                          <div className="w-20 h-20 bg-gray-100 rounded-2xl overflow-hidden">
-                            <img src={item.img} className="w-full h-full object-cover" />
-                          </div>
-                          <div className="flex-1">
+                      <p className="font-bold text-gray-400 text-xs uppercase tracking-widest">Seu carrinho está vazio</p>
+                    </div>
+                  ) : (
+                    carrinho.map((item, i) => (
+                      <div key={i} className="flex gap-4 p-3 rounded-3xl hover:bg-gray-50 transition-colors">
+                        <div className="w-24 h-28 bg-gray-100 rounded-2xl overflow-hidden flex-shrink-0">
+                          <img src={item.img} className="w-full h-full object-cover" alt={item.nome} />
+                        </div>
+                        <div className="flex-1 flex flex-col justify-between py-1">
+                          <div>
                             <p className="font-bold text-sm text-gray-900 leading-tight">{item.nome}</p>
-                            <div className="flex justify-between items-center mt-2">
-                              <p className="text-orange-600 font-black">R$ {item.preco.toFixed(2)}</p>
-                              <button onClick={() => remover(i)} className="text-red-400 hover:text-red-600"><i className="bi bi-trash3"></i></button>
-                            </div>
+                            <span className="inline-block mt-1 px-2 py-0.5 bg-gray-100 text-[10px] font-bold text-gray-500 rounded-lg uppercase">Tam: {item.tamanho || 'Único'}</span>
+                          </div>
+                          <div className="flex justify-between items-end">
+                            <p className="text-orange-600 font-black text-lg">R$ {item.preco.toFixed(2)}</p>
+                            <button onClick={() => remover(i)} className="w-8 h-8 rounded-xl bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all"><i className="bi bi-trash3 text-sm"></i></button>
                           </div>
                         </div>
-                      ))
-                    )}
-                  </div>
-                  <div className="mt-6 p-6 bg-gray-50 rounded-[32px]">
-                    <input type="text" placeholder="CEP: 00000-000" className="w-full p-4 rounded-2xl mb-4 font-bold text-sm" value={dados.cep} onChange={e => handleCEP(e.target.value)} />
-                    {dados.endereco && <p className="text-[10px] font-bold text-orange-900 mb-4">{dados.endereco}</p>}
-                    <button disabled={carrinho.length === 0 || !dados.endereco} onClick={() => setEtapaCheckout('metodo')} className="w-full bg-black text-white py-5 rounded-2xl font-black uppercase text-xs">Confirmar Itens</button>
-                  </div>
+                      </div>
+                    ))
+                  )}
                 </div>
-              )}
 
-              {/* ETAPA 2: MÉTODO */}
-              {etapaCheckout === 'metodo' && (
-                <div className="space-y-4 flex flex-col justify-center h-full">
-                  <button onClick={() => { setMetodoSelecionado('mp'); setEtapaCheckout('dados'); }} className="p-8 bg-gray-50 rounded-[32px] flex justify-between items-center border-2 border-transparent hover:border-orange-500">
-                    <span className="font-black">Cartão ou PIX</span>
-                    <i className="bi bi-credit-card-2-back text-orange-500 text-2xl"></i>
+                <div className="mt-6 p-6 bg-gray-50 rounded-[32px]">
+                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block ml-1">Simular Frete</label>
+                  <div className="relative mb-3">
+                    <input type="text" placeholder="00000-000" className="w-full bg-white border-none rounded-2xl p-4 font-bold text-sm shadow-sm outline-none" value={dados.cep} onChange={e => handleCEP(e.target.value)} />
+                    <i className="bi bi-geo-alt absolute right-4 top-4 text-gray-300"></i>
+                  </div>
+                  {dados.endereco && (
+                    <div className="mb-4 p-4 bg-orange-100/50 rounded-2xl border border-orange-200">
+                      <p className="text-[11px] font-bold text-orange-900 leading-tight">{dados.endereco}</p>
+                    </div>
+                  )}
+                  <div className="flex justify-between text-[11px] font-bold text-orange-600 uppercase mb-4 px-1">
+                    <span>Frete:</span>
+                    <span>{frete === 0 ? 'GRÁTIS' : `R$ ${frete.toFixed(2)}`}</span>
+                  </div>
+                  <button disabled={carrinho.length === 0 || !dados.endereco} onClick={() => setEtapaCheckout('metodo')} className="w-full bg-black text-white py-5 rounded-[22px] font-black uppercase text-xs tracking-widest hover:bg-orange-600 disabled:opacity-20 transition-all">
+                    Confirmar Itens
                   </button>
-                  <button onClick={() => { setMetodoSelecionado('cripto'); setEtapaCheckout('dados'); }} className="p-8 bg-gray-50 rounded-[32px] flex justify-between items-center border-2 border-transparent hover:border-orange-500">
-                    <span className="font-black">Pagar com Cripto</span>
-                    <i className="bi bi-currency-bitcoin text-orange-500 text-2xl"></i>
+                </div>
+              </div>
+            )}
+
+            {/* ETAPA 2: MÉTODO DE PAGAMENTO */}
+            {etapaCheckout === 'metodo' && (
+              <div className="flex-grow flex flex-col justify-center space-y-4">
+                <button onClick={() => { setMetodoSelecionado('mp'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
+                  <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Cartão ou PIX</p><p className="text-[10px] font-bold text-gray-400 uppercase">Via Mercado Pago</p></div>
+                  <i className="bi bi-credit-card-2-back text-orange-500 text-2xl"></i>
+                </button>
+                <button onClick={() => { setMetodoSelecionado('cripto'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
+                  <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Pagar com Cripto</p><p className="text-[10px] font-bold text-gray-400 uppercase italic">Rede Polygon (POL)</p></div>
+                  <i className="bi bi-currency-bitcoin text-orange-500 text-2xl"></i>
+                </button>
+                <button onClick={() => setEtapaCheckout('carrinho')} className="w-full py-4 text-[10px] font-black uppercase text-gray-400">Voltar ao Carrinho</button>
+              </div>
+            )}
+
+            {/* ETAPA 3: DADOS FINAIS */}
+            {etapaCheckout === 'dados' && (
+              <div className="flex-grow flex flex-col h-full overflow-hidden">
+                <div className="flex-grow space-y-4 overflow-y-auto pr-2 custom-scrollbar">
+                  <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                    <p className="text-[10px] font-bold text-gray-600 leading-tight">{dados.endereco} - CEP: {dados.cep}</p>
+                  </div>
+                  <div className="space-y-3">
+                    <input type="text" placeholder="NOME COMPLETO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none" value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})} />
+                    <input type="email" placeholder="SEU MELHOR E-MAIL" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none" value={dados.email} onChange={e => setDados({...dados, email: e.target.value})} />
+                    {metodoSelecionado === 'mp' && (<input type="text" placeholder="CPF (PARA NOTA FISCAL)" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none" value={dados.cpf} onChange={e => setDados({...dados, cpf: e.target.value})} />)}
+                    <input type="text" placeholder="NÚMERO E COMPLEMENTO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none" value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})} />
+                  </div>
+                  <div className="bg-orange-50 rounded-[32px] p-6 border border-orange-100">
+                    <p className="font-black uppercase text-[12px] text-gray-900 mb-4 text-center">NFT Genesis Reward (Opcional)</p>
+                    <input type="text" placeholder="CARTEIRA POLYGON (0x...)" value={dados.carteira_blockchain} onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})} className="w-full p-4 rounded-2xl text-[10px] font-mono outline-none shadow-inner" />
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-gray-50">
+                  <div className="flex justify-between items-center mb-6">
+                    <div>
+                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total com Frete</p>
+                      <p className="text-3xl font-black text-gray-900 italic">R$ {totalGeral.toFixed(2)}</p>
+                    </div>
+                  </div>
+                  <button onClick={processarPedidoFinal} disabled={loading || !dados.nome || !dados.email} className="w-full bg-black text-white py-6 rounded-[24px] font-black uppercase text-xs tracking-widest hover:bg-orange-600 transition-all">
+                    {loading ? 'Processando...' : 'Finalizar Pedido'}
                   </button>
-                  <button onClick={() => setEtapaCheckout('sacola')} className="text-[10px] font-black uppercase text-gray-400">Voltar</button>
+                  <button onClick={() => setEtapaCheckout('metodo')} className="w-full py-4 text-[10px] font-black uppercase text-gray-300">Voltar ao Pagamento</button>
                 </div>
-              )}
+              </div>
+            )}
 
-              {/* ETAPA 3: DADOS */}
-              {etapaCheckout === 'dados' && (
-                <div className="flex flex-col h-full">
-                  <div className="space-y-3 flex-grow overflow-y-auto">
-                    <input type="text" placeholder="NOME" className="w-full bg-gray-50 p-4 rounded-2xl text-xs font-bold" value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})} />
-                    <input type="email" placeholder="EMAIL" className="w-full bg-gray-50 p-4 rounded-2xl text-xs font-bold" value={dados.email} onChange={e => setDados({...dados, email: e.target.value})} />
-                    <input type="text" placeholder="NÚMERO / COMPLEMENTO" className="w-full bg-gray-50 p-4 rounded-2xl text-xs font-bold" value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})} />
-                  </div>
-                  <div className="mt-6 pt-6 border-t">
-                    <p className="text-3xl font-black mb-6">R$ {totalGeral.toFixed(2)}</p>
-                    <button onClick={processarPedidoFinal} disabled={loading || !dados.nome} className="w-full bg-black text-white py-6 rounded-3xl font-black uppercase text-xs">
-                      {loading ? 'Processando...' : 'Finalizar Pedido'}
-                    </button>
-                    <button onClick={() => setEtapaCheckout('metodo')} className="w-full mt-4 text-[10px] font-black text-gray-300 uppercase">Voltar</button>
-                  </div>
+            {/* ETAPA 4: PAGAMENTO BLOCKCHAIN */}
+            {etapaCheckout === 'pagamento_blockchain' && (
+              <div className="flex-grow flex flex-col items-center justify-center text-center p-6 space-y-8 animate-in zoom-in">
+                <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center text-orange-600">
+                  <i className="bi bi-wallet2 text-5xl"></i>
                 </div>
-              )}
-
-              {/* ETAPA 4: BLOCKCHAIN */}
-              {etapaCheckout === 'pagamento_blockchain' && (
-                <div className="flex flex-col items-center justify-center text-center space-y-8 h-full">
-                  <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center text-orange-600"><i className="bi bi-wallet2 text-4xl"></i></div>
-                  <h3 className="text-xl font-black uppercase">Finalizar Cripto</h3>
+                <div>
+                  <h3 className="text-2xl font-black text-gray-900 uppercase italic">Aguardando POL</h3>
+                  <p className="text-xs text-gray-500 mt-2 font-bold px-4">Seu pedido foi registrado! Finalize a transferência.</p>
+                </div>
+                <div className="w-full">
                   <BotaoPagamentoWeb3 
                     total={totalGeral} 
                     pedidoId={dados.pedidoId} 
                     onSuccess={() => window.location.href = "/sucesso"} 
                   />
-                  <button onClick={() => setEtapaCheckout('dados')} className="text-[10px] font-black text-gray-400 uppercase">Alterar Dados</button>
                 </div>
-              )}
-
-            </div> {/* Fim do Conteúdo Dinâmico */}
-          </div> {/* Fim do Container */}
-        </div> /* Fim do Overlay */
+                <button onClick={() => setEtapaCheckout('dados')} className="text-[10px] font-black uppercase text-gray-400">Corrigir Dados</button>
+              </div>
+            )}
+          </div>
+        </div>
       )}
 
      {/* 7. FOOTER */}
