@@ -118,7 +118,7 @@ export default function Loja() {
     });
     
     // Reseta etapa e abre o modal
-    setEtapaCheckout('sacola');
+    setEtapaCheckout('carrinho');
     setModalAberto(true);
   };
 
