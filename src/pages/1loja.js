@@ -8,7 +8,6 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
 
 // --- DEFINIÇÃO DO CATÁLOGO DE PRODUTOS ---
-// Exportado para ser usado em outros componentes se necessário
 export const produtos = [
     { id: 1, nome: 'T-Shirt Logo Pão de Queijo da Irá (Masc)', preco: 110, img: '/nfts/camiseta1.png', category: 'vestuario' },
     { id: 2, nome: 'T-Shirt Logo Pão de Queijo da Irá (Fem)', preco: 110, img: '/nfts/camiseta2.png', category: 'vestuario' },
@@ -46,7 +45,6 @@ export default function Loja() {
   const [frete, setFrete] = useState(0);
 
   // --- 2. CÁLCULOS OTIMIZADOS ---
-  // useMemo evita cálculos desnecessários a cada render
   const subtotal = useMemo(() => {
     if (!Array.isArray(carrinho)) return 0;
     return carrinho.reduce((acc, item) => acc + (Number(item?.preco || 0) * Number(item?.quantidade || 1)), 0);
@@ -82,96 +80,57 @@ export default function Loja() {
   }, []);
 
 // --- 4. CÁLCULO DE CEP E FRETE ---
-const handleCEP = async (v) => {
-    const cep = v.replace(/\D/g, '').substring(0, 8);
-    setDados(prev => ({ ...prev, cep }));
+  const handleCEP = async (v) => {
+    const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
+    setDados(prev => ({ ...prev, cep: cepLimpo }));
     
-    if (cep.length === 8) {
+    if (cepLimpo.length === 8) {
       try {
-        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
         const json = await res.json();
-        if (!json.erro) {
-          setDados(prev => ({
-            ...prev,
-            endereco: `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`
-          }));
+        
+        if (json && !json.erro) {
+          const endFormatado = `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`;
           
-          // Lógica de Frete baseada nos dois primeiros dígitos
-          const regiao = cep.substring(0, 2);
-          const valorFrete = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
+          setDados(prev => ({ ...prev, endereco: endFormatado }));
           
-          // Se subtotal > frete grátis, zera o frete
-          setFrete(subtotal >= VALOR_FRETE_GRATIS ? 0 : valorFrete);
-        }
-      } catch (e) { 
-        console.error("Erro ao buscar CEP"); 
-      }
-    }
-  };
-
-          // 3. Lógica de Frete por Região
           const regiao = cepLimpo.substring(0, 2);
           const freteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
           
-          // 4. Cálculo de Frete Grátis (Comparação rigorosa com 500)
-          // Usamos o subtotal atual. Se for >= 500, frete é 0.
-          if (subtotal >= VALOR_FRETE_GRATIS) {
-            setFrete(0);
-          } else {
-            setFrete(freteBase);
-          }
-
+          // Lógica de Frete Grátis (500 Reais)
+          setFrete(subtotal >= VALOR_FRETE_GRATIS ? 0 : freteBase);
         } else {
-          alert("❌ CEP não encontrado. Verifique os números.");
-          setDados(prev => ({ ...prev, endereco: '' })); // Limpa para travar o botão
+          alert("❌ CEP não encontrado.");
+          setDados(prev => ({ ...prev, endereco: '' }));
           setFrete(0);
         }
       } catch (e) { 
-        console.error("Erro na busca do CEP:", e);
-        alert("Erro ao consultar CEP. Tente novamente.");
+        console.error("Erro ao buscar CEP:", e); 
       }
-    } else {
-      // Se apagar o CEP, limpa o endereço e o frete
-      setDados(prev => ({ ...prev, endereco: '' }));
-      setFrete(0);
     }
   };
       
   // --- 5. GESTÃO DO CARRINHO ---
   const add = (p, tam = null) => {
-    // Validação obrigatória para itens de vestuário
     if (p.category === 'vestuario' && !tam) {
       alert('⚠️ Por favor, selecione um tamanho antes de adicionar.');
       return;
     }
-
     setCarrinho(prev => {
       const existe = prev.find(i => i.id === p.id && i.tamanho === tam);
       if (existe) {
-        return prev.map(i => 
-          i.id === p.id && i.tamanho === tam 
-          ? { ...i, quantidade: i.quantidade + 1 } 
-          : i
-        );
+        return prev.map(i => i.id === p.id && i.tamanho === tam ? { ...i, quantidade: i.quantidade + 1 } : i);
       }
       return [...prev, { ...p, tamanho: tam, quantidade: 1 }];
     });
-
-    // Abre o modal automaticamente na sacola ao adicionar
     setEtapaCheckout('sacola');
     setModalAberto(true);
   };
 
   const remover = (idx) => setCarrinho(prev => prev.filter((_, i) => i !== idx));
 
-  // --- 6. VALIDAÇÃO DE BLOCKCHAIN ---
-  const validarCarteira = (address) => {
-    if (!address) return true; // Opcional
-    return /^0x[a-fA-F0-9]{40}$/.test(address);
-  };
-
-  // --- 7. INTEGRAÇÃO SUPABASE (PROCESSAMENTO FINAL) ---
-const processarPedidoFinal = async () => {
+  // --- 6. INTEGRAÇÃO SUPABASE E MERCADO PAGO ---
+  const processarPedidoFinal = async () => {
     if (!dados.nome || !dados.email || !dados.cep || !dados.endereco) {
       alert("⚠️ Preencha todos os campos de entrega antes de finalizar.");
       return;
@@ -179,51 +138,50 @@ const processarPedidoFinal = async () => {
 
     setLoading(true);
     try {
-      // 1. Salva no Supabase primeiro
-      const { error } = await supabase.from('pedidos').insert([{
-        nome: dados.nome,
-        email: dados.email,
-        cpf: dados.cpf || null,
-        cep: dados.cep,
-        endereco: dados.endereco,
-        complemento: dados.complemento,
-        carteira_blockchain: dados.carteira_blockchain || null,
-        total_geral: totalGeral,
-        itens: carrinho,
-        metodo_pagamento: metodoSelecionado,
-        status_pagamento: 'pendente'
-      }]);
+      // 1. Salva no Supabase e pega o ID retornado
+      const { data: pedidoSalvo, error: errorSupabase } = await supabase
+        .from('pedidos')
+        .insert([{
+          nome: dados.nome,
+          email: dados.email,
+          cpf: dados.cpf || null,
+          cep: dados.cep,
+          endereco: dados.endereco,
+          complemento: dados.complemento,
+          carteira_blockchain: dados.carteira_blockchain || null,
+          total_geral: totalGeral,
+          itens: carrinho,
+          metodo_pagamento: metodoSelecionado,
+          status_pagamento: 'Aguardando Pagamento'
+        }])
+        .select();
 
-      if (error) throw error;
+      if (errorSupabase) throw errorSupabase;
 
-      // 2. Lógica de Redirecionamento Real
+      // 2. Redirecionamento
       if (metodoSelecionado === 'mp') {
-        alert("🚀 Pedido salvo! Redirecionando para o Mercado Pago...");
-        
-        // Chamada para sua API que gera o link de pagamento
-        const response = await fetch('/api/checkout_mercadopago', {
+        const response = await fetch('/api/checkout-mp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            items: carrinho,
+            itens: carrinho,
             email: dados.email,
-            total: totalGeral
+            nome: dados.nome,
+            frete: frete,
+            cpf: dados.cpf,
+            pedidoId: pedidoSalvo[0].id
           }),
         });
 
-        const data = await response.json();
-
-        if (data.init_point) {
-          // REDIRECIONAMENTO REAL: Envia o usuário para o site do Mercado Pago
-          window.location.href = data.init_point;
+        const resData = await response.json();
+        if (resData.init_point) {
+          window.location.href = resData.init_point;
         } else {
-          throw new Error("Falha ao gerar link de pagamento.");
+          throw new Error("Link do Mercado Pago não gerado.");
         }
-
       } else {
-        // Fluxo para Cripto (Redirecionar para página interna de pagamento)
         alert("Encaminhando para pagamento via Blockchain...");
-        router.push('/pagamento-cripto'); // Certifique-se de ter essa rota
+        // router.push('/pagamento-cripto');
       }
 
     } catch (err) {
@@ -233,7 +191,8 @@ const processarPedidoFinal = async () => {
       setLoading(false);
     }
   };
-  // Proteção de Hidratação para evitar Tela Branca no Next.js
+
+  // Proteção de Hidratação
   if (!isMounted) return null;
 
   return (
@@ -538,7 +497,7 @@ const processarPedidoFinal = async () => {
         </div>
       </section>
 
-{/* 6. MODAL DE CHECKOUT PREMIUM SOFT - EDITADO E CORRIGIDO */}
+      {/* 6. MODAL DE CHECKOUT PREMIUM SOFT - EDITADO E CORRIGIDO */}
       {modalAberto && (
         <div className="fixed inset-0 z-[200] flex justify-end">
           {/* Backdrop com desfoque */}
@@ -551,7 +510,7 @@ const processarPedidoFinal = async () => {
             <div className="flex justify-between items-center mb-8">
               <div>
                 <h2 className="text-2xl font-black text-gray-900 tracking-tight">
-                  {etapaCheckout === 'sacola' && 'Sua Sacola'}
+                  {etapaCheckout === 'carrinho' && 'Seu Carrinho'}
                   {etapaCheckout === 'metodo' && 'Pagamento'}
                   {etapaCheckout === 'dados' && 'Finalização'}
                 </h2>
@@ -562,8 +521,8 @@ const processarPedidoFinal = async () => {
               </button>
             </div>
 
-            {/* ETAPA 1: SACOLA */}
-            {etapaCheckout === 'sacola' && (
+            {/* ETAPA 1: CARRINHO */}
+            {etapaCheckout === 'carrinho' && (
               <div className="flex-grow flex flex-col">
                 <div className="flex-grow space-y-5 overflow-y-auto pr-2 custom-scrollbar">
                   {carrinho.length === 0 ? (
@@ -571,7 +530,7 @@ const processarPedidoFinal = async () => {
                       <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i className="bi bi-cart-x text-3xl text-gray-200"></i>
                       </div>
-                      <p className="font-bold text-gray-400 text-xs uppercase tracking-widest">Sua sacola está vazia</p>
+                      <p className="font-bold text-gray-400 text-xs uppercase tracking-widest">Seu carrinho está vazio</p>
                     </div>
                   ) : (
                     carrinho.map((item, i) => (
@@ -594,7 +553,7 @@ const processarPedidoFinal = async () => {
                   )}
                 </div>
 
-                {/* Seção de Frete na Sacola */}
+                {/* Seção de Frete no Carrinho */}
                 <div className="mt-6 p-6 bg-gray-50 rounded-[32px]">
                   <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block ml-1">Simular Frete</label>
                   <div className="relative mb-3">
@@ -651,7 +610,7 @@ const processarPedidoFinal = async () => {
                   <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase tracking-tight">Pagar com Cripto</p><p className="text-[10px] font-bold text-gray-400 mt-1 uppercase italic">Rede Polygon (POL)</p></div>
                   <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform"><i className="bi bi-currency-bitcoin text-orange-500 text-2xl"></i></div>
                 </button>
-                <button onClick={() => setEtapaCheckout('sacola')} className="w-full py-4 text-[10px] font-black uppercase text-gray-400 hover:text-orange-600 transition-colors tracking-widest"><i className="bi bi-arrow-left mr-2"></i> Voltar à Sacola</button>
+                <button onClick={() => setEtapaCheckout('sacola')} className="w-full py-4 text-[10px] font-black uppercase text-gray-400 hover:text-orange-600 transition-colors tracking-widest"><i className="bi bi-arrow-left mr-2"></i> Voltar ao Carrinho</button>
               </div>
             )}
 
