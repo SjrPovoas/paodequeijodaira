@@ -28,20 +28,12 @@ export default function Loja() {
   const [isMounted, setIsMounted] = useState(false); // Essencial para evitar erro de hidratação
   // --- ESTADO ADICIONAL PARA O MENU MOBILE (Necessário para o JSX abaixo) ---
   const [menuMobileAberto, setMenuMobileAberto] = useState(false);
-  const [etapaCheckout, setEtapaCheckout] = useState('sacola'); 
+  const [etapaCheckout, setEtapaCheckout] = useState('carrinho'); 
   const [metodoSelecionado, setMetodoSelecionado] = useState(null); 
   const [showScrollTop, setShowScrollTop] = useState(false);
   // Estado unificado para dados do cliente
   const [dados, setDados] = useState({ 
-    nome: '', 
-    email: '', 
-    cpf: '', 
-    cep: '', 
-    endereco: '', 
-    complemento: '', 
-    carteira_blockchain: ''
-  });
-  
+    nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '', carteira_blockchain: '' });  
   const [frete, setFrete] = useState(0);
 
   // --- 2. CÁLCULOS OTIMIZADOS ---
@@ -123,7 +115,7 @@ export default function Loja() {
       }
       return [...prev, { ...p, tamanho: tam, quantidade: 1 }];
     });
-    setEtapaCheckout('sacola');
+    setEtapaCheckout('carrinho');
     setModalAberto(true);
   };
 
@@ -610,7 +602,7 @@ export default function Loja() {
                   <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase tracking-tight">Pagar com Cripto</p><p className="text-[10px] font-bold text-gray-400 mt-1 uppercase italic">Rede Polygon (POL)</p></div>
                   <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform"><i className="bi bi-currency-bitcoin text-orange-500 text-2xl"></i></div>
                 </button>
-                <button onClick={() => setEtapaCheckout('sacola')} className="w-full py-4 text-[10px] font-black uppercase text-gray-400 hover:text-orange-600 transition-colors tracking-widest"><i className="bi bi-arrow-left mr-2"></i> Voltar ao Carrinho</button>
+                <button onClick={() => setEtapaCheckout('carrinho')} className="w-full py-4 text-[10px] font-black uppercase text-gray-400 hover:text-orange-600 transition-colors tracking-widest"><i className="bi bi-arrow-left mr-2"></i> Voltar ao Carrinho</button>
               </div>
             )}
 
