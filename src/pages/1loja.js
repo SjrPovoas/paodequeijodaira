@@ -725,5 +725,5 @@ const processarPedidoFinal = async () => {
         }
       `}</style>
     </div>
-  ); // Fecha o return
-} // Fecha a função principal 'export default function Loja'
+  );
+}
