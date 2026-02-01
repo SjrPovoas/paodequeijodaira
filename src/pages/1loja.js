@@ -71,6 +71,12 @@ export default function Loja() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+    // --- X. VALIDAÇÃO ---
+    const validarCarteira = (address) => {
+    if (!address) return true;
+    return /^0x[a-fA-F0-9]{40}$/.test(address);
+  };
+
    // --- 4. LÓGICA DE CEP E FRETE ---
     const handleCEP = async (v) => {
     const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
