@@ -29,39 +29,45 @@ export default function FAQWeb3() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] font-sans text-black p-6 selection:bg-orange-200">
+    <div className="min-h-screen bg-[#FDFDFD] font-sans text-gray-900 p-6 selection:bg-orange-100">
       <Head>
-        <title>FAQ WEB3 | Loja Lifestyle</title>
+        <title>FAQ WEB3 | Suporte Lifestyle</title>
       </Head>
 
       <div className="max-w-3xl mx-auto py-12">
         
-        {/* BOTÃO VOLTAR */}
+        {/* BOTÃO VOLTAR - SOFT STYLE */}
         <button 
           onClick={() => router.back()}
-          className="mb-8 bg-black text-white px-4 py-2 font-black uppercase text-[10px] tracking-widest border-2 border-black hover:bg-white hover:text-black transition-all shadow-[4px_4px_0px_0px_rgba(234,88,12,1)]"
+          className="mb-12 flex items-center gap-2 bg-white text-gray-500 px-6 py-3 rounded-full font-bold uppercase text-[10px] tracking-widest border border-gray-100 hover:bg-orange-50 hover:text-orange-600 transition-all shadow-sm"
         >
-          ← Voltar para Loja
+          <i className="bi bi-arrow-left"></i> Voltar para Loja
         </button>
 
-        {/* TÍTULO BRUTALISTA */}
-        <div className="mb-16">
-          <h1 className="text-6xl md:text-8xl font-black uppercase italic leading-[0.8] tracking-tighter mb-4">
-            WEB3 <br />
-            <span className="text-orange-600">DÚVIDAS</span>
+        {/* TÍTULO SOFT & BOLD */}
+        <div className="mb-20 text-center md:text-left px-4">
+          <span className="text-orange-500 font-black uppercase text-[10px] tracking-[0.4em] mb-4 block">Central de Ajuda</span>
+          <h1 className="text-5xl md:text-7xl font-black uppercase leading-tight tracking-tighter mb-4 text-gray-900">
+            Dúvidas <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-orange-400">Web3</span>
           </h1>
-          <div className="h-4 w-48 bg-black"></div>
+          <div className="h-1.5 w-24 bg-orange-500 rounded-full mx-auto md:mx-0"></div>
         </div>
 
-        {/* LISTA DE PERGUNTAS */}
-        <div className="space-y-12">
+        {/* LISTA DE PERGUNTAS - CARDS ARREDONDADOS */}
+        <div className="space-y-6">
           {perguntas.map((item, index) => (
             <div key={index} className="group">
-              <h2 className="text-2xl font-black uppercase italic leading-none mb-4 group-hover:text-orange-600 transition-colors">
-                <span className="text-orange-600 mr-2">0{index + 1}.</span> {item.pergunta}
-              </h2>
-              <div className="bg-white border-[4px] border-black p-6 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[10px_10px_0px_0px_rgba(234,88,12,1)] transition-all">
-                <p className="font-bold text-gray-700 leading-relaxed uppercase text-sm italic">
+              <div className="bg-white border border-gray-100 p-8 rounded-[40px] shadow-sm group-hover:shadow-xl group-hover:shadow-orange-100/50 group-hover:-translate-y-1 transition-all duration-300">
+                <div className="flex items-start gap-4 mb-4">
+                  <span className="flex-shrink-0 w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-black text-xs">
+                    {index + 1}
+                  </span>
+                  <h2 className="text-xl font-black uppercase leading-tight text-gray-800">
+                    {item.pergunta}
+                  </h2>
+                </div>
+                <p className="font-medium text-gray-500 leading-relaxed text-sm md:text-base pl-12">
                   {item.resposta}
                 </p>
               </div>
@@ -69,24 +75,28 @@ export default function FAQWeb3() {
           ))}
         </div>
 
-        {/* CTA FINAL */}
-        <div className="mt-20 bg-black text-white p-10 border-[6px] border-orange-600 shadow-[20px_20px_0px_0px_rgba(0,0,0,1)] text-center">
-          <h3 className="text-3xl font-black uppercase italic mb-6">Pronto para o próximo nível?</h3>
-          <p className="text-[10px] tracking-[0.3em] font-bold uppercase mb-8 text-gray-400">
-            Abra sua carteira e comece sua coleção lifestyle agora.
+        {/* CTA FINAL - SOFT PREMIUM */}
+        <div className="mt-24 bg-gradient-to-br from-gray-900 to-black text-white p-12 rounded-[50px] shadow-2xl text-center relative overflow-hidden">
+          {/* Círculos decorativos de fundo */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-orange-600/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+          
+          <h3 className="text-3xl font-black uppercase italic mb-4 relative z-10">Novo na Web3?</h3>
+          <p className="text-xs font-medium uppercase mb-8 text-gray-400 tracking-widest relative z-10">
+            Crie sua carteira em minutos e comece a colecionar.
           </p>
           <a 
             href="https://metamask.io/" 
             target="_blank"
-            className="inline-block bg-orange-600 text-white px-10 py-4 font-black uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all"
+            rel="noopener noreferrer"
+            className="relative z-10 inline-block bg-orange-600 text-white px-12 py-5 rounded-full font-black uppercase text-xs tracking-widest hover:bg-white hover:text-black hover:scale-105 transition-all shadow-lg shadow-orange-600/20"
           >
             Baixar MetaMask
           </a>
         </div>
 
         <footer className="mt-20 text-center">
-          <p className="text-[9px] font-black uppercase tracking-[0.5em] text-gray-400">
-            Pão de Queijo da Irá // Protocolo Web3 v1.0
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-300">
+            Pão de Queijo da Irá // Experiência Digital 2024
           </p>
         </footer>
       </div>
