@@ -36,7 +36,6 @@ export default function Loja() {
   const [dados, setDados] = useState({ 
     nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '', carteira_blockchain: '' });  
   const [frete, setFrete] = useState(0);
-   const [frete, setFrete] = useState(0); 
 
   // --- 2. CÁLCULOS OTIMIZADOS ---
   const subtotal = useMemo(() => {
