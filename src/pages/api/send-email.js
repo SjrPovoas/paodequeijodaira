@@ -61,7 +61,7 @@ export default async function handler(req, res) {
 
           <div style="margin-top: 40px; text-align: center; border-top: 1px solid #f5f5f5; padding-top: 20px;">
             <p style="font-size: 9px; font-weight: bold; text-transform: uppercase; color: #ccc; letter-spacing: 2px;">
-              Pão de Queijo da Irá Digital © 2026
+              @ Loja Lifestyle e Acessórios | Pão de Queijo da Irá
             </p>
           </div>
         </div>
