@@ -572,7 +572,7 @@ export default function Loja() {
 
                 <div className="mt-8 pt-8 border-t border-gray-100">
                   <div className="mb-4">
-                    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Cálculo de Entrega (FRETE)</label>
+                    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">CÁLCULO DE ENTREGA (INSIRA SEU CEP)</label>
                     <input 
                       type="text" 
                       placeholder="00000-000"
@@ -665,7 +665,7 @@ export default function Loja() {
                   <div className="mt-4 border-2 border-dashed border-orange-200 p-5 rounded-2xl bg-orange-50/50">
                     <p className="text-[10px] font-black uppercase text-orange-600 mb-2 italic">Aproveite sua recompensa Web3 (NFT que gera desconto)</p>
                     <input type="text"
-                      placeholder="INSIRA UM ENDEREÇO DE CARTEIRA POLYGON (0x...)"
+                      placeholder="INSIRA UM ENDEREÇO DE CARTEIRA POLYGON (0x...)" className="text-[9px] uppercase text-orange-600"
                       value={dados.carteira_blockchain}
                       onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})}
                       className={`w-full border-2 p-4 rounded-xl font-mono text-[10px] outline-none transition-all uppercase ${
