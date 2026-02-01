@@ -172,17 +172,14 @@ export default function Loja() {
           throw new Error("Link do Mercado Pago não gerado.");
         }
         
-//      } else {
-//        alert("Encaminhando para pagamento via Blockchain..."); }
-        // router.push('/pagamento-cripto');
-      
-    } else if (metodoSelecionado === 'cripto') {
-        // Opção A: Redirecionar para uma página dedicada
-        // router.push(`/pagamento-cripto?pedidoId=${pedidoSalvo[0].id}`);
-        
-        // Opção B: Mostrar mensagem e disparar a lógica de contrato (se estiver na mesma página)
-        alert("🚀 Pedido registrado! Agora, conecte sua carteira para pagar com POL (Polygon).");
-        setEtapaCheckout('pagamento_blockchain'); // Criaremos esta etapa no modal
+      } else if (metodoSelecionado === 'cripto') {
+        // 1. Salvamos o ID do pedido que veio do Supabase no estado
+        const idGerado = pedidoSalvo[0].id;
+        setDados(prev => ({ ...prev, pedidoId: idGerado }));  
+        // 2. Mudamos a tela do modal para a interface de pagamento
+        setEtapaCheckout('pagamento_blockchain');
+          
+        console.log("Pedido salvo no Supabase ID:", idGerado);
       }
 
     } catch (err) {
