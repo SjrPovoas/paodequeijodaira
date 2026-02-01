@@ -122,10 +122,9 @@ export default function Loja() {
   const remover = (idx) => setCarrinho(prev => prev.filter((_, i) => i !== idx));
  
   // --- 6. VALIDAÇÃO ---
-  const validarCarteira = (address) => {
-    if (!address) return true;
-    return /^0x[a-fA-F0-9]{40}$/.test(address);
-  };
+//  const validarCarteira = (address) => {
+//    if (!address) return true;
+//    return /^0x[a-fA-F0-9]{40}$/.test(address);  };
     
   // --- 7. INTEGRAÇÃO SUPABASE E MERCADO PAGO ---
 const processarPedidoFinal = async () => {
