@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import Head from 'next/head';
@@ -10,12 +11,12 @@ export default function AdminLogin() {
   const [msg, setMsg] = useState({ type: '', text: '' });
   const router = useRouter();
 
-  // Se o usuário já estiver logado, manda direto para trocas ao carregar a página
+  // Se o usuário já estiver logado, manda direto para Vendas (mais comum que Trocas)
   useEffect(() => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user?.email === 'sjrpovoas@gmail.com') {
-        router.push('/admin/trocas');
+        router.push('/admin/vendas');
       }
     };
     checkUser();
@@ -27,26 +28,21 @@ export default function AdminLogin() {
     setMsg({ type: '', text: '' });
 
     try {
-      // 1. Autenticação no Supabase
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-      if (error) throw new Error('Credenciais Inválidas. Verifique seu e-mail e senha.');
+      if (error) throw new Error('Credenciais Inválidas.');
 
-      // 2. Validação de e-mail administrativo
       if (data.user?.email === 'sjrpovoas@gmail.com') {
-        setMsg({ type: 'success', text: 'Autenticado com sucesso! Redirecionando...' });
-        
-        // Redirecionamento via Router do Next.js (mais estável que window.location)
+        setMsg({ type: 'success', text: 'Acesso autorizado!' });
         setTimeout(() => {
-          router.push('/admin/trocas');
-        }, 1200);
+          router.push('/admin/vendas');
+        }, 800);
       } else {
-        // Se o e-mail não for o permitido, desconectamos imediatamente
         await supabase.auth.signOut();
-        throw new Error('Acesso Negado: Você não possui privilégios de administrador.');
+        throw new Error('Você não possui privilégios de administrador.');
       }
 
     } catch (err) {
@@ -56,87 +52,83 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] flex items-center justify-center p-6 font-sans selection:bg-orange-200">
+    <div className="min-h-screen bg-[#FDFDFD] flex items-center justify-center p-6 font-sans selection:bg-orange-100">
       <Head>
-        <title>Admin Auth | Loja Lifestyle do Pão de Queijo da Irá</title>
+        <title>Painel Admin | Loja Lifestyle e Acessórios</title>
       </Head>
 
-      <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="w-full max-w-md animate-in fade-in zoom-in duration-500">
         
-        {/* CABEÇALHO DA MARCA */}
-        <div className="text-center mb-10">
-          <div className="inline-block bg-black text-white px-6 py-2 mb-6 shadow-[4px_4px_0px_0px_rgba(234,88,12,1)]">
-             <span className="font-black italic uppercase tracking-[0.3em] text-[10px]">Pão de Queijo da Irá</span>
+        {/* CABEÇALHO SOFT */}
+        <div className="text-center mb-8">
+          <div className="inline-block bg-orange-50 text-orange-600 px-4 py-1 rounded-full mb-6">
+             <span className="font-black italic uppercase tracking-widest text-[9px]">Acesso Restrito</span>
           </div>
-          <h1 className="text-6xl font-black uppercase italic tracking-tighter leading-none text-black">
-            ADMIN <span className="text-orange-600">AUTH</span>
+          <h1 className="text-4xl font-black uppercase italic tracking-tighter leading-none text-gray-900">
+            Painel <span className="text-orange-600">Admin</span>
           </h1>
-          <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mt-4">Acesso restrito à gerência</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mt-3">Identifique-se para continuar</p>
         </div>
 
-        {/* CARD DE LOGIN BRUTALISTA */}
-        <div className="bg-white border-[6px] border-black p-8 md:p-12 shadow-[20px_20px_0px_0px_rgba(0,0,0,1)]">
-          <form onSubmit={handleLogin} className="space-y-8">
+        {/* CARD DE LOGIN SOFT PREMIUM */}
+        <div className="bg-white border border-gray-100 p-10 md:p-12 rounded-[50px] shadow-2xl shadow-gray-200/50">
+          <form onSubmit={handleLogin} className="space-y-6">
             
             {/* CAMPO E-MAIL */}
-            <div className="relative group">
-              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 group-focus-within:text-orange-600 transition-colors">E-mail Administrativo</label>
+            <div className="space-y-2">
+              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">E-mail</label>
               <input 
                 type="email" 
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border-4 border-gray-100 p-4 font-bold text-lg focus:border-black outline-none transition-all placeholder:text-gray-200"
-                placeholder="nome@exemplo.com"
+                className="w-full bg-gray-50 border-none rounded-3xl p-4 font-bold text-gray-700 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-300"
+                placeholder="uauario@provedor.com"
               />
             </div>
 
             {/* CAMPO SENHA */}
-            <div className="relative group">
-              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 group-focus-within:text-orange-600 transition-colors">Senha de Acesso</label>
+            <div className="space-y-2">
+              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Senha</label>
               <input 
                 type="password" 
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full border-4 border-gray-100 p-4 font-bold text-lg focus:border-black outline-none transition-all placeholder:text-gray-200"
+                className="w-full bg-gray-50 border-none rounded-3xl p-4 font-bold text-gray-700 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-300"
                 placeholder="••••••••"
               />
             </div>
 
             {/* MENSAGENS DE STATUS */}
             {msg.text && (
-              <div className={`p-4 border-[3px] font-black uppercase text-[10px] tracking-widest animate-in zoom-in duration-300 ${
+              <div className={`p-4 rounded-2xl font-bold uppercase text-[9px] tracking-widest text-center animate-bounce ${
                 msg.type === 'error' 
-                ? 'bg-red-50 border-red-600 text-red-600 shadow-[4px_4px_0px_0px_rgba(220,38,38,0.2)]' 
-                : 'bg-green-50 border-green-600 text-green-600 shadow-[4px_4px_0px_0px_rgba(22,163,74,0.2)]'
+                ? 'bg-red-50 text-red-500' 
+                : 'bg-green-50 text-green-600'
               }`}>
-                {msg.type === 'error' ? '✕ ' : '✓ '} {msg.text}
+                {msg.text}
               </div>
             )}
 
-            {/* BOTÃO SUBMIT */}
+            {/* BOTÃO LOGIN SOFT */}
             <button 
               type="submit" 
               disabled={loading}
-              className="w-full bg-black text-white py-6 font-black uppercase text-xs tracking-[0.4em] shadow-[8px_8px_0px_0px_rgba(234,88,12,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all disabled:bg-gray-300 active:scale-95 flex items-center justify-center gap-3"
+              className="w-full bg-black text-white py-5 rounded-3xl font-black uppercase text-[10px] tracking-[0.2em] hover:bg-orange-600 hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-gray-200 disabled:bg-gray-200"
             >
-              {loading ? (
-                <span className="animate-pulse italic">Validando...</span>
-              ) : (
-                <>Entrar no Painel</>
-              )}
+              {loading ? "Validando..." : "Entrar no Dashboard"}
             </button>
           </form>
         </div>
 
         {/* FOOTER */}
         <div className="mt-12 text-center">
-            <p className="text-[9px] font-black uppercase tracking-[0.6em] text-gray-400">
-               Design by SjrPovoaS & Loja Lifestyle do Pão de Queijo da Irá
+            <p className="text-[9px] font-black uppercase tracking-widest text-gray-300">
+              @ Loja Lifestyle e Acessórios | Pão de Queijo da Irá
             </p>
         </div>
       </div>
     </div>
   );
-          }
+}
