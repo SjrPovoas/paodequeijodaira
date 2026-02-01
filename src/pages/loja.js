@@ -561,7 +561,8 @@ export default function Loja() {
                           </div>
                           <div className="flex justify-between items-end">
                             <p className="text-orange-600 font-black text-sm">R$ {(item.preco * item.quantidade).toFixed(2)}</p>
-                            <button onClick={() => remover(i)} className="text-[9px] font-black text-red-500 hover:underline uppercase">Excluir</button>
+                        {/* <button onClick={() => remover(i)} className="text-[9px] font-black text-red-500 hover:underline uppercase">Excluir</button> */}
+                            <button onClick={() => remover(i)} className="w-8 h-8 rounded-xl bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all"><i className="bi bi-trash3 text-sm"></i></button>
                           </div>
                         </div>
                       </div>
@@ -571,7 +572,7 @@ export default function Loja() {
 
                 <div className="mt-8 pt-8 border-t border-gray-100">
                   <div className="mb-4">
-                    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Cálculo de Entrega (CEP)</label>
+                    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Cálculo de Entrega (FRETE)</label>
                     <input 
                       type="text" 
                       placeholder="00000-000"
@@ -585,13 +586,12 @@ export default function Loja() {
                         <i className="bi bi-geo-alt-fill text-orange-600"></i> {dados.endereco}
                       </p>
                     )}
-                  </div>
-
-                 <button 
-                    disabled={carrinho.length === 0 || !dados.cep}
-                    onClick={() => setEtapaCheckout('metodo')}
-                    className="w-full bg-black text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 shadow-xl shadow-black/10"
-                  >
+                     <div className="flex justify-between text-[11px] font-bold text-orange-600 uppercase mb-4 px-1">
+                       <span>Frete:</span>
+                       <span>{frete === 0 ? 'GRÁTIS' : `R$ ${frete.toFixed(2)}`}</span>
+                     </div>
+                       
+                 <button disabled={carrinho.length === 0 || !dados.cep} onClick={() => setEtapaCheckout('metodo')} className="w-full bg-black text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 shadow-xl shadow-black/10">
                     Prosseguir para Pagamento <i className="bi bi-arrow-right"></i>
                   </button>
                 </div>
