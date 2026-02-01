@@ -151,7 +151,7 @@ export default function Loja() {
     try {
       // 1. Criar objeto do pedido para o Supabase
       const dadosPedido = {
-        cliente_nome: dados.nome,
+        nome: dados.nome,
         email: dados.email.toLowerCase().trim(),
         // Placeholder se for Web3 sem CPF
         cpf: metodoSelecionado === 'mp' ? cpfLimpo : (cpfLimpo || 'WEB3_CLIENT'),
@@ -618,7 +618,7 @@ export default function Loja() {
                 >
                   <div>
                     <p className="font-black uppercase text-sm italic group-hover:text-orange-600">Pagar com Cripto</p>
-                    <p className="text-[9px] font-bold text-gray-400 uppercase mt-1">Rede Polygon (token POL)</p>
+                    <p className="text-[9px] font-bold text-gray-400 uppercase mt-1">Rede Polygon (POL)</p>
                   </div>
                   <i className="bi bi-hexagon-fill text-2xl text-orange-600 group-hover:scale-110 transition-transform"></i>
                 </button>
@@ -664,11 +664,9 @@ export default function Loja() {
                   {/* BLOCO WEB3 COM VALIDAÇÃO EM TEMPO REAL */}
                   <div className="mt-4 border-2 border-dashed border-orange-200 p-5 rounded-2xl bg-orange-50/50">
                     <p className="text-[10px] font-black uppercase text-orange-600 mb-2 italic">Aproveite sua recompensa Web3 (NFT que gera desconto)</p>
-                    <input type="text"
-                      placeholder="INSIRA UM ENDEREÇO DE CARTEIRA POLYGON (0x...)" className="text-[9px] uppercase text-orange-600"
-                      value={dados.carteira_blockchain}
+                    <input type="text" placeholder="CARTEIRA POLYGON (0x...)" value={dados.carteira_blockchain}
                       onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})}
-                      className={`w-full border-2 p-4 rounded-xl font-mono text-[10px] outline-none transition-all uppercase ${
+                      className={`w-full border-2 p-4 rounded-xl font-mono text-[9px] outline-none transition-all uppercase ${
                         dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain)
                         ? 'border-red-500 bg-red-50 text-red-600'
                         : 'border-orange-200 bg-white focus:border-orange-600'
@@ -677,7 +675,7 @@ export default function Loja() {
                     {dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain) && (
                       <p className="text-[8px] font-black text-red-500 mt-1 uppercase animate-pulse italic">Endereço Inválido!</p>
                     )}
-                    <button onClick={() => window.open('/faq-web3', '_blank')} className="text-[10px] font-black text-orange-600 uppercase underline">O que é essa tal Recompensa Web3? Saiba mais</button>
+                    <button onClick={() => window.open('/faq-web3', '_blank')} className="text-[10px] font-black text-orange-600 uppercase underline">Saiba mais sobre essa Recompensa Web3 (NFT)</button>
                   </div>
                 </div>             
 
