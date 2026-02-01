@@ -590,7 +590,7 @@ export default function Loja() {
                        <span>Frete:</span>
                        <span>{frete === 0 ? 'GRÁTIS' : `R$ ${frete.toFixed(2)}`}</span>
                      </div>
-                       
+                  </div>    
                  <button disabled={carrinho.length === 0 || !dados.cep} onClick={() => setEtapaCheckout('metodo')} className="w-full bg-black text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 shadow-xl shadow-black/10">
                     Prosseguir para Pagamento <i className="bi bi-arrow-right"></i>
                   </button>
