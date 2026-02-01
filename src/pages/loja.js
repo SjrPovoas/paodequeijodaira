@@ -20,7 +20,7 @@ export default function Loja() {
   const [isMounted, setIsMounted] = useState(false); // Evita erros de hidratação (SSR vs Client)
   
   // Controle de Navegação do Checkout
-  const [etapaCheckout, setEtapaCheckout] = useState('sacola'); // 'sacola' | 'metodo' | 'dados'
+  const [etapaCheckout, setEtapaCheckout] = useState('carrinho'); // 'carrinho' | 'metodo' | 'dados'
   const [metodoSelecionado, setMetodoSelecionado] = useState(null); // 'mp' | 'cripto'
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -32,7 +32,7 @@ export default function Loja() {
   }, []);
   
   // Dados do Formulário
-  const [dados, setDados] = useState({ nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '' });
+  const [dados, setDados] = useState({ nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '', carteira_blockchain: '' });
   const [frete, setFrete] = useState(0);
 
   // --- 2. CÁLCULOS OTIMIZADOS (useMemo) ---
@@ -525,7 +525,7 @@ export default function Loja() {
             
             <div className="flex justify-between items-center mb-10">
               <h2 className="text-2xl font-black uppercase italic tracking-tighter">
-                {etapaCheckout === 'sacola' && 'Carrinho'}
+                {etapaCheckout === 'carrinho' && 'Seu Carrinho 🛒'}
                 {etapaCheckout === 'metodo' && 'Pagamento'}
                 {etapaCheckout === 'dados' && 'Checkout'}
               </h2>
@@ -537,14 +537,14 @@ export default function Loja() {
               </button>
             </div>
 
-            {/* ETAPA 1: SACOLA (LISTAGEM DE ITENS) */}
-            {etapaCheckout === 'sacola' && (
+            {/* ETAPA 1: CARRINHO (LISTAGEM DE ITENS) */}
+            {etapaCheckout === 'carrinho' && (
               <div className="flex-grow flex flex-col">
                 <div className="flex-grow space-y-6 overflow-y-auto pr-2">
                   {carrinho.length === 0 ? (
                     <div className="text-center py-20 opacity-30">
                       <i className="bi bi-cart-x text-6xl"></i>
-                      <p className="mt-4 font-bold uppercase text-xs">Sua sacola está vazia</p>
+                      <p className="mt-4 font-bold uppercase text-xs">Seu carrinho está vazio</p>
                     </div>
                   ) : (
                     carrinho.map((item, i) => (
@@ -607,7 +607,7 @@ export default function Loja() {
                 >
                   <div>
                     <p className="font-black uppercase text-sm italic group-hover:text-orange-600">Cartão ou PIX</p>
-                    <p className="text-[9px] font-bold text-gray-400 uppercase mt-1">Mercado Pago Seguro</p>
+                    <p className="text-[9px] font-bold text-gray-400 uppercase mt-1">Via Mercado Pago</p>
                   </div>
                   <i className="bi bi-lightning-charge-fill text-2xl text-orange-600 group-hover:scale-110 transition-transform"></i>
                 </button>
@@ -618,16 +618,16 @@ export default function Loja() {
                 >
                   <div>
                     <p className="font-black uppercase text-sm italic group-hover:text-orange-600">Pagar com Cripto</p>
-                    <p className="text-[9px] font-bold text-gray-400 uppercase mt-1">Desconto + NFT Genesis</p>
+                    <p className="text-[9px] font-bold text-gray-400 uppercase mt-1">Rede Polygon (token POL)</p>
                   </div>
                   <i className="bi bi-hexagon-fill text-2xl text-orange-600 group-hover:scale-110 transition-transform"></i>
                 </button>
 
                 <button 
-                  onClick={() => setEtapaCheckout('sacola')}
+                  onClick={() => setEtapaCheckout('carrinho')}
                   className="mt-4 text-[10px] font-black uppercase text-gray-300 hover:text-black transition-colors underline underline-offset-4"
                 >
-                  ← Voltar para a Sacola
+                  ← Voltar ao Carrinho 🛒 
                 </button>
               </div>
             )}
@@ -663,10 +663,9 @@ export default function Loja() {
 
                   {/* BLOCO WEB3 COM VALIDAÇÃO EM TEMPO REAL */}
                   <div className="mt-4 border-2 border-dashed border-orange-200 p-5 rounded-2xl bg-orange-50/50">
-                    <p className="text-[10px] font-black uppercase text-orange-600 mb-2 italic">Ganhe o NFT Genesis de Colecionador</p>
-                    <input 
-                      type="text"
-                      placeholder="CARTEIRA POLYGON (0x...)"
+                    <p className="text-[10px] font-black uppercase text-orange-600 mb-2 italic">Aproveite sua recompensa Web3 (NFT que gera desconto)</p>
+                    <input type="text"
+                      placeholder="INSIRA UM ENDEREÇO DE CARTEIRA POLYGON (0x...)"
                       value={dados.carteira_blockchain}
                       onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})}
                       className={`w-full border-2 p-4 rounded-xl font-mono text-[10px] outline-none transition-all uppercase ${
@@ -678,8 +677,9 @@ export default function Loja() {
                     {dados.carteira_blockchain && !/^0x[a-fA-F0-9]{40}$/.test(dados.carteira_blockchain) && (
                       <p className="text-[8px] font-black text-red-500 mt-1 uppercase animate-pulse italic">Endereço Inválido!</p>
                     )}
+                    <button onClick={() => window.open('/faq-web3', '_blank')} className="text-[10px] font-black text-orange-600 uppercase underline">O que é essa tal Recompensa Web3? Saiba mais</button>
                   </div>
-                </div>
+                </div>             
 
                 {/* RESUMO DE VALORES E BOTÃO FINAL */}
                 <div className="mt-auto pt-6 border-t border-gray-100">
