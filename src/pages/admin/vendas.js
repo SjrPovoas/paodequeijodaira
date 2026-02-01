@@ -79,16 +79,24 @@ export default function AdminVendas() {
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
             </Head>
 
-            {/* HEADER COM STATUS DO SISTEMA */}
-            <header className="bg-black text-white p-6 border-b-[8px] border-orange-600 sticky top-0 z-[100] flex justify-between items-center">
-                <h1 className="text-xl font-black uppercase italic tracking-tighter">
-                    Painel de <span className="text-orange-600">Vendas</span>
-                </h1>
-                <div className="flex gap-4">
-                     <button onClick={() => router.push('/loja')} className="text-[10px] font-bold uppercase bg-white/10 px-3 py-1 rounded-full">Ver Loja</button>
-                     <button onClick={async () => { await supabase.auth.signOut(); router.push('/admin/login'); }} className="text-[10px] font-bold uppercase bg-red-600 px-3 py-1 rounded-full">Sair</button>
-                </div>
-            </header>
+    {/* HEADER COM STATUS DO SISTEMA */}
+     <header className="bg-black text-white p-6 sticky top-0 z-[100] flex justify-between items-center shadow-xl">
+      <div className="flex items-center gap-4">
+        <h1 className="text-xl font-black uppercase italic tracking-tighter">
+            Painel <span className="text-orange-600">Admin</span>
+        </h1>
+        <nav className="hidden md:flex bg-white/10 rounded-full p-1 ml-4">
+            <button className="px-6 py-2 rounded-full text-[10px] font-black uppercase bg-orange-600">Vendas</button>
+            <button onClick={() => router.push('/admin/trocas')} className="px-6 py-2 rounded-full text-[10px] font-black uppercase transition-all hover:bg-white/20">Trocas</button>
+        </nav>
+      </div>
+      <div className="flex items-center gap-3">
+        <span className="text-[9px] font-bold text-gray-400 mr-2 hidden sm:block">sjrpovoas@gmail.com</span>
+        <button onClick={async () => { await supabase.auth.signOut(); router.push('/admin/login'); }} className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-full transition-all">
+            <i className="bi bi-power px-1"></i>
+        </button>
+      </div>
+    </header>
 
             <main className="p-4 md:p-10 max-w-7xl mx-auto w-full flex-grow">
                 {/* FILTROS DE STATUS ARREDONDADOS SOFT */}
