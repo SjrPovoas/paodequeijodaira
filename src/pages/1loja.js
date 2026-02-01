@@ -171,9 +171,18 @@ export default function Loja() {
         } else {
           throw new Error("Link do Mercado Pago não gerado.");
         }
-      } else {
-        alert("Encaminhando para pagamento via Blockchain...");
+        
+//      } else {
+//        alert("Encaminhando para pagamento via Blockchain..."); }
         // router.push('/pagamento-cripto');
+      
+    } else if (metodoSelecionado === 'cripto') {
+        // Opção A: Redirecionar para uma página dedicada
+        // router.push(`/pagamento-cripto?pedidoId=${pedidoSalvo[0].id}`);
+        
+        // Opção B: Mostrar mensagem e disparar a lógica de contrato (se estiver na mesma página)
+        alert("🚀 Pedido registrado! Agora, conecte sua carteira para pagar com POL (Polygon).");
+        setEtapaCheckout('pagamento_blockchain'); // Criaremos esta etapa no modal
       }
 
     } catch (err) {
@@ -641,6 +650,37 @@ export default function Loja() {
                     />
                   </div>
                 </div>
+
+{/* NOVA ETAPA: PAGAMENTO BLOCKCHAIN */}
+{etapaCheckout === 'pagamento_blockchain' && (
+  <div className="flex-grow flex flex-col items-center justify-center text-center p-6 space-y-6">
+    <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center text-orange-600">
+      <i className="bi bi-wallet2 text-4xl"></i>
+    </div>
+    <div>
+      <h3 className="text-xl font-black text-gray-900 uppercase">Pagar com Cripto</h3>
+      <p className="text-xs text-gray-500 mt-2 font-bold">
+        Total: <span className="text-orange-600">R$ {totalGeral.toFixed(2)}</span>
+      </p>
+    </div>
+
+    {/* Aqui entra o componente que você já importou no topo */}
+    <div className="w-full">
+      <BotaoPagamentoWeb3 
+        valorTotal={totalGeral} 
+        pedidoId={dados.pedidoId} // ID que veio do Supabase
+        onSuccess={() => alert("Pagamento confirmado na rede!")}
+      />
+    </div>
+
+    <button 
+      onClick={() => setEtapaCheckout('dados')}
+      className="text-[10px] font-black uppercase text-gray-400 hover:text-orange-600 transition-all"
+    >
+      <i className="bi bi-arrow-left mr-2"></i> Voltar aos dados
+    </button>
+  </div>
+)}
 
                 {/* Rodapé do Checkout com Valor Final */}
                 <div className="mt-6 pt-6 border-t border-gray-50">
