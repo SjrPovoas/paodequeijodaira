@@ -36,6 +36,7 @@ export default function Loja() {
   const [dados, setDados] = useState({ 
     nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '', carteira_blockchain: '' });  
   const [frete, setFrete] = useState(0);
+   const [frete, setFrete] = useState(0); 
 
   // --- 2. CÁLCULOS OTIMIZADOS ---
   const subtotal = useMemo(() => {
@@ -129,94 +130,67 @@ export default function Loja() {
     setModalAberto(true);
   };
 
-  const remover = (idx) => setCarrinho(prev => prev.filter((_, i) => i !== idx));
+   const remover = (idx) => setCarrinho(prev => prev.filter((_, i) => i !== idx));
     
-  // --- 7. INTEGRAÇÃO SUPABASE E MERCADO PAGO ---
-  const processarPedidoFinal = async () => {
-  // 1. Validação de segurança: Impede o processo se dados básicos faltarem
-  if (!dados.nome || !dados.email || !dados.endereco || !dados.cep) {
-    alert("⚠️ Preencha todos os campos e calcule o frete antes de finalizar.");
-    return;
-  }
-
-  setLoading(true);
-
-  try {
-    // 2. Preparação dos dados para o banco
-    // Certifique-se de que 'totalGeral' já inclua o valor do frete no seu estado global
-    const valorDoFrete = parseFloat(frete) || 0;
-    const valorSubtotal = carrinho.reduce((acc, item) => acc + item.preco, 0);
-    const valorFinalComFrete = valorSubtotal + valorDoFrete;
-
-    // 3. Inserção no Supabase
-    const { data: pedidoSalvo, error: errorSupabase } = await supabase
-      .from('pedidos')
-      .insert([{
-        nome: dados.nome.toUpperCase(),
-        email: dados.email.toLowerCase(),
-        cpf: dados.cpf || null,
-        cep: dados.cep,
-        endereco: dados.endereco,
-        complemento: dados.complemento || "Sem complemento",
-        carteira_blockchain: dados.carteira_blockchain || null,
-        
-        // Dados Financeiros
-        total_geral: valorFinalComFrete,
-        valor_frete: valorDoFrete, // Certifique-se que esta coluna existe no Supabase
-        itens: carrinho, // Salva o array de objetos do carrinho
-        
-        // Controle de Status
-        metodo_pagamento: metodoSelecionado,
-        status_pagamento: 'Aguardando Pagamento',
-        data_pedido: new Date().toISOString()
-      }])
-      .select();
-
-    if (errorSupabase) {
-      console.error("Erro Supabase detalhado:", errorSupabase);
-      throw new Error(errorSupabase.message);
+   // --- 7. INTEGRAÇÃO SUPABASE E MERCADO PAGO ---
+   const processarPedidoFinal = async () => {
+    if (!dados.nome || !dados.email || !dados.endereco) {
+      alert("⚠️ Preencha os dados de contato e entrega.");
+      return;
     }
 
-    // 4. Recupera o ID do pedido gerado
-    const novoPedidoId = pedidoSalvo[0].id;
+    setLoading(true);
+    try {
+      const valorFrete = parseFloat(frete) || 0;
+      const subtotal = carrinho.reduce((acc, item) => acc + item.preco, 0);
+      const valorTotal = subtotal + valorFrete;
 
-    // 5. Fluxo de Redirecionamento baseado no Método
-    if (metodoSelecionado === 'mp') {
-      // Lógica para Mercado Pago
-      const response = await fetch('/api/checkout-mp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          pedidoId: novoPedidoId,
-          itens: carrinho,
+      const { data: pedidoSalvo, error: errorSupabase } = await supabase
+        .from('pedidos')
+        .insert([{
           nome: dados.nome,
           email: dados.email,
-          frete: valorDoFrete,
-          total: valorFinalComFrete
-        }),
-      });
+          cep: dados.cep,
+          endereco: dados.endereco,
+          complemento: dados.complemento,
+          itens: carrinho,
+          total_geral: valorTotal,
+          valor_frete: valorFrete,
+          metodo_pagamento: metodoSelecionado,
+          status_pagamento: 'Aguardando Pagamento'
+        }])
+        .select();
 
-      const resData = await response.json();
-      if (resData.init_point) {
-        window.location.href = resData.init_point;
+      if (errorSupabase) throw errorSupabase;
+
+      const novoPedidoId = pedidoSalvo[0].id;
+
+      if (metodoSelecionado === 'mp') {
+        const response = await fetch('/api/checkout-mp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            pedidoId: novoPedidoId,
+            itens: carrinho,
+            frete: valorFrete,
+            total: valorTotal,
+            email: dados.email
+          }),
+        });
+        const resData = await response.json();
+        if (resData.init_point) window.location.href = resData.init_point;
       } else {
-        throw new Error("Falha ao gerar link do Mercado Pago.");
+        // ESSENCIAL: Salva o ID e pula para a Etapa 4 (Blockchain)
+        setDados(prev => ({ ...prev, pedidoId: novoPedidoId }));
+        setEtapaCheckout('pagamento_blockchain');
       }
-
-    } else {
-      // Lógica para Pagamento Cripto
-      // Atualizamos o estado local para que o Modal mude para a tela da carteira
-      setDados(prev => ({ ...prev, pedidoId: novoPedidoId }));
-      setEtapaCheckout('pagamento_blockchain');
+    } catch (err) {
+      console.error(err);
+      alert("Erro: " + err.message);
+    } finally {
+      setLoading(false);
     }
-
-  } catch (err) {
-    console.error("Erro Crítico no Checkout:", err);
-    alert("❌ Erro ao salvar pedido: " + err.message);
-  } finally {
-    setLoading(false);
-  }
-};
+  };
     
   // Proteção de Hidratação
   if (!isMounted) return null;
@@ -615,63 +589,88 @@ export default function Loja() {
               </div>
             )}
 
-            {/* ETAPA 3: DADOS FINAIS */}
+            {/* ETAPA 3: DADOS FINAIS + ONBOARDING WEB3 */}
             {etapaCheckout === 'dados' && (
               <div className="flex-grow flex flex-col h-full overflow-hidden">
                 <div className="flex-grow space-y-4 overflow-y-auto pr-2 custom-scrollbar">
-                  <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
-                    <p className="text-[10px] font-bold text-gray-600 leading-tight">{dados.endereco} - CEP: {dados.cep}</p>
-                  </div>
+                  
+                  {/* Inputs de Dados Pessoais */}
                   <div className="space-y-3">
-                    <input type="text" placeholder="NOME COMPLETO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none" value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})} />
-                    <input type="email" placeholder="SEU MELHOR E-MAIL" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none" value={dados.email} onChange={e => setDados({...dados, email: e.target.value})} />
-                    {metodoSelecionado === 'mp' && (<input type="text" placeholder="CPF (PARA NOTA FISCAL)" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none" value={dados.cpf} onChange={e => setDados({...dados, cpf: e.target.value})} />)}
-                    <input type="text" placeholder="NÚMERO E COMPLEMENTO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none" value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})} />
+                    <input type="text" placeholder="NOME COMPLETO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})} />
+                    <input type="email" placeholder="E-MAIL" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.email} onChange={e => setDados({...dados, email: e.target.value})} />
+                    <input type="text" placeholder="COMPLEMENTO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})} />
                   </div>
-                  <div className="bg-orange-50 rounded-[32px] p-6 border border-orange-100">
-                    <p className="font-black uppercase text-[12px] text-gray-900 mb-4 text-center">NFT Genesis Reward (Opcional)</p>
-                    <input type="text" placeholder="CARTEIRA POLYGON (0x...)" value={dados.carteira_blockchain} onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})} className="w-full p-4 rounded-2xl text-[10px] font-mono outline-none shadow-inner" />
+
+                  {/* AJUDA WEB3 / ONBOARDING */}
+                  <div className="bg-orange-50 rounded-[32px] p-6 border border-orange-100 mt-4">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-xs font-black">?</div>
+                      <p className="font-black uppercase text-[11px] text-gray-900 tracking-widest">Ajuda com Carteira</p>
+                    </div>
+                    
+                    <input 
+                      type="text" 
+                      placeholder="CARTEIRA POLYGON (0x...)" 
+                      value={dados.carteira_blockchain} 
+                      onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})} 
+                      className="w-full p-4 rounded-xl text-[10px] font-mono outline-none shadow-inner mb-3"
+                    />
+
+                    <div className="space-y-3">
+                      <div className="flex gap-2">
+                        <i className="bi bi-info-circle text-orange-500 text-xs"></i>
+                        <p className="text-[9px] text-gray-500 font-bold leading-relaxed">
+                          <span className="text-orange-600 uppercase">O que é?</span> Use sua MetaMask ou Rainbow para receber recompensas exclusivas em NFT deste pedido.
+                        </p>
+                      </div>
+                      <div className="flex gap-2">
+                        <i className="bi bi-lightning-charge text-orange-500 text-xs"></i>
+                        <p className="text-[9px] text-gray-500 font-bold leading-relaxed">
+                          <span className="text-orange-600 uppercase">Taxas:</span> Na próxima tela, você pagará em POL. Tenha um pouco extra para a taxa de rede (gas).
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-gray-50">
-                  <div className="flex justify-between items-center mb-6">
+                {/* Footer Fixo da Etapa 3 */}
+                <div className="mt-6 pt-6 border-t border-gray-100">
+                  <div className="flex justify-between items-center mb-6 px-1">
                     <div>
-                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total com Frete</p>
-                      <p className="text-3xl font-black text-gray-900 italic">R$ {totalGeral.toFixed(2)}</p>
+                      <p className="text-[10px] font-black text-gray-400 uppercase">Total Geral</p>
+                      <p className="text-3xl font-black text-gray-900 italic">R$ { (carrinho.reduce((acc, item) => acc + item.preco, 0) + (parseFloat(frete) || 0)).toFixed(2) }</p>
                     </div>
+                    <p className="text-[10px] font-bold text-orange-600 uppercase bg-orange-50 px-3 py-1 rounded-full">Frete: R$ {parseFloat(frete).toFixed(2)}</p>
                   </div>
-                  <button onClick={processarPedidoFinal} disabled={loading || !dados.nome || !dados.email} className="w-full bg-black text-white py-6 rounded-[24px] font-black uppercase text-xs tracking-widest hover:bg-orange-600 transition-all">
-                    {loading ? 'Processando...' : 'Finalizar Pedido'}
+
+                  <button onClick={processarPedidoFinal} disabled={loading || !dados.nome} className="w-full bg-black text-white py-6 rounded-[24px] font-black uppercase text-xs tracking-widest hover:bg-orange-600 transition-all shadow-xl">
+                    {loading ? 'Processando...' : 'Ir para Pagamento'}
                   </button>
-                  <button onClick={() => setEtapaCheckout('metodo')} className="w-full py-4 text-[10px] font-black uppercase text-gray-300">Voltar ao Pagamento</button>
+                  <button onClick={() => setEtapaCheckout('metodo')} className="w-full py-4 text-[10px] font-black uppercase text-gray-300 mt-2">Alterar Método</button>
                 </div>
               </div>
             )}
 
-            {/* ETAPA 4: PAGAMENTO BLOCKCHAIN */}
+            {/* ETAPA 4: WEB3 CHECKOUT */}
             {etapaCheckout === 'pagamento_blockchain' && (
-              <div className="flex-grow flex flex-col items-center justify-center text-center p-6 space-y-8 animate-in zoom-in">
-                <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center text-orange-600">
+              <div className="flex-grow flex flex-col items-center justify-center text-center p-6 space-y-8 animate-in zoom-in duration-300">
+                <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 shadow-inner">
                   <i className="bi bi-wallet2 text-5xl"></i>
                 </div>
                 <div>
                   <h3 className="text-2xl font-black text-gray-900 uppercase italic">Aguardando POL</h3>
-                  <p className="text-xs text-gray-500 mt-2 font-bold px-4">Seu pedido foi registrado! Finalize a transferência.</p>
+                  <p className="text-xs text-gray-500 mt-2 font-bold px-4 leading-relaxed">
+                    Seu pedido foi registrado com sucesso! <br/>
+                    Agora, confirme a transação na sua carteira.
+                  </p>
                 </div>
                 <div className="w-full">
-                  <BotaoPagamentoWeb3 
-                    total={totalGeral} 
-                    pedidoId={dados.pedidoId} 
-                    onSuccess={() => window.location.href = "/sucesso"} 
-                  />
+                  <BotaoPagamentoWeb3 total={ (carrinho.reduce((acc, item) => acc + item.preco, 0) + (parseFloat(frete) || 0)) } 
+                    pedidoId={dados.pedidoId} onSuccess={() => window.location.href = "/sucesso"} />
                 </div>
-                <button onClick={() => setEtapaCheckout('dados')} className="text-[10px] font-black uppercase text-gray-400">Corrigir Dados</button>
+                <button onClick={() => setEtapaCheckout('dados')} className="text-[10px] font-black uppercase text-gray-400 hover:text-black transition-colors">Corrigir Dados</button>
               </div>
             )}
-          </div>
-        </div>
-      )}
 
      {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
