@@ -666,17 +666,16 @@ export default function Loja() {
 
     {/* Aqui entra o componente que você já importou no topo */}
     <div className="w-full">
-      <BotaoPagamentoWeb3 
-        valorTotal={totalGeral} 
-        pedidoId={dados.pedidoId} // ID que veio do Supabase
-        onSuccess={() => alert("Pagamento confirmado na rede!")}
-      />
-    </div>
-
+    <BotaoPagamentoWeb3 
+        total={totalGeral} pedidoId={dados.pedidoId} // Esse ID deve vir do pedidoSalvo[0].id
+        onSuccess={(hash) => { alert("🎉 Pagamento confirmado!");
+        window.location.href = "/sucesso";
+     }}
+    />
+   </div>
     <button 
       onClick={() => setEtapaCheckout('dados')}
-      className="text-[10px] font-black uppercase text-gray-400 hover:text-orange-600 transition-all"
-    >
+      className="text-[10px] font-black uppercase text-gray-400 hover:text-orange-600 transition-all" >
       <i className="bi bi-arrow-left mr-2"></i> Voltar aos dados
     </button>
   </div>
