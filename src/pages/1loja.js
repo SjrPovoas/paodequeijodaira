@@ -33,7 +33,7 @@ export default function Loja() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   // Estado unificado para dados do cliente
   const [dados, setDados] = useState({ 
-    nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '', carteira_blockchain: '' });  
+    nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '', carteira_blockchain: '',nft_item_id: '' });  
   const [frete, setFrete] = useState(0);
 
   // --- 2. CÁLCULOS OTIMIZADOS ---
@@ -71,8 +71,8 @@ export default function Loja() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-// --- 4. CÁLCULO DE CEP E FRETE ---
-  const handleCEP = async (v) => {
+   // --- 4. LÓGICA DE CEP E FRETE ---
+    const handleCEP = async (v) => {
     const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
     setDados(prev => ({ ...prev, cep: cepLimpo }));
     
@@ -120,79 +120,101 @@ export default function Loja() {
   };
 
   const remover = (idx) => setCarrinho(prev => prev.filter((_, i) => i !== idx));
-
-  // --- 6. INTEGRAÇÃO SUPABASE E MERCADO PAGO ---
+ 
+  // --- 6. VALIDAÇÃO ---
+  const validarCarteira = (address) => {
+    if (!address) return true;
+    return /^0x[a-fA-F0-9]{40}$/.test(address);
+  };
+    
+  // --- 7. INTEGRAÇÃO SUPABASE E MERCADO PAGO ---
 const processarPedidoFinal = async () => {
-    // Validação de campos obrigatórios
-    if (!dados.nome || !dados.email || !dados.endereco) {
-      alert("⚠️ Por favor, preencha todos os dados de entrega e contato.");
-      return;
+const processarPedidoFinal = async () => {
+  // 1. Validação de segurança: Impede o processo se dados básicos faltarem
+  if (!dados.nome || !dados.email || !dados.endereco || !dados.cep) {
+    alert("⚠️ Preencha todos os campos e calcule o frete antes de finalizar.");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    // 2. Preparação dos dados para o banco
+    // Certifique-se de que 'totalGeral' já inclua o valor do frete no seu estado global
+    const valorDoFrete = parseFloat(frete) || 0;
+    const valorSubtotal = carrinho.reduce((acc, item) => acc + item.preco, 0);
+    const valorFinalComFrete = valorSubtotal + valorDoFrete;
+
+    // 3. Inserção no Supabase
+    const { data: pedidoSalvo, error: errorSupabase } = await supabase
+      .from('pedidos')
+      .insert([{
+        nome: dados.nome.toUpperCase(),
+        email: dados.email.toLowerCase(),
+        cpf: dados.cpf || null,
+        cep: dados.cep,
+        endereco: dados.endereco,
+        complemento: dados.complemento || "Sem complemento",
+        carteira_blockchain: dados.carteira_blockchain || null,
+        
+        // Dados Financeiros
+        total_geral: valorFinalComFrete,
+        valor_frete: valorDoFrete, // Certifique-se que esta coluna existe no Supabase
+        itens: carrinho, // Salva o array de objetos do carrinho
+        
+        // Controle de Status
+        metodo_pagamento: metodoSelecionado,
+        status_pagamento: 'Aguardando Pagamento',
+        data_pedido: new Date().toISOString()
+      }])
+      .select();
+
+    if (errorSupabase) {
+      console.error("Erro Supabase detalhado:", errorSupabase);
+      throw new Error(errorSupabase.message);
     }
 
-    setLoading(true);
+    // 4. Recupera o ID do pedido gerado
+    const novoPedidoId = pedidoSalvo[0].id;
 
-    try {
-      // 1. SALVA O PEDIDO NO SUPABASE
-      const { data: pedidoSalvo, error: errorSupabase } = await supabase
-        .from('pedidos')
-        .insert([{
+    // 5. Fluxo de Redirecionamento baseado no Método
+    if (metodoSelecionado === 'mp') {
+      // Lógica para Mercado Pago
+      const response = await fetch('/api/checkout-mp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pedidoId: novoPedidoId,
+          itens: carrinho,
           nome: dados.nome,
           email: dados.email,
-          cpf: dados.cpf || null,
-          cep: dados.cep,
-          endereco: dados.endereco,
-          complemento: dados.complemento,
-          carteira_blockchain: dados.carteira_blockchain || null,
-          total_geral: totalGeral,
-          itens: carrinho,
-          metodo_pagamento: metodoSelecionado,
-          status_pagamento: 'Aguardando Pagamento'
-        }])
-        .select();
+          frete: valorDoFrete,
+          total: valorFinalComFrete
+        }),
+      });
 
-      if (errorSupabase) throw errorSupabase;
-
-      // Pegamos o ID gerado pelo banco de dados
-      const novoPedidoId = pedidoSalvo[0].id;
-
-      // 2. REDIRECIONAMENTO OU MUDANÇA DE ETAPA
-      if (metodoSelecionado === 'mp') {
-        // FLUXO MERCADO PAGO
-        const response = await fetch('/api/checkout-mp', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            itens: carrinho,
-            email: dados.email,
-            nome: dados.nome,
-            frete: frete,
-            cpf: dados.cpf,
-            pedidoId: novoPedidoId
-          }),
-        });
-
-        const resData = await response.json();
-        if (resData.init_point) {
-          window.location.href = resData.init_point;
-        } else {
-          throw new Error("Não foi possível gerar o link do Mercado Pago.");
-        }
-
+      const resData = await response.json();
+      if (resData.init_point) {
+        window.location.href = resData.init_point;
       } else {
-        // FLUXO CRIPTO: Atualiza o estado com o ID e muda a tela do modal
-        setDados(prev => ({ ...prev, pedidoId: novoPedidoId }));
-        setEtapaCheckout('pagamento_blockchain');
-        alert("🚀 Pedido registrado! Prossiga com o pagamento em POL.");
+        throw new Error("Falha ao gerar link do Mercado Pago.");
       }
 
-    } catch (err) {
-      console.error("Erro no checkout:", err);
-      alert("❌ Erro ao processar pedido: " + err.message);
-    } finally {
-      setLoading(false);
+    } else {
+      // Lógica para Pagamento Cripto
+      // Atualizamos o estado local para que o Modal mude para a tela da carteira
+      setDados(prev => ({ ...prev, pedidoId: novoPedidoId }));
+      setEtapaCheckout('pagamento_blockchain');
     }
-  };
 
+  } catch (err) {
+    console.error("Erro Crítico no Checkout:", err);
+    alert("❌ Erro ao salvar pedido: " + err.message);
+  } finally {
+    setLoading(false);
+  }
+};
+    
   // Proteção de Hidratação
   if (!isMounted) return null;
 
