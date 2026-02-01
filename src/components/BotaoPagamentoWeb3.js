@@ -12,8 +12,8 @@ export default function BotaoPagamentoWeb3({ total, pedidoId, onSuccess }) {
   const { switchChain } = useSwitchChain();
   const [loading, setLoading] = useState(false);
 
-  //  const REDE_CORRETA_ID = 137; // Polygon Mainnet
-  const REDE_CORRETA_ID = 80002; // Polygon Amoy Testnet
+  const REDE_CORRETA_ID = 137; // Polygon Mainnet
+//  const REDE_CORRETA_ID = 80002; // Polygon Amoy Testnet
   const CARTEIRA_DESTINO = "0x9523160C1cAf82358B9a6af332E47d6F5fDb02ac";
 
   const { sendTransactionAsync } = useSendTransaction();
@@ -47,7 +47,7 @@ export default function BotaoPagamentoWeb3({ total, pedidoId, onSuccess }) {
       console.log(`Enviando ${valorEmPOL} POL para ${CARTEIRA_DESTINO}`);
 
       // 2. DISPARA A CARTEIRA (Aqui é onde o MetaMask/Rainbow deve abrir)
-      const txHash = await sendTransactionAsync({
+      const txHash = await sendTra0x9523160C1cAf82358B9a6af332E47d6F5fDb02acr diansactionAsync({
         to: CARTEIRA_DESTINO,
         value: parseEther(valorEmPOL.toString()),
       });
