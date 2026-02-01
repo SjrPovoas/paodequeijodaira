@@ -589,89 +589,58 @@ export default function Loja() {
               </div>
             )}
 
-            {/* ETAPA 3: DADOS FINAIS + ONBOARDING WEB3 */}
+           {/* ETAPA 3: DADOS FINAIS */}
             {etapaCheckout === 'dados' && (
               <div className="flex-grow flex flex-col h-full overflow-hidden">
                 <div className="flex-grow space-y-4 overflow-y-auto pr-2 custom-scrollbar">
-                  
-                  {/* Inputs de Dados Pessoais */}
                   <div className="space-y-3">
                     <input type="text" placeholder="NOME COMPLETO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})} />
                     <input type="email" placeholder="E-MAIL" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.email} onChange={e => setDados({...dados, email: e.target.value})} />
                     <input type="text" placeholder="COMPLEMENTO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})} />
                   </div>
 
-                  {/* AJUDA WEB3 / ONBOARDING */}
-                  <div className="bg-orange-50 rounded-[32px] p-6 border border-orange-100 mt-4">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-xs font-black">?</div>
-                      <p className="font-black uppercase text-[11px] text-gray-900 tracking-widest">Ajuda com Carteira</p>
-                    </div>
-                    
-                    <input 
-                      type="text" 
-                      placeholder="CARTEIRA POLYGON (0x...)" 
-                      value={dados.carteira_blockchain} 
-                      onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})} 
-                      className="w-full p-4 rounded-xl text-[10px] font-mono outline-none shadow-inner mb-3"
-                    />
-
-                    <div className="space-y-3">
-                      <div className="flex gap-2">
-                        <i className="bi bi-info-circle text-orange-500 text-xs"></i>
-                        <p className="text-[9px] text-gray-500 font-bold leading-relaxed">
-                          <span className="text-orange-600 uppercase">O que é?</span> Use sua MetaMask ou Rainbow para receber recompensas exclusivas em NFT deste pedido.
-                        </p>
-                      </div>
-                      <div className="flex gap-2">
-                        <i className="bi bi-lightning-charge text-orange-500 text-xs"></i>
-                        <p className="text-[9px] text-gray-500 font-bold leading-relaxed">
-                          <span className="text-orange-600 uppercase">Taxas:</span> Na próxima tela, você pagará em POL. Tenha um pouco extra para a taxa de rede (gas).
-                        </p>
-                      </div>
-                    </div>
+                  <div className="bg-orange-50 rounded-[32px] p-6 border border-orange-100 mt-4 text-center">
+                    <p className="font-black uppercase text-[10px] text-gray-900 mb-3 tracking-widest">Recompensas Web3</p>
+                    <input type="text" placeholder="CARTEIRA POLYGON 0x..." value={dados.carteira_blockchain} onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})} className="w-full p-4 rounded-xl text-[10px] font-mono outline-none shadow-inner mb-2" />
+                    <button onClick={() => window.open('/faq-web3', '_blank')} className="text-[9px] font-black text-orange-600 uppercase underline">O que é isso? Saiba mais</button>
                   </div>
                 </div>
 
-                {/* Footer Fixo da Etapa 3 */}
                 <div className="mt-6 pt-6 border-t border-gray-100">
-                  <div className="flex justify-between items-center mb-6 px-1">
+                  <div className="flex justify-between items-center mb-6">
                     <div>
-                      <p className="text-[10px] font-black text-gray-400 uppercase">Total Geral</p>
-                      <p className="text-3xl font-black text-gray-900 italic">R$ { (carrinho.reduce((acc, item) => acc + item.preco, 0) + (parseFloat(frete) || 0)).toFixed(2) }</p>
+                      <p className="text-[10px] font-black text-gray-400 uppercase">Total</p>
+                      <p className="text-3xl font-black text-gray-900 italic text-orange-600">R$ {(carrinho.reduce((acc, item) => acc + item.preco, 0) + (parseFloat(frete) || 0)).toFixed(2)}</p>
                     </div>
-                    <p className="text-[10px] font-bold text-orange-600 uppercase bg-orange-50 px-3 py-1 rounded-full">Frete: R$ {parseFloat(frete).toFixed(2)}</p>
                   </div>
-
-                  <button onClick={processarPedidoFinal} disabled={loading || !dados.nome} className="w-full bg-black text-white py-6 rounded-[24px] font-black uppercase text-xs tracking-widest hover:bg-orange-600 transition-all shadow-xl">
-                    {loading ? 'Processando...' : 'Ir para Pagamento'}
+                  <button onClick={processarPedidoFinal} disabled={loading} className="w-full bg-black text-white py-6 rounded-[24px] font-black uppercase text-xs tracking-widest hover:bg-orange-600 transition-all">
+                    {loading ? 'Processando...' : 'Finalizar Pedido'}
                   </button>
-                  <button onClick={() => setEtapaCheckout('metodo')} className="w-full py-4 text-[10px] font-black uppercase text-gray-300 mt-2">Alterar Método</button>
                 </div>
               </div>
             )}
 
-            {/* ETAPA 4: WEB3 CHECKOUT */}
+            {/* ETAPA 4: PAGAMENTO BLOCKCHAIN */}
             {etapaCheckout === 'pagamento_blockchain' && (
               <div className="flex-grow flex flex-col items-center justify-center text-center p-6 space-y-8 animate-in zoom-in duration-300">
-                <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 shadow-inner">
+                <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center text-orange-600">
                   <i className="bi bi-wallet2 text-5xl"></i>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-black text-gray-900 uppercase italic">Aguardando POL</h3>
-                  <p className="text-xs text-gray-500 mt-2 font-bold px-4 leading-relaxed">
-                    Seu pedido foi registrado com sucesso! <br/>
-                    Agora, confirme a transação na sua carteira.
-                  </p>
-                </div>
+                <h3 className="text-2xl font-black text-gray-900 uppercase italic">Aguardando POL</h3>
                 <div className="w-full">
-                  <BotaoPagamentoWeb3 total={ (carrinho.reduce((acc, item) => acc + item.preco, 0) + (parseFloat(frete) || 0)) } 
-                    pedidoId={dados.pedidoId} onSuccess={() => window.location.href = "/sucesso"} />
+                  <BotaoPagamentoWeb3 
+                    total={(carrinho.reduce((acc, item) => acc + item.preco, 0) + (parseFloat(frete) || 0))} 
+                    pedidoId={dados.pedidoId} 
+                    onSuccess={() => window.location.href = "/sucesso"} 
+                  />
                 </div>
-                <button onClick={() => setEtapaCheckout('dados')} className="text-[10px] font-black uppercase text-gray-400 hover:text-black transition-colors">Corrigir Dados</button>
+                <button onClick={() => setEtapaCheckout('dados')} className="text-[10px] font-black uppercase text-gray-400">Voltar</button>
               </div>
             )}
-
+          </div>
+        </div>  
+      )}       
+    
      {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
@@ -720,7 +689,7 @@ export default function Loja() {
         <i className="bi bi-arrow-up text-xl"></i>
       </button>
 
-<style jsx>{`
+      <style jsx>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 4px;
         }
