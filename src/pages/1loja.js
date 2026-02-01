@@ -6,6 +6,7 @@ import { supabase } from '../lib/supabaseClient';
 import BotaoPagamentoWeb3 from '../components/BotaoPagamentoWeb3';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
+import { isAddress } from 'viem';
 
 // --- DEFINIÇÃO DO CATÁLOGO DE PRODUTOS ---
 export const produtos = [
@@ -71,13 +72,16 @@ export default function Loja() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-    // --- X. VALIDAÇÃO ---
-    const validarCarteira = (address) => {
-    if (!address) return true;
-    return /^0x[a-fA-F0-9]{40}$/.test(address);
+    // --- 4. VALIDAÇÃO DE CARTEIRA CRIPTO ---
+    // Ou usando Regex se preferir não importar nada extra:
+    const validarEnderecoCrypto = (endereco) => {
+    if (!endereco) return false;
+    // Verifica se começa com 0x e tem 42 caracteres hexadecimais
+    const regexHex = /^0x[a-fA-F0-9]{40}$/;
+    return regexHex.test(endereco);
   };
 
-   // --- 4. LÓGICA DE CEP E FRETE ---
+   // --- 5. LÓGICA DE CEP E FRETE ---
     const handleCEP = async (v) => {
     const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
     setDados(prev => ({ ...prev, cep: cepLimpo }));
@@ -108,7 +112,7 @@ export default function Loja() {
     }
   };
       
-  // --- 5. GESTÃO DO CARRINHO ---
+  // --- 6. GESTÃO DO CARRINHO ---
   const add = (p, tam = null) => {
     if (p.category === 'vestuario' && !tam) {
       alert('⚠️ Por favor, selecione um tamanho antes de adicionar.');
