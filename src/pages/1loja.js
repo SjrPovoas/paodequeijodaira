@@ -122,8 +122,7 @@ export default function Loja() {
   const remover = (idx) => setCarrinho(prev => prev.filter((_, i) => i !== idx));
     
   // --- 7. INTEGRAÇÃO SUPABASE E MERCADO PAGO ---
-const processarPedidoFinal = async () => {
-const processarPedidoFinal = async () => {
+  const processarPedidoFinal = async () => {
   // 1. Validação de segurança: Impede o processo se dados básicos faltarem
   if (!dados.nome || !dados.email || !dados.endereco || !dados.cep) {
     alert("⚠️ Preencha todos os campos e calcule o frete antes de finalizar.");
