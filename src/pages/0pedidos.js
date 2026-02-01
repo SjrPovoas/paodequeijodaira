@@ -1,172 +1,142 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import { supabase } from '../lib/supabaseClient';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 export default function MeusPedidos() {
-    const [cpf, setCpf] = useState('');
+    const [busca, setBusca] = useState({ cpf: '', pedidoId: '', hash: '' });
     const [pedidos, setPedidos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [erro, setErro] = useState('');
-    const router = useRouter();
-    const { id } = router.query; // Permite buscar um pedido específico vindo do e-mail
+    const [tipoBusca, setTipoBusca] = useState('comum'); // 'comum' ou 'web3'
 
-    // Se o cliente vier direto do link do e-mail (api/send-email)
-    useEffect(() => {
-        if (id) {
-            buscarPedidoPorId(id);
-        }
-    }, [id]);
-
-    async function buscarPedidoPorId(orderId) {
-        setLoading(true);
-        const { data, error } = await supabase
-            .from('pedidos')
-            .select('*')
-            .eq('id', orderId)
-            .single();
-        
-        if (data) setPedidos([data]);
-        setLoading(false);
-    }
-
-    const buscarPorCpf = async (e) => {
+    const buscarPedido = async (e) => {
         e.preventDefault();
         setLoading(true);
         setErro('');
-        const cpfLimpo = cpf.replace(/\D/g, "");
+        setPedidos([]);
 
-        if (cpfLimpo.length < 11) {
-            setErro("Digite um CPF válido.");
-            setLoading(false);
-            return;
-        }
+        try {
+            let query = supabase.from('pedidos').select('*');
 
-        const { data, error } = await supabase
-            .from('pedidos')
-            .select('*')
-            .or(`cpf.eq.${cpfLimpo},cpf.eq.${cpf}`)
-            .order('created_at', { ascending: false });
+            if (tipoBusca === 'comum') {
+                const cpfLimpo = busca.cpf.replace(/\D/g, "");
+                if (cpfLimpo.length < 11 || !busca.pedidoId) {
+                    throw new Error("Informe o CPF e o Número do Pedido corretamente.");
+                }
+                // SEGURANÇA LGPD: O filtro exige que AMBOS os campos coincidam
+                query = query
+                    .eq('cpf', cpfLimpo)
+                    .ilike('id', `%${busca.pedidoId}%`); // Busca parcial do ID para facilitar
+            } else {
+                if (!busca.hash) throw new Error("Informe a Hash da transação.");
+                query = query.eq('hash_transacao', busca.hash);
+            }
 
-        if (error || !data.length) {
-            setErro('Nenhum pedido encontrado para este CPF.');
-        } else {
+            const { data, error } = await query;
+
+            if (error || !data || data.length === 0) {
+                throw new Error("Pedido não encontrado. Verifique os dados informados.");
+            }
+
             setPedidos(data);
+        } catch (err) {
+            setErro(err.message);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     return (
-        <div className="min-h-screen bg-[#FDFDFD] font-sans text-gray-900 p-4 md:p-10">
+        <div className="min-h-screen bg-[#FDFDFD] font-sans text-gray-900 p-6">
             <Head>
-                <title>Meus Pedidos | Lifestyle</title>
+                <title>Rastreio Seguro | Lifestyle</title>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
             </Head>
 
-            <div className="max-w-3xl mx-auto">
-                {/* HEADER VOLTAR */}
-                <div className="flex justify-between items-center mb-12">
-                    <Link href="/loja" className="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-orange-600 transition-all flex items-center gap-2">
-                        <i className="bi bi-arrow-left"></i> Voltar à Loja
-                    </Link>
-                    <div className="bg-black text-white px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter">
-                        Lifestyle <span className="text-orange-500 text-lg">.</span>
-                    </div>
+            <div className="max-w-xl mx-auto pt-10">
+                <div className="text-center mb-10">
+                    <h1 className="text-4xl font-black uppercase italic tracking-tighter mb-4">Rastreio <span className="text-orange-600">Seguro</span></h1>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Proteção de dados conforme LGPD</p>
                 </div>
 
-                {/* TÍTULO & BUSCA */}
-                <div className="text-center mb-12">
-                    <h1 className="text-5xl font-black uppercase italic tracking-tighter mb-4">
-                        Meus <span className="text-orange-600">Pedidos</span>
-                    </h1>
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-8">Consulte o status e rastreio da sua compra</p>
+                {/* SELETOR DE TIPO DE BUSCA */}
+                <div className="flex bg-gray-100 p-1 rounded-2xl mb-8">
+                    <button 
+                        onClick={() => setTipoBusca('comum')}
+                        className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${tipoBusca === 'comum' ? 'bg-white shadow-sm text-black' : 'text-gray-400'}`}
+                    >
+                        CPF + Pedido
+                    </button>
+                    <button 
+                        onClick={() => setTipoBusca('web3')}
+                        className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${tipoBusca === 'web3' ? 'bg-white shadow-sm text-purple-600' : 'text-gray-400'}`}
+                    >
+                        Hash Web3
+                    </button>
+                </div>
 
-                    <form onSubmit={buscarPorCpf} className="max-w-md mx-auto relative group">
+                {/* FORMULÁRIO DE BUSCA */}
+                <form onSubmit={buscarPedido} className="space-y-4 bg-white p-8 rounded-[40px] border border-gray-100 shadow-xl shadow-gray-200/50 mb-12">
+                    {tipoBusca === 'comum' ? (
+                        <>
+                            <input 
+                                type="text" placeholder="CPF do Comprador"
+                                value={busca.cpf} onChange={e => setBusca({...busca, cpf: e.target.value})}
+                                className="w-full bg-gray-50 rounded-2xl p-4 font-bold outline-none focus:ring-2 focus:ring-orange-500/20 transition-all"
+                            />
+                            <input 
+                                type="text" placeholder="Número do Pedido (Ex: #8a2f)"
+                                value={busca.pedidoId} onChange={e => setBusca({...busca, pedidoId: e.target.value})}
+                                className="w-full bg-gray-50 rounded-2xl p-4 font-bold outline-none focus:ring-2 focus:ring-orange-500/20 transition-all"
+                            />
+                        </>
+                    ) : (
                         <input 
-                            type="text"
-                            placeholder="Digite seu CPF"
-                            value={cpf}
-                            onChange={(e) => setCpf(e.target.value)}
-                            className="w-full bg-white border border-gray-100 rounded-3xl p-5 pr-14 font-bold text-gray-700 shadow-xl shadow-gray-100/40 outline-none focus:ring-4 focus:ring-orange-500/5 transition-all"
+                            type="text" placeholder="Cole sua Transaction Hash (0x...)"
+                            value={busca.hash} onChange={e => setBusca({...busca, hash: e.target.value})}
+                            className="w-full bg-gray-50 rounded-2xl p-4 font-bold outline-none focus:ring-2 focus:ring-purple-500/20 transition-all font-mono text-sm"
                         />
-                        <button type="submit" className="absolute right-3 top-3 bottom-3 bg-black text-white w-12 rounded-2xl flex items-center justify-center hover:bg-orange-600 transition-all">
-                            {loading ? <i className="bi bi-hourglass-split animate-spin"></i> : <i className="bi bi-search"></i>}
-                        </button>
-                    </form>
-                    {erro && <p className="mt-4 text-red-500 font-bold text-[9px] uppercase tracking-widest">{erro}</p>}
-                </div>
+                    )}
+                    
+                    <button type="submit" disabled={loading} className="w-full bg-black text-white py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-orange-600 transition-all">
+                        {loading ? 'Validando Dados...' : 'Verificar Status'}
+                    </button>
+                    {erro && <p className="text-center text-red-500 text-[9px] font-bold uppercase tracking-widest">{erro}</p>}
+                </form>
 
-                {/* LISTAGEM DE PEDIDOS */}
+                {/* RESULTADO (EXIBIÇÃO SEGURA) */}
                 <div className="space-y-6">
                     {pedidos.map((pedido) => (
-                        <div key={pedido.id} className="bg-white border border-gray-50 rounded-[40px] p-8 shadow-sm hover:shadow-xl transition-all animate-in fade-in slide-in-from-bottom-4 duration-500">
-                            
-                            {/* STATUS & DATA */}
-                            <div className="flex flex-col md:flex-row justify-between border-b border-gray-50 pb-6 mb-6 gap-4">
-                                <div>
-                                    <span className="text-[9px] font-black uppercase tracking-widest text-gray-300">Status Atual</span>
-                                    <div className="flex items-center gap-2">
-                                        <div className={`w-2 h-2 rounded-full ${pedido.status_pagamento.includes('Pago') ? 'bg-green-500 animate-pulse' : 'bg-orange-500'}`}></div>
-                                        <h2 className="text-xl font-black uppercase italic text-gray-800">{pedido.status_pagamento}</h2>
-                                    </div>
-                                </div>
-                                <div className="md:text-right">
-                                    <span className="text-[9px] font-black uppercase tracking-widest text-gray-300">Ordem de Compra</span>
-                                    <p className="font-bold text-sm text-gray-500">#{pedido.id.slice(0, 8).toUpperCase()}</p>
-                                </div>
+                        <div key={pedido.id} className="bg-white border-2 border-orange-500/10 rounded-[40px] p-8 animate-in fade-in slide-in-from-bottom-4">
+                            <div className="flex justify-between items-center mb-6">
+                                <span className="text-[9px] font-black uppercase bg-orange-100 text-orange-600 px-4 py-1 rounded-full">Status: {pedido.status_pagamento}</span>
+                                <span className="text-[9px] font-bold text-gray-400">ID: {pedido.id.slice(0, 8)}</span>
                             </div>
 
-                            {/* BARRA DE PROGRESSO */}
-                            <div className="relative h-1 bg-gray-100 rounded-full mb-10 flex items-center">
-                                <div className={`h-full bg-orange-600 rounded-full transition-all duration-1000 ${
-                                    pedido.status_pagamento.includes('Pago') ? 'w-1/3' : 
-                                    pedido.status_pagamento === 'Enviado' ? 'w-2/3' : 
-                                    pedido.status_pagamento === 'Entregue' ? 'w-full' : 'w-[10%]'
-                                }`}></div>
-                                <div className="absolute w-full flex justify-between px-0">
-                                    <div className="w-3 h-3 rounded-full bg-orange-600 border-2 border-white shadow-sm"></div>
-                                    <div className={`w-3 h-3 rounded-full border-2 border-white shadow-sm ${pedido.status_pagamento === 'Enviado' || pedido.status_pagamento === 'Entregue' ? 'bg-orange-600' : 'bg-gray-200'}`}></div>
-                                    <div className={`w-3 h-3 rounded-full border-2 border-white shadow-sm ${pedido.status_pagamento === 'Entregue' ? 'bg-orange-600' : 'bg-gray-200'}`}></div>
-                                </div>
+                            <div className="space-y-4 mb-8">
+                                <p className="text-sm font-bold text-gray-700">Olá, {pedido.nome.split(' ')[0]}!</p>
+                                <p className="text-xs text-gray-500 leading-relaxed">Seu pacote está sendo processado. Abaixo você encontra o link oficial de rastreio.</p>
                             </div>
 
-                            {/* INFO DE LOGÍSTICA */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
-                                <div className="bg-gray-50 rounded-3xl p-6 border border-gray-100">
-                                    <p className="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-2">Código de Rastreio</p>
-                                    <div className="flex items-center gap-3">
-                                        <i className="bi bi-truck text-orange-600 text-xl"></i>
-                                        <span className="font-mono font-bold text-sm text-gray-700">
-                                            {pedido.rastreio_codigo || 'Preparando para envio'}
-                                        </span>
-                                    </div>
+                            {pedido.rastreio_codigo ? (
+                                <a 
+                                    href={`https://www.melhorenvio.com.br/rastreio/${pedido.rastreio_codigo}`}
+                                    target="_blank" rel="noopener noreferrer"
+                                    className="block w-full text-center bg-gray-50 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-black hover:text-white transition-all"
+                                >
+                                    Abrir Rastreio Oficial ↗
+                                </a>
+                            ) : (
+                                <div className="p-4 bg-gray-50 rounded-2xl text-center">
+                                    <p className="text-[9px] font-black text-gray-400 uppercase">Aguardando Postagem pela Logística</p>
                                 </div>
-
-                                {pedido.rastreio_codigo && (
-                                    <a 
-                                        href={`https://www.melhorenvio.com.br/rastreio/${pedido.rastreio_codigo}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="w-full bg-black text-white text-center py-5 rounded-3xl font-black uppercase text-[10px] tracking-widest hover:bg-orange-600 transition-all shadow-lg shadow-gray-200"
-                                    >
-                                        Rastrear Objeto ↗
-                                    </a>
-                                )}
-                            </div>
+                            )}
                         </div>
                     ))}
-                </div>
-
-                {/* SUPORTE RÁPIDO */}
-                <div className="mt-16 p-8 border border-dashed border-gray-200 rounded-[40px] text-center">
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Problemas com o pedido?</p>
-                    <a href="https://wa.me/SEUNUMERO" className="inline-flex items-center gap-2 text-xs font-black uppercase text-gray-800 hover:text-orange-600 transition-all">
-                        <i className="bi bi-whatsapp"></i> Chamar suporte da Irá
-                    </a>
                 </div>
             </div>
         </div>
     );
-                      }
+                            }
