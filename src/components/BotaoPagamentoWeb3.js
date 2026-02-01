@@ -18,55 +18,32 @@ export default function BotaoPagamentoWeb3({ total, pedidoId, onSuccess }) {
   const { sendTransactionAsync } = useSendTransaction();
 
   const handlePagamentoCripto = async () => {
-    if (!isConnected) {
-      alert("⚠️ Conecte sua carteira primeiro.");
-      return;
-    }
-    
-    if (chainId !== REDE_CORRETA_ID) {
-      alert("🔄 Mudando para a rede Polygon...");
-      switchChain({ chainId: REDE_CORRETA_ID });
-      return;
-    }
-
-    if (!pedidoId) {
-      alert("❌ Erro: ID do pedido não encontrado.");
+    // Verificação forçada de endereço
+    if (!address) {
+      alert("Sua carteira parece desconectada. Clique em 'Conectar' no topo do site.");
       return;
     }
 
     setLoading(true);
-
     try {
-      // Valor fixo de conversão (ajustável conforme mercado)
+      // Força a atualização do estado da rede antes de enviar
+      if (chainId !== REDE_CORRETA_ID) {
+        await switchChain({ chainId: REDE_CORRETA_ID });
+        setLoading(false); // Para o loading para o usuário clicar de novo após trocar
+        return;
+      }
+
       const precoPOL = 2.50; 
       const valorEmPOL = (total / precoPOL).toFixed(6);
 
-      // A LINHA QUE ESTAVA COM ERRO FOI CORRIGIDA ABAIXO:
-      const txHash = await sendTransactionAsync({
+      // Chamada direta que DEVE abrir a MetaMask
+      const tx = await sendTransactionAsync({
         to: CARTEIRA_DESTINO,
-        value: parseEther(valorEmPOL.toString()),
+        value: parseEther(valorEmPOL),
       });
 
-      // Atualiza o status no Supabase
-      const { error } = await supabase
-        .from('pedidos')
-        .update({ 
-          status_pagamento: 'Pago via Cripto', 
-          hash_transacao: txHash 
-        })
-        .eq('id', pedidoId);
-
-      if (error) throw error;
-
-      onSuccess(txHash);
-
-    } catch (err) {
-      console.error("Erro no pagamento:", err);
-      alert("Falha: " + (err.shortMessage || err.message || "Erro na transação."));
-    } finally {
-      setLoading(false);
-    }
-  };
+      console.log("Sucesso! Hash:", tx);
+  
 
   return (
     <button
