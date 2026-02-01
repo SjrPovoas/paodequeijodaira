@@ -11,7 +11,6 @@ export default function AdminTrocas() {
     const [filtro, setFiltro] = useState('Pendente');
     const router = useRouter();
 
-    // PROTEÇÃO DE ROTA: Apenas o seu e-mail acessa
     useEffect(() => {
         const checkAdmin = async () => {
             const { data: { session } } = await supabase.auth.getSession();
@@ -24,7 +23,6 @@ export default function AdminTrocas() {
         checkAdmin();
     }, [router]);
 
-    // BUSCA DADOS NO SUPABASE (Tabela: trocas)
     async function fetchTrocas() {
         setLoading(true);
         const { data, error } = await supabase
@@ -36,7 +34,6 @@ export default function AdminTrocas() {
         setLoading(false);
     }
 
-    // ATUALIZA STATUS (Autorizado / Recusado)
     const handleStatus = async (id, novoStatus) => {
         const { error } = await supabase
             .from('trocas')
@@ -46,72 +43,72 @@ export default function AdminTrocas() {
         if (!error) fetchTrocas();
     };
 
-    const handleSair = async () => {
-        await supabase.auth.signOut();
-        router.push('/admin/login');
-    };
-
     return (
-        <div className="min-h-screen bg-[#F3F4F6] font-sans text-black flex flex-col selection:bg-orange-200">
+        <div className="min-h-screen bg-[#FDFDFD] font-sans text-gray-900 flex flex-col selection:bg-orange-200">
             <Head>
                 <title>Gestão de Trocas | Admin</title>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
             </Head>
 
-            {/* HEADER SIMPLES */}
-            <header className="bg-black text-white p-6 border-b-[8px] border-orange-600 sticky top-0 z-[100]">
-                <h1 className="text-xl font-black uppercase italic tracking-tighter">
-                    Trocas & <span className="text-orange-600">Devoluções</span>
-                </h1>
+            {/* NAVBAR SUPERIOR CONECTADA */}
+            <header className="bg-black text-white p-6 sticky top-0 z-[100] flex justify-between items-center shadow-xl">
+                <div className="flex items-center gap-4">
+                    <h1 className="text-xl font-black uppercase italic tracking-tighter">
+                        Painel <span className="text-orange-600">Admin</span>
+                    </h1>
+                    <nav className="hidden md:flex bg-white/10 rounded-full p-1 ml-4">
+                        <button onClick={() => router.push('/admin/vendas')} className="px-6 py-2 rounded-full text-[10px] font-black uppercase transition-all hover:bg-white/20">Vendas</button>
+                        <button className="px-6 py-2 rounded-full text-[10px] font-black uppercase bg-orange-600">Trocas</button>
+                    </nav>
+                </div>
+                <div className="flex items-center gap-3">
+                    <span className="text-[9px] font-bold text-gray-400 mr-2 hidden sm:block">sjrpovoas@gmail.com</span>
+                    <button onClick={async () => { await supabase.auth.signOut(); router.push('/admin/login'); }} className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-full transition-all">
+                        <i className="bi bi-power px-1"></i>
+                    </button>
+                </div>
             </header>
 
-            {/* MENU ADMIN FIXO NO TOPO DIREITO */}
-            <div className="fixed top-4 right-4 z-[110] flex items-center bg-black border-[3px] border-black shadow-[6px_6px_0px_0px_rgba(234,88,12,1)]">
-                <button onClick={() => router.push('/admin/vendas')} className="px-4 py-3 flex items-center gap-2 border-r-2 border-white/10 text-gray-400 hover:text-white">
-                    <i className="bi bi-cart-check-fill"></i>
-                    <span className="text-[9px] font-black uppercase hidden md:block">Vendas</span>
-                </button>
-                <button className="px-4 py-3 flex items-center gap-2 border-r-2 border-white/10 bg-orange-600 text-white">
-                    <i className="bi bi-arrow-left-right"></i>
-                    <span className="text-[9px] font-black uppercase hidden md:block">Trocas</span>
-                </button>
-                <button onClick={handleSair} className="px-4 py-3 bg-red-600 text-white flex items-center gap-2">
-                    <i className="bi bi-power"></i>
-                    <span className="text-[9px] font-black uppercase hidden md:block">Sair</span>
-                </button>
-            </div>
+            <main className="p-4 md:p-10 max-w-5xl mx-auto w-full flex-grow">
+                <div className="mb-12">
+                    <h2 className="text-4xl font-black uppercase italic tracking-tighter text-gray-900">Trocas & <span className="text-orange-600">Devoluções</span></h2>
+                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-2">Gerencie solicitações de suporte e logística reversa</p>
+                </div>
 
-            <main className="p-4 md:p-10 max-w-6xl mx-auto w-full flex-grow">
-                {/* FILTROS */}
-                <div className="flex gap-4 mb-10 overflow-x-auto pb-4">
+                {/* FILTROS SOFT */}
+                <div className="flex gap-3 mb-10 overflow-x-auto pb-2">
                     {['Pendente', 'Autorizado', 'Recusado'].map((f) => (
                         <button key={f} onClick={() => setFiltro(f)} 
-                                className={`px-6 py-2 font-black uppercase text-[10px] border-4 transition-all ${filtro === f ? 'bg-black text-white border-black shadow-[4px_4px_0px_0px_rgba(234,88,12,1)]' : 'bg-white border-gray-200 text-gray-400'}`}>
+                                className={`px-8 py-3 rounded-full font-black uppercase text-[10px] tracking-widest border transition-all shadow-sm ${filtro === f ? 'bg-black text-white border-black' : 'bg-white border-gray-100 text-gray-400 hover:border-orange-300'}`}>
                             {f}
                         </button>
                     ))}
                 </div>
 
                 {loading ? (
-                    <div className="text-center py-20 font-black uppercase italic animate-pulse">Carregando...</div>
+                    <div className="text-center py-20 animate-pulse font-black text-orange-600 uppercase tracking-widest">Sincronizando Banco de Dados...</div>
                 ) : (
-                    <div className="grid grid-cols-1 gap-8">
+                    <div className="grid grid-cols-1 gap-6">
                         {trocas.filter(t => t.status === filtro).map((troca) => (
-                            <div key={troca.id} className="bg-white border-[6px] border-black p-6 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
-                                <div className="flex justify-between items-start mb-6">
+                            <div key={troca.id} className="bg-white border border-gray-100 p-8 rounded-[40px] shadow-sm hover:shadow-xl transition-all group">
+                                <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-6">
                                     <div>
-                                        <h2 className="text-xl font-black uppercase italic">{troca.cliente_email}</h2>
-                                        <p className="text-[10px] font-bold text-gray-400 uppercase">Pedido: {troca.pedido_id}</p>
+                                        <h3 className="text-xl font-black uppercase italic text-gray-800">{troca.cliente_email}</h3>
+                                        <p className="text-[10px] font-bold text-orange-600 uppercase tracking-tighter mt-1">ID DO PEDIDO: #{troca.pedido_id?.slice(0,8)}</p>
                                     </div>
-                                    <span className="bg-black text-white px-3 py-1 text-[9px] font-black uppercase italic">{troca.motivo}</span>
+                                    <span className="bg-orange-50 text-orange-600 px-4 py-2 rounded-full text-[10px] font-black uppercase italic border border-orange-100">
+                                        Motivo: {troca.motivo}
+                                    </span>
                                 </div>
-                                <div className="bg-gray-50 border-l-8 border-black p-4 mb-6">
-                                    <p className="text-sm italic">"{troca.descricao}"</p>
+                                
+                                <div className="bg-gray-50 rounded-[24px] p-6 mb-8 border border-gray-100">
+                                    <p className="text-sm font-medium text-gray-600 italic leading-relaxed">"{troca.descricao}"</p>
                                 </div>
+
                                 {troca.status === 'Pendente' && (
-                                    <div className="flex gap-4">
-                                        <button onClick={() => handleStatus(troca.id, 'Autorizado')} className="bg-green-500 text-white px-6 py-2 font-black text-[10px] border-2 border-black">Autorizar</button>
-                                        <button onClick={() => handleStatus(troca.id, 'Recusado')} className="bg-red-500 text-white px-6 py-2 font-black text-[10px] border-2 border-black">Recusar</button>
+                                    <div className="flex gap-3">
+                                        <button onClick={() => handleStatus(troca.id, 'Autorizado')} className="flex-1 bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all shadow-lg shadow-green-100">Autorizar</button>
+                                        <button onClick={() => handleStatus(troca.id, 'Recusado')} className="flex-1 bg-white border border-red-200 text-red-500 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-red-50 transition-all">Recusar</button>
                                     </div>
                                 )}
                             </div>
@@ -121,4 +118,4 @@ export default function AdminTrocas() {
             </main>
         </div>
     );
-                                    }
+}
