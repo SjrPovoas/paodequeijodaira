@@ -7,54 +7,47 @@ import { parseEther } from 'viem';
 import { supabase } from '../lib/supabaseClient';
 
 export default function BotaoPagamentoWeb3({ total, pedidoId, onSuccess }) {
-  const { isConnected, address } = useAccount();
+  const { isConnected } = useAccount();
   const chainId = useChainId();
   const { switchChain } = useSwitchChain();
   const [loading, setLoading] = useState(false);
 
   const REDE_CORRETA_ID = 137; // Polygon Mainnet
-//  const REDE_CORRETA_ID = 80002; // Polygon Amoy Testnet
   const CARTEIRA_DESTINO = "0x9523160C1cAf82358B9a6af332E47d6F5fDb02ac";
 
   const { sendTransactionAsync } = useSendTransaction();
 
   const handlePagamentoCripto = async () => {
-    console.log("Iniciando pagamento...", { isConnected, chainId, pedidoId, total });
-
     if (!isConnected) {
-      alert("⚠️ Carteira não conectada. Por favor, conecte via RainbowKit.");
+      alert("⚠️ Conecte sua carteira primeiro.");
       return;
     }
     
     if (chainId !== REDE_CORRETA_ID) {
-      alert("🔄 Alterando rede para Polygon...");
+      alert("🔄 Mudando para a rede Polygon...");
       switchChain({ chainId: REDE_CORRETA_ID });
       return;
     }
 
     if (!pedidoId) {
-      alert("❌ Erro técnico: ID do pedido não encontrado no estado.");
+      alert("❌ Erro: ID do pedido não encontrado.");
       return;
     }
 
     setLoading(true);
 
     try {
-      // 1. Busca cotação (ou usa fixo para teste rápido)
-      const precoPOL = 2.50; // Ajuste conforme a cotação
+      // Valor fixo de conversão (ajustável conforme mercado)
+      const precoPOL = 2.50; 
       const valorEmPOL = (total / precoPOL).toFixed(6);
-      
-      console.log(`Enviando ${valorEmPOL} POL para ${CARTEIRA_DESTINO}`);
 
-      // 2. DISPARA A CARTEIRA (Aqui é onde o MetaMask/Rainbow deve abrir)
-      const txHash = await sendTra0x9523160C1cAf82358B9a6af332E47d6F5fDb02acr diansactionAsync({
+      // A LINHA QUE ESTAVA COM ERRO FOI CORRIGIDA ABAIXO:
+      const txHash = await sendTransactionAsync({
         to: CARTEIRA_DESTINO,
         value: parseEther(valorEmPOL.toString()),
       });
 
-      console.log("Transação assinada! Hash:", txHash);
-
-      // 3. ATUALIZA O SUPABASE
+      // Atualiza o status no Supabase
       const { error } = await supabase
         .from('pedidos')
         .update({ 
@@ -68,8 +61,8 @@ export default function BotaoPagamentoWeb3({ total, pedidoId, onSuccess }) {
       onSuccess(txHash);
 
     } catch (err) {
-      console.error("Erro detalhado:", err);
-      alert("Falha no pagamento: " + (err.shortMessage || err.message || "Usuário cancelou ou saldo insuficiente."));
+      console.error("Erro no pagamento:", err);
+      alert("Falha: " + (err.shortMessage || err.message || "Erro na transação."));
     } finally {
       setLoading(false);
     }
@@ -77,13 +70,10 @@ export default function BotaoPagamentoWeb3({ total, pedidoId, onSuccess }) {
 
   return (
     <button
-      onClick={(e) => {
-        e.preventDefault(); // Evita qualquer comportamento estranho de formulário
-        handlePagamentoCripto();
-      }}
+      onClick={handlePagamentoCripto}
       disabled={loading}
       className={`w-full py-5 rounded-[22px] font-black uppercase text-xs tracking-widest transition-all shadow-xl flex items-center justify-center gap-2 ${
-        loading ? 'bg-gray-100 text-gray-400' : 'bg-orange-600 text-white hover:bg-black active:scale-95'
+        loading ? 'bg-gray-100 text-gray-400' : 'bg-orange-600 text-white hover:bg-black'
       }`}
     >
       {loading ? (
@@ -96,4 +86,4 @@ export default function BotaoPagamentoWeb3({ total, pedidoId, onSuccess }) {
       )}
     </button>
   );
-      }
+}
