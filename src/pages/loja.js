@@ -6,6 +6,7 @@ import { supabase } from '../lib/supabaseClient';
 import BotaoPagamentoWeb3 from '../components/BotaoPagamentoWeb3';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
+import { isAddress } from 'viem';
 
 export default function Loja() {
   const LINK_LISTA_ESPERA = "https://43782b7b.sibforms.com/serve/MUIFAC4AxTEnI80RImF7seW5i2MRkz5EqdqtMse22-stmvG7jsOqdFhZ6mmpfwRA-2skU_c3GJF8YXD6k-K_kNE6_gFeWIFbCIxIEWpknHGH8m6tdQMhTuqNG7-e_tsEQRBC4-pjosH0TVoqcW1UonSiJnd2E378zedWIJRs_Dhj9R9v8_VCpmg9Kebo_wFD_WsvLIPqwRBVBCNh8w==";
@@ -69,7 +70,16 @@ export default function Loja() {
     }
   }, [carrinho, isMounted]);
 
-  // --- 4. LÓGICA DE CEP E FRETE ---
+    // --- 4.0. VALIDAÇÃO DE CARTEIRA CRIPTO ---
+    // Ou usando Regex se preferir não importar nada extra:
+    const validarEnderecoCrypto = (endereco) => {
+    if (!endereco) return false;
+    // Verifica se começa com 0x e tem 42 caracteres hexadecimais
+    const regexHex = /^0x[a-fA-F0-9]{40}$/;
+    return regexHex.test(endereco);
+  };
+
+  // --- 4.1. LÓGICA DE CEP E FRETE ---
   const handleCEP = async (v) => {
     const cep = v.replace(/\D/g, '').substring(0, 8);
     setDados(prev => ({ ...prev, cep }));
