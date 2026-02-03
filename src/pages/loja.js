@@ -162,8 +162,9 @@ const handleCEP = async (v) => {
       )}
       </button>
     </div>
-  )};  
-     
+   );  
+  }
+
   // --- 5. GESTÃO DO CARRINHO ---
   const add = (p, tam = null) => {
     // Validação de tamanho para vestuário
