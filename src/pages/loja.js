@@ -152,17 +152,16 @@ const handleCEP = async (v) => {
       </div>    
 
       {/* BOTÃO COM TRAVA LGPD E LOGÍSTICA */}
-      <button 
-      // TRAVA TRIPLA: Precisa ter itens, o frete tem que ser calculado (não null) e o endereço existir
-      disabled={carrinho.length === 0 || frete === null || !dados.endereco} 
-      onClick={() => setEtapaCheckout('metodo')} 
-      className="w-full bg-black text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 disabled:grayscale shadow-xl shadow-black/10 active:scale-95">
-      {frete === null ? 'Aguardando CEP Válido' : (
-         <>Prosseguir para Pagamento <i className="bi bi-arrow-right"></i></>
-      )}
+      <button onClick={() => adicionarAoCarrinho(produto)}
+        className="w-full bg-black text-white py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-orange-600 transition-all">
+        {loadingId === produto.id ? (
+        <span className="animate-pulse">Adicionando...</span>
+        ) : (
+        "Adicionar ao Carrinho"
+         )}
       </button>
     </div>
-   );  
+   ));  
   }
 
   // --- 5. GESTÃO DO CARRINHO ---
