@@ -19,7 +19,7 @@ export default function Loja() {
   const [menuMobileAberto, setMenuMobileAberto] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false); // Evita erros de hidratação (SSR vs Client)
-
+  const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
   const [metodo, setMetodo] = useState(null);
 
   // Controle de Navegação do Checkout
@@ -520,38 +520,60 @@ const handleCEP = async (v) => {
                 </div>
             </section>
 
-{/* INICIO - 6. MODAL DE CHECKOUT */}
+{/* INICIO DO MODAL DE CHECKOUT */}
 {modalAberto && (
-  <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4">
-    <div className="bg-white w-full max-w-lg h-[90vh] rounded-[40px] shadow-2xl flex flex-col overflow-hidden">
+  <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300">
+    <div className="bg-white w-full max-w-lg h-[90vh] rounded-[40px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in duration-300">
       
       {/* CABEÇALHO */}
-      <div className="p-8 flex justify-between items-center border-b border-gray-50">
+      <div className="p-8 flex justify-between items-center border-b border-gray-50 bg-white">
         <div>
           <h2 className="text-2xl font-black uppercase italic tracking-tighter text-black">
-            Seu <span className="text-orange-600">Carrinho 🛒</span>
+            Seu <span className="text-orange-600">Carrinho</span>
           </h2>
+          <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mt-1">Lifestyle & Web3 Ecosystem</p>
         </div>
-        <button onClick={() => setModalAberto(false)} className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400">
+        <button 
+          onClick={() => setModalAberto(false)}
+          className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-black hover:text-white transition-all"
+        >
           <i className="bi bi-x-lg"></i>
         </button>
       </div>
 
-      {/* CONTEÚDO SCROLLÁVEL */}
-      <div className="flex-grow overflow-y-auto p-8 bg-white">
+      {/* ÁREA DE CONTEÚDO (PRODUTOS / PAGAMENTO) */}
+      <div className="flex-grow overflow-y-auto p-8 custom-scrollbar bg-white">
+        
         {etapaCheckout === 'carrinho' && (
-          <div className="space-y-6">
+          <div className="space-y-6 animate-in slide-in-from-left-4">
             {carrinho.length === 0 ? (
-              <p className="text-center py-10 font-bold opacity-20 uppercase text-xs">Carrinho Vazio</p>
+              <div className="text-center py-10 opacity-30">
+                <i className="bi bi-cart-x text-5xl mb-4"></i>
+                <p className="font-bold uppercase text-[10px]">O carrinho está vazio</p>
+              </div>
             ) : (
               carrinho.map((item, i) => (
-                <div key={i} className="flex gap-4 items-center border-b border-gray-50 pb-4">
-                  <img src={item.img} className="w-16 h-20 object-cover rounded-xl" alt="" />
-                  <div className="flex-1">
-                    <p className="font-black text-[10px] uppercase">{item.nome}</p>
-                    <p className="text-orange-600 font-black text-xs">R$ {item.preco.toFixed(2)}</p>
+                <div key={i} className="flex gap-4 group border-b border-gray-50 pb-4">
+                  <div className="w-16 h-20 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0">
+                    <img src={item.img} className="w-full h-full object-cover" alt={item.nome} />
                   </div>
-                  <button onClick={() => removerItem(i)} className="text-red-500"><i className="bi bi-trash3"></i></button>
+                  <div className="flex-1 flex flex-col justify-between py-1">
+                    <div>
+                      <p className="font-black text-[10px] uppercase leading-tight">{item.nome}</p>
+                      <p className="text-[9px] font-bold text-gray-400 mt-1 uppercase">
+                        Qtd: {item.quantidade}
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-end">
+                      <p className="text-orange-600 font-black text-xs">R$ {(item.preco * item.quantidade).toFixed(2)}</p>
+                      <button 
+                        onClick={() => removerItem(i)} 
+                        className="text-red-500 hover:text-red-700 transition-colors"
+                      >
+                        <i className="bi bi-trash3 text-xs"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ))
             )}
@@ -559,64 +581,90 @@ const handleCEP = async (v) => {
         )}
 
         {etapaCheckout === 'metodo' && (
-          <div className="space-y-4">
-            <button onClick={() => setEtapaCheckout('carrinho')} className="text-[9px] font-black uppercase text-gray-400 mb-4 flex items-center gap-2">
-              <i className="bi bi-arrow-left"></i> ← Voltar ao Carrinho 🛒
-            </button>
-            <h3 className="font-black uppercase text-sm mb-4">Escolha o Pagamento</h3>
-            <button onClick={() => setMetodoSelecionado('mercadopago')} className={`w-full p-5 rounded-3xl border-2 transition-all flex justify-between ${metodo === 'mercadopago' ? 'border-orange-600 bg-orange-50' : 'border-gray-100'}`}>
-              <span className="font-bold text-xs uppercase">Cartão / Pix</span>
-              {metodo === 'mercadopago' && <i className="bi bi-check-circle-fill text-orange-600"></i>}
-            </button>
-            <button onClick={() => setMetodoSelecionado('crypto')} className={`w-full p-5 rounded-3xl border-2 transition-all flex justify-between ${metodo === 'crypto' ? 'border-purple-600 bg-purple-50' : 'border-gray-100'}`}>
-              <span className="font-bold text-xs uppercase">Cripto (Rede Polygon)</span>
-              {metodo === 'crypto' && <i className="bi bi-check-circle-fill text-purple-600"></i>}
-            </button>
+          <div className="space-y-6 animate-in slide-in-from-right-4">
+             <button onClick={() => setEtapaCheckout('carrinho')} className="text-[9px] font-black uppercase text-gray-400 hover:text-black flex items-center gap-2 mb-4">
+               <i className="bi bi-arrow-left"></i> Voltar ao Carrinho
+             </button>
+             <h3 className="text-lg font-black uppercase italic text-black">Forma de <span className="text-orange-600">Pagamento</span></h3>
+             <div className="space-y-3">
+                <button onClick={() => setMetodo('mercadopago')} className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodo === 'mercadopago' ? 'border-orange-600 bg-orange-50/30' : 'border-gray-50 bg-white'}`}>
+                  <span className="font-black text-[10px] uppercase tracking-widest">Cartão ou Pix</span>
+                  {metodo === 'mercadopago' && <i className="bi bi-check-circle-fill text-orange-600"></i>}
+                </button>
+                <button onClick={() => setMetodo('crypto')} className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodo === 'crypto' ? 'border-purple-600 bg-purple-50/30' : 'border-gray-50 bg-white'}`}>
+                  <span className="font-black text-[10px] uppercase tracking-widest">Cripto (Polygon)</span>
+                  {metodo === 'crypto' && <i className="bi bi-check-circle-fill text-purple-600"></i>}
+                </button>
+             </div>
           </div>
         )}
       </div>
 
-      {/* RODAPÉ COM TOTAL E TRAVA */}
-      <div className="p-8 bg-gray-50 border-t border-gray-100">
+      {/* RODAPÉ: CÁLCULO DE FRETE E RESUMO FINANCEIRO */}
+      <div className="p-8 bg-gray-50 border-t border-gray-100 mt-auto">
+        
         {etapaCheckout === 'carrinho' && (
           <div className="mb-6">
-            <label className="text-[9px] font-black text-gray-400 uppercase mb-2 block tracking-widest">Cálculo de Entrega (Insira seu CEP)</label>
+            <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Cálculo de Entrega</label>
             <input 
-              type="text" placeholder="00000-000" maxLength={9}
-              className="w-full bg-white rounded-2xl p-4 font-bold text-xs outline-none shadow-sm"
+              type="text" placeholder="Insira seu CEP" maxLength={9}
+              className="w-full bg-white rounded-2xl p-4 font-bold text-xs outline-none focus:ring-2 focus:ring-orange-500 shadow-sm border-none"
               value={dados.cep} onChange={e => handleCEP(e.target.value)}
             />
-            {dados.endereco && <p className="text-[9px] mt-2 font-bold text-gray-500 italic uppercase">{dados.endereco}</p>}
+            {dados.endereco && (
+              <div className="mt-3 p-3 bg-white rounded-xl border border-gray-100 animate-in fade-in">
+                <p className="text-[9px] font-bold text-gray-500 uppercase leading-tight italic">
+                  <i className="bi bi-geo-alt-fill text-orange-600 mr-1"></i> {dados.endereco}
+                </p>
+              </div>
+            )}
           </div>
         )}
 
-        <div className="flex justify-between text-xl font-black text-black uppercase mb-6">
-          <span>Total</span>
-          <span>R$ {(subtotal + (frete || 0)).toFixed(2)}</span>
+        {/* RESUMO FINANCEIRO COMPLETO (SOLICITADO) */}
+        <div className="space-y-2 mb-6 border-b border-gray-200 pb-4">
+          <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase">
+            <span>Subtotal</span>
+            <span className="text-gray-600 font-black">R$ {subtotal.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase">
+            <span>Frete</span>
+            <span className={`font-black ${frete === 0 ? 'text-green-600' : 'text-gray-600'}`}>
+              {frete === null ? '--' : (frete === 0 ? 'GRÁTIS' : `R$ ${frete.toFixed(2)}`)}
+            </span>
+          </div>
         </div>
 
+        <div className="flex justify-between text-xl font-black text-black uppercase mb-6">
+          <span>Total Geral</span>
+          <span className="text-orange-600">R$ {(subtotal + (frete || 0)).toFixed(2)}</span>
+        </div>
+
+        {/* BOTÃO DE AÇÃO PRINCIPAL */}
         {etapaCheckout === 'carrinho' ? (
           <button 
-            disabled={carrinho.length === 0 || frete === null}
-            onClick={() => setEtapaCheckout('metodo')}
-            className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-widest disabled:opacity-20"
+            disabled={carrinho.length === 0 || frete === null || !dados.endereco} 
+            onClick={() => setEtapaCheckout('metodo')} 
+            className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all disabled:opacity-20 shadow-xl shadow-black/10"
           >
-            {frete === null ? 'Informe o CEP' : 'Avançar'}
+            {frete === null ? 'Aguardando CEP Válido' : 'Prosseguir para Pagamento'}
           </button>
         ) : (
           <button 
             disabled={!metodo || loading}
             onClick={handleFinalizarCompra}
-            className="w-full bg-orange-600 text-white py-6 rounded-2xl font-black uppercase text-xs tracking-widest disabled:opacity-20"
+            className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 shadow-xl shadow-black/10"
           >
-            {loading ? 'Processando...' : 'Finalizar Pedido'}
+            {loading ? <i className="bi bi-arrow-repeat animate-spin text-lg"></i> : `Finalizar R$ ${(subtotal + (frete || 0)).toFixed(2)}`}
           </button>
         )}
       </div>
+
     </div>
   </div>
 )}
-{/* FIM DO MODAL */}
+
+      {/* FIM DO MODAL */}
 
       {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
