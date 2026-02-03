@@ -580,19 +580,40 @@ export default function Loja() {
                 </div>
               </div>
             )}
-
             {/* ETAPA 2: MÉTODO DE PAGAMENTO */}
             {etapaCheckout === 'metodo' && (
-              <div className="flex-grow flex flex-col justify-center space-y-4">
-                <button onClick={() => { setMetodoSelecionado('mercadopago'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
-                  <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Cartão ou PIX</p><p className="text-[10px] font-bold text-gray-400 uppercase">Cartão ou PIX</p></div>
-                  <i className="bi bi-credit-card-2-back text-orange-500 text-2xl"></i>
+              <div className="flex-grow flex flex-col justify-center space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
+                {/* BOTÃO MERCADO PAGO */}
+                <button 
+                  onClick={() => { setMetodoSelecionado('mercadopago'); setEtapaCheckout('dados'); }} 
+                  className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all group"
+                >
+                  <div className="text-left">
+                    <p className="font-black text-gray-900 text-lg uppercase leading-tight">Cartão ou PIX</p>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Checkout Seguro</p>
+                  </div>
+                  <i className="bi bi-credit-card-2-back text-orange-500 text-2xl group-hover:scale-110 transition-transform"></i>
                 </button>
-                <button onClick={() => { setMetodoSelecionado('cripto'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
-                  <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Pagar com Cripto</p><p className="text-[10px] font-bold text-gray-400 uppercase italic">Crypto (Rede Polygon)</p></div>
-                  <i className="bi bi-currency-bitcoin text-orange-500 text-2xl"></i>
+
+                {/* BOTÃO CRIPTO */}
+                <button 
+                  onClick={() => { setMetodoSelecionado('cripto'); setEtapaCheckout('dados'); }} 
+                  className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all group"
+                >
+                  <div className="text-left">
+                    <p className="font-black text-gray-900 text-lg uppercase leading-tight">Pagar com Cripto</p>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase italic mt-1 tracking-widest">Crypto (Polygon)</p>
+                  </div>
+                  <i className="bi bi-currency-bitcoin text-orange-500 text-2xl group-hover:scale-110 transition-transform"></i>
                 </button>
-                <button onClick={() => setEtapaCheckout('carrinho')} className="w-full py-4 text-[10px] font-black uppercase text-gray-400">← Voltar ao Carrinho 🛒</button>
+
+                {/* BOTÃO VOLTAR */}
+                <button 
+                  onClick={() => setEtapaCheckout('carrinho')} 
+                  className="w-full py-4 text-[10px] font-black uppercase text-gray-400 hover:text-black transition-colors"
+                >
+                  ← Voltar ao Carrinho 🛒
+                </button>
               </div>
             )}
 
