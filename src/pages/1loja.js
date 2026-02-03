@@ -579,11 +579,11 @@ export default function Loja() {
             {/* ETAPA 2: MÉTODO DE PAGAMENTO */}
             {etapaCheckout === 'metodo' && (
               <div className="flex-grow flex flex-col justify-center space-y-4">
-                <button onClick={() => { setMetodoSelecionado('mercadopago'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
-                  <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Cartão ou PIX</p><p className="text-[10px] font-bold text-gray-400 uppercase">Via Mercado Pago</p></div>
+                <button onClick={() => { setMetodoSelecionado('Mercado Pago'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
+                  <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Cartão ou PIX</p><p className="text-[10px] font-bold text-gray-400 uppercase">Cartão ou PIX</p></div>
                   <i className="bi bi-credit-card-2-back text-orange-500 text-2xl"></i>
                 </button>
-                <button onClick={() => { setMetodoSelecionado('cripto'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
+                <button onClick={() => { setMetodoSelecionado('Crypto'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
                   <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Pagar com Cripto</p><p className="text-[10px] font-bold text-gray-400 uppercase italic">Crypto (Rede Polygon)</p></div>
                   <i className="bi bi-currency-bitcoin text-orange-500 text-2xl"></i>
                 </button>
@@ -598,7 +598,9 @@ export default function Loja() {
                   <div className="space-y-3">
                     <input type="text" placeholder="NOME COMPLETO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})} />
                     <input type="email" placeholder="SEU MELHOR E-MAIL" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.email} onChange={e => setDados({...dados, email: e.target.value})} />
+                    <input type="text" placeholder="CPF" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.cpf} onChange={e => setDados({...dados, cpf: e.target.value})} />
                     <input type="text" placeholder="COMPLEMENTO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})} />
+                  </div>
                   </div>
 
                   <div className="bg-orange-50 rounded-[32px] p-6 border border-orange-100 mt-4 text-center">
@@ -606,6 +608,7 @@ export default function Loja() {
                     <input type="text" placeholder="CARTEIRA POLYGON 0x..." value={dados.carteira_blockchain} onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})} className="w-full p-4 rounded-xl text-[10px] font-mono outline-none shadow-inner mb-2" />
                     <button onClick={() => window.open('/faq-web3', '_blank')} className="text-[9px] font-black text-orange-600 uppercase underline">Saiba mais</button>
                   </div>
+                 <button onClick={() => setEtapaCheckout('carrinho')} className="w-full py-4 text-[10px] font-black uppercase text-gray-400">← Voltar ao Pagamento</button>
                 </div>
 
                 <div className="mt-6 pt-6 border-t border-gray-100">
