@@ -520,8 +520,7 @@ const handleCEP = async (v) => {
                 </div>
             </section>
 
-     {/* INICIO - 6. MODAL DE CHECKOUT */}
-
+{/* INICIO - 6. MODAL DE CHECKOUT */}
 {modalAberto && (
   <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4">
     <div className="bg-white w-full max-w-lg h-[90vh] rounded-[40px] shadow-2xl flex flex-col overflow-hidden">
@@ -565,11 +564,11 @@ const handleCEP = async (v) => {
               <i className="bi bi-arrow-left"></i> ← Voltar ao Carrinho 🛒
             </button>
             <h3 className="font-black uppercase text-sm mb-4">Escolha o Pagamento</h3>
-            <button onClick={() => setMetodo('mercadopago')} className={`w-full p-5 rounded-3xl border-2 transition-all flex justify-between ${metodo === 'mercadopago' ? 'border-orange-600 bg-orange-50' : 'border-gray-100'}`}>
+            <button onClick={() => setMetodoSelecionado('mercadopago')} className={`w-full p-5 rounded-3xl border-2 transition-all flex justify-between ${metodo === 'mercadopago' ? 'border-orange-600 bg-orange-50' : 'border-gray-100'}`}>
               <span className="font-bold text-xs uppercase">Cartão / Pix</span>
               {metodo === 'mercadopago' && <i className="bi bi-check-circle-fill text-orange-600"></i>}
             </button>
-            <button onClick={() => setMetodo('crypto')} className={`w-full p-5 rounded-3xl border-2 transition-all flex justify-between ${metodo === 'crypto' ? 'border-purple-600 bg-purple-50' : 'border-gray-100'}`}>
+            <button onClick={() => setMetodoSelecionado('crypto')} className={`w-full p-5 rounded-3xl border-2 transition-all flex justify-between ${metodo === 'crypto' ? 'border-purple-600 bg-purple-50' : 'border-gray-100'}`}>
               <span className="font-bold text-xs uppercase">Cripto (Rede Polygon)</span>
               {metodo === 'crypto' && <i className="bi bi-check-circle-fill text-purple-600"></i>}
             </button>
