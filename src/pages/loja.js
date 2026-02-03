@@ -29,9 +29,6 @@ export default function Loja() {
     complemento: '', 
     carteira_blockchain: '' 
   });
-   const totalGeral = useMemo(() => {
-    return subtotal + (frete || 0);
-  }, [subtotal, frete]); 
 
   // --- 3. CÁLCULOS OTIMIZADOS ---
 const subtotal = useMemo(() => {
