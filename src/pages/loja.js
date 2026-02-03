@@ -34,15 +34,14 @@ export default function Loja() {
   }, [subtotal, frete]); 
 
   // --- 3. CÁLCULOS OTIMIZADOS ---
-  // Aqui é onde calculamos o valor total dos itens de forma segura
-  const subtotal = useMemo(() => {
+const subtotal = useMemo(() => {
     if (!Array.isArray(carrinho)) return 0;
-    return carrinho.reduce((acc, item) => {
-      const preco = Number(item?.preco) || 0;
-      const qtd = Number(item?.quantidade) || 1;
-      return acc + (preco * qtd);
-    }, 0);
+    return carrinho.reduce((acc, item) => acc + (Number(item?.preco) || 0) * (item?.quantidade || 1), 0);
   }, [carrinho]);
+
+  const totalGeral = useMemo(() => {
+    return subtotal + (frete || 0);
+  }, [subtotal, frete]);
 
   // --- 4. FUNÇÕES DE AÇÃO ---
   // Função para deletar item (Corrigida para atualizar o estado corretamente)
@@ -128,76 +127,45 @@ const validarEnderecoCrypto = (endereco) => {
   // --- 7. FUNÇÃO CENTRALIZADA DE REGISTRO DE PEDIDO ---
   const processarPedidoFinal = async () => {
     const cpfLimpo = dados.cpf.replace(/\D/g, '');
-    
-    // Validações de Segurança
     if (!dados.nome || !dados.email || !dados.cep) {
-      alert("Por favor, preencha Nome, E-mail e CEP para a entrega.");
+      alert("Preencha Nome, E-mail e CEP.");
       return null;
     }
-    
     if (metodoSelecionado === 'mp' && cpfLimpo.length !== 11) {
-      alert("O CPF é obrigatório para pagamentos via Mercado Pago.");
-      return null;
-    }
-    
-    if (carrinho.length === 0) {
-      alert("Seu carrinho está vazio.");
+      alert("CPF obrigatório para Mercado Pago.");
       return null;
     }
 
     setLoading(true);
-
     try {
-      // 1. Criar objeto do pedido para o Supabase
-      const dadosPedido = {
-        nome: dados.nome,
-        email: dados.email.toLowerCase().trim(),
-        // Placeholder se for Web3 sem CPF
-        cpf: metodoSelecionado === 'mp' ? cpfLimpo : (cpfLimpo || 'WEB3_CLIENT'),
-        cep: dados.cep,
-        endereco: `${dados.endereco} | Complemento: ${dados.complemento || 'N/A'}`,
-        total_geral: totalGeral,
-        itens: carrinho, // Coluna JSONB no banco
-        status_pagamento: 'Aguardando Pagamento',
-        metodo_pagamento: metodoSelecionado === 'mp' ? 'Mercado Pago' : 'Web3 Cripto'
-      };
-
       const { data: pedido, error: errSupa } = await supabase
         .from('pedidos')
-        .insert([dadosPedido])
-        .select()
-        .single();
+        .insert([{
+          nome: dados.nome,
+          email: dados.email.toLowerCase().trim(),
+          cpf: metodoSelecionado === 'mp' ? cpfLimpo : 'WEB3_CLIENT',
+          cep: dados.cep,
+          endereco: `${dados.endereco} | ${dados.complemento || ''}`,
+          total_geral: totalGeral,
+          itens: carrinho,
+          status_pagamento: 'Aguardando Pagamento',
+          metodo_pagamento: metodoSelecionado === 'mp' ? 'Mercado Pago' : 'Web3 Cripto'
+        }])
+        .select().single();
 
-      if (errSupa) throw new Error("Erro ao registrar no banco de dados: " + errSupa.message);
+      if (errSupa) throw errSupa;
 
-      // 2. Se for Mercado Pago, envia para a API do Backend
       if (metodoSelecionado === 'mp') {
         const res = await fetch('/api/checkout-mp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            itens: carrinho, 
-            frete, 
-            pedidoId: pedido.id, 
-            email: dados.email.trim(),
-            nome: dados.nome,
-            cpf: cpfLimpo
-          })
+          body: JSON.stringify({ itens: carrinho, frete, pedidoId: pedido.id, email: dados.email, nome: dados.nome, cpf: cpfLimpo })
         });
-
         const data = await res.json();
-        if (data.init_point) {
-          window.location.href = data.init_point;
-        } else {
-          throw new Error(data.error || "Erro ao gerar link de pagamento.");
-        }
-      } 
-      
-      // 3. Retorna o ID para o BotaoPagamentoWeb3 processar a transação
+        if (data.init_point) window.location.href = data.init_point;
+      }
       return pedido.id;
-
     } catch (err) {
-      console.error("Erro no Processamento:", err);
       alert(err.message);
       return null;
     } finally {
@@ -512,142 +480,74 @@ const validarEnderecoCrypto = (endereco) => {
 
 {/* INICIO DO MODAL DE CHECKOUT */}
 
-{/* --- MODAL DE CHECKOUT --- */}
+   {/* MODAL DE CHECKOUT */}
       {modalAberto && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-lg h-[90vh] rounded-[40px] shadow-2xl flex flex-col overflow-hidden">
+          <div className="bg-white w-full max-w-lg h-[90vh] rounded-[40px] flex flex-col overflow-hidden shadow-2xl">
             
-            {/* CABEÇALHO */}
-            <div className="p-8 flex justify-between items-center border-b border-gray-50 bg-white">
-              <div>
-                <h2 className="text-2xl font-black uppercase italic tracking-tighter text-black">
-                  Seu <span className="text-orange-600">Carrinho</span>
-                </h2>
-                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mt-1">Lifestyle & Web3 Ecosystem</p>
-              </div>
-              <button 
-                onClick={() => setModalAberto(false)}
-                className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-black hover:text-white transition-all"
-              >
-                <i className="bi bi-x-lg"></i>
-              </button>
+            <div className="p-8 flex justify-between items-center border-b">
+              <h2 className="text-2xl font-black uppercase italic italic tracking-tighter">Seu <span className="text-orange-600">Carrinho</span></h2>
+              <button onClick={() => setModalAberto(false)} className="text-2xl">&times;</button>
             </div>
 
-            {/* ÁREA DE CONTEÚDO (PRODUTOS / PAGAMENTO) */}
-            <div className="flex-grow overflow-y-auto p-8 custom-scrollbar bg-white">
-              
+            <div className="flex-grow overflow-y-auto p-8">
               {etapaCheckout === 'carrinho' ? (
-                <div className="space-y-6">
-                  {carrinho.length === 0 ? (
-                    <div className="text-center py-10 opacity-30 italic font-black uppercase text-[10px]">O carrinho está vazio</div>
-                  ) : (
-                    carrinho.map((item, i) => (
-                      <div key={i} className="flex gap-4 border-b border-gray-50 pb-4">
-                        <img src={item.img} className="w-16 h-20 object-cover rounded-xl" alt={item.nome} />
-                        <div className="flex-1 flex flex-col justify-between py-1">
-                          <p className="font-black text-[10px] uppercase leading-tight">{item.nome}</p>
-                          <div className="flex justify-between items-end">
-                            <p className="text-orange-600 font-black text-xs">R$ {(item.preco * item.quantidade).toFixed(2)}</p>
-                            <button onClick={() => removerItem(i)} className="text-red-500 hover:text-red-700 transition-colors">
-                              <i className="bi bi-trash3 text-xs"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              ) : (
-                <div className="space-y-6">
-                   <button onClick={() => setEtapaCheckout('carrinho')} className="text-[9px] font-black uppercase text-gray-400 hover:text-black flex items-center gap-2 mb-4">
-                     <i className="bi bi-arrow-left"></i> Voltar ao Carrinho
-                   </button>
-                   <h3 className="text-lg font-black uppercase italic text-black">Forma de <span className="text-orange-600">Pagamento</span></h3>
-                   <div className="space-y-3">
-                      <button 
-                        onClick={() => setMetodoSelecionado('mp')} 
-                        className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodoSelecionado === 'mp' ? 'border-orange-600 bg-orange-50/30' : 'border-gray-50 bg-white'}`}
-                      >
-                        <span className="font-black text-[10px] uppercase tracking-widest">Cartão ou Pix</span>
-                        {metodoSelecionado === 'mp' && <i className="bi bi-check-circle-fill text-orange-600"></i>}
-                      </button>
-
-                      <button 
-                        onClick={() => setMetodoSelecionado('cripto')} 
-                        className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodoSelecionado === 'cripto' ? 'border-purple-600 bg-purple-50/30' : 'border-gray-50 bg-white'}`}
-                      >
-                        <span className="font-black text-[10px] uppercase tracking-widest">Cripto (Polygon)</span>
-                        {metodoSelecionado === 'cripto' && <i className="bi bi-check-circle-fill text-purple-600"></i>}
-                      </button>
-                   </div>
-                </div>
-              )}
-            </div>
-
-            {/* RODAPÉ: CÁLCULO E FINALIZAÇÃO */}
-            <div className="p-8 bg-gray-50 border-t border-gray-100 mt-auto">
-              
-              {etapaCheckout === 'carrinho' && (
-                <div className="mb-6">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Cálculo de Entrega</label>
+                <div className="space-y-4">
+                  {carrinho.map((item, i) => (
+                    <div key={i} className="flex justify-between items-center border-b pb-2">
+                      <span className="text-[10px] font-bold uppercase">{item.nome}</span>
+                      <button onClick={() => removerItem(i)} className="text-red-500 text-xs">Remover</button>
+                    </div>
+                  ))}
                   <input 
-                    type="text" placeholder="Insira seu CEP" maxLength={9}
-                    className="w-full bg-white rounded-2xl p-4 font-bold text-xs outline-none border-none shadow-sm"
+                    type="text" placeholder="Seu Nome" className="w-full border p-3 rounded-xl"
+                    onChange={e => setDados({...dados, nome: e.target.value})}
+                  />
+                  <input 
+                    type="email" placeholder="Seu E-mail" className="w-full border p-3 rounded-xl"
+                    onChange={e => setDados({...dados, email: e.target.value})}
+                  />
+                  <input 
+                    type="text" placeholder="CEP" className="w-full border p-3 rounded-xl"
                     value={dados.cep} onChange={e => handleCEP(e.target.value)}
                   />
-                  {dados.endereco && (
-                    <div className="mt-3 p-3 bg-white rounded-xl border border-gray-100">
-                      <p className="text-[9px] font-bold text-gray-500 uppercase leading-tight italic">
-                        <i className="bi bi-geo-alt-fill text-orange-600 mr-1"></i> {dados.endereco}
-                      </p>
-                    </div>
-                  )}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <button onClick={() => setEtapaCheckout('carrinho')} className="text-xs font-bold text-gray-400 uppercase">← Voltar</button>
+                  <h3 className="font-black uppercase italic">Pagamento</h3>
+                  <div className="grid grid-cols-1 gap-3">
+                    <button onClick={() => setMetodoSelecionado('mp')} className={`p-4 border-2 rounded-2xl font-bold ${metodoSelecionado === 'mp' ? 'border-orange-600' : ''}`}>Mercado Pago (Pix/Cartão)</button>
+                    <button onClick={() => setMetodoSelecionado('cripto')} className={`p-4 border-2 rounded-2xl font-bold ${metodoSelecionado === 'cripto' ? 'border-purple-600' : ''}`}>Cripto (Polygon)</button>
+                  </div>
                 </div>
               )}
+            </div>
 
-              <div className="space-y-2 mb-6 border-b border-gray-200 pb-4">
-                <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase">
-                  <span>Subtotal</span>
-                  <span className="text-gray-600 font-black">R$ {subtotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase">
-                  <span>Frete</span>
-                  <span className="text-gray-600 font-black">{frete === null ? '--' : `R$ ${frete.toFixed(2)}`}</span>
-                </div>
-              </div>
-
-              <div className="flex justify-between text-xl font-black text-black uppercase mb-6">
-                <span>Total Geral</span>
+            <div className="p-8 bg-gray-50 border-t">
+              <div className="flex justify-between font-black uppercase mb-4">
+                <span>Total</span>
                 <span className="text-orange-600">R$ {totalGeral.toFixed(2)}</span>
               </div>
 
-              {/* LÓGICA DE BOTÕES POR ETAPA E MÉTODO */}
               {etapaCheckout === 'carrinho' ? (
                 <button 
-                  disabled={carrinho.length === 0 || frete === null || !dados.endereco} 
-                  onClick={() => setEtapaCheckout('metodo')} 
-                  className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all disabled:opacity-20 shadow-xl shadow-black/10"
-                >
-                  {frete === null ? 'Aguardando CEP' : 'Prosseguir para Pagamento'}
-                </button>
+                  disabled={carrinho.length === 0 || !frete}
+                  onClick={() => setEtapaCheckout('metodo')}
+                  className="w-full bg-black text-white py-4 rounded-2xl font-black uppercase text-xs"
+                >Prosseguir</button>
               ) : (
                 <>
                   {metodoSelecionado === 'cripto' ? (
-                    /* AQUI ENTRA O SEU COMPONENTE WEB3 */
-                    <Botaopagamentoweb3 
+                    <BotaoPagamentoWeb3 
                       valor={totalGeral} 
                       onSuccess={processarPedidoFinal} 
-                      loading={loading}
                     />
                   ) : (
-                    /* BOTÃO PADRÃO MERCADO PAGO */
                     <button 
-                      disabled={!metodoSelecionado || loading}
                       onClick={processarPedidoFinal}
-                      className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 shadow-xl shadow-black/10"
-                    >
-                      {loading ? <i className="bi bi-arrow-repeat animate-spin text-lg"></i> : `Finalizar R$ ${totalGeral.toFixed(2)}`}
-                    </button>
+                      className="w-full bg-black text-white py-4 rounded-2xl font-black uppercase text-xs"
+                    >Finalizar no Mercado Pago</button>
                   )}
                 </>
               )}
