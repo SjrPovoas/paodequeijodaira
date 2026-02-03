@@ -579,11 +579,11 @@ export default function Loja() {
             {/* ETAPA 2: MÉTODO DE PAGAMENTO */}
             {etapaCheckout === 'metodo' && (
               <div className="flex-grow flex flex-col justify-center space-y-4">
-                <button onClick={() => { setMetodoSelecionado('Mercado Pago'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
+                <button onClick={() => { setMetodoSelecionado('mercadopago'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
                   <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Cartão ou PIX</p><p className="text-[10px] font-bold text-gray-400 uppercase">Cartão ou PIX</p></div>
                   <i className="bi bi-credit-card-2-back text-orange-500 text-2xl"></i>
                 </button>
-                <button onClick={() => { setMetodoSelecionado('Crypto'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
+                <button onClick={() => { setMetodoSelecionado('cripto'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
                   <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Pagar com Cripto</p><p className="text-[10px] font-bold text-gray-400 uppercase italic">Crypto (Rede Polygon)</p></div>
                   <i className="bi bi-currency-bitcoin text-orange-500 text-2xl"></i>
                 </button>
