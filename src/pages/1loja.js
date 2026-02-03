@@ -133,7 +133,7 @@ export default function Loja() {
     
    // --- 7. INTEGRAÇÃO SUPABASE E MERCADO PAGO ---
    const processarPedidoFinal = async () => {
-    if (!dados.nome || !dados.email || !dados.endereco) {
+    if (!dados.nome || !dados.email || !dados.endereco || !dados.cpf) {
       alert("⚠️ Preencha os dados de contato e entrega.");
       return;
     }
@@ -149,6 +149,7 @@ export default function Loja() {
         .insert([{
           nome: dados.nome,
           email: dados.email,
+          cpf: dados.cpf,
           cep: dados.cep,
           endereco: dados.endereco,
           complemento: dados.complemento,
@@ -505,14 +506,12 @@ export default function Loja() {
           <div className="relative w-full max-w-md bg-white h-[96vh] my-[2vh] mr-[1vw] rounded-[40px] shadow-2xl p-8 overflow-hidden flex flex-col animate-in slide-in-from-right duration-500 ease-out">          
             {/* Cabeçalho Dinâmico */}
             <div className="p-8 flex justify-between items-center border-b">
-              <h2 className="text-2xl font-black uppercase italic italic tracking-tighter">Seu <span className="text-orange-600">Carrinho</span></h2>
-              <button onClick={() => setModalAberto(false)} className="text-2xl">&times;</button>
             
              {/*<div className="flex justify-between items-center mb-8">*/}
               <div>
-                <h2 className="text-2xl font-black text-gray-900 tracking-tight">
+                <h2 className="text-2xl font-black uppercase italic italic tracking-tighter">
                   {etapaCheckout === 'carrinho' && 'Seu Carrinho 🛒'}
-                  {etapaCheckout === 'metodo' && 'Pagamento'}
+                  {etapaCheckout === 'metodo' && 'Seu Pagamento'}
                   {etapaCheckout === 'dados' && 'Checkout'}
                   {etapaCheckout === 'pagamento_blockchain' && 'Web3 Checkout'}
                 </h2>
