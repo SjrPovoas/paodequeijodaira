@@ -164,7 +164,7 @@ export default function Loja() {
 
       const novoPedidoId = pedidoSalvo[0].id;
 
-      if (metodoSelecionado === 'mp') {
+      if (metodoSelecionado === 'mercadopago') {
         const response = await fetch('/api/checkout-mp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -504,12 +504,16 @@ export default function Loja() {
           {/* Container do Modal */}
           <div className="relative w-full max-w-md bg-white h-[96vh] my-[2vh] mr-[1vw] rounded-[40px] shadow-2xl p-8 overflow-hidden flex flex-col animate-in slide-in-from-right duration-500 ease-out">          
             {/* Cabeçalho Dinâmico */}
-            <div className="flex justify-between items-center mb-8">
+            <div className="p-8 flex justify-between items-center border-b">
+              <h2 className="text-2xl font-black uppercase italic italic tracking-tighter">Seu <span className="text-orange-600">Carrinho</span></h2>
+              <button onClick={() => setModalAberto(false)} className="text-2xl">&times;</button>
+            
+             {/*<div className="flex justify-between items-center mb-8">*/}
               <div>
                 <h2 className="text-2xl font-black text-gray-900 tracking-tight">
-                  {etapaCheckout === 'carrinho' && 'Seu Carrinho'}
+                  {etapaCheckout === 'carrinho' && 'Seu Carrinho 🛒'}
                   {etapaCheckout === 'metodo' && 'Pagamento'}
-                  {etapaCheckout === 'dados' && 'Finalização'}
+                  {etapaCheckout === 'dados' && 'Checkout'}
                   {etapaCheckout === 'pagamento_blockchain' && 'Web3 Checkout'}
                 </h2>
                 <div className="h-1 w-8 bg-orange-500 rounded-full mt-1"></div>
@@ -552,7 +556,7 @@ export default function Loja() {
                 </div>
 
                 <div className="mt-6 p-6 bg-gray-50 rounded-[32px]">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block ml-1">Simular Frete</label>
+                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block ml-1">Cálculo de Frete (Insira seu CEP)</label>
                   <div className="relative mb-3">
                     <input type="text" placeholder="00000-000" className="w-full bg-white border-none rounded-2xl p-4 font-bold text-sm shadow-sm outline-none" value={dados.cep} onChange={e => handleCEP(e.target.value)} />
                     <i className="bi bi-geo-alt absolute right-4 top-4 text-gray-300"></i>
@@ -567,7 +571,7 @@ export default function Loja() {
                     <span>{frete === 0 ? 'GRÁTIS' : `R$ ${frete.toFixed(2)}`}</span>
                   </div>
                   <button disabled={carrinho.length === 0 || !dados.endereco} onClick={() => setEtapaCheckout('metodo')} className="w-full bg-black text-white py-5 rounded-[22px] font-black uppercase text-xs tracking-widest hover:bg-orange-600 disabled:opacity-20 transition-all">
-                    Confirmar Itens
+                    Prosseguir Pagamento 
                   </button>
                 </div>
               </div>
@@ -576,15 +580,15 @@ export default function Loja() {
             {/* ETAPA 2: MÉTODO DE PAGAMENTO */}
             {etapaCheckout === 'metodo' && (
               <div className="flex-grow flex flex-col justify-center space-y-4">
-                <button onClick={() => { setMetodoSelecionado('mp'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
+                <button onClick={() => { setMetodoSelecionado('mercadopago'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
                   <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Cartão ou PIX</p><p className="text-[10px] font-bold text-gray-400 uppercase">Via Mercado Pago</p></div>
                   <i className="bi bi-credit-card-2-back text-orange-500 text-2xl"></i>
                 </button>
                 <button onClick={() => { setMetodoSelecionado('cripto'); setEtapaCheckout('dados'); }} className="w-full p-8 bg-gray-50 rounded-[32px] border-2 border-transparent hover:border-orange-500 flex justify-between items-center transition-all">
-                  <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Pagar com Cripto</p><p className="text-[10px] font-bold text-gray-400 uppercase italic">Rede Polygon (POL)</p></div>
+                  <div className="text-left"><p className="font-black text-gray-900 text-lg uppercase">Pagar com Cripto</p><p className="text-[10px] font-bold text-gray-400 uppercase italic">Crypto (Rede Polygon)</p></div>
                   <i className="bi bi-currency-bitcoin text-orange-500 text-2xl"></i>
                 </button>
-                <button onClick={() => setEtapaCheckout('carrinho')} className="w-full py-4 text-[10px] font-black uppercase text-gray-400">Voltar ao Carrinho</button>
+                <button onClick={() => setEtapaCheckout('carrinho')} className="w-full py-4 text-[10px] font-black uppercase text-gray-400">← Voltar ao Carrinho 🛒</button>
               </div>
             )}
 
@@ -594,14 +598,14 @@ export default function Loja() {
                 <div className="flex-grow space-y-4 overflow-y-auto pr-2 custom-scrollbar">
                   <div className="space-y-3">
                     <input type="text" placeholder="NOME COMPLETO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})} />
-                    <input type="email" placeholder="E-MAIL" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.email} onChange={e => setDados({...dados, email: e.target.value})} />
+                    <input type="email" placeholder="SEU MELHOR E-MAIL" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.email} onChange={e => setDados({...dados, email: e.target.value})} />
                     <input type="text" placeholder="COMPLEMENTO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})} />
                   </div>
 
                   <div className="bg-orange-50 rounded-[32px] p-6 border border-orange-100 mt-4 text-center">
                     <p className="font-black uppercase text-[10px] text-gray-900 mb-3 tracking-widest">Recompensas Web3</p>
                     <input type="text" placeholder="CARTEIRA POLYGON 0x..." value={dados.carteira_blockchain} onChange={(e) => setDados({...dados, carteira_blockchain: e.target.value})} className="w-full p-4 rounded-xl text-[10px] font-mono outline-none shadow-inner mb-2" />
-                    <button onClick={() => window.open('/faq-web3', '_blank')} className="text-[9px] font-black text-orange-600 uppercase underline">O que é isso? Saiba mais</button>
+                    <button onClick={() => window.open('/faq-web3', '_blank')} className="text-[9px] font-black text-orange-600 uppercase underline">Saiba mais</button>
                   </div>
                 </div>
 
@@ -633,7 +637,7 @@ export default function Loja() {
                     onSuccess={() => window.location.href = "/sucesso"} 
                   />
                 </div>
-                <button onClick={() => setEtapaCheckout('dados')} className="text-[10px] font-black uppercase text-gray-400">Voltar</button>
+                <button onClick={() => setEtapaCheckout('dados')} className="text-[10px] font-black uppercase text-gray-400">← Voltar ao Pagamento</button>
               </div>
             )}
           </div>
