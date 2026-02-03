@@ -19,7 +19,6 @@ export default function Loja() {
   const [menuMobileAberto, setMenuMobileAberto] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false); // Evita erros de hidratação (SSR vs Client)
-  const [modalAberto, setModalAberto] = useState(false);
 
   const [metodo, setMetodo] = useState(null);
 
