@@ -161,7 +161,7 @@ const handleCEP = async (v) => {
          )}
       </button>
     </div>
-   ));  
+   );  
   }
 
   // --- 5. GESTÃO DO CARRINHO ---
