@@ -79,25 +79,6 @@ export default function Loja() {
     return regexHex.test(endereco);
   };
 
-  // --- 4.1. LÓGICA DE CEP E FRETE ---
-//  const handleCEP = async (v) => {
-//    const cep = v.replace(/\D/g, '').substring(0, 8);
-//    setDados(prev => ({ ...prev, cep }));
-    
-//        if (cep.length === 8) {
-//      try {
-//        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);       const json = await res.json();
-//       if (!json.erro) { setDados(prev => ({ ...prev, endereco: `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}` }));
-          
-          // Lógica de Frete baseada nos dois primeiros dígitos
-//          const regiao = cep.substring(0, 2);
-//          const valorFrete = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
-          
-          // Se subtotal > frete grátis, zera o frete
-//          setFrete(subtotal >= VALOR_FRETE_GRATIS ? 0 : valorFrete); }
-//      } catch (e) { 
-//        console.error("Erro ao buscar CEP");  } } };
-
 // CÁLCULO DE ENTREGA INSIRA SEU CEP
     const handleCEP = async (v) => {
     const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
@@ -118,16 +99,18 @@ export default function Loja() {
           
           // Lógica de Frete Grátis (500 Reais)
           setFrete(subtotal >= VALOR_FRETE_GRATIS ? 0 : freteBase);
-        } else {
-          alert("❌ CEP não encontrado.");
-          setDados(prev => ({ ...prev, endereco: '' }));
-          setFrete(0);
+
+         } else {
+           alert("❌ CEP não encontrado. Por favor, verifique.");
+           setDados(prev => ({ ...prev, endereco: '' }));
+           setFrete(null); // MUDE DE 0 PARA NULL (Trava o botão)
+           }
+        } catch (e) { 
+           console.error("Erro ao buscar CEP:", e);
+           setFrete(null); // MUDE DE 0 PARA NULL
         }
-      } catch (e) { 
-        console.error("Erro ao buscar CEP:", e); 
       }
-    }
-  };
+    };
   
   // --- 5. GESTÃO DO CARRINHO ---
   const add = (p, tam = null) => {
