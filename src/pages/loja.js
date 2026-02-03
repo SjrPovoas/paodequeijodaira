@@ -210,6 +210,10 @@ const validarEnderecoCrypto = (endereco) => {
     { id: 4, nome: 'Caneca Cerâmica Fosca do Pão de Queijo da Irá', preco: 42, img: '/imagens/caneca.png', category: 'acessorios' },
   ];
 
+    const totalGeral = useMemo(() => {
+    return subtotal + (frete || 0);
+  }, [subtotal, frete]);
+
   // Se o componente ainda não montou no cliente, não renderiza nada (evita erro de hidratação)
   if (!isMounted) return null;
 
@@ -509,138 +513,162 @@ const validarEnderecoCrypto = (endereco) => {
 
 {/* INICIO DO MODAL DE CHECKOUT */}
 
-{modalAberto && (
-  <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300">
-    <div className="bg-white w-full max-w-lg h-[90vh] rounded-[40px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in duration-300">
-      
-      {/* CABEÇALHO */}
-      <div className="p-8 flex justify-between items-center border-b border-gray-50 bg-white">
-        <div>
-          <h2 className="text-2xl font-black uppercase italic tracking-tighter text-black">
-            Seu <span className="text-orange-600">Carrinho 🛒</span>
-          </h2>
-          <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mt-1">Lifestyle & Web3 Ecosystem</p>
-        </div>
-        <button 
-          onClick={() => setModalAberto(false)}
-          className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-black hover:text-white transition-all"
-        >
-          <i className="bi bi-x-lg"></i>
-        </button>
-      </div>
+ 
 
-      {/* CONTEÚDO */}
-      <div className="flex-grow overflow-y-auto p-8 custom-scrollbar bg-white">
-        {etapaCheckout === 'carrinho' && (
-          <div className="space-y-6 animate-in slide-in-from-left-4">
-            {carrinho.length === 0 ? (
-              <div className="text-center py-10 opacity-30">
-                <i className="bi bi-cart-x text-5xl mb-4"></i>
-                <p className="font-bold uppercase text-[10px]">O carrinho está vazio</p>
+
+      {/* --- MODAL DE CHECKOUT --- */}
+      {modalAberto && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <div className="bg-white w-full max-w-lg h-[90vh] rounded-[40px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in duration-300">
+            
+            {/* CABEÇALHO */}
+            <div className="p-8 flex justify-between items-center border-b border-gray-50 bg-white">
+              <div>
+                <h2 className="text-2xl font-black uppercase italic tracking-tighter text-black">
+                  Seu <span className="text-orange-600">Carrinho</span>
+                </h2>
+                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mt-1">Lifestyle & Web3 Ecosystem</p>
               </div>
-            ) : (
-              carrinho.map((item, i) => (
-                <div key={i} className="flex gap-4 group border-b border-gray-50 pb-4">
-                  <div className="w-16 h-20 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0">
-                    <img src={item.img} className="w-full h-full object-cover" alt={item.nome} />
-                  </div>
-                  <div className="flex-1 flex flex-col justify-between py-1">
-                    <div>
-                      <p className="font-black text-[10px] uppercase leading-tight">{item.nome}</p>
-                      <p className="text-[9px] font-bold text-gray-400 mt-1 uppercase">Qtd: {item.quantidade}</p>
+              <button 
+                onClick={() => setModalAberto(false)}
+                className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-black hover:text-white transition-all"
+              >
+                <i className="bi bi-x-lg"></i>
+              </button>
+            </div>
+
+            {/* ÁREA DE CONTEÚDO (PRODUTOS / PAGAMENTO) */}
+            <div className="flex-grow overflow-y-auto p-8 custom-scrollbar bg-white">
+              
+              {etapaCheckout === 'carrinho' && (
+                <div className="space-y-6 animate-in slide-in-from-left-4">
+                  {carrinho.length === 0 ? (
+                    <div className="text-center py-10 opacity-30">
+                      <i className="bi bi-cart-x text-5xl mb-4"></i>
+                      <p className="font-bold uppercase text-[10px]">O carrinho está vazio</p>
                     </div>
-                    <div className="flex justify-between items-end">
-                      <p className="text-orange-600 font-black text-xs">R$ {(item.preco * item.quantidade).toFixed(2)}</p>
-                      <button onClick={() => removerItem(i)} className="text-red-500 hover:text-red-700 transition-colors">
-                        <i className="bi bi-trash3 text-xs"></i>
-                      </button>
-                    </div>
-                  </div>
+                  ) : (
+                    carrinho.map((item, i) => (
+                      <div key={i} className="flex gap-4 group border-b border-gray-50 pb-4">
+                        <div className="w-16 h-20 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0">
+                          <img src={item.img} className="w-full h-full object-cover" alt={item.nome} />
+                        </div>
+                        <div className="flex-1 flex flex-col justify-between py-1">
+                          <div>
+                            <p className="font-black text-[10px] uppercase leading-tight">{item.nome}</p>
+                            <p className="text-[9px] font-bold text-gray-400 mt-1 uppercase">
+                              Qtd: {item.quantidade}
+                            </p>
+                          </div>
+                          <div className="flex justify-between items-end">
+                            <p className="text-orange-600 font-black text-xs">R$ {(item.preco * item.quantidade).toFixed(2)}</p>
+                            <button 
+                              onClick={() => removerItem(i)} 
+                              className="text-red-500 hover:text-red-700 transition-colors"
+                            >
+                              <i className="bi bi-trash3 text-xs"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  )}
                 </div>
-              ))
-            )}
-          </div>
-        )}
+              )}
 
-        {etapaCheckout === 'metodo' && (
-          <div className="space-y-6 animate-in slide-in-from-right-4">
-             <button onClick={() => setEtapaCheckout('carrinho')} className="text-[9px] font-black uppercase text-gray-400 hover:text-black flex items-center gap-2 mb-4">
-               <i className="bi bi-arrow-left"></i> Voltar ao Carrinho
-             </button>
-             <h3 className="text-lg font-black uppercase italic text-black">Forma de <span className="text-orange-600">Pagamento</span></h3>
-             <div className="space-y-3">
-                <button onClick={() => setMetodoSelecionado('mercadopago')} className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodo === 'mercadopago' ? 'border-orange-600 bg-orange-50/30' : 'border-gray-50 bg-white'}`}>
-                  <span className="font-black text-[10px] uppercase tracking-widest">Cartão ou Pix</span>
-                  {metodo === 'mercadopago' && <i className="bi bi-check-circle-fill text-orange-600"></i>}
-                </button>
-                <button onClick={() => setMetodoSelecionado('crypto')} className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodo === 'crypto' ? 'border-purple-600 bg-purple-50/30' : 'border-gray-50 bg-white'}`}>
-                  <span className="font-black text-[10px] uppercase tracking-widest">Cripto (Rede Polygon)</span>
-                  {metodo === 'crypto' && <i className="bi bi-check-circle-fill text-purple-600"></i>}
-                </button>
-             </div>
-          </div>
-        )}
-      </div>
+              {etapaCheckout === 'metodo' && (
+                <div className="space-y-6 animate-in slide-in-from-right-4">
+                   <button onClick={() => setEtapaCheckout('carrinho')} className="text-[9px] font-black uppercase text-gray-400 hover:text-black flex items-center gap-2 mb-4">
+                     <i className="bi bi-arrow-left"></i> Voltar ao Carrinho
+                   </button>
+                   <h3 className="text-lg font-black uppercase italic text-black">Forma de <span className="text-orange-600">Pagamento</span></h3>
+                   <div className="space-y-3">
+                      <button 
+                        onClick={() => setMetodoSelecionado('mp')} 
+                        className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodoSelecionado === 'mp' ? 'border-orange-600 bg-orange-50/30' : 'border-gray-50 bg-white'}`}
+                      >
+                        <span className="font-black text-[10px] uppercase tracking-widest">Cartão ou Pix</span>
+                        {metodoSelecionado === 'mp' && <i className="bi bi-check-circle-fill text-orange-600"></i>}
+                      </button>
+                      <button 
+                        onClick={() => setMetodoSelecionado('cripto')} 
+                        className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodoSelecionado === 'cripto' ? 'border-purple-600 bg-purple-50/30' : 'border-gray-50 bg-white'}`}
+                      >
+                        <span className="font-black text-[10px] uppercase tracking-widest">Cripto (Polygon)</span>
+                        {metodoSelecionado === 'cripto' && <i className="bi bi-check-circle-fill text-purple-600"></i>}
+                      </button>
+                   </div>
+                </div>
+              )}
+            </div>
 
-      {/* RODAPÉ */}
-      <div className="p-8 bg-gray-50 border-t border-gray-100 mt-auto">
-        {etapaCheckout === 'carrinho' && (
-          <div className="mb-6">
-            <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Cálculo de Entrega</label>
-            <input 
-              type="text" placeholder="Insira seu CEP" maxLength={9}
-              className="w-full bg-white rounded-2xl p-4 font-bold text-xs outline-none focus:ring-2 focus:ring-orange-500 shadow-sm border-none"
-              value={dados.cep} onChange={e => handleCEP(e.target.value)}
-            />
-            {dados.endereco && (
-              <div className="mt-3 p-3 bg-white rounded-xl border border-gray-100 animate-in fade-in">
-                <p className="text-[9px] font-bold text-gray-500 uppercase leading-tight italic">
-                  <i className="bi bi-geo-alt-fill text-orange-600 mr-1"></i> {dados.endereco}
-                </p>
+            {/* RODAPÉ: CÁLCULO DE FRETE E RESUMO FINANCEIRO */}
+            <div className="p-8 bg-gray-50 border-t border-gray-100 mt-auto">
+              
+              {etapaCheckout === 'carrinho' && (
+                <div className="mb-6">
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Cálculo de Entrega</label>
+                  <input 
+                    type="text" placeholder="Insira seu CEP" maxLength={9}
+                    className="w-full bg-white rounded-2xl p-4 font-bold text-xs outline-none focus:ring-2 focus:ring-orange-500 shadow-sm border-none"
+                    value={dados.cep} onChange={e => handleCEP(e.target.value)}
+                  />
+                  {dados.endereco && (
+                    <div className="mt-3 p-3 bg-white rounded-xl border border-gray-100 animate-in fade-in">
+                      <p className="text-[9px] font-bold text-gray-500 uppercase leading-tight italic">
+                        <i className="bi bi-geo-alt-fill text-orange-600 mr-1"></i> {dados.endereco}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* RESUMO FINANCEIRO COMPLETO */}
+              <div className="space-y-2 mb-6 border-b border-gray-200 pb-4">
+                <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase">
+                  <span>Subtotal</span>
+                  <span className="text-gray-600 font-black">R$ {subtotal.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase">
+                  <span>Frete</span>
+                  <span className={`font-black ${frete === 0 ? 'text-green-600' : 'text-gray-600'}`}>
+                    {frete === null ? '--' : (frete === 0 ? 'GRÁTIS' : `R$ ${frete.toFixed(2)}`)}
+                  </span>
+                </div>
               </div>
-            )}
-          </div>
-        )}
 
-        <div className="space-y-2 mb-6 border-b border-gray-200 pb-4">
-          <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase">
-            <span>Subtotal</span>
-            <span className="text-gray-600 font-black">R$ {subtotal.toFixed(2)}</span>
-          </div>
-          <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase">
-            <span>Frete</span>
-            <span className={`font-black ${frete === 0 ? 'text-green-600' : 'text-gray-600'}`}>
-              {frete === null ? '--' : (frete === 0 ? 'GRÁTIS' : `R$ ${frete.toFixed(2)}`)}
-            </span>
+              <div className="flex justify-between text-xl font-black text-black uppercase mb-6">
+                <span>Total Geral</span>
+                <span className="text-orange-600">R$ {totalGeral.toFixed(2)}</span>
+              </div>
+
+              {/* BOTÃO DE AÇÃO PRINCIPAL CONECTADO AO SUPABASE */}
+              {etapaCheckout === 'carrinho' ? (
+                <button 
+                  disabled={carrinho.length === 0 || frete === null || !dados.endereco} 
+                  onClick={() => setEtapaCheckout('metodo')} 
+                  className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all disabled:opacity-20 shadow-xl shadow-black/10"
+                >
+                  {frete === null ? 'Aguardando CEP Válido' : 'Prosseguir para Pagamento'}
+                </button>
+              ) : (
+                <button 
+                  disabled={!metodoSelecionado || loading}
+                  onClick={processarPedidoFinal}
+                  className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 shadow-xl shadow-black/10"
+                >
+                  {loading ? (
+                    <i className="bi bi-arrow-repeat animate-spin text-lg"></i>
+                  ) : (
+                    `Finalizar R$ ${totalGeral.toFixed(2)}`
+                  )}
+                </button>
+              )}
+            </div>
+
           </div>
         </div>
-
-        <div className="flex justify-between text-xl font-black text-black uppercase mb-6">
-          <span>Total Geral</span>
-          <span className="text-orange-600">R$ {(subtotal + (frete || 0)).toFixed(2)}</span>
-        </div>
-
-        {etapaCheckout === 'carrinho' ? (
-          <button 
-            disabled={carrinho.length === 0 || frete === null || !dados.endereco} 
-            onClick={() => setEtapaCheckout('metodo')} 
-            className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all disabled:opacity-20 shadow-xl shadow-black/10"
-          >
-            {frete === null ? 'Aguardando CEP Válido' : 'Prosseguir para Pagamento'}
-          </button>
-        ) : (
-          <button 
-            disabled={!metodo || loading}
-            onClick={handleFinalizarCompra}
-            className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 shadow-xl shadow-black/10"
-          >
-            {loading ? <i className="bi bi-arrow-repeat animate-spin text-lg"></i> : `Finalizar R$ ${(subtotal + (frete || 0)).toFixed(2)}`}
-          </button>
-        )}
-      </div>
-    </div>
-  </div>
-)}
+  
 
 
       {/* FIM DO MODAL */}
