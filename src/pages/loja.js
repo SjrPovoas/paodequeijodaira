@@ -760,7 +760,7 @@ const handleCEP = async (v) => {
       </button>
     </div>
   </div>
-)}
+
 
       {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
