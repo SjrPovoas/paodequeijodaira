@@ -512,7 +512,25 @@ const validarEnderecoCrypto = (endereco) => {
 
 {/* INICIO DO MODAL DE CHECKOUT */}
 
- 
+ {/* 8. LISTAGEM DE PRODUTOS FINALIZA AQUI */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
+        {produtos.map(produto => (
+          <div key={produto.id} className="group">
+            <img src={produto.img} alt={produto.nome} className="w-full aspect-[3/4] object-cover rounded-3xl mb-4" />
+            <h3 className="text-[10px] font-black uppercase mb-1">{produto.nome}</h3>
+            <p className="text-orange-600 font-black">R$ {produto.preco.toFixed(2)}</p>
+            <button 
+              onClick={() => {
+                setCarrinho([...carrinho, { ...produto, quantidade: 1 }]);
+                setModalAberto(true);
+              }}
+              className="mt-2 w-full py-2 bg-black text-white text-[9px] font-black uppercase rounded-xl"
+            >
+              Adicionar ao Carrinho
+            </button>
+          </div>
+        ))}
+      </div>
 
 
       {/* --- MODAL DE CHECKOUT --- */}
@@ -662,11 +680,10 @@ const validarEnderecoCrypto = (endereco) => {
                     `Finalizar R$ ${totalGeral.toFixed(2)}`
                   )}
                 </button>
-              )}
             </div>
-
           </div>
         </div>
+      )}
   
 
 
