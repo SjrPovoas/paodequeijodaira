@@ -18,7 +18,7 @@ export default function Loja() {
 
   // --- 2. ESTADOS DO CHECKOUT ---
   const [etapaCheckout, setEtapaCheckout] = useState('carrinho'); // 'carrinho' ou 'metodo'
-  const [metodo, setMetodo] = useState(null); // 'mercadopago' ou 'crypto'
+  const [metodoSelecionado, setMetodoSelecionado] = useState(null); // 'mercadopago' ou 'crypto'
   const [frete, setFrete] = useState(null);
   const [dados, setDados] = useState({ 
     nome: '', 
@@ -29,6 +29,9 @@ export default function Loja() {
     complemento: '', 
     carteira_blockchain: '' 
   });
+   const totalGeral = useMemo(() => {
+    return subtotal + (frete || 0);
+  }, [subtotal, frete]); 
 
   // --- 3. CÁLCULOS OTIMIZADOS ---
   // Aqui é onde calculamos o valor total dos itens de forma segura
@@ -209,10 +212,6 @@ const validarEnderecoCrypto = (endereco) => {
     { id: 3, nome: 'Avental de Lona Pão de Queijo da Irá', preco: 85, img: '/imagens/avental.png', category: 'acessorios' },
     { id: 4, nome: 'Caneca Cerâmica Fosca do Pão de Queijo da Irá', preco: 42, img: '/imagens/caneca.png', category: 'acessorios' },
   ];
-
-    const totalGeral = useMemo(() => {
-    return subtotal + (frete || 0);
-  }, [subtotal, frete]);
 
   // Se o componente ainda não montou no cliente, não renderiza nada (evita erro de hidratação)
   if (!isMounted) return null;
