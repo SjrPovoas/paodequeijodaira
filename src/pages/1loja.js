@@ -40,11 +40,17 @@ export default function Loja() {
   // --- 2. CÁLCULOS OTIMIZADOS ---
   const subtotal = useMemo(() => {
     if (!Array.isArray(carrinho)) return 0;
-    return carrinho.reduce((acc, item) => acc + (Number(item?.preco || 0) * Number(item?.quantidade || 1)), 0);
+    return carrinho.reduce((acc, item) => {
+      const preco = Number(item?.preco) || 0;
+      const qtd = Number(item?.quantidade) || 1;
+      return acc + (preco * qtd);
+    }, 0);
   }, [carrinho]);
 
-  const totalGeral = subtotal + frete;
-
+  const totalGeral = useMemo(() => {
+    return subtotal + (frete || 0);
+  }, [subtotal, frete]);
+    
   // --- 3. PERSISTÊNCIA (LIFECYCLE) ---
   useEffect(() => {
     setIsMounted(true);
