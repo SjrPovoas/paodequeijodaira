@@ -162,7 +162,7 @@ const handleCEP = async (v) => {
       )}
       </button>
     </div>
-  });    
+  )};  
      
   // --- 5. GESTÃO DO CARRINHO ---
   const add = (p, tam = null) => {
@@ -637,6 +637,7 @@ const handleCEP = async (v) => {
                   )}
                 </div>
 
+{/* SEÇÃO DE ENTREGA NO CARRINHO */}
 <div className="mt-8 pt-8 border-t border-gray-100">
   <div className="mb-4">
     <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">
@@ -646,29 +647,32 @@ const handleCEP = async (v) => {
       type="text" 
       placeholder="00000-000"
       maxLength={9}
-      className={`w-full bg-gray-50 border-none rounded-xl p-4 font-bold text-xs outline-none transition-all ${
-        frete === null && dados.cep.length === 8 ? 'ring-2 ring-red-500/20' : 'focus:ring-2 focus:ring-orange-500'
-      }`}
+      className="w-full bg-gray-50 border-none rounded-xl p-4 font-bold text-xs focus:ring-2 focus:ring-orange-500 outline-none transition-all"
       value={dados.cep} 
       onChange={e => handleCEP(e.target.value)}
     />
     
-    {/* EXIBIÇÃO DO ENDEREÇO OU ERRO */}
-    {dados.endereco ? (
-      <div className="mt-4 animate-in fade-in duration-500">
+    {dados.endereco && (
+      <div className="mt-4 animate-in fade-in">
         <p className="text-[9px] font-bold uppercase text-gray-500 flex items-center gap-1 italic mb-2">
           <i className="bi bi-geo-alt-fill text-orange-600"></i> {dados.endereco}
         </p>
         <div className="flex justify-between text-[11px] font-bold text-orange-600 uppercase px-1">
-          <span>Custo de Entrega:</span>
-          <span>{frete === 0 ? 'Frete GRÁTIS' : `R$ ${frete?.toFixed(2)}`}</span>
+          <span>Frete:</span>
+          <span>{frete === 0 ? 'GRÁTIS' : (frete === null ? '---' : `R$ ${frete.toFixed(2)}`)}</span>
         </div>
       </div>
-    ) : dados.cep.length === 8 && (
-      <p className="text-[9px] mt-2 font-black text-red-500 uppercase italic">CEP Inválido para entrega.</p>
     )}
   </div>    
 
+  <button 
+    disabled={carrinho.length === 0 || frete === null || !dados.endereco} 
+    onClick={() => setEtapaCheckout('metodo')} 
+    className="w-full bg-black text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 shadow-xl shadow-black/10"
+  >
+    Prosseguir para Pagamento <i className="bi bi-arrow-right"></i>
+  </button>
+</div>
   {/* BOTÃO COM TRAVA LGPD E LOGÍSTICA */}
   <button 
     // TRAVA TRIPLA: Precisa ter itens, o frete tem que ser calculado (não null) e o endereço existir
