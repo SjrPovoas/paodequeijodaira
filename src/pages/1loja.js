@@ -139,7 +139,7 @@ export default function Loja() {
     
    // --- 7. INTEGRAÇÃO SUPABASE E MERCADO PAGO ---
    const processarPedidoFinal = async () => {
-    if (!dados.nome || !dados.email || !dados.endereco || !dados.cpf) {
+    if (!dados.nome || !dados.email || !dados.endereco) {
       alert("⚠️ Preencha os dados de contato e entrega.");
       return;
     }
@@ -603,7 +603,7 @@ export default function Loja() {
                   <div className="space-y-3">
                     <input type="text" placeholder="NOME COMPLETO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})} />
                     <input type="email" placeholder="SEU MELHOR E-MAIL" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.email} onChange={e => setDados({...dados, email: e.target.value})} />
-          <input type="text" placeholder="CPF" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.cpf} onChange={e => setDados({...dados, cpf: e.target.value})} />
+                                       {/*<input type="text" placeholder="CPF" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.cpf} onChange={e => setDados({...dados, cpf: e.target.value})} />*/}
                     <input type="text" placeholder="COMPLEMENTO" className="w-full bg-gray-50 rounded-2xl p-4 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" value={dados.complemento} onChange={e => setDados({...dados, complemento: e.target.value})} />
                   </div>
                   </div>
