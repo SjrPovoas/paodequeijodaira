@@ -512,29 +512,6 @@ const validarEnderecoCrypto = (endereco) => {
 
 {/* INICIO DO MODAL DE CHECKOUT */}
 
- {/* 8. LISTAGEM DE PRODUTOS FINALIZA AQUI */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
-        {produtos.map(produto => (
-          <div key={produto.id} className="group">
-            <img src={produto.img} alt={produto.nome} className="w-full aspect-[3/4] object-cover rounded-3xl mb-4" />
-            <h3 className="text-[10px] font-black uppercase mb-1">{produto.nome}</h3>
-            <p className="text-orange-600 font-black">R$ {produto.preco.toFixed(2)}</p>
-            <button 
-              onClick={() => {
-                setCarrinho([...carrinho, { ...produto, quantidade: 1 }]);
-                setModalAberto(true);
-              }}
-              className="mt-2 w-full py-2 bg-black text-white text-[9px] font-black uppercase rounded-xl"
-            >
-              Adicionar ao Carrinho
-            </button>
-          </div>
-        ))}
-      </div>
-
-
-      {/* --- MODAL DE CHECKOUT --- */}
-
 {/* --- MODAL DE CHECKOUT --- */}
       {modalAberto && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4">
@@ -556,14 +533,13 @@ const validarEnderecoCrypto = (endereco) => {
               </button>
             </div>
 
-            {/* ÁREA DE CONTEÚDO */}
+            {/* ÁREA DE CONTEÚDO (PRODUTOS / PAGAMENTO) */}
             <div className="flex-grow overflow-y-auto p-8 custom-scrollbar bg-white">
+              
               {etapaCheckout === 'carrinho' ? (
                 <div className="space-y-6">
                   {carrinho.length === 0 ? (
-                    <div className="text-center py-10 opacity-30">
-                      <p className="font-bold uppercase text-[10px]">O carrinho está vazio</p>
-                    </div>
+                    <div className="text-center py-10 opacity-30 italic font-black uppercase text-[10px]">O carrinho está vazio</div>
                   ) : (
                     carrinho.map((item, i) => (
                       <div key={i} className="flex gap-4 border-b border-gray-50 pb-4">
@@ -583,32 +559,34 @@ const validarEnderecoCrypto = (endereco) => {
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <button onClick={() => setEtapaCheckout('carrinho')} className="text-[9px] font-black uppercase text-gray-400 hover:text-black flex items-center gap-2 mb-4">
-                    <i className="bi bi-arrow-left"></i> Voltar ao Carrinho
-                  </button>
-                  <h3 className="text-lg font-black uppercase italic text-black">Forma de <span className="text-orange-600">Pagamento</span></h3>
-                  <div className="space-y-3">
-                    <button 
-                      onClick={() => setMetodoSelecionado('mp')} 
-                      className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodoSelecionado === 'mp' ? 'border-orange-600 bg-orange-50/30' : 'border-gray-50 bg-white'}`}
-                    >
-                      <span className="font-black text-[10px] uppercase tracking-widest">Cartão ou Pix</span>
-                      {metodoSelecionado === 'mp' && <i className="bi bi-check-circle-fill text-orange-600"></i>}
-                    </button>
-                    <button 
-                      onClick={() => setMetodoSelecionado('cripto')} 
-                      className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodoSelecionado === 'cripto' ? 'border-purple-600 bg-purple-50/30' : 'border-gray-50 bg-white'}`}
-                    >
-                      <span className="font-black text-[10px] uppercase tracking-widest">Cripto (Polygon)</span>
-                      {metodoSelecionado === 'cripto' && <i className="bi bi-check-circle-fill text-purple-600"></i>}
-                    </button>
-                  </div>
+                   <button onClick={() => setEtapaCheckout('carrinho')} className="text-[9px] font-black uppercase text-gray-400 hover:text-black flex items-center gap-2 mb-4">
+                     <i className="bi bi-arrow-left"></i> Voltar ao Carrinho
+                   </button>
+                   <h3 className="text-lg font-black uppercase italic text-black">Forma de <span className="text-orange-600">Pagamento</span></h3>
+                   <div className="space-y-3">
+                      <button 
+                        onClick={() => setMetodoSelecionado('mp')} 
+                        className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodoSelecionado === 'mp' ? 'border-orange-600 bg-orange-50/30' : 'border-gray-50 bg-white'}`}
+                      >
+                        <span className="font-black text-[10px] uppercase tracking-widest">Cartão ou Pix</span>
+                        {metodoSelecionado === 'mp' && <i className="bi bi-check-circle-fill text-orange-600"></i>}
+                      </button>
+
+                      <button 
+                        onClick={() => setMetodoSelecionado('cripto')} 
+                        className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodoSelecionado === 'cripto' ? 'border-purple-600 bg-purple-50/30' : 'border-gray-50 bg-white'}`}
+                      >
+                        <span className="font-black text-[10px] uppercase tracking-widest">Cripto (Polygon)</span>
+                        {metodoSelecionado === 'cripto' && <i className="bi bi-check-circle-fill text-purple-600"></i>}
+                      </button>
+                   </div>
                 </div>
               )}
             </div>
 
-            {/* RODAPÉ */}
+            {/* RODAPÉ: CÁLCULO E FINALIZAÇÃO */}
             <div className="p-8 bg-gray-50 border-t border-gray-100 mt-auto">
+              
               {etapaCheckout === 'carrinho' && (
                 <div className="mb-6">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Cálculo de Entrega</label>
@@ -618,8 +596,10 @@ const validarEnderecoCrypto = (endereco) => {
                     value={dados.cep} onChange={e => handleCEP(e.target.value)}
                   />
                   {dados.endereco && (
-                    <div className="mt-3 p-3 bg-white rounded-xl border border-gray-100 italic text-[9px] font-bold text-gray-500 uppercase">
-                      <i className="bi bi-geo-alt-fill text-orange-600 mr-1"></i> {dados.endereco}
+                    <div className="mt-3 p-3 bg-white rounded-xl border border-gray-100">
+                      <p className="text-[9px] font-bold text-gray-500 uppercase leading-tight italic">
+                        <i className="bi bi-geo-alt-fill text-orange-600 mr-1"></i> {dados.endereco}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -641,6 +621,7 @@ const validarEnderecoCrypto = (endereco) => {
                 <span className="text-orange-600">R$ {totalGeral.toFixed(2)}</span>
               </div>
 
+              {/* LÓGICA DE BOTÕES POR ETAPA E MÉTODO */}
               {etapaCheckout === 'carrinho' ? (
                 <button 
                   disabled={carrinho.length === 0 || frete === null || !dados.endereco} 
@@ -650,99 +631,68 @@ const validarEnderecoCrypto = (endereco) => {
                   {frete === null ? 'Aguardando CEP' : 'Prosseguir para Pagamento'}
                 </button>
               ) : (
-                <button 
-                  disabled={!metodoSelecionado || loading}
-                  onClick={processarPedidoFinal}
-                  className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 shadow-xl shadow-black/10"
-                >
-                  {loading ? (
-                    <i className="bi bi-arrow-repeat animate-spin text-lg"></i>
+                <>
+                  {metodoSelecionado === 'cripto' ? (
+                    /* AQUI ENTRA O SEU COMPONENTE WEB3 */
+                    <Botaopagamentoweb3 
+                      valor={totalGeral} 
+                      onSuccess={processarPedidoFinal} 
+                      loading={loading}
+                    />
                   ) : (
-                    `Finalizar R$ ${totalGeral.toFixed(2)}`
+                    /* BOTÃO PADRÃO MERCADO PAGO */
+                    <button 
+                      disabled={!metodoSelecionado || loading}
+                      onClick={processarPedidoFinal}
+                      className="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 shadow-xl shadow-black/10"
+                    >
+                      {loading ? <i className="bi bi-arrow-repeat animate-spin text-lg"></i> : `Finalizar R$ ${totalGeral.toFixed(2)}`}
+                    </button>
                   )}
-                </button>
+                </>
               )}
             </div>
           </div>
         </div>
       )}
 
-      {/* FIM DO MODAL */}
-
-      {/* FOOTER */}
+     {/* 7. FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:justify-between mb-16">
-
-            {/* COLUNA 1: LOGO E REDES SOCIAIS */}
             <div className="flex flex-col items-center md:items-start space-y-4">
-              {/* LOGO */}
-              <Link href="/">
-                <img src="/logo-paodequeijodaira.jpg" className="h-20 cursor-pointer" alt="Logo" />
-              </Link>
-              {/* REDES SOCIAIS */}
+              <Link href="/"><img src="/logo-paodequeijodaira.jpg" className="h-20 cursor-pointer" alt="Logo" /></Link>
               <div className="flex gap-4">
                 <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></Link>
                 <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></Link>
                 <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-youtube"></i></Link>
               </div>
             </div>
-
-            {/* COLUNA 2: AJUDA & SUPORTE */}
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Ajuda & Suporte</h4>
               <div className="space-y-4">
-                <Link href="/pedidos" className="text-orange-500 flex items-center justify-center md:justify-start gap-2 group">
-                  <i className="bi bi-box-seam text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold tracking-widest group:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
-                </Link>
-                <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-2 group">
-                  <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p>
-                </Link>
-                <Link href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center justify-center md:justify-start gap-3 group">
-                  <i className="bi bi-whatsapp text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Fale Conosco</p>
-                </Link>
+                <Link href="/pedidos" className="flex items-center justify-center md:justify-start gap-2 group"><i className="bi bi-box-seam text-orange-600 text-lg"></i><p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Rastrear Pedido</p></Link>
+                <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-2 group"><i className="bi bi-arrow-left-right text-orange-600 text-lg"></i><p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Trocas e Devoluções</p></Link>
+                <Link href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center justify-center md:justify-start gap-3 group"><i className="bi bi-whatsapp text-orange-600 text-lg"></i><p className="text-xs font-bold tracking-widest group-hover:text-orange-600 transition-colors pt-1">Fale Conosco</p></Link>
               </div>
             </div>
-
-            {/* COLUNA 3: FUNCIONAMENTO & LOCALIZAÇÃO */}
             <div className="text-center md:text-left space-y-4">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Funcionamento & Retirada</h4>
-              <div className="flex items-start justify-center md:justify-start gap-3">
-                <i className="bi bi-clock text-orange-600 text-lg"></i>
-                <p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p>
-              </div>
-              <div className="pt-2">
-                <Link href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
-                  <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>        
-                  <p className="text-sm text-gray-600 leading-relaxed text-left">
-                    Quadra 4 Lote 26 Condomínio Flores do Cerrado II. Recreio Mossoró - Cidade Ocidental-GO</p>
-                </Link>
-              </div>
+              <div className="flex items-start justify-center md:justify-start gap-3"><i className="bi bi-clock text-orange-600 text-lg"></i><p className="text-sm text-gray-600 leading-tight">Seg a Sáb: 08:00 às 18:00<br />Dom: 08:00 às 12:00</p></div>
+              <div className="pt-2"><Link href="#" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group"><i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i><p className="text-sm text-gray-600 leading-relaxed text-left">Quadra 4 Lote 26 Condomínio Flores do Cerrado II<br />Recreio Mossoró - Cidade Ocidental-GO</p></Link></div>
             </div>
-
-            {/* COLUNA 4: INSTITUCIONAL & DIREITOS */}
             <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
-              <h3 className="text-[14px] text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>    
+              <h3 className="text-[14px] text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>
               <div className="flex flex-row items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">
-                <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group">
-                  Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
-                </Link>
-                <span className="text-gray-200">|</span>
-                <Link href="/privacidade" className="hover:text-black flex items-center gap-1 transition-colors group">
-                  Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
-                </Link>
-              </div> 
+                <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group">Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i></Link><span className="text-gray-200">|</span>
+                <Link href="/privacidade" className="hover:text-black flex items-center gap-1 transition-colors group">Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i></Link>
+              </div>
               <p className="text-[9px] pt-2 font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">© 2026 - Todos os direitos reservados.</p>
             </div>
           </div>
-
-          {/* ASSINATURA */}
           <div className="pt-8 border-t border-gray-50 text-center">
-            <a href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</a>
+            <Link href="https://sjrpovoas.vercel.app" target="_blank" className="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 hover:text-orange-600 transition-all">Desenvolvido por SjrPovoaS</Link>
           </div>
         </div>
       </footer>
