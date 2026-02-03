@@ -19,7 +19,6 @@ export default function Loja() {
   const [menuMobileAberto, setMenuMobileAberto] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false); // Evita erros de hidratação (SSR vs Client)
-  const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
   const [metodo, setMetodo] = useState(null);
 
   // Controle de Navegação do Checkout
@@ -542,9 +541,8 @@ const handleCEP = async (v) => {
         </button>
       </div>
 
-      {/* ÁREA DE CONTEÚDO (PRODUTOS / PAGAMENTO) */}
+      {/* CONTEÚDO */}
       <div className="flex-grow overflow-y-auto p-8 custom-scrollbar bg-white">
-        
         {etapaCheckout === 'carrinho' && (
           <div className="space-y-6 animate-in slide-in-from-left-4">
             {carrinho.length === 0 ? (
@@ -561,16 +559,11 @@ const handleCEP = async (v) => {
                   <div className="flex-1 flex flex-col justify-between py-1">
                     <div>
                       <p className="font-black text-[10px] uppercase leading-tight">{item.nome}</p>
-                      <p className="text-[9px] font-bold text-gray-400 mt-1 uppercase">
-                        Qtd: {item.quantidade}
-                      </p>
+                      <p className="text-[9px] font-bold text-gray-400 mt-1 uppercase">Qtd: {item.quantidade}</p>
                     </div>
                     <div className="flex justify-between items-end">
                       <p className="text-orange-600 font-black text-xs">R$ {(item.preco * item.quantidade).toFixed(2)}</p>
-                      <button 
-                        onClick={() => removerItem(i)} 
-                        className="text-red-500 hover:text-red-700 transition-colors"
-                      >
+                      <button onClick={() => removerItem(i)} className="text-red-500 hover:text-red-700 transition-colors">
                         <i className="bi bi-trash3 text-xs"></i>
                       </button>
                     </div>
@@ -584,7 +577,7 @@ const handleCEP = async (v) => {
         {etapaCheckout === 'metodo' && (
           <div className="space-y-6 animate-in slide-in-from-right-4">
              <button onClick={() => setEtapaCheckout('carrinho')} className="text-[9px] font-black uppercase text-gray-400 hover:text-black flex items-center gap-2 mb-4">
-               <i className="bi bi-arrow-left"></i> ← Voltar ao Carrinho 🛒 
+               <i className="bi bi-arrow-left"></i> Voltar ao Carrinho
              </button>
              <h3 className="text-lg font-black uppercase italic text-black">Forma de <span className="text-orange-600">Pagamento</span></h3>
              <div className="space-y-3">
@@ -601,9 +594,8 @@ const handleCEP = async (v) => {
         )}
       </div>
 
-      {/* RODAPÉ: CÁLCULO DE FRETE E RESUMO FINANCEIRO */}
+      {/* RODAPÉ */}
       <div className="p-8 bg-gray-50 border-t border-gray-100 mt-auto">
-        
         {etapaCheckout === 'carrinho' && (
           <div className="mb-6">
             <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Cálculo de Entrega</label>
@@ -622,7 +614,6 @@ const handleCEP = async (v) => {
           </div>
         )}
 
-        {/* RESUMO FINANCEIRO */}
         <div className="space-y-2 mb-6 border-b border-gray-200 pb-4">
           <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase">
             <span>Subtotal</span>
@@ -641,7 +632,6 @@ const handleCEP = async (v) => {
           <span className="text-orange-600">R$ {(subtotal + (frete || 0)).toFixed(2)}</span>
         </div>
 
-        {/* BOTÃO DE AÇÃO PRINCIPAL */}
         {etapaCheckout === 'carrinho' ? (
           <button 
             disabled={carrinho.length === 0 || frete === null || !dados.endereco} 
@@ -660,10 +650,10 @@ const handleCEP = async (v) => {
           </button>
         )}
       </div>
-
     </div>
   </div>
 )}
+
 
       {/* FIM DO MODAL */}
 
