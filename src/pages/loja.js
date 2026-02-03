@@ -521,6 +521,7 @@ const handleCEP = async (v) => {
             </section>
 
 {/* INICIO DO MODAL DE CHECKOUT */}
+
 {modalAberto && (
   <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300">
     <div className="bg-white w-full max-w-lg h-[90vh] rounded-[40px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in duration-300">
@@ -529,7 +530,7 @@ const handleCEP = async (v) => {
       <div className="p-8 flex justify-between items-center border-b border-gray-50 bg-white">
         <div>
           <h2 className="text-2xl font-black uppercase italic tracking-tighter text-black">
-            Seu <span className="text-orange-600">Carrinho</span>
+            Seu <span className="text-orange-600">Carrinho 🛒</span>
           </h2>
           <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mt-1">Lifestyle & Web3 Ecosystem</p>
         </div>
@@ -583,16 +584,16 @@ const handleCEP = async (v) => {
         {etapaCheckout === 'metodo' && (
           <div className="space-y-6 animate-in slide-in-from-right-4">
              <button onClick={() => setEtapaCheckout('carrinho')} className="text-[9px] font-black uppercase text-gray-400 hover:text-black flex items-center gap-2 mb-4">
-               <i className="bi bi-arrow-left"></i> Voltar ao Carrinho
+               <i className="bi bi-arrow-left"></i> ← Voltar ao Carrinho 🛒 
              </button>
              <h3 className="text-lg font-black uppercase italic text-black">Forma de <span className="text-orange-600">Pagamento</span></h3>
              <div className="space-y-3">
-                <button onClick={() => setMetodo('mercadopago')} className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodo === 'mercadopago' ? 'border-orange-600 bg-orange-50/30' : 'border-gray-50 bg-white'}`}>
+                <button onClick={() => setMetodoSelecionado('mercadopago')} className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodo === 'mercadopago' ? 'border-orange-600 bg-orange-50/30' : 'border-gray-50 bg-white'}`}>
                   <span className="font-black text-[10px] uppercase tracking-widest">Cartão ou Pix</span>
                   {metodo === 'mercadopago' && <i className="bi bi-check-circle-fill text-orange-600"></i>}
                 </button>
-                <button onClick={() => setMetodo('crypto')} className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodo === 'crypto' ? 'border-purple-600 bg-purple-50/30' : 'border-gray-50 bg-white'}`}>
-                  <span className="font-black text-[10px] uppercase tracking-widest">Cripto (Polygon)</span>
+                <button onClick={() => setMetodoSelecionado('crypto')} className={`w-full p-5 rounded-3xl border-2 transition-all flex items-center justify-between ${metodo === 'crypto' ? 'border-purple-600 bg-purple-50/30' : 'border-gray-50 bg-white'}`}>
+                  <span className="font-black text-[10px] uppercase tracking-widest">Cripto (Rede Polygon)</span>
                   {metodo === 'crypto' && <i className="bi bi-check-circle-fill text-purple-600"></i>}
                 </button>
              </div>
@@ -621,7 +622,7 @@ const handleCEP = async (v) => {
           </div>
         )}
 
-        {/* RESUMO FINANCEIRO COMPLETO (SOLICITADO) */}
+        {/* RESUMO FINANCEIRO */}
         <div className="space-y-2 mb-6 border-b border-gray-200 pb-4">
           <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase">
             <span>Subtotal</span>
