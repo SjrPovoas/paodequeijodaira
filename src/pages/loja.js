@@ -34,7 +34,7 @@ export default function Loja() {
   
   // Dados do Formulário
   const [dados, setDados] = useState({ nome: '', email: '', cpf: '', cep: '', endereco: '', complemento: '', carteira_blockchain: '' });
-  const [frete, setFrete] = useState(0);
+  const [frete, setFrete] = useState(null);
 
   // --- 2. CÁLCULOS OTIMIZADOS (useMemo) ---
   // Impede que o app quebre se 'carrinho' não for um array e garante precisão numérica
@@ -81,37 +81,89 @@ export default function Loja() {
 
 // CÁLCULO DE ENTREGA INSIRA SEU CEP
     const handleCEP = async (v) => {
-    const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
-    setDados(prev => ({ ...prev, cep: cepLimpo }));
-    
-    if (cepLimpo.length === 8) {
-      try {
-        const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
-        const json = await res.json();
-        
-        if (json && !json.erro) {
-          const endFormatado = `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`;
-          
-          setDados(prev => ({ ...prev, endereco: endFormatado }));
-          
-          const regiao = cepLimpo.substring(0, 2);
-          const freteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
-          
-          // Lógica de Frete Grátis (500 Reais)
-          setFrete(subtotal >= VALOR_FRETE_GRATIS ? 0 : freteBase);
-
-         } else {
-           alert("❌ CEP não encontrado. Por favor, verifique.");
-           setDados(prev => ({ ...prev, endereco: '' }));
-           setFrete(null); // MUDE DE 0 PARA NULL (Trava o botão)
-           }
-        } catch (e) { 
-           console.error("Erro ao buscar CEP:", e);
-           setFrete(null); // MUDE DE 0 PARA NULL
-        }
-      }
-    };
+const handleCEP = async (v) => {
+  const cepLimpo = v.replace(/\D/g, '').substring(0, 8);
+  setDados(prev => ({ ...prev, cep: cepLimpo }));
   
+  // Enquanto o CEP não tem 8 dígitos, resetamos o frete para null (trava o botão)
+  if (cepLimpo.length < 8) {
+    setFrete(null);
+    setDados(prev => ({ ...prev, endereco: '' }));
+    return;
+  }
+
+  try {
+    const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+    const json = await res.json();
+    
+    if (json && !json.erro) {
+      const endFormatado = `${json.logradouro}, ${json.bairro} - ${json.localidade}/${json.uf}`;
+      setDados(prev => ({ ...prev, endereco: endFormatado }));
+      
+      // Cálculo de Região
+      const regiao = cepLimpo.substring(0, 2);
+      const freteBase = ["70", "71", "72", "73"].includes(regiao) ? 25 : 50;
+      
+      // Lógica de Frete Grátis Baseada no Subtotal
+      const VALOR_FRETE_GRATIS = 500;
+      setFrete(subtotal >= VALOR_FRETE_GRATIS ? 0 : freteBase);
+    } else {
+      // ERRO: CEP não existe
+      setFrete(null); // Trava o botão
+      setDados(prev => ({ ...prev, endereco: '' }));
+      alert("❌ CEP não encontrado. Por favor, confira os números.");
+    }
+  } catch (e) { 
+    console.error("Erro ao buscar CEP:", e);
+    setFrete(null); 
+  }
+};
+
+<div className="mt-8 pt-8 border-t border-gray-100">
+  <div className="mb-4">
+    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">
+      CÁLCULO DE ENTREGA (INSIRA SEU CEP)
+    </label>
+    <input 
+      type="text" 
+      placeholder="00000-000"
+      maxLength={9}
+      className={`w-full bg-gray-50 border-none rounded-xl p-4 font-bold text-xs outline-none transition-all ${
+        frete === null && dados.cep.length === 8 ? 'ring-2 ring-red-500/20' : 'focus:ring-2 focus:ring-orange-500'
+      }`}
+      value={dados.cep} 
+      onChange={e => handleCEP(e.target.value)}
+    />
+    
+    {/* EXIBIÇÃO DO ENDEREÇO OU ERRO */}
+    {dados.endereco ? (
+      <div className="mt-4 animate-in fade-in duration-500">
+        <p className="text-[9px] font-bold uppercase text-gray-500 flex items-center gap-1 italic mb-2">
+          <i className="bi bi-geo-alt-fill text-orange-600"></i> {dados.endereco}
+        </p>
+        <div className="flex justify-between text-[11px] font-bold text-orange-600 uppercase px-1">
+          <span>Custo de Entrega:</span>
+          <span>{frete === 0 ? 'Frete GRÁTIS' : `R$ ${frete?.toFixed(2)}`}</span>
+        </div>
+      </div>
+       ) : dados.cep.length === 8 && (
+           <p className="text-[9px] mt-2 font-black text-red-500 uppercase italic">CEP Inválido para entrega.</p>
+         )}
+      </div>    
+
+      {/* BOTÃO COM TRAVA LGPD E LOGÍSTICA */}
+      <button 
+      // TRAVA TRIPLA: Precisa ter itens, o frete tem que ser calculado (não null) e o endereço existir
+      disabled={carrinho.length === 0 || frete === null || !dados.endereco} 
+      onClick={() => setEtapaCheckout('metodo')} 
+      className="w-full bg-black text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 disabled:grayscale shadow-xl shadow-black/10 active:scale-95">
+      {frete === null ? 'Aguardando CEP Válido' : (
+         <>Prosseguir para Pagamento <i className="bi bi-arrow-right"></i></>
+      )}
+      </button>
+    </div>
+  });    
+     
   // --- 5. GESTÃO DO CARRINHO ---
   const add = (p, tam = null) => {
     // Validação de tamanho para vestuário
@@ -585,33 +637,51 @@ export default function Loja() {
                   )}
                 </div>
 
-                <div className="mt-8 pt-8 border-t border-gray-100">
-                  <div className="mb-4">
-                    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">CÁLCULO DE ENTREGA (INSIRA SEU CEP)</label>
-                    <input 
-                      type="text" 
-                      placeholder="00000-000"
-                      maxLength={9}
-                      className="w-full bg-gray-50 border-none rounded-xl p-4 font-bold text-xs focus:ring-2 focus:ring-orange-500 outline-none transition-all"
-                      value={dados.cep} 
-                      onChange={e => handleCEP(e.target.value)}
-                    />
-                    {dados.endereco && (
-                      <p className="text-[9px] mt-2 font-bold uppercase text-gray-500 flex items-center gap-1 italic">
-                        <i className="bi bi-geo-alt-fill text-orange-600"></i> {dados.endereco}
-                      </p>
-                    )}
-                     <div className="flex justify-between text-[11px] font-bold text-orange-600 uppercase mb-4 px-1">
-                       <span>Frete:</span>
-                       <span>{frete === 0 ? 'GRÁTIS' : `R$ ${frete.toFixed(2)}`}</span>
-                     </div>
-                  </div>    
-                 <button disabled={carrinho.length === 0 || !dados.cep} onClick={() => setEtapaCheckout('metodo')} className="w-full bg-black text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 shadow-xl shadow-black/10">
-                    Prosseguir para Pagamento <i className="bi bi-arrow-right"></i>
-                  </button>
-                </div>
-              </div>
-            )}
+<div className="mt-8 pt-8 border-t border-gray-100">
+  <div className="mb-4">
+    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2 block">
+      CÁLCULO DE ENTREGA (INSIRA SEU CEP)
+    </label>
+    <input 
+      type="text" 
+      placeholder="00000-000"
+      maxLength={9}
+      className={`w-full bg-gray-50 border-none rounded-xl p-4 font-bold text-xs outline-none transition-all ${
+        frete === null && dados.cep.length === 8 ? 'ring-2 ring-red-500/20' : 'focus:ring-2 focus:ring-orange-500'
+      }`}
+      value={dados.cep} 
+      onChange={e => handleCEP(e.target.value)}
+    />
+    
+    {/* EXIBIÇÃO DO ENDEREÇO OU ERRO */}
+    {dados.endereco ? (
+      <div className="mt-4 animate-in fade-in duration-500">
+        <p className="text-[9px] font-bold uppercase text-gray-500 flex items-center gap-1 italic mb-2">
+          <i className="bi bi-geo-alt-fill text-orange-600"></i> {dados.endereco}
+        </p>
+        <div className="flex justify-between text-[11px] font-bold text-orange-600 uppercase px-1">
+          <span>Custo de Entrega:</span>
+          <span>{frete === 0 ? 'Frete GRÁTIS' : `R$ ${frete?.toFixed(2)}`}</span>
+        </div>
+      </div>
+    ) : dados.cep.length === 8 && (
+      <p className="text-[9px] mt-2 font-black text-red-500 uppercase italic">CEP Inválido para entrega.</p>
+    )}
+  </div>    
+
+  {/* BOTÃO COM TRAVA LGPD E LOGÍSTICA */}
+  <button 
+    // TRAVA TRIPLA: Precisa ter itens, o frete tem que ser calculado (não null) e o endereço existir
+    disabled={carrinho.length === 0 || frete === null || !dados.endereco} 
+    onClick={() => setEtapaCheckout('metodo')} 
+    className="w-full bg-black text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-20 disabled:grayscale shadow-xl shadow-black/10 active:scale-95"
+  >
+    {frete === null ? 'Aguardando CEP Válido' : (
+      <>Prosseguir para Pagamento <i className="bi bi-arrow-right"></i></>
+    )}
+  </button>
+</div>
+     )}
 
             {/* ETAPA 2: ESCOLHA DO MÉTODO */}
             {etapaCheckout === 'metodo' && (
