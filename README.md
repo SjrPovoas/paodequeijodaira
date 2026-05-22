@@ -72,6 +72,19 @@ Você pode fazer isso com os seguintes comandos, substituindo "Seu Nome" e "seu@
 ```
   git push -u origin main
 ```
+6. Rodar aplicação localmente.
+```
+  npm run dev
+```
+7. Parar o terminal
+```
+  CTRL + C
+```
+8. Verificar Alterações (Antes do Commit). Veja exatamente o que mudou em cada arquivo. 
+```
+  git diff
+```
+
 
 Esses são apenas alguns dos comandos mais comuns do **Git** que você pode usar na linha de comando.
 ```
@@ -109,6 +122,9 @@ npm install @emailjs/browser
 ```
 npm install resend
 ```
+```
+npm install swiper
+```
 
 ---
 ## 2. TECNOLOGIAS USADAS
@@ -116,8 +132,8 @@ npm install resend
 <details>
 <summary>FRONTEND</summary>
 <ul>
-<li>HTML</li>
-<li>CSS</li>
+<li>NEXT.JS</li>
+<li>TAILWIND</li>
 </ul>
 </details>
 
@@ -125,6 +141,11 @@ npm install resend
 <summary>BACKEND</summary>
 <ul>
 <li>JAVASCRIPT</li>
+<li>BREVO (formulários de captura, Criação de fluxos de trabalho automatizados para entrega dos E-books e organizar o funil de vendas - CRM</li>
+<li>SUPABASE (Banco de Dados da Loja LyfeStyle)</li>
+<li>RESEND (Painel ADM - recuperação de senha e confirmação de cadastro)</li>
+<li>MELHORENVIO (Plataforma gratuita de Logística para calcular, comparar e gerar etiqueta de envio)</li>
+<li>(Painel ADMIN) [https://paodequeijodaira.vercel.app/admin/login]</li>
 </ul>
 </details>
 
@@ -180,5 +201,5 @@ Antônia Iraleide | Fundadora | X | X | X | [@paodequeijodaira](https://www.inst
 
 
 <p align="center">
-  &COPY; 2025 Pão de Queijo da Irá
+  &COPY; 2025-2026 Pão de Queijo da Irá
 </p>

@@ -1,7 +1,10 @@
+// src/pages/api/checkout-mp.js
+
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
+// Inicializa o Mercado Pago com o seu Access Token seguro do ambiente
 const client = new MercadoPagoConfig({ 
-  accessToken: process.env.MP_ACCESS_TOKEN 
+  accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN || 'SEU_ACCESS_TOKEN_AQUI' 
 });
 
 export default async function handler(req, res) {
@@ -10,83 +13,63 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { itens, email, frete, cpf, pedidoId, nome } = req.body;
+    const { pedidoId, itens, frete, nome, email, cpf } = req.body;
 
-    if (!itens || !email || !nome) {
-      return res.status(400).json({ error: "Dados insuficientes para gerar o pagamento." });
-    }
+    // 1. MAPEIA O SEU CARRINHO PARA O PADRÃO EXIGIDO PELO MERCADO PAGO
+    const itemsFormatados = itens.map((item) => {
+      // Garante que o preço unitário seja extraído corretamente
+      const precoUnitario = Number(item.preco || item.price || 0);
+      
+      return {
+        id: String(item.id || Math.random()),
+        title: item.nome || item.title || "Produto da Loja",
+        quantity: Number(item.quantidade || item.quantity || 1),
+        unit_price: precoUnitario,
+        currency_id: 'BRL',
+      };
+    });
 
-    // 1. Formatação dos Itens
-    const itemsMP = itens.map(item => ({
-      id: String(item.id || 'prod'),
-      title: `${item.nome}${item.tam ? ' (Tam: ' + item.tam + ')' : ''}`, // Ajustado para 'tam' que usamos no banco
-      unit_price: Number(item.preco),
-      quantity: Number(item.quantidade || 1),
-      currency_id: 'BRL'
-    }));
-
-    // 2. Adiciona o Frete
+    // 2. ADICIONA O FRETE COMO UM ITEM INDEPENDENTE NO CHECKOUT
     if (frete && Number(frete) > 0) {
-      itemsMP.push({
-        id: 'custo-frete',
+      itemsFormatados.push({
+        id: 'frete-entrega',
         title: 'Taxa de Entrega / Frete',
-        unit_price: Number(frete),
         quantity: 1,
-        currency_id: 'BRL'
+        unit_price: Number(frete),
+        currency_id: 'BRL',
       });
     }
 
-    // 3. Tratamento de Nome
-    const nomePartes = nome.trim().split(' ');
-    const firstName = nomePartes[0];
-    const lastName = nomePartes.length > 1 ? nomePartes.slice(1).join(' ') : 'Cliente';
-
+    // 3. CONFIGURA A PREFERÊNCIA DE COMPRA
     const preference = new Preference(client);
-
-    // 4. Construção da Preferência
-    const preferenceData = {
+    const resultado = await preference.create({
       body: {
-        items: itemsMP,
+        items: itemsFormatados,
         payer: {
-          email: email.toLowerCase().trim(),
-          first_name: firstName,
-          last_name: lastName,
+          name: nome,
+          email: email,
+          identification: {
+            type: 'CPF',
+            number: cpf ? cpf.replace(/\D/g, '') : '', // Remove pontos e traços do CPF
+          },
         },
-        // O external_reference é o nosso pedidoId do Supabase
-        external_reference: String(pedidoId), 
         back_urls: {
-          // ADICIONADO: ?payment_id ao final para o arquivo sucesso.js identificar que veio do MP
-          success: `${process.env.NEXT_PUBLIC_SITE_URL}/sucesso?pedido=${pedidoId}`,
-          failure: `${process.env.NEXT_PUBLIC_SITE_URL}/loja`,
-          pending: `${process.env.NEXT_PUBLIC_SITE_URL}/pendente`,
+          success: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/loja?etapa=sucesso&pedido=${pedidoId}`,
+          failure: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/loja?etapa=falha`,
+          pending: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/loja?etapa=pendente`,
         },
-        auto_return: "approved",
-        statement_descriptor: "LOJA LIFESTYLE E ACESSORIOS | PAO DE QUEIJO DA IRA",
-        payment_methods: {
-          installments: 12,
-        },
-        // Isso garante que o MP envie os dados da transação de volta
-        notification_url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/webhooks/mercadopago`,
-      }
-    };
+        auto_return: 'approved',
+        external_reference: String(pedidoId),
+      },
+    });
 
-    // 5. CPF (Somente se válido)
-    const cpfLimpo = cpf ? cpf.replace(/\D/g, '') : '';
-    if (cpfLimpo.length === 11) {
-      preferenceData.body.payer.identification = {
-        type: 'CPF',
-        number: cpfLimpo
-      };
-    }
-
-    const response = await preference.create(preferenceData);
-
-    return res.status(200).json({ init_point: response.init_point });
+    // 4. RETORNA O LINK DE REDIRECIONAMENTO CORRETO
+    return res.status(200).json({ init_point: resultado.init_point });
 
   } catch (error) {
-    console.error("Erro detalhado Mercado Pago:", error);
+    console.error('❌ Erro na API do Mercado Pago:', error);
     return res.status(500).json({ 
-      error: "Erro ao gerar pagamento",
+      error: 'Erro ao criar a preferência de pagamento.', 
       details: error.message 
     });
   }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset 
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
-    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+    xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
     <url>
         <loc>https://paodequeijodaira.vercel.app/</loc>
@@ -33,8 +34,21 @@
             <image:loc>https://paodequeijodaira.vercel.app/imagens/criar-negocio.webp</image:loc>
             <image:title>Crie seu Negócio com Pão de Queijo da Irá</image:title>
         </image:image>
-        <lastmod>2026-01-21T12:00:04+00:00</lastmod> 
+        <lastmod>2026-05-21T12:19:04+00:00</lastmod> 
         <priority>1.00</priority>
+    </url>
+    <url>
+        <loc>https://paodequeijodaira.vercel.app/</loc>
+        <video:video>
+            <video:thumbnail_loc>https://paodequeijodaira.vercel.app/imagens/imagem-hero.png</video:thumbnail_loc>
+            <video:title>Como preparar o Pão de Queijo da Irá</video:title>
+            <video:description>VSL Institucional do Pão de Queijo da Irá</video:description>
+            <video:content_loc>https://paodequeijodaira.vercel.app/videos/video1-institucional.mp4</video:content_loc>
+            <video:player_loc>https://paodequeijodaira.vercel.app/</video:player_loc>
+            <video:duration>13</video:duration>
+            <lastmod>2026-05-21T12:19:04+00:00</lastmod> 
+            <priority>1.00</priority>
+        </video:video>
     </url>
     <url>
         <loc>https://paodequeijodaira.vercel.app/loja</loc>
@@ -43,7 +57,7 @@
             <image:title>T-Shirt Logo Pão de Queijo da Irá (Masc)</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://paodequeijodaira.vercel.app/imagens/camiseta1.png</image:loc>
+            <image:loc>https://paodequeijodaira.vercel.app/imagens/camiseta2.png</image:loc>
             <image:title>T-Shirt Logo Pão de Queijo da Irá (Fem)</image:title>
         </image:image>
         <image:image>
@@ -54,7 +68,7 @@
             <image:loc>https://paodequeijodaira.vercel.app/imagens/caneca.png</image:loc>
             <image:title>Caneca Cerâmica Fosca do Pão de Queijo da Irá</image:title>
         </image:image>
-        <lastmod>2026-01-21T12:00:04+00:00</lastmod> 
+        <lastmod>2026-05-21T12:19:04+00:00</lastmod> 
         <priority>1.00</priority>
     </url>
     

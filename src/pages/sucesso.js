@@ -1,17 +1,58 @@
 "use client";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabaseClient'; // Verifique o caminho do seu cliente Supabase
 
 export default function Sucesso() {
   const router = useRouter();
-  const { tx, payment_id } = router.query;
+  const { tx, payment_id, pedido } = router.query; // Adicionei 'pedido' que vem da URL do MP
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // ESSENCIAL: Limpa o carrinho local para evitar duplicidade
-    localStorage.removeItem('carrinho_ira');
-  }, []);
+    async function validarPedido() {
+      if (!router.isReady) return;
+
+      try {
+        // 1. Se veio do Mercado Pago
+        if (payment_id && pedido) {
+          await supabase
+            .from('pedidos')
+            .update({
+              status_pagamento: 'pago',
+              mercadopago_payment_id: String(payment_id),
+              metodo_pagamento: 'mercado_pago'
+            })
+            .eq('id', pedido);
+        }
+
+        // 2. Se veio da Cripto (A transação já deve ter sido enviada, mas garantimos aqui)
+        if (tx && pedido) {
+          await supabase
+            .from('pedidos')
+            .update({
+              status_pagamento: 'pago',
+              hash_transacao_crypto: String(tx),
+              metodo_pagamento: 'cripto'
+            })
+            .eq('id', pedido);
+        }
+
+        // ESSENCIAL: Só limpa o carrinho se o processo de validação terminou
+        localStorage.removeItem('carrinho_ira');
+      } catch (error) {
+        console.error("Erro ao validar pedido no banco:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    validarPedido();
+  }, [router.isReady, payment_id, tx, pedido]);
+
+  // Se estiver carregando a validação, pode mostrar um spinner ou manter o layout
+  if (loading) return <div className="min-h-screen flex items-center justify-center">Verificando pagamento...</div>;
 
   return (
     <div className="min-h-screen bg-[#FDFDFD] flex items-center justify-center p-6 font-sans selection:bg-orange-100">
@@ -21,7 +62,7 @@ export default function Sucesso() {
       </Head>
 
       <div className="max-w-md w-full bg-white border border-gray-100 p-10 md:p-14 text-center rounded-[50px] shadow-xl shadow-orange-100/20 animate-in fade-in zoom-in duration-500">
-        
+
         {/* ÍCONE DE SUCESSO SOFT */}
         <div className="w-24 h-24 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-8">
           <i className="bi bi-check-circle-fill text-5xl text-orange-500"></i>
@@ -32,7 +73,7 @@ export default function Sucesso() {
         </h1>
 
         <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-8">
-            Seu Lifestyle está a caminho.
+          Seu Lifestyle está a caminho.
         </p>
 
         {tx ? (
@@ -57,7 +98,7 @@ export default function Sucesso() {
           /* MENSAGEM MERCADO PAGO / PIX */
           <div className="mb-8">
             <p className="text-gray-500 text-sm leading-relaxed font-medium px-4">
-              Obrigado por fortalecer nossa comunidade. Seu pagamento via 
+              Obrigado por fortalecer nossa comunidade. Seu pagamento via
               <span className="text-orange-600 font-bold"> {payment_id ? 'Mercado Pago' : 'Sistema'}</span> foi validado com sucesso.
             </p>
           </div>
@@ -68,7 +109,7 @@ export default function Sucesso() {
           <Link href="/loja" className="block w-full py-5 bg-black text-white rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] hover:bg-orange-600 hover:scale-[1.02] transition-all shadow-lg shadow-gray-200">
             Voltar para a Loja
           </Link>
-          
+
           <Link href="/faq-web3" className="block w-full py-4 text-[9px] text-gray-400 font-black uppercase tracking-widest hover:text-orange-600 transition-colors">
             Entender meus benefícios Web3
           </Link>
@@ -77,10 +118,10 @@ export default function Sucesso() {
         {/* SUPORTE */}
         <div className="mt-12 pt-8 border-t border-gray-50">
           <div className="flex items-center justify-center gap-2 text-gray-300">
-             <i className="bi bi-whatsapp text-lg"></i>
-             <p className="text-[9px] font-bold uppercase tracking-widest leading-loose">
-               Dúvidas? Suporte via WhatsApp
-             </p>
+            <i className="bi bi-whatsapp text-lg"></i>
+            <p className="text-[9px] font-bold uppercase tracking-widest leading-loose">
+              Dúvidas? Suporte via WhatsApp
+            </p>
           </div>
         </div>
       </div>

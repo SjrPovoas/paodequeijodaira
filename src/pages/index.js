@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 export default function Home() {
   const WHATSAPP_NUMBER = "5561982777196";
@@ -8,6 +12,23 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Dentro do seu componente:
+  const videoRef = useRef(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  const depoimentos = [
+    { img: "https://lh3.googleusercontent.com/a-/ALV-UjUEICHzds70pEc7pbevJMnTgDC2EuX-k1_3prBG-0FvYtVNOEi4=w36-h36-p-rp-mo-br100", text: "Comprei pão de queijo e é muito bom, recomendo!", author: "Lex Silva, DF", stars: 5 },
+    { img: "https://lh3.googleusercontent.com/a/ACg8ocI1OtrknBIdHp75IwJgH6_N1rJ2larDdNCbttsgy6O_nLDAkw=w36-h36-p-rp-mo-br100", text: "Muito bom! Sente-se o sabor de queijo e além do excelente produto, são pessoas simpáticas. Isso é ótimo. Parabéns pelo serviço", author: "Samuel Rodrigues, GO", stars: 5 },
+    { img: "https://lh3.googleusercontent.com/a/ACg8ocLy6S1a6mUdg_Nyi8R3z9aCjgrDLrI1bxk4Bk9DyzBioytZ9Q=w36-h36-p-rp-mo-br100", text: "O melhor pão de queijo da cidade ocidental.", author: "Luciane dos Santos, GO", stars: 5 }
+  ];
 
   // Trava o scroll do site quando o menu estiver aberto
   useEffect(() => {
@@ -28,7 +49,7 @@ export default function Home() {
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  
+
   const handleWhatsapp = (e) => {
     e.preventDefault();
     const nome = document.getElementById('nome').value;
@@ -64,11 +85,11 @@ export default function Home() {
         <meta property="og:url" content="https://www.facebook.com/paodeuqiejodaira.iraleide" />
         <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
         <meta name="og:image:width" content="1200" />
-        <meta name="og:image:height" content="630" /> 
+        <meta name="og:image:height" content="630" />
         <meta property="og:title" content="Pão de Queijo da Irá" />
         <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
 
-       {/* <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        {/* <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
         <meta property="og:image:secure_url" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
         <meta property="og:image:type" content="image/jpg" /> */}
 
@@ -97,7 +118,7 @@ export default function Home() {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
-     {/* HEADER */}
+      {/* HEADER */}
       <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* LOGO */}
@@ -108,9 +129,10 @@ export default function Home() {
             <Link href="#produtos" className="hover:text-orange-600 transition-colors">Produtos</Link>
             <Link href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</Link>
             <Link href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</Link>
-            <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
-            <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>                      
-          </nav>   
+            <Link href="#receita" className="hover:text-orange-600 transition-colors">Receita</Link>
+            <Link href="/loja" target="_blank" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
+            <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
+          </nav>
           {/* BOTÃO HAMBÚRGUER: visível apenas no mobile (lg:hidden) */}
           <button onClick={toggleMenu} className="lg:hidden text-3xl text-orange-600 relative z-[110] focus:outline-none">
             <i className={isMenuOpen ? "bi bi-x-lg" : "bi bi-list"}></i>
@@ -120,9 +142,9 @@ export default function Home() {
         {/* ESTRUTURA DO MENU MOBILE (DIREITA PARA ESQUERDA) */}
         <div className={`fixed inset-0 z-[1000] lg:hidden transition-all duration-500 ${isMenuOpen ? 'visible' : 'invisible'}`}>
           {/* Fundo Escuro (Overlay) */}
-          <div className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-500 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`} onClick={toggleMenu}></div>         
+          <div className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-500 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`} onClick={toggleMenu}></div>
           {/* Painel do Menu Lateral */}
-          <nav className={`absolute top-0 right-0 h-screen w-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>          
+          <nav className={`absolute top-0 right-0 h-screen w-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             {/* Cabeçalho do Menu com Botão X alinhado à Direita */}
             <div className="flex justify-end px-6 py-4 border-b border-gray-100">
               <button onClick={toggleMenu} className="text-3xl text-orange-600 p-1"><i className="bi bi-x-lg"></i></button>
@@ -132,8 +154,9 @@ export default function Home() {
               <Link href="#produtos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">Produtos <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
               <Link href="#nossa-historia" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">História <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
               <Link href="#depoimentos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">Depoimentos <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
-              <Link href="#guia-gratuito" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">Guia Grátis <i className="bi bi-chevron-right text-orange-600/30"></i></Link>     
-              <Link href="/loja" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter py-4 text-orange-600 flex items-center justify-between transition-transform duration-300 active:scale-110 hover:scale-110 origin-left">Loja Lifstyle </Link>
+              <Link href="#guia-gratuito" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">Guia Grátis <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
+              <Link href="#receita" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">Receita <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
+              <Link href="/loja" target='_blank' onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter py-4 text-orange-600 flex items-center justify-between transition-transform duration-300 active:scale-110 hover:scale-110 origin-left">Loja Lifstyle </Link>
               <button onClick={() => { setIsModalOpen(true); toggleMenu(); }} className="w-full bg-orange-600 text-white text-[23px] py-4 font-black uppercase tracking-widest leading-none hover:text-gray-100 text-xs shadow-xl transition-transform duration-500 origin-left mb-4">Pedir Agora</button>
             </div>
             {/* Footer do Menu */}
@@ -142,7 +165,7 @@ export default function Home() {
               <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-facebook"></i></Link>
               <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-3xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
             </div>
-              <p className="text-center text-[9px] py-10 font-bold text-gray-400 uppercase tracking-widest italic">© Pão de Queijo da Irá</p>           
+            <p className="text-center text-[9px] py-10 font-bold text-gray-400 uppercase tracking-widest italic">© Pão de Queijo da Irá</p>
           </nav>
         </div>
       </header>
@@ -160,7 +183,7 @@ export default function Home() {
             </button>
           </div>
           <div className="relative">
-            <img src="/imagens/hero-banner.png" alt="Pão de Queijo" className="relative z-10 w-full rounded-2xl shadow-2xl" />
+            <img src="/imagens/hero-banner.png" alt="Pão de Queijo" loading='lazy' className="relative z-10 w-full rounded-2xl shadow-2xl" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-100 rounded-full blur-3xl -z-10 opacity-50"></div>
           </div>
         </div>
@@ -171,16 +194,47 @@ export default function Home() {
         <h2 className="text-center text-3xl md:text-4xl font-black uppercase tracking-tighter mb-16 italic">🧀 Nossos Pacotes: Sabor Congelado!</h2>
         <div className="grid md:grid-cols-2 gap-12">
           <div className="border-4 border-black p-8 flex flex-col items-center text-center group hover:bg-black hover:text-white transition-all">
-            <img src="/imagens/imagem-embalagem-20und.png" className="h-48 md:h-64 object-contain mb-6 grayscale group-hover:grayscale-0 transition-all" />
+            <img src="/imagens/imagem-embalagem-20und.png" alt="embalagem-20und" loading="lazy" className="h-48 md:h-64 object-contain mb-6 grayscale group-hover:grayscale-0 transition-all" />
             <h3 className="text-2xl font-black uppercase">20 Unidades</h3>
             <span className="text-3xl font-black my-4">R$ 10,00</span>
             <button onClick={() => setIsModalOpen(true)} className="w-full bg-orange-600 text-white py-4 font-bold uppercase hover:bg-white hover:text-orange-600 transition-colors">Comprar 20 Und</button>
           </div>
           <div className="border-4 border-orange-600 p-8 flex flex-col items-center text-center bg-orange-50 group hover:bg-orange-600 hover:text-white transition-all">
-            <img src="/imagens/imagem-embalagem-1kg.png" className="h-48 md:h-64 object-contain mb-6 transition-all" />
+            <img src="/imagens/imagem-embalagem-1kg.png" alt="embalagem-1kg" loading="lazy" className="h-48 md:h-64 object-contain mb-6 transition-all" />
             <h3 className="text-2xl font-black uppercase">Pacote de 1 KG</h3>
             <span className="text-3xl font-black my-4">R$ 25,00</span>
             <button onClick={() => setIsModalOpen(true)} className="w-full bg-black text-white py-4 font-bold uppercase hover:bg-white hover:text-black transition-colors">Comprar 1 KG</button>
+          </div>
+        </div>
+      </section>
+
+      {/* --- VÍDEO INSTITUCIONAL --- */}
+      <section className="bg-black py-24 px-[5%] flex flex-col items-center text-center text-white">
+        <div className="max-w-4xl w-full">
+          <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(255,204,0,0.2)] border-2 border-white/10">
+            <video
+              ref={videoRef}
+              className="w-full h-full object-cover"
+              preload="metadata"
+              autoPlay       // Inicia automaticamente
+              loop           // Repete infinitamente
+              muted={isMuted} // Obrigatório para o autoplay funcionar em quase todos os navegadores
+              playsInline    // Essencial para rodar em iPhones/iPads sem abrir o player nativo
+              poster="/imagens/imagem-hero.png"
+            >
+              <source src="/videos/video1-institucional.mp4" type="video/mp4" />
+              Seu navegador não suporta vídeos.
+            </video>
+
+            {/* Botão de Som fixo no canto inferior */}
+            <button onClick={toggleMute}
+              className="absolute bottom-4 right-4 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full backdrop-blur-sm transition-all z-10">
+              {isMuted ? (
+                <i className="bi bi-volume-mute-fill text-xl"></i>
+              ) : (
+                <i className="bi bi-volume-up-fill text-xl"></i>
+              )}
+            </button>
           </div>
         </div>
       </section>
@@ -194,30 +248,41 @@ export default function Home() {
               <p>Eu sou a Iraleide, e o <strong>Pão de Queijo da Irá</strong> nasceu de um desejo simples: compartilhar a melhor receita de pão de queijo da minha família.</p>
               <p>Hoje, esse mesmo carinho é transformado em cada pãozinho que você leva para casa, <strong>congelado e fresquinho</strong>. Com a nossa praticidade, você tem um lanche delicioso e caseiro a minutos de distância.</p>
             </div>
-            <Link href="https://g.page/r/Ca9UJok_gMntEBI/review" target="_blank" className="inline-block mt-8 border-b-2 border-orange-600 pb-1 font-bold text-sm uppercase tracking-widest text-orange-600">⭐ Confira nossas avaliações no Google</Link>
           </div>
           <div className="order-1 md:order-2">
-            <img src="/imagens/historia-contato.png" alt="Iraleide" className="w-full rounded-2xl shadow-2xl" />
+            <img src="/imagens/historia-contato.png" alt="Iraleide" loading="lazy" className="w-full rounded-2xl shadow-2xl" />
           </div>
         </div>
       </section>
 
       {/* DEPOIMENTOS */}
-      <section id="depoimentos" className="py-24 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto text-center">
+      <section id="depoimentos" className="py-24 px-6 bg-gray-50 overflow-hidden">
+        <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-black uppercase tracking-tighter mb-16 italic">💬 O Que Dizem Nossos Clientes?</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { text: "O melhor pão de queijo congelado que já comi! Crocante por fora e super macio por dentro.", author: "Kelly M., GO" },
-              { text: "Acabei com o pacote de 1kg em um fim de semana. É viciante! Entrega super rápida.", author: "Pedro B., DF" },
-              { text: "Receita de vó com cara nova! O sabor é muito fiel ao caseiro de Minas.", author: "Yeda M., GO" }
-            ].map((d, i) => (
-              <div key={i} className="bg-white p-8 shadow-sm border border-gray-100 rounded-xl">
-                <p className="text-sm italic text-gray-600 mb-6">"{d.text}"</p>
-                <p className="text-[10px] font-black uppercase tracking-widest text-orange-600">— {d.author}</p>
-              </div>
+
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            spaceBetween={30}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
+            breakpoints={{ 768: { slidesPerView: 2 } }}
+          >
+            {depoimentos.map((d, i) => (
+              <SwiperSlide key={i} className="pb-12">
+                <div className="bg-white p-8 shadow-xl border border-gray-100 rounded-3xl flex flex-col items-center">
+                  <img src={d.img} alt={d.author} className="w-20 h-20 rounded-full object-cover mb-4 border-4 border-amber-100" />
+                  <div className="flex text-amber-400 mb-4">
+                    {[...Array(d.stars)].map((_, s) => <i key={s} className="bi bi-star-fill"></i>)}
+                  </div>
+                  <p className="text-gray-700 italic mb-6">"{d.text}"</p>
+                  <p className="text-sm font-black uppercase text-orange-600">— {d.author}</p>
+                </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
+          <Link href="https://g.page/r/Ca9UJok_gMntEBI/review" target="_blank" className="inline-block mt-8 border-b-2 border-orange-600 pb-1 font-bold text-sm uppercase tracking-widest text-orange-600">⭐ Confira nossas avaliações no Google</Link>
         </div>
       </section>
 
@@ -228,14 +293,13 @@ export default function Home() {
           {/* LADO ESQUERDO: IMAGEM/ISCA */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-orange-600/20 rounded-full blur-3xl group-hover:bg-orange-600/30 transition-all duration-700"></div>
-            <img
-              src="/imagens/caneca-isca.png"
-              alt="Guia Harmonização"
-              className="relative rounded-3xl shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-500 z-10 w-full object-cover"
-            />
+            <img src="/imagens/caneca-isca.png" alt="Guia Harmonização" loading="lazy"
+              className="relative rounded-3xl shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-500 z-10 w-full object-cover" />
             {/* Selo Flutuante */}
             <div className="absolute -bottom-6 -right-6 bg-orange-600 text-white p-6 rounded-full font-black text-xs uppercase tracking-tighter leading-none shadow-2xl z-20 animate-bounce">
-              Grátis<br />PDF
+              <Link href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer">
+                Grátis<br />PDF
+              </Link>
             </div>
           </div>
 
@@ -250,22 +314,18 @@ export default function Home() {
             <p className="text-gray-400 text-lg mb-10 leading-relaxed max-w-md">
               Baixe nosso guia gratuito e descubra quais cafés e acompanhamentos combinam perfeitamente com o seu pão de queijo.
             </p>
-
             {/* BAIXAR GUIA GRATUITO */}
             <Link href={LINK_BAIXAR_GUIA} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center bg-orange-600 hover:bg-white hover:text-black py-6 text-[11px] font-[900] uppercase tracking-[0.3em] transition-all duration-500 shadow-xl">
               Baixar meu Guia Gratuito agora!
             </Link>
-
             <p className="text-[9px] text-gray-500 uppercase tracking-widest text-center mt-4">
               Prometemos não enviar spam. Você pode sair da lista a qualquer momento.</p>
-
           </div>
-
         </div>
       </section>
 
       {/* CURSO */}
-      <section id="curso" className="relative py-32 px-8 overflow-hidden text-white text-center">
+      <section id="receita" className="relative py-32 px-8 overflow-hidden text-white text-center">
         {/* Camada da Imagem de Fundo */}
         <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
           style={{ backgroundImage: "url('/imagens/criar-negocio.webp')" }}
@@ -353,7 +413,7 @@ export default function Home() {
             <div className="flex flex-col items-center md:items-start space-y-4">
               {/* LOGO */}
               <Link href="/">
-                <img src="/logo-paodequeijodaira.jpg" className="h-20 cursor-pointer" alt="Logo" />
+                <img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-20 cursor-pointer" />
               </Link>
               {/* REDES SOCIAIS */}
               <div className="flex gap-4">
@@ -371,7 +431,7 @@ export default function Home() {
               </div>
               <div className="pt-2">
                 <Link href="https://maps.app.goo.gl/oGCHp5i9y8HnPutg9" target="_blank" className="flex items-start justify-center md:justify-start gap-3 group">
-                  <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>        
+                  <i className="bi bi-geo-alt text-orange-600 text-lg mt-0.5"></i>
                   <p className="text-sm text-gray-600 leading-relaxed text-left">
                     Quadra 4 Lote 26 Condomínio Flores do Cerrado II. Recreio Mossoró - Cidade Ocidental-GO</p>
                 </Link>
@@ -380,7 +440,7 @@ export default function Home() {
             {/* COLUNA 3: INSTITUCIONAL & DIREITOS */}
             <div className="text-center md:text-right space-y-4 flex flex-col items-center md:items-end">
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Institucional</h4>
-              <h3 className="text-[14px] text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>    
+              <h3 className="text-[14px] text-base font-black pt-3 uppercase mb-1 italic tracking-tighter whitespace-nowrap">Pão de Queijo da Irá</h3>
               <div className="flex flex-row items-center justify-center md:justify-end gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">
                 <Link href="/termos" className="hover:text-black flex items-center gap-1 transition-colors group">
                   Termos de Uso <i className="bi bi-file-text group-hover:text-orange-600"></i>
@@ -389,7 +449,7 @@ export default function Home() {
                 <Link href="/privacidade" className="hover:text-black flex items-center gap-1 transition-colors group">
                   Privacidade <i className="bi bi-shield-check group-hover:text-orange-600"></i>
                 </Link>
-              </div> 
+              </div>
               <p className="text-[9px] pt-2 font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">© 2026 - Todos os direitos reservados.</p>
             </div>
           </div>

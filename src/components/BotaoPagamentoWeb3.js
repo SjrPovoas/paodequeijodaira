@@ -1,120 +1,128 @@
+// src/components/BotaoPagamentoWeb3.js
+
 "use client";
 
-import { useState } from 'react';
-import { useAccount, useSendTransaction, useSwitchChain, useChainId } from 'wagmi';
+import { useState, useMemo, useEffect } from 'react';
+import { useAccount, useSendTransaction } from 'wagmi';
 import { parseEther } from 'viem';
-import { supabase } from '../lib/supabaseClient';
 
-export default function BotaoPagamentoWeb3({ total, pedidoId, onSuccess }) {
-  // Hooks do Wagmi para gerenciar a carteira
-  const { isConnected, address } = useAccount();
-  const chainId = useChainId();
-  const { switchChainAsync } = useSwitchChain(); // Usando versão Async para melhor controle
-  const [loading, setLoading] = useState(false);
-
-  // Configurações Fixas
-  const REDE_CORRETA_ID = 137; // ID da Polygon Mainnet
-  const CARTEIRA_DESTINO = "0x9523160C1cAf82358B9a6af332E47d6F5fDb02ac";
-
-  // Hook que dispara a janela da MetaMask
+export default function BotaoPagamentoWeb3({ total, disabled, criarPedidoNoSupabase, onSuccess }) {
+  const [loadingLocal, setLoadingLocal] = useState(false);
+  // Começa com um preço estimado de segurança (R$ 3.50) caso a API demore a responder
+  const [precoTokenEmBrl, setPrecoTokenEmBrl] = useState(3.50); 
+  const [buscandoPreco, setBuscandoPreco] = useState(true);
+  
+  const { address: carteiraCliente, isConnected } = useAccount();
   const { sendTransactionAsync } = useSendTransaction();
 
-  const handlePagamentoCripto = async () => {
-    // 1. Verifica conexão básica
-    if (!isConnected || !address) {
-      alert("⚠️ Carteira não detectada. Por favor, conecte-se.");
+  // --- BUSCA DO PREÇO DA CRIPTO EM TEMPO REAL ---
+  useEffect(() => {
+    async function obterPrecoAtual() {
+      try {
+        setBuscandoPreco(true);
+        // Consulta a API global da CoinGecko buscando o preço do token POL (antigo MATIC) em Reais (BRL)
+        const resposta = await fetch(
+          "https://api.coingecko.com/api/v3/simple/price?ids=polygon-ecosystem-token&vs_currencies=brl"
+        );
+        const dados = await resposta.json();
+        
+        if (dados && dados["polygon-ecosystem-token"] && dados["polygon-ecosystem-token"].brl) {
+          const precoRealTime = dados["polygon-ecosystem-token"].brl;
+          console.log(`🌐 Preço da POL atualizado em tempo real: R$ ${precoRealTime}`);
+          setPrecoTokenEmBrl(precoRealTime);
+        }
+      } catch (erro) {
+        console.error("Erro ao buscar cotação em tempo real, usando valor padrão:", erro);
+      } finally {
+        setBuscandoPreco(false);
+      }
+    }
+
+    obterPrecoAtual();
+    
+    // Opcional: Atualiza o preço a cada 30 segundos enquanto o usuário estiver com a página aberta
+    const intervalo = setInterval(obterPrecoAtual, 30000);
+    return () => clearInterval(intervalo);
+  }, []);
+
+  // --- CÁLCULO DE CONVERSÃO MATEMÁTICA ---
+  const valorConvertidoCripto = useMemo(() => {
+    if (!total || total <= 0) return "0.0000";
+    // Divide o valor em Reais pelo preço atual da moeda na blockchain
+    return (total / precoTokenEmBrl).toFixed(4);
+  }, [total, precoTokenEmBrl]);
+
+  const realizarPagamentoCripto = async () => {
+    if (!isConnected || !carteiraCliente) {
+      alert("Por favor, conecte sua carteira digital usando o botão de conexão!");
       return;
     }
 
-    setLoading(true);
+    setLoadingLocal(true);
 
     try {
-      // 2. Verificação de Rede com tentativa de correção automática
-      // Se o ID da rede no código for diferente de 137, tentamos forçar a troca
-      if (chainId !== REDE_CORRETA_ID) {
-        try {
-          console.log("Tentando trocar de rede para 137...");
-          await switchChainAsync({ chainId: REDE_CORRETA_ID });
-        } catch (switchError) {
-          console.error("Erro ao trocar rede:", switchError);
-          // Se falhar a troca, não travamos o código, tentamos prosseguir
-        }
+      console.log("Registrando intenção de pedido no Supabase...");
+      const pedidoCriado = await criarPedidoNoSupabase(null, null);
+      
+      console.log("Resultado retornado do banco pelo componente pai:", pedidoCriado);
+      
+      if (!pedidoCriado || !pedidoCriado.id) {
+        throw new Error("Não foi possível gerar o número do pedido no banco de dados. O retorno veio vazio.");
       }
 
-      // 3. Cálculo do Valor (Exemplo: R$ 2.50 por 1 POL)
-      // Ajuste o valor de precoPOL conforme a cotação do dia
-      const precoPOL = 2.50; 
-      const valorEmPOL = (total / precoPOL).toFixed(6);
-
-      console.log(`Solicitando assinatura: ${valorEmPOL} POL`);
-
-      // 4. DISPARO DA METAMASK (Assinar Contrato/Taxa)
-      // Esta função DEVE abrir o pop-up da MetaMask
+      const enderecoSuaCarteira = "0x9523160C1cAf82358B9a6af332E47d6F5fDb02ac"; 
+      console.log(`Enviando ${valorConvertidoCripto} POL para ${enderecoSuaCarteira}...`);
+      
       const txHash = await sendTransactionAsync({
-        to: CARTEIRA_DESTINO,
-        value: parseEther(valorEmPOL.toString()),
+        to: enderecoSuaCarteira,
+        value: parseEther(valorConvertidoCripto),
       });
 
-      console.log("Transação enviada! Hash:", txHash);
+      console.log("Transação confirmada na Blockchain! Hash:", txHash);
 
-      // 5. ATUALIZAÇÃO DO SUPABASE
-      // Só chegamos aqui se o usuário clicar em "Confirmar" na MetaMask
-      const { error } = await supabase
+      const { supabase } = await import('../lib/supabaseClient');
+      const { error: updateError } = await supabase
         .from('pedidos')
-        .update({ 
-          status_pagamento: 'Pago via Cripto', 
-          hash_transacao: txHash,
+        .update({
+          status_pagamento: 'pago',
+          hash_transacao_crypto: txHash,
+          carteira_blockchain_cliente: carteiraCliente,
           pago_em: new Date().toISOString()
         })
-        .eq('id', pedidoId);
+        .eq('id', pedidoCriado.id);
 
-      if (error) throw error;
+      if (updateError) {
+        console.error("Erro crítico ao atualizar status para pago no Supabase:", updateError);
+      }
 
-      // 6. SUCESSO FINAL
       onSuccess(txHash);
 
     } catch (err) {
-      console.error("Erro no processo Web3:", err);
+      console.error("Erro no fluxo de pagamento Web3:", err);
       
-      // Tratamento de erro amigável
-      if (err.message.includes("User rejected")) {
-        alert("❌ Você recusou a transação na MetaMask.");
+      if (err.message?.includes("User rejected the request") || err.shortMessage?.includes("User rejected the request")) {
+        alert("A transação foi cancelada por você na sua carteira digital.");
       } else {
-        alert("Falha no pagamento: " + (err.shortMessage || "Verifique seu saldo de POL para taxas de gás."));
+        alert("Falha no pagamento cripto: " + (err.shortMessage || err.message || "Erro desconhecido"));
       }
     } finally {
-      setLoading(false);
+      setLoadingLocal(false);
     }
   };
 
   return (
-    <div className="w-full px-2">
-      <button
-        onClick={handlePagamentoCripto}
-        disabled={loading}
-        className={`w-full py-5 rounded-[22px] font-black uppercase text-xs tracking-[0.1em] transition-all shadow-xl flex items-center justify-center gap-3 ${
-          loading 
-            ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-            : 'bg-orange-600 text-white hover:bg-black active:scale-95 shadow-orange-200'
-        }`}
-      >
-        {loading ? (
-          <>
-            <span className="w-5 h-5 border-3 border-orange-500 border-t-transparent rounded-full animate-spin"></span>
-            Processando...
-          </>
-        ) : (
-          <>
-            Pagar R$ {total.toFixed(2)} com POL
-            <i className="bi bi-shield-lock-fill text-lg"></i>
-          </>
-        )}
-      </button>
-      
-      {/* Aviso auxiliar para o usuário */}
-      <p className="text-[9px] text-center text-gray-400 mt-3 font-bold uppercase tracking-tighter">
-        Certifique-se de ter saldo em POL para cobrir as taxas de rede (gas).
-      </p>
-    </div>
+    <button
+      type="button"
+      onClick={realizarPagamentoCripto}
+      disabled={disabled || loadingLocal || buscandoPreco}
+      className="w-full bg-purple-600 hover:bg-purple-700 text-white py-6 rounded-2xl font-black uppercase text-xs tracking-wider disabled:opacity-50 transition-colors"
+    >
+      {loadingLocal 
+        ? "Aguardando Confirmação..." 
+        : buscandoPreco 
+          ? "Sincronizando cotação real..." 
+          : `Pagar ${valorConvertidoCripto} POL (~ R$ ${total.toFixed(2)})`
+      }
+    </button>
   );
 }
