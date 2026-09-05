@@ -1,5 +1,18 @@
 {
   "framework": "nextjs",
   "buildCommand": "next build",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "paodequeijodaira.com.br"
+        }
+      ],
+      "destination": "https://paodequeijodaira.com.br/$1",
+      "permanent": true
+    }
+  ]
 }
