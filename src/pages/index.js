@@ -91,7 +91,7 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Pão de Queijo da Irá" />
         <meta property="og:url" content="https://www.facebook.com/paodeuqiejodaira.iraleide" />
-        <meta property="og:image" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
+        <meta property="og:image" content="https://paodequeijodaira.com.br//favicon.png" />
         <meta name="og:image:width" content="1200" />
         <meta name="og:image:height" content="630" />
         <meta property="og:title" content="Pão de Queijo da Irá" />

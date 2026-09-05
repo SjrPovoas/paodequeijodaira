@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg">
+  <img src="https://paodequeijodaira.vercel.app"/logo-paodequeijodaira.jpg">
 </p>
 
 ---
