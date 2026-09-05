@@ -1,6 +1,6 @@
 {
-  "name": "pao-de-queijo-da-ira",
-  "version": "1.0.0",
+  "name": "paodequeijodaira",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

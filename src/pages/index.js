@@ -79,37 +79,93 @@ export default function Home() {
         <meta name="googlebot" content="index,follow" />
         <meta name="google-site-verification" content="rj9-yKQenuTL7WznZzLhnZhRRqalrW8B9ptmhuewFiA" />
 
+        {/* Ícones */}
+        <link rel="icon" sizes="32x32" href="/favicon.ico" />
+        <link rel="icon" sizes="192x192" href="/favicon.ico" />
+        <link rel="apple-touch-icon" type="/x-icon" href="/favicon.ico" />
+        <link rel="shortcut icon" type="/x-icon" href="/favicon.ico" />
+        <link rel="mask-icon" href="/favicon.ico" />
+
         {/* Meta Tags para WhatsApp / Facebook (Open Graph) */}
         <meta property="og:locale" content="pt_BR" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Pão de Queijo da Irá" />
         <meta property="og:url" content="https://www.facebook.com/paodeuqiejodaira.iraleide" />
-        <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        <meta property="og:image" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
         <meta name="og:image:width" content="1200" />
         <meta name="og:image:height" content="630" />
         <meta property="og:title" content="Pão de Queijo da Irá" />
         <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
 
-        {/* <meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
-        <meta property="og:image:secure_url" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        {/* <meta property="og:image" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
+        <meta property="og:image:secure_url" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
         <meta property="og:image:type" content="image/jpg" /> */}
-
-        {/* Twitter / X */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@PaodQueijodaIra" />
-        <meta name="twitter:creator" content="@PaodQueijodaIra" />
-        <meta name="twitter:title" content="Pão de Queijo da Irá" />
-        <meta name="twitter:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
-        <meta name="twitter:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
-        <meta name="twitter:url" content="https://x.com/PaodQueijodaIra" />
-
-        <title>Pão de Queijo da Irá | O melhor pão de queijo congelado e caseiro da Cidade Ocidental</title>
 
         {/* Fontes e Estilos Externos */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-        <link rel="canonical" href="https://paodequeijodaira.vercel.app" />
+        <link rel="canonical" href="https://paodequeijodaira.com.br" />
         <link rel="profile" href="https://gmpg.org/xfn/11" />
+
+        <title>Pão de Queijo da Irá | O melhor pão de queijo congelado e caseiro da Cidade Ocidental</title>
+
+        {/* JSON-LD Otimizado para Pesquisa Aprimorada */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "@id": "https://paodequeijodaira.com.br/#localbusiness",
+              "name": "Pão de Queijo da Ira",
+              "image": [
+                "https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg",
+                "https://paodequeijodaira.com.br/imagens/imagem-embalagem-20und.png",
+                "https://paodequeijodaira.com.br/imagens/imagem-embalagem-1kg.png"
+              ],
+              "url": "https://paodequeijodaira.com.br",
+              "telephone": "+5561982777196",
+              "priceRange": "$",
+              "servesCuisine": "Pão de Queijo Caseiro, Congelados",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Quadra 4 Lote 26 Condomínio Flores do Cerrado II Casa 63. Recreio Mossoró",
+                "addressLocality": "Cidade Ocidental",
+                "addressRegion": "GO",
+                "postalCode": "72885-580",
+                "addressCountry": "BR"
+              },
+              "sameAs": [
+                "https://www.instagram.com/paodequeijodaira",
+                "https://www.facebook.com/share/1GWWjcK1xr"
+              ],
+              "makesOffer": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Product",
+                    "name": "Pão de Queijo Congelado - 20 Unidades",
+                    "description": "Pacote com 20 unidades de pão de queijo congelado."
+                  },
+                  "price": "10.00",
+                  "priceCurrency": "BRL",
+                  "availability": "https://schema.org/InStock"
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Product",
+                    "name": "Pão de Queijo Congelado - Pacote de 1 kg",
+                    "description": "Pacote econômico de 1 kg de pão de queijo congelado."
+                  },
+                  "price": "25.00",
+                  "priceCurrency": "BRL",
+                  "availability": "https://schema.org/InStock"
+                }
+              ]
+            })
+          }}
+        />
 
         <script src="https://cdn.tailwindcss.com"></script>
         {/* Google Tag Manager original */}
