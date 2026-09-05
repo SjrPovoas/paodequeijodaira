@@ -1,12 +1,11 @@
 <p align="center">
-  <img src="https://paodequeijodaira.vercel.app"/logo-paodequeijodaira.jpg">
+  <img src="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg">
 </p>
 
 ---
 ## SOBRE O PROJETO
 
-Site desenvolvido por SjrPovoaS para comércio Web2.
-Comércio IRL desejando ingressar processos na blockchain e utilizar a força da Web3.
+Site desenvolvido em duas etapas por [SjrPovoaS](https://sjrpovoas.vercel.app/) para comércio Web2 em sua primeira parte. Em sua segunda fase, esse Comércio IRL desejan ingressar processos na blockchain e utilizar a força da Web3.
 
 
 ---
@@ -201,7 +200,7 @@ ns2.vercel-dns.com
 <li>paodequeijodaira.com.br     | Connect to Production |	(Nenhum, ele é o principal)</li>
 ns1.vercel-dns.com <p>
 ns2.vercel-dns.com
-<li>paodequeijodaira.vercel.app | Connect to Production | (Nenhum, ele é o principal)</li>
+<li>paodequeijodaira.vercel.app | Redirect (301)	       | paodequeijodaira.com.br</li>
 </ul>
 </details>
 
