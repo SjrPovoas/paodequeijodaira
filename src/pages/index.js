@@ -115,52 +115,68 @@ export default function Home() {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "@id": "https://paodequeijodaira.com.br/#localbusiness",
-              "name": "Pão de Queijo da Ira",
-              "image": [
-                "https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg",
-                "https://paodequeijodaira.com.br/imagens/imagem-embalagem-20und.png",
-                "https://paodequeijodaira.com.br/imagens/imagem-embalagem-1kg.png"
-              ],
-              "url": "https://paodequeijodaira.com.br",
-              "telephone": "+5561982777196",
-              "priceRange": "$",
-              "servesCuisine": "Pão de Queijo Caseiro, Congelados",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Quadra 4 Lote 26 Condomínio Flores do Cerrado II Casa 63. Recreio Mossoró",
-                "addressLocality": "Cidade Ocidental",
-                "addressRegion": "GO",
-                "postalCode": "72885-580",
-                "addressCountry": "BR"
-              },
-              "sameAs": [
-                "https://www.instagram.com/paodequeijodaira",
-                "https://www.facebook.com/share/1GWWjcK1xr"
-              ],
-              "makesOffer": [
+              "@graph": [
                 {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Product",
-                    "name": "Pão de Queijo Congelado - 20 Unidades",
-                    "description": "Pacote com 20 unidades de pão de queijo congelado."
+                  "@type": "LocalBusiness",
+                  "@id": "https://paodequeijodaira.com.br/#localbusiness",
+                  "name": "Pão de Queijo da Ira",
+                  "image": [
+                    "https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg",
+                    "https://paodequeijodaira.com.br/imagens/imagem-embalagem-20und.png",
+                    "https://paodequeijodaira.com.br/imagens/imagem-embalagem-1kg.png"
+                  ],
+                  "url": "https://paodequeijodaira.com.br",
+                  "telephone": "+5561982777196",
+                  "priceRange": "$",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Quadra 4 Lote 26 Condomínio Flores do Cerrado II Casa 63. Recreio Mossoró",
+                    "addressLocality": "Cidade Ocidental",
+                    "addressRegion": "GO",
+                    "postalCode": "72885-580",
+                    "addressCountry": "BR"
                   },
-                  "price": "10.00",
-                  "priceCurrency": "BRL",
-                  "availability": "https://schema.org/InStock"
+                  "sameAs": [
+                    "https://www.instagram.com/paodequeijodaira"
+                  ]
                 },
                 {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Product",
-                    "name": "Pão de Queijo Congelado - Pacote de 1 kg",
-                    "description": "Pacote econômico de 1 kg de pão de queijo congelado."
+                  "@type": "Product",
+                  "name": "Pão de Queijo Congelado - 20 Unidades",
+                  "image": "https://paodequeijodaira.com.br/imagens/imagem-embalagem-20und.png",
+                  "description": "Pacote com 20 unidades de pão de queijo congelado.",
+                  "brand": {
+                    "@type": "Brand",
+                    "name": "Pão de Queijo da Ira"
                   },
-                  "price": "25.00",
-                  "priceCurrency": "BRL",
-                  "availability": "https://schema.org/InStock"
+                  "offers": {
+                    "@type": "Offer",
+                    "url": "https://paodequeijodaira.com.br/",
+                    "priceCurrency": "BRL",
+                    "price": "10.00",
+                    "priceValidUntil": "2026-12-31",
+                    "itemCondition": "https://schema.org/NewCondition",
+                    "availability": "https://schema.org/InStock"
+                  }
+                },
+                {
+                  "@type": "Product",
+                  "name": "Pão de Queijo Congelado - Pacote de 1 kg",
+                  "image": "https://paodequeijodaira.com.br/imagens/imagem-embalagem-1kg.png",
+                  "description": "Pacote econômico de 1 kg de pão de queijo congelado.",
+                  "brand": {
+                    "@type": "Brand",
+                    "name": "Pão de Queijo da Ira"
+                  },
+                  "offers": {
+                    "@type": "Offer",
+                    "url": "https://paodequeijodaira.com.br/",
+                    "priceCurrency": "BRL",
+                    "price": "25.00",
+                    "priceValidUntil": "2026-12-31",
+                    "itemCondition": "https://schema.org/NewCondition",
+                    "availability": "https://schema.org/InStock"
+                  }
                 }
               ]
             })
