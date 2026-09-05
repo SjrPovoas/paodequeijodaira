@@ -4,49 +4,48 @@
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
     <url>
-        <loc>https://paodequeijodaira.vercel.app/</loc>
-        <lastmod>2026-05-21T12:19:04+00:00</lastmod>
+        <loc>https://paodequeijodaira.com.br/</loc>
+        <lastmod>2026-09-05T12:16:04+00:00</lastmod>
         <priority>1.00</priority>
         
         <image:image>
-            <image:loc>https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg</image:loc>
+            <image:loc>https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg</image:loc>
             <image:title>Logo do Pão de Queijo da Irá</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://paodequeijodaira.vercel.app/imagens/hero-banner.png</image:loc>
+            <image:loc>https://paodequeijodaira.com.br/imagens/hero-banner.png</image:loc>
             <image:title>Pão de Queijo da Irá pacote com 20 pães de queijo congelado</image:title>
         </image:image>
 
         <video:video>
-            <video:thumbnail_loc>https://paodequeijodaira.vercel.app/imagens/imagem-hero.png</video:thumbnail_loc>
+            <video:thumbnail_loc>https://paodequeijodaira.com.br/imagens/imagem-hero.png</video:thumbnail_loc>
             <video:title>Como preparar o Pão de Queijo da Irá</video:title>
             <video:description>VSL Institucional do Pão de Queijo da Irá</video:description>
             <video:content_loc>https://paodequeijodaira.vercel.app/videos/video1-institucional.mp4</video:content_loc>
-            <video:player_loc>https://paodequeijodaira.vercel.app/</video:player_loc>
             <video:duration>13</video:duration>
         </video:video>
     </url>
 
     <url>
-        <loc>https://paodequeijodaira.vercel.app/loja</loc>
-        <lastmod>2026-05-21T12:19:04+00:00</lastmod>
+        <loc>https://paodequeijodaira.com.br/loja</loc>
+        <lastmod>2026-09-05T12:16:04+00:00</lastmod>
         <priority>0.90</priority>
         <image:image>
-            <image:loc>https://paodequeijodaira.vercel.app/imagens/camiseta1.png</image:loc>
+            <image:loc>https://paodequeijodaira.com.br/imagens/camiseta1.png</image:loc>
             <image:title>T-Shirt Logo Pão de Queijo da Irá (Masc)</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://paodequeijodaira.vercel.app/imagens/caneca.png</image:loc>
+            <image:loc>https://paodequeijodaira.com.br/imagens/caneca.png</image:loc>
             <image:title>Caneca Cerâmica Fosca do Pão de Queijo da Irá</image:title>
         </image:image>
     </url>
 
     <url>
-        <loc>https://paodequeijodaira.vercel.app/curso</loc>
-        <lastmod>2026-05-21T12:19:04+00:00</lastmod>
+        <loc>https://paodequeijodaira.com.br/curso</loc>
+        <lastmod>2026-09-05T12:16:04+00:00</lastmod>
         <priority>0.80</priority>
         <image:image>
-            <image:loc>https://paodequeijodaira.vercel.app/imagens/criar-negocio.webp</image:loc>
+            <image:loc>https://paodequeijodaira.com.br/imagens/criar-negocio.webp</image:loc>
             <image:title>Curso: Crie seu Negócio com Pão de Queijo da Irá</image:title>
         </image:image>
     </url>

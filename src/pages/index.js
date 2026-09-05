@@ -27,7 +27,8 @@ export default function Home() {
   const depoimentos = [
     { img: "https://lh3.googleusercontent.com/a-/ALV-UjUEICHzds70pEc7pbevJMnTgDC2EuX-k1_3prBG-0FvYtVNOEi4=w36-h36-p-rp-mo-br100", text: "Comprei pão de queijo e é muito bom, recomendo!", author: "Lex Silva, DF", stars: 5 },
     { img: "https://lh3.googleusercontent.com/a/ACg8ocI1OtrknBIdHp75IwJgH6_N1rJ2larDdNCbttsgy6O_nLDAkw=w36-h36-p-rp-mo-br100", text: "Muito bom! Sente-se o sabor de queijo e além do excelente produto, são pessoas simpáticas. Isso é ótimo. Parabéns pelo serviço", author: "Samuel Rodrigues, GO", stars: 5 },
-    { img: "https://lh3.googleusercontent.com/a/ACg8ocLy6S1a6mUdg_Nyi8R3z9aCjgrDLrI1bxk4Bk9DyzBioytZ9Q=w36-h36-p-rp-mo-br100", text: "O melhor pão de queijo da cidade ocidental.", author: "Luciane dos Santos, GO", stars: 5 }
+    { img: "https://lh3.googleusercontent.com/a/ACg8ocLy6S1a6mUdg_Nyi8R3z9aCjgrDLrI1bxk4Bk9DyzBioytZ9Q=w36-h36-p-rp-mo-br100", text: "O melhor pão de queijo da cidade ocidental.", author: "Luciane dos Santos, GO", stars: 5 },
+    { img: "https://lh3.googleusercontent.com/a/ACg8ocLwlRZeKq4QCFTr9qt-im6VePouQHIAdaARMGskx7AsLF5bGQ=w36-h36-p-rp-mo-ba12-br100", text: "Pão de queijo maravilhoso com preço justo. Não é aquele que vem só o cheirinho do queijo, da pra sentir mesmo. Super recomendo pra todos que são fãs de pão de queijo. (Além do que o pessoal que faz é gente boa demais).", author: "Rafael Carreiro, DF", stars: 5 }
   ];
 
   // Trava o scroll do site quando o menu estiver aberto
@@ -130,7 +131,7 @@ export default function Home() {
             <Link href="#nossa-historia" className="hover:text-orange-600 transition-colors">Nossa História</Link>
             <Link href="#guia-gratuito" className="hover:text-orange-600 transition-colors">Guia Gratuito</Link>
             <Link href="#receita" className="hover:text-orange-600 transition-colors">Receita</Link>
-            <Link href="/loja" target="_blank" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
+            {/*<Link href="/loja" target="_blank" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>*/}
             <button onClick={() => setIsModalOpen(true)} className="bg-orange-600 text-white px-8 py-4 font-black uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition-all">Pedir Agora</button>
           </nav>
           {/* BOTÃO HAMBÚRGUER: visível apenas no mobile (lg:hidden) */}
@@ -156,7 +157,7 @@ export default function Home() {
               <Link href="#depoimentos" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">Depoimentos <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
               <Link href="#guia-gratuito" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">Guia Grátis <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
               <Link href="#receita" onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter text-[#2D3134] hover:text-orange-600 transition-colors flex items-center justify-between border-b border-gray-50 pb-4">Receita <i className="bi bi-chevron-right text-orange-600/30"></i></Link>
-              <Link href="/loja" target='_blank' onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter py-4 text-orange-600 flex items-center justify-between transition-transform duration-300 active:scale-110 hover:scale-110 origin-left">Loja Lifstyle </Link>
+              {/*<Link href="/loja" target='_blank' onClick={toggleMenu} className="text-xl font-black uppercase italic tracking-tighter py-4 text-orange-600 flex items-center justify-between transition-transform duration-300 active:scale-110 hover:scale-110 origin-left">Loja Lifstyle </Link>*/}
               <button onClick={() => { setIsModalOpen(true); toggleMenu(); }} className="w-full bg-orange-600 text-white text-[23px] py-4 font-black uppercase tracking-widest leading-none hover:text-gray-100 text-xs shadow-xl transition-transform duration-500 origin-left mb-4">Pedir Agora</button>
             </div>
             {/* Footer do Menu */}

@@ -11,7 +11,7 @@ Comércio IRL desejando ingressar processos na blockchain e utilizar a força da
 
 ---
 ## MÍDIAS SOCIAIS
-- [Site](https://paodequeijodaira.vercel.app/)
+- [Site](https://paodequeijodaira.com.br/)
 - [Instagram](https://www.instagram.com/paodequeijodaira/)
 - [YouTube](https://www.youtube.com/@paodequeijodaira/)
 
@@ -145,7 +145,7 @@ npm install swiper
 <li>SUPABASE (Banco de Dados da Loja LyfeStyle)</li>
 <li>RESEND (Painel ADM - recuperação de senha e confirmação de cadastro)</li>
 <li>MELHORENVIO (Plataforma gratuita de Logística para calcular, comparar e gerar etiqueta de envio)</li>
-<li>(Painel ADMIN) [https://paodequeijodaira.vercel.app/admin/login]</li>
+<li>(Painel ADMIN) [https://paodequeijodaira.com.br/admin/login]</li>
 </ul>
 </details>
 
@@ -190,8 +190,48 @@ npm install swiper
 
 <p>
 
+## 4. CONFIGURAÇÃO DE REDIRECIONAMENTO
+
+<details>
+<summary>DOMÍNIO | CONFIGURAÇÃO | DESTINO</summary>
+<ul>
+<li>www.paodequeijodaira.com.br | Redirect (301)	       | paodequeijodaira.com.br</li>
+ns1.vercel-dns.com <p>
+ns2.vercel-dns.com
+<li>paodequeijodaira.com.br     | Connect to Production |	(Nenhum, ele é o principal)</li>
+ns1.vercel-dns.com <p>
+ns2.vercel-dns.com
+<li>paodequeijodaira.vercel.app | Connect to Production | (Nenhum, ele é o principal)</li>
+</ul>
+</details>
+
 ---
-## 4. CONHEÇA O TIME
+## 5. FLUXO DE ENVIO E RECEBIMENTO DE EMAIL CORPORATIVO
+
+<details>
+<summary>IMPROVMX</summary>
+<ul>
+<li><b>Serviço de encaminhamento (RELAY)</b>
+<br>
+Ele não possui uma caixa de entrada para fazer login e ler e-mails. Ele apenas recebe a mensagem enviada para o seu domínio e a "empurra" instantaneamente para outro endereço (como o seu Gmail Corporativo).
+<br>
+O foco principal é o recebimento. Para responder ou enviar e-mails usando o seu domínio através dele, você configura o SMTP de outro provedor ou usa os recursos de "Enviar como" do Gmail.
+<br>
+Oferece um plano gratuito generoso com aliases ilimitados.
+<br>
+Uma vez dentro do painel do ImprovMX, você verá que ele já cria automaticamente um alias de * (catch-all) apontando para o seu Gmail. Se quiser criar especificamente o contato@, basta adicionar uma linha lá dentro.
+<br>
+Após salvar as alterações no DNS, o próprio painel do ImprovMX vai mostrar um aviso verde de "Active".
+<br>
+<li><b>Criar conta gratuita</b>
+<br>
+Acesse https://improvmx.com/ e utilize o email do gmail de preferência.
+</li>
+</ul>
+</details>
+
+---
+## 6. CONHEÇA O TIME
 
 Nome | Título | Linkedin | X/Twitter | GitHub | Instagram
 ---|---|---|---|---|---

@@ -1,6 +1,6 @@
-Sitemap: https://paodequeijodaira.vercel.app/sitemap.xml
+Sitemap: https://paodequeijodaira.com.br/sitemap.xml
 
 User-agent: *
 Allow: /
 
-# This file was generated on Mon, 11 MAy 2026 12:00:35 +0000
+# This file was generated on Tue, 05 Set 2026 16:00:35 +0000
