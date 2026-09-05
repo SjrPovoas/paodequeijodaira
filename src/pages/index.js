@@ -151,7 +151,7 @@ export default function Home() {
                   },
                   "offers": {
                     "@type": "Offer",
-                    "url": "https://paodequeijodaira.com.br/",
+                    "url": "https://paodequeijodaira.com.br/#produtos",
                     "priceCurrency": "BRL",
                     "price": "10.00",
                     "priceValidUntil": "2026-12-31",
@@ -170,7 +170,7 @@ export default function Home() {
                   },
                   "offers": {
                     "@type": "Offer",
-                    "url": "https://paodequeijodaira.com.br/",
+                    "url": "https://paodequeijodaira.com.br/#produtos",
                     "priceCurrency": "BRL",
                     "price": "25.00",
                     "priceValidUntil": "2026-12-31",
