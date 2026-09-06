@@ -187,6 +187,14 @@ npm install swiper
 
 </details>
 
+<details>
+<summary>GERADOR DE ÍCONES</summary>
+
+  - [Gerador de Ícones](https://www.aconvert.com/pt/icon/)
+
+</details>
+
+
 <p>
 
 ## 4. CONFIGURAÇÃO DE REDIRECIONAMENTO

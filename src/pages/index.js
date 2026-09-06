@@ -81,21 +81,21 @@ export default function Home() {
 
         {/* Ícones */}
         <link rel="icon" sizes="32x32" href="/favicon.ico" />
-        <link rel="icon" sizes="192x192" href="/favicon.ico" />
-        <link rel="apple-touch-icon" type="/x-icon" href="/favicon.ico" />
-        <link rel="shortcut icon" type="/x-icon" href="/favicon.ico" />
-        <link rel="mask-icon" href="/favicon.ico" />
+        <link rel="icon" sizes="192x192" href="/favicon.png" />
+        <link rel="apple-touch-icon" type="image/png" href="/favicon.png" />
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
         {/* Meta Tags para WhatsApp / Facebook (Open Graph) */}
         <meta property="og:locale" content="pt_BR" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Pão de Queijo da Irá" />
+        <meta property="og:site_name" content="Pão de Queijo da Ira" />
         <meta property="og:url" content="https://paodequeijodaira.com.br" />
-        <meta property="og:image" content="https://paodequeijodaira.com.br/favicon.png" />
-        <meta name="og:image:width" content="1200" />
-        <meta name="og:image:height" content="630" />
-        <meta property="og:title" content="Pão de Queijo da Irá" />
-        <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental. Temos pacote com 20 pães de queijo congelado e pacote com 1 kg de pão de queijo congelado." />
+        <meta property="og:title" content="Pão de Queijo da Ira | Congelados e Caseiros" />
+        <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental" />
+        <meta property="og:image" content="https://paodequeijodaira.com.br/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/png" />
 
         {/* <meta property="og:image" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
         <meta property="og:image:secure_url" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
