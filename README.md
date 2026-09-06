@@ -192,6 +192,14 @@ npm install swiper
 
   - [Gerador de Ícones](https://www.aconvert.com/pt/icon/)
 
+  Como o WhatsApp tem um cache agressivo, o link ainda pode demorar a aparecer. Para forçar a atualização, use a ferramenta de depuração do Facebook (que o WhatsApp também usa):
+
+Acesse: https://developers.facebook.com/tools/debug/
+
+Cole a URL do seu site ([https://paodequeijodaira.com.br](https://paodequeijodaira.com.br)) e clique em "Depurar".
+
+Se aparecerem erros, clique em "Recravar" ou "Scrape Again" até que a pré-visualização correta apareça na tela.
+
 </details>
 
 

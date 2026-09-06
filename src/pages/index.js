@@ -92,14 +92,10 @@ export default function Home() {
         <meta property="og:url" content="https://paodequeijodaira.com.br" />
         <meta property="og:title" content="Pão de Queijo da Ira | Congelados e Caseiros" />
         <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental" />
-        <meta property="og:image" content="https://paodequeijodaira.com.br/og-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image" content="https://paodequeijodaira.com.br/favicon.png" />
         <meta property="og:image:type" content="image/png" />
-
-        {/* <meta property="og:image" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
-        <meta property="og:image:secure_url" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
-        <meta property="og:image:type" content="image/jpg" /> */}
+        <meta property="og:image:width" content="192" />
+        <meta property="og:image:height" content="192" />
 
         {/* Fontes e Estilos Externos */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -183,6 +179,11 @@ export default function Home() {
           }}
         />
 
+
+        {/* <meta property="og:image" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
+        <meta property="og:image:secure_url" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
+        <meta property="og:image:type" content="image/jpg" /> */}
+        
         <script src="https://cdn.tailwindcss.com"></script>
         {/* Google Tag Manager original */}
         <script dangerouslySetInnerHTML={{
