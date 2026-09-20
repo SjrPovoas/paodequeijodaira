@@ -105,8 +105,8 @@ export default function Home() {
 
         <title>Pão de Queijo da Irá | O melhor pão de queijo congelado e caseiro da Cidade Ocidental</title>
 
-        {/* JSON-LD Otimizado para Pesquisa Aprimorada */}
-        <script
+{/* JSON-LD Otimizado para Pesquisa Aprimorada */}
+<script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -145,6 +145,11 @@ export default function Home() {
                     "@type": "Brand",
                     "name": "Pão de Queijo da Ira"
                   },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "5.0",
+                    "reviewCount": "12"
+                  },
                   "offers": {
                     "@type": "Offer",
                     "url": "https://paodequeijodaira.com.br/#produtos",
@@ -152,7 +157,42 @@ export default function Home() {
                     "price": "10.00",
                     "priceValidUntil": "2026-12-31",
                     "itemCondition": "https://schema.org/NewCondition",
-                    "availability": "https://schema.org/InStock"
+                    "availability": "https://schema.org/InStock",
+                    "hasMerchantReturnPolicy": {
+                      "@type": "MerchantReturnPolicy",
+                      "applicableCountry": "BR",
+                      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                      "merchantReturnDays": 7,
+                      "returnMethod": "https://schema.org/ReturnByMail",
+                      "returnFees": "https://schema.org/FreeReturn"
+                    },
+                    "shippingDetails": {
+                      "@type": "OfferShippingDetails",
+                      "shippingRate": {
+                        "@type": "MonetaryAmount",
+                        "value": "0.00",
+                        "currency": "BRL"
+                      },
+                      "shippingDestination": {
+                        "@type": "DefinedRegion",
+                        "addressCountry": "BR"
+                      },
+                      "deliveryTime": {
+                        "@type": "ShippingDeliveryTime",
+                        "handlingTime": {
+                          "@type": "QuantitativeValue",
+                          "minValue": 1,
+                          "maxValue": 3,
+                          "unitCode": "DAY"
+                        },
+                        "transitTime": {
+                          "@type": "QuantitativeValue",
+                          "minValue": 2,
+                          "maxValue": 7,
+                          "unitCode": "DAY"
+                        }
+                      }
+                    }
                   }
                 },
                 {
@@ -164,6 +204,11 @@ export default function Home() {
                     "@type": "Brand",
                     "name": "Pão de Queijo da Ira"
                   },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "5.0",
+                    "reviewCount": "18"
+                  },
                   "offers": {
                     "@type": "Offer",
                     "url": "https://paodequeijodaira.com.br/#produtos",
@@ -171,7 +216,42 @@ export default function Home() {
                     "price": "25.00",
                     "priceValidUntil": "2026-12-31",
                     "itemCondition": "https://schema.org/NewCondition",
-                    "availability": "https://schema.org/InStock"
+                    "availability": "https://schema.org/InStock",
+                    "hasMerchantReturnPolicy": {
+                      "@type": "MerchantReturnPolicy",
+                      "applicableCountry": "BR",
+                      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                      "merchantReturnDays": 7,
+                      "returnMethod": "https://schema.org/ReturnByMail",
+                      "returnFees": "https://schema.org/FreeReturn"
+                    },
+                    "shippingDetails": {
+                      "@type": "OfferShippingDetails",
+                      "shippingRate": {
+                        "@type": "MonetaryAmount",
+                        "value": "0.00",
+                        "currency": "BRL"
+                      },
+                      "shippingDestination": {
+                        "@type": "DefinedRegion",
+                        "addressCountry": "BR"
+                      },
+                      "deliveryTime": {
+                        "@type": "ShippingDeliveryTime",
+                        "handlingTime": {
+                          "@type": "QuantitativeValue",
+                          "minValue": 1,
+                          "maxValue": 3,
+                          "unitCode": "DAY"
+                        },
+                        "transitTime": {
+                          "@type": "QuantitativeValue",
+                          "minValue": 2,
+                          "maxValue": 7,
+                          "unitCode": "DAY"
+                        }
+                      }
+                    }
                   }
                 }
               ]
