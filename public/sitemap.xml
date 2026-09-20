@@ -5,7 +5,7 @@
 
     <url>
         <loc>https://paodequeijodaira.com.br/</loc>
-        <lastmod>2026-09-05T12:16:04+00:00</lastmod>
+        <lastmod>2026-09-20T12:06:04+00:00</lastmod>
         <priority>1.00</priority>
         
         <image:image>
@@ -21,14 +21,16 @@
             <video:thumbnail_loc>https://paodequeijodaira.com.br/imagens/imagem-hero.png</video:thumbnail_loc>
             <video:title>Como preparar o Pão de Queijo da Irá</video:title>
             <video:description>VSL Institucional do Pão de Queijo da Irá</video:description>
-            <video:content_loc>https://paodequeijodaira.vercel.app/videos/video1-institucional.mp4</video:content_loc>
+            <video:content_loc>https://paodequeijodaira.com.br/videos/video1-institucional.mp4</video:content_loc>
+            <video:player_loc>https://paodequeijodaira.com.br/</video:player_loc>
             <video:duration>13</video:duration>
+            <video:publication_date>2026-09-20T12:06:04+00:00</video:publication_date>
         </video:video>
     </url>
 
     <url>
         <loc>https://paodequeijodaira.com.br/loja</loc>
-        <lastmod>2026-09-05T12:16:04+00:00</lastmod>
+        <lastmod>2026-09-20T12:06:04+00:00</lastmod>
         <priority>0.90</priority>
         <image:image>
             <image:loc>https://paodequeijodaira.com.br/imagens/camiseta1.png</image:loc>
@@ -42,7 +44,7 @@
 
     <url>
         <loc>https://paodequeijodaira.com.br/curso</loc>
-        <lastmod>2026-09-05T12:16:04+00:00</lastmod>
+        <lastmod>2026-09-20T12:06:04+00:00</lastmod>
         <priority>0.80</priority>
         <image:image>
             <image:loc>https://paodequeijodaira.com.br/imagens/criar-negocio.webp</image:loc>

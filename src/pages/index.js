@@ -76,7 +76,6 @@ export default function Home() {
         <meta name="Keywords" content="pao de queijo, pão de queijo, pão de queijo em Cidade Ocidental, pão de queijo congelado Cidade Ocidental, pão de queijo caseiro, Pão de Queijo da Irá, melhor lanche em cidade ocidental" />
         <meta name="skype_toolbar" content="skype_toolbar_parser_compatible" />
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
-        <meta name="googlebot" content="index,follow" />
         <meta name="google-site-verification" content="rj9-yKQenuTL7WznZzLhnZhRRqalrW8B9ptmhuewFiA" />
 
         {/* Ícones */}
@@ -88,14 +87,14 @@ export default function Home() {
         {/* Meta Tags para WhatsApp / Facebook (Open Graph) */}
         <meta property="og:locale" content="pt_BR" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Pão de Queijo da Ira" />
+        <meta property="og:site_name" content="Pão de Queijo da Irá" />
         <meta property="og:url" content="https://paodequeijodaira.com.br" />
         <meta property="og:image" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
         <meta property="og:image:secure_url" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
         <meta property="og:image:type" content="image/jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="600" />
-        <meta property="og:title" content="Pão de Queijo da Ira | Congelados e Caseiros" />
+        <meta property="og:title" content="Pão de Queijo da Irá | Congelados e Caseiros" />
         <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental" />
  
         {/* Fontes e Estilos Externos */}
