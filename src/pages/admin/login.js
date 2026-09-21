@@ -1,3 +1,5 @@
+// pages/admin/login.js
+
 "use client";
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
@@ -7,11 +9,12 @@ import { useRouter } from 'next/router';
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // Estado para controlar a visibilidade da senha
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState({ type: '', text: '' });
   const router = useRouter();
 
-  // Se o usuário já estiver logado, manda direto para Vendas (mais comum que Trocas)
+  // Se o usuário já estiver logado, manda direto para Vendas
   useEffect(() => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
@@ -55,6 +58,7 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-[#FDFDFD] flex items-center justify-center p-6 font-sans selection:bg-orange-100">
       <Head>
         <title>Painel Admin | Loja Lifestyle e Acessórios</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
       <div className="w-full max-w-md animate-in fade-in zoom-in duration-500">
@@ -83,21 +87,30 @@ export default function AdminLogin() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-gray-50 border-none rounded-3xl p-4 font-bold text-gray-700 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-300"
-                placeholder="uauario@provedor.com"
+                placeholder="usuario@provedor.com"
               />
             </div>
 
-            {/* CAMPO SENHA */}
+            {/* CAMPO SENHA COM BOTÃO DE VISUALIZAR */}
             <div className="space-y-2">
               <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Senha</label>
-              <input 
-                type="password" 
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-gray-50 border-none rounded-3xl p-4 font-bold text-gray-700 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-300"
-                placeholder="••••••••"
-              />
+              <div className="relative w-full">
+                <input 
+                  type={showPassword ? "text" : "password"} 
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-gray-50 border-none rounded-3xl p-4 pr-12 font-bold text-gray-700 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-300"
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-orange-600 transition-colors text-lg p-1"
+                >
+                  <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
+                </button>
+              </div>
             </div>
 
             {/* MENSAGENS DE STATUS */}
@@ -125,7 +138,7 @@ export default function AdminLogin() {
         {/* FOOTER */}
         <div className="mt-12 text-center">
             <p className="text-[9px] font-black uppercase tracking-widest text-gray-300">
-              @ Loja Lifestyle e Acessórios | Pão de Queijo da Irá
+              © Loja Lifestyle e Acessórios | Pão de Queijo da Irá
             </p>
         </div>
       </div>

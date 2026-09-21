@@ -246,7 +246,44 @@ Acesse https://improvmx.com/ e utilize o email do gmail de preferência.
 </details>
 
 ---
-## 6. CONHEÇA O TIME
+## 6. BANCO DE DADOS
+
+
+<details>
+<summary>SUPABASE</summary>
+<ul>
+<li><b>Serviço de Banco de Dados</b>
+<br>
+
+<li><b>Criar conta gratuita</b>
+<br>
+Acesse https://supabase.com.br
+</li>
+</ul>
+</details>
+
+---
+## 7. BRANCHES
+
+# 1. Certifique-se de que está na branch principal ou na atual com tudo salvo
+git status
+
+# 2. Crie e mude para a nova branch "painel-admin"
+git checkout -b painel-admin
+
+# 3. Adicione todos os ficheiros modificados (incluindo o suporte e o painel)
+git add .
+
+# 4. Faça o commit das alterações
+git commit -m "feat: centralização do painel admin e melhorias no suporte"
+
+# 5. Envie a nova branch para o GitHub
+git push -u origin painel-admin
+
+
+
+---
+## 8. CONHEÇA O TIME
 
 Nome | Título | Linkedin | X/Twitter | GitHub | Instagram
 ---|---|---|---|---|---
