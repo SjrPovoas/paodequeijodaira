@@ -89,11 +89,11 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Pão de Queijo da Irá" />
         <meta property="og:url" content="https://paodequeijodaira.com.br" />
-        <meta property="og:image" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
-        <meta property="og:image:secure_url" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
-        <meta property="og:image:type" content="image/jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="600" />
+        <meta property="og:image" content="https://paodequeijodaira.com.br/favicon.png" />
+        <meta property="og:image:secure_url" content="https://paodequeijodaira.com.br/favicon.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="500" />
+        <meta property="og:image:height" content="500" />
         <meta property="og:title" content="Pão de Queijo da Irá | Congelados e Caseiros" />
         <meta property="og:description" content="O melhor pão de queijo congelado e caseiro da Cidade Ocidental" />
  
