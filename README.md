@@ -253,7 +253,14 @@ Acesse https://improvmx.com/ e utilize o email do gmail de preferência.
 <summary>SUPABASE</summary>
 <ul>
 <li><b>Serviço de Banco de Dados</b>
-<br>
+
+O Supabase é uma plataforma de código aberto de Backend como Serviço (BaaS) que funciona como uma alternativa ao Firebase, utilizando um banco de dados relacional PostgreSQL.
+
+Banco de dados PostgreSQL: Oferece um banco relacional robusto com interface visual amigável para gerenciar tabelas.
+
+Autenticação: Permite cadastrar, fazer login e gerenciar usuários de forma segura (com suporte a e-mail/senha, redes sociais, etc.).
+
+APIs automáticas: Gera APIs instantâneas baseadas nas suas tabelas para conectar facilmente o front-end ao banco de dados.
 
 <li><b>Criar conta gratuita</b>
 <br>
@@ -265,29 +272,47 @@ Acesse https://supabase.com.br
 ---
 ## 7. BRANCHES
 
-# 1. Certifique-se de que está na branch principal ou na atual com tudo salvo
+<details>
+<summary>NAVEGAÇÃO DAS BRANCHES</summary>
+<ul>
+<li><b>1. Certifique-se de que está na branch principal ou na atual com tudo salvo</b>
+
 git status
 
-# 2. Crie e mude para a nova branch "painel-admin"
+<li><b>2. Crie e mude para a nova branch "painel-admin"</b>
+
 git checkout -b painel-admin
 
-# 3. Adicione todos os ficheiros modificados (incluindo o suporte e o painel)
+<li><b>3. Adicione todos os ficheiros modificados (incluindo o suporte e o painel)</b>
+
 git add .
 
-# 4. Faça o commit das alterações
+<li><b>4. Faça o commit das alterações</b>
+
 git commit -m "feat: centralização do painel admin e melhorias no suporte"
 
-# 5. Envie a nova branch para o GitHub
+<li><b>5. Envie a nova branch para o GitHub</b>
+
 git push -u origin painel-admin
 
+<li><b>6. Voltar para branch anterior</b>
 
+git checkout -
+
+<li><b>7. Voltar para branch painel-admin</b>
+
+git checkout painel-admin
+
+</li>
+</ul>
+</details>
 
 ---
 ## 8. CONHEÇA O TIME
 
 Nome | Título | Linkedin | X/Twitter | GitHub | Instagram
 ---|---|---|---|---|---
-Silvio Povoas | Desenvolvedor e Fundador | [sjrpovoas](https://www.linkedin.com/in/sjrpovoas) | [sjrpovoas](https://www.x.com/sjrpovoas) | [SjrPovoas](https://github.com/SjrPovoas) | [@silviopovoasjunior](https://www.instagram.com/silviopovoasjunior)
+Silvio Póvoas | Desenvolvedor e Fundador | [sjrpovoas](https://www.linkedin.com/in/sjrpovoas) | [sjrpovoas](https://www.x.com/sjrpovoas) | [SjrPovoas](https://github.com/SjrPovoas) | [@silviopovoasjunior](https://www.instagram.com/silviopovoasjunior)
 Antônia Iraleide | Fundadora | X | X | X | [@paodequeijodaira](https://www.instagram.com/paodequeijodaira)
 ***
 
