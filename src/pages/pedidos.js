@@ -1,3 +1,5 @@
+// pages/pedidos.js
+
 "use client";
 import React, { useState } from 'react';
 import Head from 'next/head';
@@ -11,12 +13,11 @@ export default function Pedidos() {
     const [erro, setErro] = useState('');
     const [tipoBusca, setTipoBusca] = useState('comum'); // 'comum' ou 'web3'
     
-    const [pedidoEncontrado, setPedidoEncontrado] = useState(null);
-    const [abaAtiva, setAbaAtiva] = useState('tradicional'); 
     const [menuMobileAberto, setMenuMobileAberto] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);   
   
     const WHATSAPP_NUMBER = "5561982777196";
+
     const buscarPedido = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -31,13 +32,14 @@ export default function Pedidos() {
                 if (cpfLimpo.length < 11 || !busca.pedidoId) {
                     throw new Error("Informe o CPF e o Número do Pedido corretamente.");
                 }
-                // SEGURANÇA LGPD: O filtro exige que AMBOS os campos coincidam
+                // Filtro combinando CPF e ID do pedido conforme a tabela do Supabase
                 query = query
                     .eq('cpf', cpfLimpo)
-                    .ilike('id', `%${busca.pedidoId}%`); // Busca parcial do ID para facilitar
+                    .ilike('id', `%${busca.pedidoId}%`);
             } else {
                 if (!busca.hash) throw new Error("Informe a Hash da transação.");
-                query = query.eq('hash_transacao', busca.hash);
+                // Sincronizado com a coluna exata do Supabase: hash_transacao_crypto
+                query = query.eq('hash_transacao_crypto', busca.hash);
             }
 
             const { data, error } = await query;
@@ -67,62 +69,56 @@ export default function Pedidos() {
                 • Entrega em todo Brasil • Frete Grátis acima de R$ 500,00 •
             </div>
     
-    {/* HEADER */}
-    <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
-       <div className="max-w-7xl mx-auto flex justify-between items-center">
-         {/* LOGO */}
-         <Link href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" /></Link>
-          <button onClick={() => setMenuMobileAberto(true)} className="md:hidden text-orange-600">
-            <i className="bi bi-list text-3xl"></i>
-          </button>
+            {/* HEADER */}
+            <header className="border-b border-gray-100 py-4 px-6 sticky top-0 bg-white/95 backdrop-blur-md z-[100]">
+               <div className="max-w-7xl mx-auto flex justify-between items-center">
+                 <Link href="/"><img src="/logo-paodequeijodaira.jpg" alt="Logo" className="h-12 md:h-16 w-auto cursor-pointer" /></Link>
+                  <button onClick={() => setMenuMobileAberto(true)} className="md:hidden text-orange-600">
+                    <i className="bi bi-list text-3xl"></i>
+                  </button>
 
-          {/* NAVEGAÇÃO DESKTOP */}
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i></Link>
-            <Link href="/suporte" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">TROCAS & DEVOLUÇÕES <i className="bi bi-arrow-left-right text-[18px]"></i></Link>
-            <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
-          </nav>
-       </div>
+                  <nav className="hidden md:flex items-center gap-8">
+                    <Link href="/pedidos" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">RASTREAR PEDIDO <i className="bi bi-box-seam text-[18px]"></i></Link>
+                    <Link href="/suporte" className="hover:text-orange-600 transition-colors font-black uppercase text-[12px] flex items-center gap-2">TROCAS & DEVOLUÇÕES <i className="bi bi-arrow-left-right text-[18px]"></i></Link>
+                    <Link href="/loja" className="text-orange-600 border border-orange-600 px-4 py-2 rounded-full hover:bg-orange-600 hover:text-white transition-all">LOJA LIFESTYLE</Link>
+                  </nav>
+               </div>
 
-        {/* MENU MOBILE - ESTRUTURA CORRIGIDA */}
-        
-        <div className={`fixed inset-0 z-[1000] bg-white md:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
-          <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`} onClick={() => setMenuMobileAberto(false)}></div>
-          <nav className={`absolute top-0 right-0 w-[100%] h-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
-            <div className="flex justify-end p-6">
-              <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600 p-2"><i className="bi bi-x-lg"></i></button>
-            </div>
-            <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-6">
-              <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-2x1 font-black uppercase tracking-[0.4em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
-              <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600">LOJA LIFESTYLE</Link>
-              {/* NOVOS LINKS DE RASTREIO E SUPORTE */}
-              <div className="pt-4 flex flex-col space-y-4">
-                <Link href="/loja#web3" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-gem text-lg"></i>Lançamento
-                </Link>
-                <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-box-seam text-lg"></i>Rastrear Pedido
-                </Link>
-                <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
-                  <i className="bi bi-arrow-left-right text-lg"></i>Trocas & Devoluções
-                </Link>
+                {/* MENU MOBILE */}
+                <div className={`fixed inset-0 z-[1000] bg-white md:hidden transition-all duration-500 ${menuMobileAberto ? 'visible' : 'invisible'}`}>
+                  <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${menuMobileAberto ? 'opacity-100' : 'opacity-0'}`} onClick={() => setMenuMobileAberto(false)}></div>
+                  <nav className={`absolute top-0 right-0 w-[100%] h-screen bg-white transition-transform duration-500 ease-in-out shadow-2xl flex flex-col z-[1001] ${menuMobileAberto ? 'translate-x-0' : 'translate-x-full'}`}>
+                    <div className="flex justify-end p-6">
+                      <button onClick={() => setMenuMobileAberto(false)} className="text-3xl text-orange-600 p-2"><i className="bi bi-x-lg"></i></button>
+                    </div>
+                    <div className="flex-1 flex flex-col justify-center items-center space-y-8 text-center px-6">
+                      <Link href="/" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase tracking-[0.4em] text-orange-600">COMPRAR PÃO DE QUEIJO</Link>
+                      <Link href="/loja" onClick={() => setMenuMobileAberto(false)} className="text-2xl font-black uppercase italic tracking-tighter border-b-4 border-orange-600">LOJA LIFESTYLE</Link>
+                      <div className="pt-4 flex flex-col space-y-4">
+                        <Link href="/loja#web3" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
+                          <i className="bi bi-gem text-lg"></i>Lançamento
+                        </Link>
+                        <Link href="/pedidos" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
+                          <i className="bi bi-box-seam text-lg"></i>Rastrear Pedido
+                        </Link>
+                        <Link href="/suporte" onClick={() => setMenuMobileAberto(false)} className="text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:text-orange-600 transition-colors">
+                          <i className="bi bi-arrow-left-right text-lg"></i>Trocas & Devoluções
+                        </Link>
+                      </div>
+                      <div className="flex justify-center items-center gap-6 pt-6">
+                        <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></Link>
+                        <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></Link>
+                        <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
+                      </div>
+                    </div>
+                    <div className="p-10 text-center border-t border-gray-50">
+                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">© Pão de Queijo da Irá</p>
+                    </div>
+                  </nav>
                 </div>
-              {/* REDES SOCIAIS */}
-              <div className="flex justify-center items-center gap-6 pt-6">
-                <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-instagram"></i></Link>
-                <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-facebook"></i></Link>
-                <Link href="https://www.youtube.com/@paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600"><i className="bi bi-youtube"></i></Link>
-              </div>
-            </div>
-            <div className="p-10 text-center border-t border-gray-50">
-              <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">© Pão de Queijo da Irá</p>
-            </div>
-          </nav>
-        </div>
-      </header>
+            </header>
 
-
-            <div className="max-w-xl mx-auto pt-10">
+            <div className="max-w-xl mx-auto pt-10 px-4">
                 <div className="text-center mb-10">
                     <h1 className="text-4xl font-black uppercase italic tracking-tighter mb-4">Rastreio <span className="text-orange-600">Seguro</span></h1>
                     <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Proteção de dados conforme LGPD</p>
@@ -131,12 +127,14 @@ export default function Pedidos() {
                 {/* SELETOR DE TIPO DE BUSCA */}
                 <div className="flex bg-gray-100 p-1 rounded-2xl mb-8">
                     <button 
+                        type="button"
                         onClick={() => setTipoBusca('comum')}
                         className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${tipoBusca === 'comum' ? 'bg-white shadow-sm text-black' : 'text-gray-400'}`}
                     >
                         CPF + Pedido
                     </button>
                     <button 
+                        type="button"
                         onClick={() => setTipoBusca('web3')}
                         className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${tipoBusca === 'web3' ? 'bg-white shadow-sm text-purple-600' : 'text-gray-400'}`}
                     >
@@ -173,17 +171,21 @@ export default function Pedidos() {
                     {erro && <p className="text-center text-red-500 text-[9px] font-bold uppercase tracking-widest">{erro}</p>}
                 </form>
 
-                {/* RESULTADO (EXIBIÇÃO SEGURA) */}
+                {/* RESULTADO (EXIBIÇÃO SEGURA USANDO status_pedido) */}
                 <div className="space-y-6">
                     {pedidos.map((pedido) => (
                         <div key={pedido.id} className="bg-white border-2 border-orange-500/10 rounded-[40px] p-8 animate-in fade-in slide-in-from-bottom-4">
                             <div className="flex justify-between items-center mb-6">
-                                <span className="text-[9px] font-black uppercase bg-orange-100 text-orange-600 px-4 py-1 rounded-full">Status: {pedido.status_pagamento}</span>
-                                <span className="text-[9px] font-bold text-gray-400">ID: {pedido.id.slice(0, 8)}</span>
+                                <span className="text-[9px] font-black uppercase bg-orange-100 text-orange-600 px-4 py-1 rounded-full">
+                                    Status: {pedido.status_pedido || 'Pendente'}
+                                </span>
+                                <span className="text-[9px] font-bold text-gray-400">ID: {String(pedido.id).slice(0, 8)}</span>
                             </div>
 
                             <div className="space-y-4 mb-8">
-                                <p className="text-sm font-bold text-gray-700">Olá, {pedido.nome.split(' ')[0]}!</p>
+                                <p className="text-sm font-bold text-gray-700">
+                                    Olá, {pedido.nome_completo ? pedido.nome_completo.split(' ')[0] : (pedido.nome ? pedido.nome.split(' ')[0] : 'Cliente')}!
+                                </p>
                                 <p className="text-xs text-gray-500 leading-relaxed">Seu pacote está sendo processado. Abaixo você encontra o link oficial de rastreio.</p>
                             </div>
 
@@ -205,61 +207,6 @@ export default function Pedidos() {
                 </div>
             </div>
 
-
-{/* SEÇÃO DE CREDIBILIDADE E TECNOLOGIA - Pré-Rodapé */}
-<section className="bg-white border-t border-gray-50 py-16">
-    <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
-            
-            {/* 1. SEGURANÇA GOOGLE */}
-            <div className="flex flex-col items-center text-center space-y-3 group">
-                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-green-50">
-                    <i className="bi bi-google text-gray-400 group-hover:text-green-600 text-xl"></i>
-                </div>
-                <div>
-                    <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Google Safe Browsing</h5>
-                    <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Ambiente monitorado e livre de malwares</p>
-                </div>
-            </div>
-
-            {/* 2. CRIPTOGRAFIA SSL */}
-            <div className="flex flex-col items-center text-center space-y-3 group">
-                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-blue-50">
-                    <i className="bi bi-shield-lock text-gray-400 group-hover:text-blue-600 text-xl"></i>
-                </div>
-                <div>
-                    <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Conexão Criptografada</h5>
-                    <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Dados protegidos via certificado SSL 256-bits</p>
-                </div>
-            </div>
-
-            {/* 3. POLYGON (POL) BLOCKCHAIN VERIFIED */}
-            <div className="flex flex-col items-center text-center space-y-3 group">
-                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-purple-50">
-                    {/* Hexágono sólido representando o novo ecossistema Polygon */}
-                    <i className="bi bi-hexagon-fill text-gray-400 group-hover:text-[#8247E5] text-xl"></i>
-                </div>
-                <div>
-                    <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Polygon Ecosystem</h5>
-                    <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Pagamentos e ativos nativos em rede (POL)</p>
-                </div>
-            </div>
-
-            {/* 4. QUALIDADE LIFESTYLE */}
-            <div className="flex flex-col items-center text-center space-y-3 group">
-                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center transition-colors group-hover:bg-orange-50">
-                    <i className="bi bi-award text-gray-400 group-hover:text-orange-600 text-xl"></i>
-                </div>
-                <div>
-                    <h5 className="font-black uppercase text-[9px] tracking-[0.2em] mb-1">Curadoria Lifestyle</h5>
-                    <p className="text-[8px] text-gray-400 uppercase leading-tight px-4">Produtos exclusivos com tiragem limitada</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-  </section>
-
       {/* FOOTER */}
       <footer className="py-20 px-6 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
@@ -267,11 +214,9 @@ export default function Pedidos() {
 
             {/* COLUNA 1: LOGO E REDES SOCIAIS */}
             <div className="flex flex-col items-center md:items-start space-y-4">
-              {/* LOGO */}
               <Link href="/">
                 <img src="/logo-paodequeijodaira.jpg" className="h-20 cursor-pointer" alt="Logo" />
               </Link>
-              {/* REDES SOCIAIS */}
               <div className="flex gap-4">
                 <Link href="https://www.instagram.com/paodequeijodaira" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-instagram"></i></Link>
                 <Link href="https://www.facebook.com/share/1GWWjcK1xr/" target="_blank" className="text-2xl hover:text-orange-600 transition-colors"><i className="bi bi-facebook"></i></Link>
@@ -285,7 +230,7 @@ export default function Pedidos() {
               <div className="space-y-4">
                 <Link href="/pedidos" className="text-orange-500 flex items-center justify-center md:justify-start gap-2 group">
                   <i className="bi bi-box-seam text-orange-600 text-lg"></i>
-                  <p className="text-xs font-bold tracking-widest group:text-orange-600 transition-colors pt-1">Rastrear Pedido</p>
+                  <p className="text-xs font-bold tracking-widest transition-colors pt-1">Rastrear Pedido</p>
                 </Link>
                 <Link href="/suporte" className="flex items-center justify-center md:justify-start gap-2 group">
                   <i className="bi bi-arrow-left-right text-orange-600 text-lg"></i>
@@ -340,18 +285,10 @@ export default function Pedidos() {
 
       {/* BOTÃO VOLTAR AO TOPO */}
       {showScrollTop && (
-        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 animate-bounce">
+        <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-8 right-8 z-[90] bg-orange-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-black hover:scale-110 active:scale-90 animate-bounce">
           <i className="bi bi-arrow-up"></i>
         </button>
       )}
-
-      <style jsx global>
-        {`@keyframes slide-left { from { transform: translateX(100%); } to { transform: translateX(0); } }
-          @keyframes slide-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
-          .animate-slide-left { animation: slide-left 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-          .animate-slide-right { animation: slide-right 0.4s cubic-bezier(0.16, 1, 0.3, 1); }`}
-      </style>
-
     </div>
   );
 }

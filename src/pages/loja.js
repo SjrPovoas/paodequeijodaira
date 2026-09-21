@@ -356,24 +356,28 @@ export default function Loja() {
         <meta name="Keywords" content="Loja Lifestyle e Acessórios, loja, camiseta, avental, caneca" />
         <meta name="skype_toolbar" content="skype_toolbar_parser_compatible" />
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
-        <meta name="googlebot" content="index,follow" />
         <meta name="google-site-verification" content="rj9-yKQenuTL7WznZzLhnZhRRqalrW8B9ptmhuewFiA" />
 
+        {/* Ícones */}
+        <link rel="icon" sizes="32x32" href="/favicon.ico" />
+        <link rel="icon" sizes="192x192" href="/favicon.ico" />
+        <link rel="apple-touch-icon" type="/x-icon" href="/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="mask-icon" href="/favicon.ico" />
         {/* Meta Tags para WhatsApp / Facebook (Open Graph) */}
         <meta property="og:locale" content="pt_BR" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Loja Lifestyle e Acessórios | Pão de Queijo da Irá" />
         <meta property="og:description" content="Vendemos Camisetas, Canecas e Aventais do Pão de Queijo da Irá." />
         <meta property="og:site_name" content="Loja Lifestyle e Acessórios | Pão de Queijo da Irá" />
-        {/*<meta property="og:image" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />*/}
-        <meta property="og:image:secure_url" content="https://paodequeijodaira.vercel.app/logo-paodequeijodaira.jpg" />
+        <meta property="og:image:secure_url" content="https://paodequeijodaira.com.br/logo-paodequeijodaira.jpg" />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
         <title>Loja Lifestyle e Acessórios | Pão de Queijo da Irá</title>
 
-        <link rel="canonical" href="https://paodequeijodaira.vercel.app/loja" />
+        <link rel="canonical" href="https://paodequeijodaira.com.br/loja" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css" />
       </Head>
 
