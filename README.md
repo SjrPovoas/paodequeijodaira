@@ -274,6 +274,44 @@ Acesse https://supabase.com.br
 
 <details>
 <summary>NAVEGAÇÃO DAS BRANCHES</summary>
+
+<details>
+<summary>Branch: home</summary>
+<ul>
+<li><b>1. Certifique-se de que está na branch principal ou na atual com tudo salvo</b>
+
+git status
+
+<li><b>2. Crie e mude para a nova branch "home"</b>
+
+git checkout -b home
+
+<li><b>3. Adicione todos os ficheiros modificados (incluindo o suporte e o painel)</b>
+
+git add .
+
+<li><b>4. Faça o commit das alterações</b>
+
+git commit -m "feat: melhorias nas meta tags, JSON-LD, nas seções: Header, Hero, Produtos, Video Institucional, Nossa História, Depoimentos, Guia Gratuito e Curso na Home"
+
+<li><b>5. Envie a nova branch para o GitHub</b>
+
+git push -u origin home
+
+<li><b>6. Voltar para branch anterior</b>
+
+git checkout -
+
+<li><b>7. Voltar para branch home</b>
+
+git checkout home
+
+</li>
+</ul>
+</details>
+
+<details>
+<summary>Branch: painel-admin</summary>
 <ul>
 <li><b>1. Certifique-se de que está na branch principal ou na atual com tudo salvo</b>
 
@@ -305,6 +343,46 @@ git checkout painel-admin
 
 </li>
 </ul>
+</details>
+
+<details>
+<summary>Branch: loja</summary>
+
+<ul>
+<li><b>1. Certifique-se de que está na branch principal ou na atual com tudo salvo</b>
+
+git status
+
+<li><b>2. Crie e mude para a nova branch "loja"</b>
+
+git checkout -b loja
+
+<li><b>3. Adicione todos os ficheiros modificados</b>
+
+git add .
+
+<li><b>4. Faça o commit das alterações</b>
+
+git commit -m "feat: atualização da loja no pagamento via mercado pago o pix"
+
+<li><b>5. Envie a nova branch para o GitHub</b>
+
+git push -u origin loja
+
+<li><b>6. Voltar para branch anterior</b>
+
+git checkout -
+
+<li><b>7. Voltar para branch loja</b>
+
+git checkout loja
+
+</li>
+</ul>
+
+</details>
+
+
 </details>
 
 ---
